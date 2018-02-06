@@ -1,0 +1,429 @@
+<div class="page page-table" data-ng-controller="accountsCtrl">
+    <div class="row">
+        <div class="col-md-6">
+            <ol class="breadcrumb">
+                <li><a href="#/">Home</a></li>
+                <li><a href="#/accounts/">Accounts</a></li>
+                <li class="active"><a href="#/accounts/{{account.id}}/">{{account.name}}</a></li>
+            </ol>
+        </div>
+        <div class="col-md-6">
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-3">
+
+                <!-- <identicon size='300' username="" ng-attr-username="account.name">{{account.name}}</identicon> -->
+            <canvas id="identicon" width="300" height="300" />
+        </div>
+
+        <div class="col-md-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading"> Stats</div>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <span class="badge" style="background-color: #FFFFFF; color: #000000">{{account.bts_balance | number}}</span>
+                        BTS Balance
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge" style="background-color: #FFFFFF; color: #000000">{{account.lifetime_fees_paid | number}}</span>
+                        Lifetime fees paid
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge" style="background-color: #FFFFFF; color: #000000">{{account.total_ops | number}}</span>
+                        Total ops
+                    </li>
+                </ul>
+            </div>
+            <h2>{{account.name}}</h2> <p class="card-text">{{account.lifetime}}</p>
+        </div>
+
+            <!--
+			<section class="panel panel-box ui-ribbon-container">
+                <div class="panel-top bg-primary ">
+                    <div class="text-center">
+                        <h3>{{account.name}}</h3>
+                        <p>{{account.lifetime}}</p>
+                    </div>
+                    <div class="divider divider-xl"></div>
+                    <div class="divider divider-lg"></div>
+                    <div class="ui-ribbon-wrapper ui-ribbon-success" ng-if="is_worker == 1">
+                        <div class="ui-ribbon">
+                            worker
+                        </div>
+                    </div>
+                    <div class="ui-ribbon-wrapper ui-ribbon-info" ng-if="is_witness == 1">
+                        <div class="ui-ribbon">
+                            witness
+                        </div>
+                    </div>
+                    <div class="ui-ribbon-wrapper ui-ribbon-warning" ng-if="is_committee_member == 1">
+                        <div class="ui-ribbon">
+                            committee
+                        </div>
+                    </div>
+                    <div class="ui-ribbon-wrapper ui-ribbon-danger" ng-if="is_proxy == 1">
+                        <div class="ui-ribbon">
+                            proxy
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-img bg-primary">
+                    <img alt="" src="images/g1.jpg" class="img-circle">
+                </div>
+                <div class="list-justified-container">
+                    <ul class="list-justified text-center">
+                        <li>
+                            <p class="size-h3">{{account.bts_balance | number}}</p>
+                            <p class="text-muted">BTS Balance</p>
+                        </li>
+                        <li>
+                            <p class="size-h3">{{account.lifetime_fees_paid | number}}</p>
+                            <p class="text-muted">Lifetime fees paid</p>
+                        </li>
+                        <li>
+                            <p class="size-h3">{{account.total_ops | number}}</p>
+                            <p class="text-muted">Total ops</p>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            -->
+		<div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading"> General Account Information</div>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#/objects/{{account.id}}/'>{{account.id}}</a></span>
+                        ID
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge" style="background-color: #FFFFFF; color: #000000">{{account.name}}</span>
+                        Name
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#/accounts/{{account.referer}}/'>{{account.referer}}</a></span>
+                        Referer
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#/accounts/{{account.registrar}}/'>{{account.registrar}}</a></span>
+                        Registar
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge" style="background-color: #FFFFFF; color: #000000">{{account.cashback_balance | number}} BTS - <a href='#/objects/{{account.cashback}}/'>{{account.cashback}}</a></span>
+                       Cashback Balance
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge" style="background-color: #FFFFFF; color: #000000">
+                            <span data-ng-repeat="v in account.vesting">{{v.balance | number}} {{v.asset_name}} - <a href='#/objects/{{v.id}}/'>{{v.id}}</a> {{$last ? '' : ', '}}</span>
+                        </span>
+                        Vesting Balances
+                    </li>
+					<li class="list-group-item">
+                        <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#/objects/{{account.statistics}}/'>{{account.statistics}}</a></span>
+                       Statistics
+                    </li>
+                </ul>
+            </div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-10">
+            <div class="panel panel-primary">
+                <div class="panel-heading"> Balances</div>
+                <table class="table">
+                    <thead>
+                        <tr>
+						    <th ng-click='sortColumn("id")' ng-class='sortClass("id")'>ID</th>
+							<th ng-click='sortColumn("asset_name")' ng-class='sortClass("asset_name")'>Asset</th>
+							<th class="align-right" ng-click='sortColumn("balance")' ng-class='sortClass("balance")'>Balance</th>
+							<th class="align-right" ng-click='sortColumn("call_orders_counter")' ng-class='sortClass("call_orders_counter")'>Open Call Orders</th>
+                            <th class="align-right" ng-click='sortColumn("limit_orders_counter")' ng-class='sortClass("limit_orders_counter")'>Open Limit Orders</th>
+                        </tr>
+                    </thead>
+					<tbody>
+					<tr data-ng-repeat="balance in balances | orderBy:column:reverse">
+						<td><a href="#/objects/{{balance.id}}/">{{balance.id}}</a></td>
+						<td><a href="#/assets/{{balance.asset}}/">{{balance.asset_name}}</a></td>
+						<td class="align-right">{{balance.balance | number}}</td>
+						<td class="align-right">{{balance.call_orders_counter | number}}</td>
+                        <td class="align-right">{{balance.limit_orders_counter | number}}</td>
+                    </tbody>
+                </table>
+            </div>
+		</div>
+
+
+        <div class="col-md-2">
+            <div class="panel panel-primary">
+                <div class="panel-heading"> Issued Assets</div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th ng-click='sortColumn("asset_name")' ng-class='sortClass("asset_name")'>Asset</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr data-ng-repeat="uia in user_issued_assets">
+                        <td><a href="#/assets/{{uia.asset_id}}/">{{uia.asset_name}}</a></td>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+	</div>
+
+	<div class="row">
+		<div class="col-md-6">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading"><i class="fa fa-key"></i>  Owner Keys</div>
+                <div class="panel-body table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Key</th>
+                                <th class="align-right">Threshold</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr data-ng-repeat="ok in owner_keys">
+                            <td align="left">{{ok.key}}</td>
+                            <td class="align-right">{{ok.threshold}}</td>
+                        </tbody>
+                    </table>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Account</th>
+                            <th class="align-right">Threshold</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr data-ng-repeat="oa in owner_accounts">
+                            <td align="left"><a href="#/accounts/{{oa.account}}/">{{oa.account_name}}</a></td>
+                            <td class="align-right">{{oa.threshold}}</td>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+		</div>
+
+		<div class="col-md-6">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading"><i class="fa fa-key"></i>  Active Keys</div>
+
+                    <div class="panel-body table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Key</th>
+                                <th class="align-right">Threshold</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr data-ng-repeat="ak in active_keys">
+                                <td align="left">{{ak.key}}</td>
+                                <td class="align-right">{{ak.threshold}}</td>
+                            </tbody>
+                        </table>
+
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Account</th>
+                                <th class="align-right">Threshold</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr data-ng-repeat="aa in active_accounts">
+                                <td align="left"><a href="#/accounts/{{aa.account}}/">{{aa.account_name}}</a></td>
+                                <td class="align-right">{{aa.threshold}}</td>
+                            </tbody>
+                        </table>
+					</div>
+                </div>
+		    </div>
+	</div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Full Account History</h3>
+        </div>
+        <div class="panel-body table-responsive">
+            <div class="col-md-6">
+            </div>
+            <div class="col-md-6 text-right">
+                <a href="http://open-explorer.io/bitshares-account-exporter/" target="_blank"><span size="+1">Click here for a CSV account exporter</span></a>
+            </div>
+            <table class="table">
+                <thead>
+                <tr><th>Operation ID</th>
+                    <th>DateTime</th>
+                    <th>Witness</th>
+                    <th>Block</th>
+                    <th>Op Type</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="operation in operations">
+                    <td><a href='#/operations/{{operation.operation_id}}/'>{{operation.operation_id}}</a></td>
+                    <td>{{operation.time}}</td>
+                    <td><a href='#/objects/{{operation.witness}}/'>{{operation.witness}}</a></td>
+                    <td><a href='#/blocks/{{operation.block_num}}/'>{{operation.block_num | number}} </a></td>
+                    <td><span class="badge badge-primary" style="background-color: #{{operation.op_color}};">{{operation.op_type}}</span></td>
+                </tr>
+                </tbody>
+            </table>
+            <footer class="table-footer">
+                <div class="row">
+                    <div class="col-md-6 page-num-info">
+                    </div>
+                    <div class="col-md-6 text-right pagination-container">
+                        <ul uib-pagination class="pagination-sm"
+                                            ng-model="currentPage"
+                                            total-items="account.total_ops"
+                                            max-size="4"
+                                            ng-change="currentPage===undefined || select(currentPage)"
+                                            items-per-page="20"
+                                            rotate="false"
+                                            previous-text="&lsaquo;" next-text="&rsaquo;"
+                                            boundary-links="true"></ul>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Proxy</div>
+                <div class="panel-body table-responsive">
+                    <div ng-if="is_proxy == 1">
+                        <font size="+1">YES</font>
+                    </div>
+                    <div ng-if="is_proxy == 0">
+                        <font size="+1">NO</font>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Committee Member</div>
+                <div class="panel-body table-responsive">
+                    <div ng-if="is_committee_member == 1">
+                        <font size="+1">YES</font>
+                    </div>
+                    <div ng-if="is_committee_member == 0">
+                        <font size="+1">NO</font>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Witness</div>
+                <div class="panel-body table-responsive">
+                    <div ng-if="is_witness == 1">
+                        <font size="+1">YES</font>
+                    </div>
+                    <div ng-if="is_witness == 0">
+                        <font size="+1">NO</font>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Worker</div>
+                <div class="panel-body table-responsive">
+                    <div ng-if="is_worker == 1">
+                        <font size="+1">YES</font>
+                    </div>
+                    <div ng-if="is_worker == 0">
+                        <font size="+1">NO</font>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Active proposal transactions</div>
+
+                <div class="panel-body table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr><th>ID</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr data-ng-repeat="p in proposals">
+                            <td><a href="#/blocks/{{p.id}}/">{{p.id}}</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Votes</div>
+
+
+                <div class="panel-body table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Type</th>
+                            <th>Account</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr data-ng-repeat="v in votes">
+                            <td><a href="#/objects/{{v.id}}/">{{v.id}}</a></td>
+                            <td>{{v.type}}</td>
+                            <td><a href="#/accounts/{{v.account}}/">{{v.account}}</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Referral Information</div>
+
+
+                <div class="panel-body table-responsive">
+                    <b>{{referral_count}}</b> referred accounts.
+                    <table class="table">
+                        <thead>
+                        <tr><th>Account</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                         <tr data-ng-repeat="r in referrers">
+                            <td><a href="#/accounts/{{r.account_id}}/">{{r.account_name}}</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

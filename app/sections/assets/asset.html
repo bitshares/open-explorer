@@ -1,0 +1,151 @@
+<div class="page page-table" data-ng-controller="assetsCtrl">
+    <div class="row">
+        <div class="col-md-6">
+            <ol class="breadcrumb">
+                <li><a href="#/">Home</a></li>
+                <li><a href="#/assets/">Assets</a></li>
+                <li class="active"><a href="#/assets/{{data.id}}/">{{data.symbol}}</a></li>
+            </ol>
+        </div>
+        <div class="col-md-6">
+        </div>
+    </div>
+
+
+    <div class="row">
+
+        <div class="col-md-3">
+            <img alt="" src="{{data.image_url}}" class="img-circle" width="300" height="300">
+        </div>
+
+        <div class="col-md-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading"> Stats</div>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <span class="badge" style="background-color: #FFFFFF; color: #000000">{{data.volume | number}}</span>
+                        24 HS BTS Volume
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge" style="background-color: #FFFFFF; color: #000000">{{data.accumulated_fees | number}}</span>
+                        Accumulated Fees
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge" style="background-color: #FFFFFF; color: #000000">{{data.holders | number}}</span>
+                        Holders
+                    </li>
+                </ul>
+            </div>
+            <h2>{{data.symbol}}</h2>
+            <p>{{data.type}} - {{data.id}}</p>
+        </div>
+        <div class="col-md-6">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading"> additional asset information</strong></div>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <span class="badge" style="background-color: #FFFFFF; color: #000000;">
+                            {{ data.description | limitTo:50 }}
+                                <span ng-if="data.long_description">
+                                  <!--  ... <a target="_self" ng-click="scrollTo('fulldescription')" title="{{data.description}}" style="cursor: pointer;"> READ FULL</a> -->
+                                </span>
+                        </span>
+                        Description
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge" style="background-color: #FFFFFF; color: #000000">{{data.max_supply | number}} {{data.symbol}}</span>
+                        Max Supply
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#/accounts/{{data.issuer}}/'>{{data.issuer_name}}</a></span>
+                        Issuer
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge" style="background-color: #FFFFFF; color: #000000">{{data.precision}}</span>
+                    Presicion
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge" style="background-color: #FFFFFF; color: #000000">{{data.fee_pool | number}} {{data.symbol}}</span>
+                        Fee Pool
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge" style="background-color: #FFFFFF; color: #000000">{{data.current_supply | number}} {{data.symbol}}</span>
+                        Current Supply
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge" style="background-color: #FFFFFF; color: #000000">{{data.confidential_supply | number}} {{data.symbol}} </span>
+                        Confidential Supply
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Active Markets (in the last 24 hs)</h3>
+        </div>
+        <div class="panel-body">
+
+
+            <div class="panel-body table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th ng-click='sortColumn("pair")' ng-class='sortClass("pair")'>Name</th>
+                        <th class="align-right" ng-click='sortColumn("price")' ng-class='sortClass("price")'>Price</th>
+                        <th class="align-right" ng-click='sortColumn("volume")' ng-class='sortClass("volume")'>Volume</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr data-ng-repeat="market in markets | orderBy:column:reverse">
+                        <td><a href='#/markets/{{market.pair}}/'>{{market.pair}}</a></td>
+                        <td class="align-right">{{market.price | number}}</td>
+                        <td class="align-right">{{market.volume | number}}</td>
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Top Holders</h3>
+        </div>
+        <div class="panel-body">
+
+
+            <div class="panel-body table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th ng-click='sortColumn2("account")' ng-class='sortClass2("account")'>Account</th>
+                        <th class="align-right" ng-click='sortColumn2("amount")' ng-class='sortClass2("amount")'>Amount</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr data-ng-repeat="account in accounts | orderBy:column2:reverse2">
+                        <td><a href='#/accounts/{{account.id}}/'>{{account.name}}</a></td>
+                        <td class="align-right">{{account.amount | number}}</td>
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+    </div>
+
+    <a name="fulldescription" id="fulldescription"></a>
+    <div class="panel panel-primary" ng-if="data.long_description">
+        <div class="panel-heading">
+            <h3 class="panel-title">Full description</h3>
+        </div>
+        <div class="panel-body">
+            {{data.description}}
+        </div>
+    </div>
+
+</div>

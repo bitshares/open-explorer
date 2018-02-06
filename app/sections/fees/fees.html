@@ -1,0 +1,64 @@
+<div class="page page-table" data-ng-controller="feesCtrl">
+<!--
+    <div class="row">
+        <div class="col-md-6">
+
+            <div class="panel panel-success">
+                <div class="panel-heading">Daily Network Fee Distribution</div>
+                <div class="panel-body">
+                    <div data-echarts data-options="radar1.options" style="height: 350px;"></div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+
+            <div class="panel panel-success">
+                <div class="panel-heading">LifeTime Network Fee Distribution</div>
+                <div class="panel-body">
+                    <div data-echarts data-options="radar2.options" style="height: 350px;"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+-->
+
+    <div class="row">
+        <div class="col-md-6">
+            <ol class="breadcrumb">
+                <li><a href="#/">Home</a></li>
+                <li class="active"><a href="#/fees/">Fees</a></li>
+            </ol>
+        </div>
+        <div class="col-md-6">
+        </div>
+    </div>
+
+
+    <div class="panel panel-primary">
+		<div class="panel-heading">Fee Schedule </div>
+        <div class="panel-body table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th ng-click='sortColumn("identifier")' ng-class='sortClass("identifier")'>ID</th>
+                        <th ng-click='sortColumn("operation")' ng-class='sortClass("operation")'>Operation</th>
+                        <th class="align-right" ng-click='sortColumn("basic_fee")' ng-class='sortClass("basic_fee")'>Basic</th>
+						<th class="align-right" ng-click='sortColumn("premium_fee")' ng-class='sortClass("premium_fee")'>Premium</th>
+						<th class="align-right" ng-click='sortColumn("price_per_kbyte")' ng-class='sortClass("price_per_kbyte")'>Price per KB</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="fee in fees | orderBy:column:reverse">
+                    <td>{{fee.identifier}}</td>
+                    <td><span class="badge badge-primary" style="background-color: #{{fee.color}};">{{fee.operation}}</span></td>
+                    <td class="align-right">{{fee.basic_fee | number}}</td>
+					<td class="align-right">{{fee.premium_fee | number}}</td>
+					<td class="align-right">{{fee.price_per_kbyte | number}}</td>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

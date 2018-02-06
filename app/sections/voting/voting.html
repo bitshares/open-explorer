@@ -1,0 +1,98 @@
+<div class="page page-table" data-ng-controller="votingCtrl">
+
+    <div class="row">
+        <div class="col-md-6">
+            <ol class="breadcrumb">
+                <li><a href="#/">Home</a></li>
+                <li class="active"><a href="#/votes/">Voting report</a></li>
+            </ol>
+        </div>
+        <div class="col-md-6">
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">Committee Members </div>
+        <div class="panel-body table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th data-ng-repeat="p in proxies"> {{p.account_name | limitTo: 8}} </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="c in committee">
+                    <td><a href="#/objects/{{c.id}}/">{{c.committee_account_name}}</a></td>
+                    <td class="{{c.tclass1}}">{{c.proxy1}}</td>
+                    <td class="{{c.tclass2}}">{{c.proxy2}}</td>
+                    <td class="{{c.tclass3}}">{{c.proxy3}}</td>
+                    <td class="{{c.tclass4}}">{{c.proxy4}}</td>
+                    <td class="{{c.tclass5}}">{{c.proxy5}}</td>
+                    <td class="{{c.tclass6}}">{{c.proxy6}}</td>
+                    <td class="{{c.tclass7}}">{{c.proxy7}}</td>
+                    <td class="{{c.tclass8}}">{{c.proxy8}}</td>
+                    <td class="{{c.tclass9}}">{{c.proxy9}}</td>
+                    <td class="{{c.tclass10}}">{{c.proxy10}}</td>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">Witnesses </div>
+        <div class="panel-body table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th data-ng-repeat="p in proxies"> {{p.account_name | limitTo: 8}} </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="w in witnesses">
+                    <td><a href="#/objects/{{w.id}}/">{{w.witness_account_name}}</a></td>
+                    <td class="{{w.tclass1}}">{{w.proxy1}}</td>
+                    <td class="{{w.tclass2}}">{{w.proxy2}}</td>
+                    <td class="{{w.tclass3}}">{{w.proxy3}}</td>
+                    <td class="{{w.tclass4}}">{{w.proxy4}}</td>
+                    <td class="{{w.tclass5}}">{{w.proxy5}}</td>
+                    <td class="{{w.tclass6}}">{{w.proxy6}}</td>
+                    <td class="{{w.tclass7}}">{{w.proxy7}}</td>
+                    <td class="{{w.tclass8}}">{{w.proxy8}}</td>
+                    <td class="{{w.tclass9}}">{{w.proxy9}}</td>
+                    <td class="{{w.tclass10}}">{{w.proxy10}}</td>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">Workers </div>
+        <div class="panel-body table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th data-ng-repeat="p in proxies"> {{p.account_name | limitTo: 8}} </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="w in workers">
+                    <td><a href="#/objects/{{w.id}}/">{{w.id}} - {{w.worker_account_name}}</a></td>
+                    <td class="{{w.tclass1}}">{{w.proxy1}}</td>
+                    <td class="{{w.tclass2}}">{{w.proxy2}}</td>
+                    <td class="{{w.tclass3}}">{{w.proxy3}}</td>
+                    <td class="{{w.tclass4}}">{{w.proxy4}}</td>
+                    <td class="{{w.tclass5}}">{{w.proxy5}}</td>
+                    <td class="{{w.tclass6}}">{{w.proxy6}}</td>
+                    <td class="{{w.tclass7}}">{{w.proxy7}}</td>
+                    <td class="{{w.tclass8}}">{{w.proxy8}}</td>
+                    <td class="{{w.tclass9}}">{{w.proxy9}}</td>
+                    <td class="{{w.tclass10}}">{{w.proxy10}}</td>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

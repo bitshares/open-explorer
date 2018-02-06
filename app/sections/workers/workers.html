@@ -1,0 +1,74 @@
+<div class="page page-table" data-ng-controller="workersCtrl">
+
+    <div class="row">
+        <div class="col-md-6">
+            <ol class="breadcrumb">
+                <li><a href="#/">Home</a></li>
+                <li class="active"><a href="#/workers/">DAC Workers</a></li>
+            </ol>
+        </div>
+        <div class="col-md-6">
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+		<div class="panel-heading">Current Workers </div>
+        <div class="panel-body table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th ng-click='sortColumn("name")' ng-class='sortClass("name")'>Name</th>
+                        <th ng-click='sortColumn("worker")' ng-class='sortClass("worker")'>Worker</th>
+                        <th ng-click='sortColumn("start")' ng-class='sortClass("start")'>Start</th>
+                        <th ng-click='sortColumn("end")' ng-class='sortClass("end")'>End</th>
+                        <th ng-click='sortColumn("daily_pay")' ng-class='sortClass("daily_pay")'>Daily Pay(BTS)</th>
+						<th>Url</th>
+						<th class="align-right" ng-click='sortColumn("votes_for")' ng-class='sortClass("votes_for")'>Votes for</th>
+                        <th ng-click='sortColumn("funded")' ng-class='sortClass("funded")'>Funded</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="w in workers_current | orderBy:column:reverse" class="{{w.tclass}}">
+                    <td><a href='#/objects/{{w.id}}/'>{{w.name}}</a> <span class='label label-info'>{{w.voting_now}}</span></td>
+                    <td><a href='#/accounts/{{w.worker}}/'>{{w.worker_name}}</a></td>
+                    <td>{{w.start}}</td>
+                    <td>{{w.end}}</td>
+                    <td class="align-right">{{w.daily_pay | number}}</td>
+					<td><a href="{{w.url}}" target="_blank">Link</a></td>
+					<td class="align-right">{{w.votes_for | number: 0}}</td>
+                    <td>{{w.perc}}%</td>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">Expired Workers </div>
+        <div class="panel-body table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th ng-click='sortColumn2("name")' ng-class='sortClass2("name")'>Name</th>
+                    <th ng-click='sortColumn2("worker")' ng-class='sortClass2("worker")'>Worker</th>
+                    <th ng-click='sortColumn2("start")' ng-class='sortClass2("start")'>Start</th>
+                    <th ng-click='sortColumn2("end")' ng-class='sortClass2("end")'>End</th>
+                    <th class="align-right" ng-click='sortColumn2("daily_pay")' ng-class='sortClass2("daily_pay")'>Daily Pay(BTS)</th>
+                    <th>Url</th>
+                    <th class="align-right" ng-click='sortColumn2("votes_for")' ng-class='sortClass2("votes_for")'>Votes for</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="w in workers_expired | orderBy:column2:reverse2" class="{{w.tclass}}">
+                    <td><a href='#/objects/{{w.id}}/'>{{w.name}}</a></td>
+                    <td><a href='#/accounts/{{w.worker}}/'>{{w.worker_name}}</a></td>
+                    <td>{{w.start}}</td>
+                    <td>{{w.end}}</td>
+                    <td class="align-right">{{w.daily_pay | number}}</td>
+                    <td><a href="{{w.url}}" target="_blank">Link</a></td>
+                    <td class="align-right">{{w.votes_for | number: 0}}</td>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

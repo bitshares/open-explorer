@@ -1,0 +1,90 @@
+<div class="page page-table" data-ng-controller="proxiesCtrl">
+
+    <div class="row">
+        <div class="col-md-6">
+            <ol class="breadcrumb">
+                <li><a href="#/">Home</a></li>
+                <li class="active"><a href="#/proxies/">Bitshares Top Proxies</a></li>
+            </ol>
+        </div>
+        <div class="col-md-6">
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+		<div class="panel-heading">Top Proxies</div>
+        <div class="panel-body table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th ng-click='sortColumn("position")' ng-class='sortClass("position")'>Position</th>
+                        <th ng-click='sortColumn("account")' ng-class='sortClass("account")'>Account</th>
+                        <th class="align-right" ng-click='sortColumn("power")' ng-class='sortClass("power")'>Power</th>
+						<th class="align-right" ng-click='sortColumn("followers")' ng-class='sortClass("followers")'>Followers</th>
+                        <th ng-click='sortColumn("perc")' ng-class='sortClass("perc")'>%</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="p in proxies | orderBy:column:reverse">
+                    <td>{{p.position}}</td>
+                    <td><a href="#/accounts/{{p.account}}/">{{p.account_name}}</a></td>
+                    <td class="align-right">{{p.power | number: 0}}</td>
+					<td class="align-right">{{p.followers | number}}</td>
+                    <td>{{p.perc | number: 3}}</td>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Top active holders </div>
+                <div class="panel-body table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Position</th>
+                            <th>Account</th>
+                            <th>Power</th>
+                            <th>%</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr data-ng-repeat="sc in standby_committee">
+                            <td>{{sc.counter}}</td>
+                            <td><a href="#/accounts/{{sc.committee_member_account}}/">{{sc.committee_member_account_name}}</a></td>
+                            <td><a href="{{sc.url}}" target="_blank">Link</a></td>
+                            <td>{{sc.total_votes | number}}</td>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Top non voting accounts and exchanges </div>
+                <div class="panel-body table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Position</th>
+                            <th>Account</th>
+                            <th>Power</th>
+                            <th>%</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr data-ng-repeat="sc in standby_committee">
+                            <td>{{sc.counter}}</td>
+                            <td><a href="#/accounts/{{sc.committee_member_account}}/">{{sc.committee_member_account_name}}</a></td>
+                            <td><a href="{{sc.url}}" target="_blank">Link</a></td>
+                            <td>{{sc.total_votes | number}}</td>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,57 @@
+<div class="page page-table" data-ng-controller="operationsCtrl">
+    <div class="row">
+        <div class="col-md-6">
+            <ol class="breadcrumb">
+                <li><a href="#/">Home</a></li>
+                <li><a href="#/operations/">Operations</a></li>
+                <li class="active"><a href="#/operations/{{data.name}}/">{{data.name}}</a></li>
+            </ol>
+        </div>
+        <div class="col-md-6">
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading"> Exploring Operation ID: <strong>{{data.name}}</strong></div>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <span class="badge" style="background-color: #{{data.color}};">{{data.type}}</span>
+                Type
+            </li>
+            <li class="list-group-item">
+                <span class="badge" style="background-color: #FFFFFF; color: #000000">2</span>
+                Fee
+            </li>
+            <li class="list-group-item">
+                <span class="badge" style="background-color: #FFFFFF; color: #000000">{{data.op_in_trx}}</span>
+                Operation in Transaction
+            </li>
+            <li class="list-group-item">
+                <span class="badge" style="background-color: #FFFFFF; color: #000000">{{data.trx_in_block}}</span>
+                Transaction in Block
+            </li>
+            <li class="list-group-item">
+                <span class="badge" style="background-color: #FFFFFF; color: #000000">{{data.virtual_op | number}}</span>
+                Virtual Operation
+            </li>
+            <li class="list-group-item">
+                <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#/blocks/{{data.block_num}}/'>{{data.block_num | number}}</a></span>
+                Block
+            </li>
+            <li class="list-group-item">
+                <span class="badge" style="background-color: #FFFFFF; color: #000000">5</span>
+                Transaction
+            </li>
+        </ul>
+    </div>
+
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title">Raw Operation</h3>
+        </div>
+        <div class="panel-body">
+            <pre>{{data.raw | json}}</pre>
+        </div>
+    </div>
+
+</div>

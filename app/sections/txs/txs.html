@@ -1,0 +1,36 @@
+<div class="page page-table" data-ng-controller="txsCtrl">
+
+    <div class="row">
+        <div class="col-md-6">
+            <ol class="breadcrumb">
+                <li><a href="#/">Home</a></li>
+                <li class="active"><a href="#/txs/">Transactions</a></li>
+            </ol>
+        </div>
+        <div class="col-md-6">
+        </div>
+    </div>
+
+    <div class="panel panel-primary" >
+		<div class="panel-heading" >Last Network Transactions</div>
+        <div class="panel-body table-responsive">
+
+            <!-- <h1>Work in progress ...</h1> -->
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Transaction ID</th>
+                        <th>Operations</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="trx in transactions">
+                    <td><a href=''>{{trx.trx_id}}</a></td>
+                    <td>{{trx.count | number}}</td>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
