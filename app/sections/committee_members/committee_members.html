@@ -1,0 +1,63 @@
+<div class="page page-table" data-ng-controller="committeeCtrl">
+    <div class="row">
+        <div class="col-md-6">
+            <ol class="breadcrumb">
+                <li><a href="#/">Home</a></li>
+                <li class="active"><a href="#/committee_members/">Committee Members</a></li>
+            </ol>
+        </div>
+        <div class="col-md-6">
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+		<div class="panel-heading">Current Active Committee Members</div>
+        <div class="panel-body table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th ng-click='sortColumn("counter")' ng-class='sortClass("counter")'>Position</th>
+                        <th ng-click='sortColumn("id")' ng-class='sortClass("id")'>ID</th>
+                        <th ng-click='sortColumn("committee_member_account")' ng-class='sortClass("committee_member_account")'>Account</th>
+                        <th>Url</th>
+						<th class="align-right" ng-click='sortColumn("total_votes")' ng-class='sortClass("total_votes")'>Total votes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="ac in active_committee | orderBy:column:reverse">
+                    <td>{{ac.counter}}</td>
+                    <td><a href="#/objects/{{ac.id}}/">{{ac.id}}</a></td>
+                    <td><a href="#/accounts/{{ac.committee_member_account}}/">{{ac.committee_member_account_name}}</a></td>
+                    <td><a href="{{ac.url}}" target="_blank">Link</a></td>
+					<td class="align-right">{{ac.total_votes | number: 0}}</td>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">Standby Committee Members </div>
+        <div class="panel-body table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th ng-click='sortColumn2("counter")' ng-class='sortClass2("counter")'>Position</th>
+                    <th ng-click='sortColumn2("id")' ng-class='sortClass2("id")'>ID</th>
+                    <th ng-click='sortColumn2("committee_member_account")' ng-class='sortClass2("committee_member_account")'>Account</th>
+                    <th>Url</th>
+                    <th class="align-right" ng-click='sortColumn2("total_votes")' ng-class='sortClass2("total_votes")'>Total votes</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="sc in standby_committee | orderBy:column2:reverse2">
+                    <td>{{sc.counter}}</td>
+                    <td><a href="#/objects/{{sc.id}}/">{{sc.id}}</a></td>
+                    <td><a href="#/accounts/{{sc.committee_member_account}}/">{{sc.committee_member_account_name}}</a></td>
+                    <td><a href="{{sc.url}}" target="_blank">Link</a></td>
+                    <td class="align-right">{{sc.total_votes | number: 0}}</td>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

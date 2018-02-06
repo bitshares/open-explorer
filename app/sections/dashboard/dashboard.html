@@ -1,0 +1,114 @@
+<div class="page page-dashboard" data-ng-controller="DashboardCtrl">
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="row text-center">
+                <!-- Stats -->
+                <div class="col-sm-4">
+                    <div class="well">
+                        <div class="box-info">
+                            <p class="size-h4">{{dynamic.head_block_number | number}}<span class="size-h4"></span></p>
+                            <p class="text-muted text-small"><span data-translate="BLOCK NUMBER"></span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="well">
+                        <div class="box-info">
+                            <p class="size-h4">{{dynamic.accounts_registered_this_interval}} <span class="size-h4"></span></p>
+                            <p class="text-muted text-small"><span data-translate="NEW USERS"></span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="well">
+                        <div class="box-info">
+                            <p class="size-h4">{{dynamic.bts_market_cap | number}}</p>
+                            <p class="text-muted text-small"><span data-translate="BTS MARKET CAP"></span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="well">
+                        <div class="box-info">
+                            <p class="size-h4">{{dynamic.quote_volume | number}}</p>
+                            <p class="text-muted text-small"><span data-translate="BTS/BTC VOL"></span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="well">
+                        <div class="box-info">
+                            <p class="size-h4">{{dynamic.witness_count | number}}</p>
+                            <p class="text-muted text-small"><span data-translate=" WITNESSES"></span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="well">
+                        <div class="box-info">
+                            <p class="size-h4">{{dynamic.commitee_count | number}}</p>
+                            <p class="text-muted text-small"><span data-translate=" COMMITEE"></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+
+                    <uib-tabset class="ui-tab">
+                        <uib-tab heading="Operations" index="0" class="text-small" select="showChart(0)">
+                            <div data-echarts data-options="operations_chart.options" style="min-height: 200px; width: 100%; margin-top: 10px"></div>
+                        </uib-tab>
+                        <uib-tab heading="Proxies" index="1" class="text-small" select="showChart(1)">
+                            <div data-echarts data-options="proxies.options" style="min-height: 200px; width: 100%; margin-top: 10px"></div>
+                        </uib-tab>
+                        <uib-tab heading="Markets" index="2" class="text-small" select="showChart(2)">
+                            <div data-echarts data-options="markets.options" style="min-height: 200px; width: 100%; margin-top: 10px"></div>
+                        </uib-tab>
+                        <uib-tab heading="SmartCoins" index="3" class="text-small" select="showChart(3)">
+                            <div data-echarts data-options="smartcoins.options" style="min-height: 200px; width: 100%; margin-top: 10px"></div>
+                        </uib-tab>
+                        <uib-tab heading="UIAs" index="4" class="text-small" select="showChart(4)">
+                            <div data-echarts data-options="uias.options" style="min-height: 200px; width: 100%; margin-top: 10px"></div>
+                        </uib-tab>
+                        <uib-tab heading="Holders" index="5" class="text-small" select="showChart(5)">
+                            <div data-echarts data-options="holders.options" style="min-height: 200px; width: 100%; margin-top: 10px"></div>
+                        </uib-tab>
+                    </uib-tabset>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-body table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Operation ID</th>
+                        <th>DateTime</th>
+                        <th>History ID</th>
+                        <th>Account</th>
+                        <th>Block</th>
+                        <th>OP Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="operation in operations">
+                    <td><a href='#/operations/{{operation.operation_id}}/'>{{operation.operation_id}}</a></td>
+                    <td>{{operation.time}}</td>
+                    <td><a href='#/objects/{{operation.id}}/'>{{operation.id}}</a></td>
+                    <td><a href='#/accounts/{{operation.account}}/'>{{operation.account_name}}</a></td>
+					<td><a href='#/blocks/{{operation.block_num}}/'>{{operation.block_num | number}} </a></td>
+                    <td><span class="badge badge-primary" style="background-color: #{{operation.color}};">{{operation.type}}</span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

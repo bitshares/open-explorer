@@ -1,0 +1,71 @@
+<div class="page page-table" data-ng-controller="witnessesCtrl">
+    <div class="row">
+        <div class="col-md-6">
+            <ol class="breadcrumb">
+                <li><a href="#/">Home</a></li>
+                <li class="active"><a href="#/witness/">Network Witnesses</a></li>
+            </ol>
+        </div>
+        <div class="col-md-6">
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+		<div class="panel-heading">Active Witnesses </div>
+        <div class="panel-body table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th ng-click='sortColumn("counter")' ng-class='sortClass("counter")'>Position</th>
+                        <th ng-click='sortColumn("id")' ng-class='sortClass("id")'>ID</th>
+                        <th ng-click='sortColumn("witness_account")' ng-class='sortClass("witness_account")'>Account</th>
+                        <th>Url</th>
+						<th class="align-right" ng-click='sortColumn("total_votes")' ng-class='sortClass("total_votes")'>Total votes</th>
+						<th class="align-right" ng-click='sortColumn("total_missed")' ng-class='sortClass("total_missed")'>Missed</th>
+                        <th class="align-right" ng-click='sortColumn("last_confirmed_block_num")' ng-class='sortClass("last_confirmed_block_num")'>Last Confirmed Block</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="w in active_witnesses | orderBy:column:reverse">
+                    <td>{{w.counter}}</td>
+                    <td><a href="#/objects/{{w.id}}/">{{w.id}}</a></td>
+                    <td><a href="#/accounts/{{w.witness_account}}/">{{w.witness_account_name}}</a></td>
+                    <td><a href="{{w.url}}" target="_blank">Link</a></td>
+					<td class="align-right">{{w.total_votes | number: 0}}</td>
+					<td class="align-right">{{w.total_missed | number}}</td>
+                    <td class="align-right"><a href="#/blocks/{{w.last_confirmed_block_num}}/">{{w.last_confirmed_block_num | number}}</a></td>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">Standby Witnesses </div>
+        <div class="panel-body table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th ng-click='sortColumn2("counter")' ng-class='sortClass2("counter")'>Position</th>
+                    <th ng-click='sortColumn2("id")' ng-class='sortClass2("id")'>ID</th>
+                    <th ng-click='sortColumn2("witness_account")' ng-class='sortClass2("witness_account")'>Account</th>
+                    <th>Url</th>
+                    <th class="align-right" ng-click='sortColumn2("total_votes")' ng-class='sortClass2("total_votes")'>Total votes</th>
+                    <th class="align-right" ng-click='sortColumn2("total_missed")' ng-class='sortClass2("total_missed")'>Missed</th>
+                    <th class="align-right" ng-click='sortColumn2("last_confirmed_block_num")' ng-class='sortClass2("last_confirmed_block_num")'>Last Confirmed Block</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="w in standby_witnesses | orderBy:column2:reverse2">
+                    <td>{{w.counter}}</td>
+                    <td><a href="#/objects/{{w.id}}/">{{w.id}}</a></td>
+                    <td><a href="#/accounts/{{w.witness_account}}/">{{w.witness_account_name}}</a></td>
+                    <td><a href="{{w.url}}" target="_blank">Link</a></td>
+                    <td class="align-right">{{w.total_votes | number: 0}}</td>
+                    <td class="align-right">{{w.total_missed | number}}</td>
+                    <td class="align-right"><a href="#/blocks/{{w.last_confirmed_block_num}}/">{{w.last_confirmed_block_num | number}}</a></td>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

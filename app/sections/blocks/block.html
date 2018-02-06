@@ -1,0 +1,57 @@
+<div class="page page-table" data-ng-controller="blocksCtrl">
+    <div class="row">
+        <div class="col-md-6">
+            <ol class="breadcrumb">
+                <li><a href="#/">Home</a></li>
+                <li><a href="#/blocks/">Blocks</a></li>
+                <li class="active"><a href="#/blocks/{{data.block_num}}/">Block Number: {{data.block_num | number}}</a></li>
+            </ol>
+        </div>
+        <div class="col-md-6">
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading"> Block: <strong>{{data.block_num | number}}</strong></div>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <span class="badge" style="background-color: #FFFFFF; color: #000000">{{data.previous}}</span>
+                Previous
+            </li>
+            <li class="list-group-item">
+                <span class="badge" style="background-color: #FFFFFF; color: #000000">{{data.timestamp}}</span>
+                DateTime
+            </li>
+            <li class="list-group-item">
+                <span class="badge" style="background-color: #FFFFFF; color: #000000">{{data.transaction_merkle_root}}</span>
+                Merkle Root
+            </li>
+            <li class="list-group-item">
+                <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#/objects/{{data.witness}}/'>{{data.witness}}</a></span>
+                Witness
+            </li>
+            <li class="list-group-item">
+                <span class="badge" style="background-color: #FFFFFF; color: #000000">{{data.witness_signature}}</span>
+                Witness Signature
+            </li>
+            <li class="list-group-item">
+                <span class="badge" style="background-color: #FFFFFF; color: #000000">{{data.transactions_count}}</span>
+                Transactions in Block
+            </li>
+            <li class="list-group-item">
+                <span class="badge" style="background-color: #FFFFFF; color: #000000">{{data.operations_count}}</span>
+                Operations in Block
+            </li>
+        </ul>
+    </div>
+
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title">Transactions Raw Data</h3>
+        </div>
+        <div class="panel-body">
+            <pre>{{data.transactions | json}}</pre>
+        </div>
+    </div>
+
+</div>

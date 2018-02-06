@@ -1,0 +1,93 @@
+<div class="page page-table" data-ng-controller="searchCtrl">
+
+    <div class="row">
+        <div class="col-md-6">
+            <ol class="breadcrumb">
+                <li><a href="#/">Home</a></li>
+                <li class="active"><a href="#/search/">Search</a></li>
+            </ol>
+        </div>
+        <div class="col-md-6">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading"> Search Block</div>
+                <div class="panel-body">
+                    <p>Search by block by inserting block number. No commas, no dots, just pure numbers.</p>
+                    <p>Sample input: <a data-ng-click="add2block('19446934')" style="cursor: pointer;">19446934</a></p>
+                    <form role="form" data-ng-submit="submit()">
+                        <input type="hidden" class="form-control" ng-model="type" value="block">
+                        <div class="form-group ui-typeahead">
+                            <label for="block">Block Number</label>
+                            <input type="text" class="form-control" ng-model="block" ng-change="updateData('block')" id="block" placeholder="enter block number"
+                                   uib-typeahead="b for b in blocks | filter:$viewValue | limitTo:8" ng-required="required">
+                        </div>
+                        <button type="submit" class="btn btn-success btn-w-md">Go</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Search Account</div>
+                <div class="panel-body">
+                    <p>Looking for an account? Start typing the first letters of it's name and let the autocompleate feature help you find the exact string.</p>
+                    <p>Sample input: <a data-ng-click="add2account('alfredo-worker')" style="cursor: pointer;">alfredo-worker</a></p>
+                    <form role="form" data-ng-submit="submit()">
+                        <input type="hidden" class="form-control" ng-model="type" value="account">
+                        <div class="form-group ui-typeahead">
+                            <label for="account">Account name or ID</label>
+                            <input type="text" class="form-control" ng-model="account" ng-change="updateData('account')" id="account" placeholder="enter account name or id number"
+                                   uib-typeahead="a for a in accounts | filter:$viewValue | limitTo:8" ng-required="required">
+                        </div>
+                        <button type="submit" class="btn btn-success btn-w-md">Go</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Search Object</h3>
+                </div>
+                <div class="panel-body">
+                    <p>IOn order to search for an object you need to insert an ID with the correct Bitshares object format. More info and list can be found <a href="http://docs.bitshares.org/development/blockchain/objects.html" target="_blank">HERE</a></p>
+                    <p>Sample input: <a data-ng-click="add2object('1.3.0')" style="cursor: pointer;">1.3.0</a></p>
+                    <form role="form" data-ng-submit="submit()">
+                        <input type="hidden" class="form-control" ng-model="type" value="object">
+                        <div class="form-group">
+                            <label for="object">Object ID</label>
+                            <input type="text" class="form-control" ng-model="object" id="object" placeholder="enter object id" ng-required="required">
+                        </div>
+                        <button type="submit" class="btn btn-success btn-w-md">Go</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Search Asset</h3>
+                </div>
+                <div class="panel-body">
+                    <p>Looking for a SmartCoin or UIA? Start typing the first letters of it's name and let the autocompleate feature help you find the exact string.</p>
+                    <p>Sample input: <a data-ng-click="add2asset('CNY')" style="cursor: pointer;">CNY</a></p>
+                    <form role="form" data-ng-submit="submit()">
+                        <input type="hidden" class="form-control" ng-model="type" value="asset">
+                        <div class="form-group ui-typeahead">
+                            <label for="asset">Asset name or id</label>
+                            <input type="text" class="form-control" ng-model="asset" ng-change="updateData('asset')" id="asset" placeholder="enter asset name or id"
+                                   uib-typeahead="a for a in assets | filter:$viewValue | limitTo:8" ng-required="required">
+                        </div>
+                        <button type="submit" class="btn btn-success btn-w-md">Go</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
