@@ -2,7 +2,7 @@
 
 http://open-explorer.io
 
-## install
+## Install
 
 clone repo:
 
@@ -25,6 +25,13 @@ Install bower dependencies:
 or
 
 `bower install --allow-root`
+
+Install compass:
+
+```
+sudo apt install ruby-compass
+sudo gem install compass
+```
 
 Start by npm:
 
