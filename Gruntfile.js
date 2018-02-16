@@ -58,7 +58,7 @@
             connect: {
                 options: {
                     port: 8000,
-                    hostname: "localhost"
+                    hostname: "209.188.21.157"
                 },
                 livereload: {
                     options: {
@@ -218,7 +218,7 @@
                         {
                             expand: true,
                             cwd: "<%= yeoman.app %>",
-                            src: ["sections/*.html", "views/*.html"],
+                            src: ["*.html", "sections/*.html"],
                             dest: "<%= yeoman.dist %>"
                         }
                     ]
