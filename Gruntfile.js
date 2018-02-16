@@ -58,7 +58,7 @@
             connect: {
                 options: {
                     port: 8000,
-                    hostname: "209.188.21.157"
+                    hostname: "127.0.0.1"
                 },
                 livereload: {
                     options: {
