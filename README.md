@@ -7,12 +7,12 @@ http://open-explorer.io
 clone repo:
 
 ```
-git clone https://github.com/oxarbitrage/open-explorer.io
-cd open-explorer.io
+git clone https://github.com/oxarbitrage/open-explorer
+cd open-explorer
 ```
 
-* change localhost if you want to listen outside at https://github.com/oxarbitrage/open-explorer.io/blob/master/package.json#L57
-* change your hostname in grunt if needed: https://github.com/oxarbitrage/open-explorer.io/blob/master/Gruntfile.js#L61
+* change localhost if you want to listen outside at https://github.com/oxarbitrage/open-explorer/blob/master/package.json#L57
+* change your hostname in grunt if needed: https://github.com/oxarbitrage/open-explorer/blob/master/Gruntfile.js#L61
 
 Install node dependencies:
 
