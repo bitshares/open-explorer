@@ -7,8 +7,7 @@
 
         //var dataStream = $websocket('ws://node.testnet.bitshares.eu:18092');
         var dataStream = $websocket(appConfig.urls.websocket);
-	    dataStream.send('{"method": "call", "params": [1, "database", []], "id": 3}')
-	    dataStream.send('{"method": "call", "params": [2, "set_subscribe_callback", [5, true]], "id": 6}');
+        dataStream.send('{"method": "set_subscribe_callback", "params": [5, true], "id": 6}')
 
         var collection = [];
         $scope.operations = [];
