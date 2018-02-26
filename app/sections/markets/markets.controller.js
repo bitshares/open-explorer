@@ -10,6 +10,7 @@
         var name = $routeParams.name;
 
         if(name) {
+            name = name.toUpperCase();
             if(path.includes("markets")) {
                 var name2 = $routeParams.name2;
 

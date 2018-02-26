@@ -9,6 +9,7 @@
 		var path = $location.path();
 		var name = $routeParams.name;
 		if(name) {
+            name = name.toLowerCase();
 			if(path.includes("accounts")) {
 				$http.get(appConfig.urls.python_backend + "/full_account?account_id=" + name)
 					.then(function(response) {
