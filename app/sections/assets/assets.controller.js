@@ -13,6 +13,7 @@
 		var path = $location.path();
 		var name = $routeParams.name;
 		if(name) {
+		    name = name.toUpperCase();
             if(path.includes("assets")) {
                 var block_num = "";
                 var virtual_op = "";
