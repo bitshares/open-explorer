@@ -13,6 +13,7 @@
             name = name.toUpperCase();
             if(path.includes("markets")) {
                 var name2 = $routeParams.name2;
+                name2 = name2.toUpperCase();
 
                 [name,name2] = [name2,name];
                 //console.log(name2);
