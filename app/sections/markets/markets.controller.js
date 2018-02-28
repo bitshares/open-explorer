@@ -47,13 +47,16 @@
                                         $scope.ticker = parsed;
 
                                         // subscription
-                                        console.log($scope.ticker);
                                         var dataStream = $websocket(appConfig.urls.websocket);
-                                        dataStream.send('{"method": "call", "params": [0, "set_subscribe_callback", [5, false]], "id": 6}');
                                         var base = base_id;
                                         var quote = quote_id;
                                         dataStream.send('{"method": "call", "params": [0, "subscribe_to_market", [5, "' + base + '", "'+quote+'"]], "id": 7}');
-                                        console.log('{"method": "call", "params": [0, "subscribe_to_market", ["' + base + '", "'+quote+'"]], "id": 7}');
+
+                                        $scope.$on("$locationChangeStart", function(event) {
+                                            // when leaving page unsubscribe from market
+                                            dataStream.send('{"method": "call", "params": [0, "unsubscribe_from_market", ["' + base + '", "'+quote+'"]], "id": 8}');
+                                        });
+
                                         dataStream.onMessage(function (message) {
                                             var parsed;
                                             try {
@@ -108,12 +111,9 @@
 
                                                                 // grouped order book
                                                                 var grouped = [];
-                                                                $http.get(appConfig.urls.python_backend + "/get_grouped_limit_orders?base=" + name + "&quote=" + name2 + "&group=100&limit=100")
+                                                                $http.get(appConfig.urls.python_backend + "/get_grouped_limit_orders?base=" + name + "&quote=" + name2 + "&group=100&limit=10")
                                                                     .then(function(response) {
-                                                                        //console.log(response);
-                                                                        var total = 0;
                                                                         angular.forEach(response.data, function(value, key) {
-                                                                            //console.log(value);
                                                                             var total_for_sale = value.total_for_sale;
                                                                             var max_base_amount = value.max_price.base.amount;
                                                                             var max_quote_amount = value.max_price.quote.amount;
@@ -143,19 +143,12 @@
                                                                                 var max_price = (max_base_amount / base_precision) / (max_quote_amount / quote_precision);
                                                                                 var min_price = (min_base_amount / base_precision) / (min_quote_amount / quote_precision);
                                                                             }
-
-                                                                            //console.log(max_price);
-                                                                            //console.log(min_price);
-                                                                            //console.log(total_for_sale);
                                                                             var parsed = {max_price: max_price, min_price: min_price, total_for_sale: total_for_sale, base_precision: base_precision, quote_precision: quote_precision};
                                                                             grouped.push(parsed);
-                                                                            //total = total + parseInt(value.quote);
-                                                                            //var parsed = {base: value.base, price: value.price, quote: value.quote, base_precision: base_precision, quote_precision: quote_precision, total: total};
-                                                                            //asks.push(parsed);
                                                                         });
                                                                         $scope.grouped = grouped;
                                                                     });
-                                                                // end order book
+                                                                // end grouped order book
 
 
 
