@@ -2,9 +2,9 @@
     'use strict';
 
     angular.module('app.markets')
-        .controller('marketsCtrl', ['$scope', '$filter', '$routeParams', '$location', '$http', 'appConfig', marketsCtrl]);
+        .controller('marketsCtrl', ['$scope', '$filter', '$routeParams', '$location', '$http', '$websocket', 'appConfig', marketsCtrl]);
 
-    function marketsCtrl($scope, $filter, $routeParams, $location, $http, appConfig) {
+    function marketsCtrl($scope, $filter, $routeParams, $location, $http, $websocket, appConfig) {
 
         var path = $location.path();
         var name = $routeParams.name;
@@ -18,74 +18,167 @@
                 [name,name2] = [name2,name];
                 //console.log(name2);
 
-                var asks = [];
-                var bids = [];
-                $http.get(appConfig.urls.python_backend + "/get_order_book?base=" + name + "&quote=" + name2)
-                    .then(function(response) {
-                        angular.forEach(response.data.asks, function(value, key) {
-
-                            var base_precision = 5;
-                            var quote_precision = 5;
-                            $http.get(appConfig.urls.python_backend + "/get_asset?asset_id=" + name)
-                                .then(function(response_p) {
-                                    base_precision = response_p.data[0].precision;
-
-                                    $http.get(appConfig.urls.python_backend + "/get_asset?asset_id=" + name2)
-                                        .then(function(response_p2) {
-                                            quote_precision = response_p2.data[0].precision;
-
-                                            var parsed = {base: value.base, price: value.price, quote: value.quote, base_precision: base_precision, quote_precision: quote_precision};
-                                            asks.push(parsed);
-
-                                        });
-                                });
-                        });
-                        $scope.asks = asks;
-
-                        angular.forEach(response.data.bids, function(value, key) {
-                            var base_precision = 5;
-                            var quote_precision = 5;
-                            $http.get(appConfig.urls.python_backend + "/get_asset?asset_id=" + name)
-                                .then(function(response_p) {
-                                    base_precision = response_p.data[0].precision;
-
-                                    $http.get(appConfig.urls.python_backend + "/get_asset?asset_id=" + name2)
-                                        .then(function(response_p2) {
-                                            quote_precision = response_p2.data[0].precision;
-
-                                            var parsed = {base: value.base, price: value.price, quote: value.quote, base_precision: base_precision, quote_precision: quote_precision};
-                                            bids.push(parsed);
-
-                                        });
-                                });
-                        });
-                        $scope.bids = bids;
-                    });
-
                 var ticker = {};
                 $http.get(appConfig.urls.python_backend + "/get_ticker?base=" + name + "&quote=" + name2)
                     .then(function(response3) {
-                        var base_precision = 5;
+                        //var base_precision = 5;
                         $http.get(appConfig.urls.python_backend + "/get_asset?asset_id=" + name)
-                            .then(function(response_p) {
-                                base_precision = response_p.data[0].precision;
+                            .then(function(response_b) {
+                                var base_id = response_b.data[0].id;
+                                var base_precision = response_b.data[0].precision;
 
-                                var parsed = {
-                                    price: response3.data.latest,
-                                    ask: response3.data.lowest_ask,
-                                    bid: response3.data.highest_bid,
-                                    base_volume: parseInt(response3.data.base_volume),
-                                    quote_volume: parseInt(response3.data.quote_volume),
-                                    perc_change: response3.data.percent_change,
-                                    base: name,
-                                    quote: name2,
-                                    base_precision: base_precision
-                                };
-                                $scope.ticker = parsed;
+
+                                $http.get(appConfig.urls.python_backend + "/get_asset?asset_id=" + name2)
+                                    .then(function(response_q) {
+                                        var quote_id = response_q.data[0].id;
+                                        var quote_precision = response_q.data[0].precision;
+
+                                        var parsed = {
+                                            price: response3.data.latest,
+                                            ask: response3.data.lowest_ask,
+                                            bid: response3.data.highest_bid,
+                                            base_volume: parseInt(response3.data.base_volume),
+                                            quote_volume: parseInt(response3.data.quote_volume),
+                                            perc_change: response3.data.percent_change,
+                                            base: name,
+                                            quote: name2,
+                                            base_precision: base_precision
+                                        };
+                                        $scope.ticker = parsed;
+
+                                        // subscription
+                                        console.log($scope.ticker);
+                                        var dataStream = $websocket(appConfig.urls.websocket);
+                                        dataStream.send('{"method": "call", "params": [0, "set_subscribe_callback", [5, false]], "id": 6}');
+                                        var base = base_id;
+                                        var quote = quote_id;
+                                        dataStream.send('{"method": "call", "params": [0, "subscribe_to_market", [5, "' + base + '", "'+quote+'"]], "id": 7}');
+                                        console.log('{"method": "call", "params": [0, "subscribe_to_market", ["' + base + '", "'+quote+'"]], "id": 7}');
+                                        dataStream.onMessage(function (message) {
+                                            var parsed;
+                                            try {
+                                                // lets update the ticker
+                                                var ticker = {};
+                                                $http.get(appConfig.urls.python_backend + "/get_ticker?base=" + name + "&quote=" + name2)
+                                                    .then(function(response3) {
+                                                        //var base_precision = 5;
+                                                        $http.get(appConfig.urls.python_backend + "/get_asset?asset_id=" + name)
+                                                            .then(function(response_p) {
+                                                                //base_precision = response_p.data[0].precision;
+
+                                                                var parsed = {
+                                                                    price: response3.data.latest,
+                                                                    ask: response3.data.lowest_ask,
+                                                                    bid: response3.data.highest_bid,
+                                                                    base_volume: parseInt(response3.data.base_volume),
+                                                                    quote_volume: parseInt(response3.data.quote_volume),
+                                                                    perc_change: response3.data.percent_change,
+                                                                    base: name,
+                                                                    quote: name2,
+                                                                    base_precision: base_precision
+                                                                };
+                                                                $scope.ticker = parsed;
+
+
+
+                                                                // order book
+                                                                var asks = [];
+                                                                var bids = [];
+                                                                $http.get(appConfig.urls.python_backend + "/get_order_book?base=" + name + "&quote=" + name2 + "&limit=10")
+                                                                    .then(function(response) {
+                                                                        //console.log(response);
+                                                                        var total = 0;
+                                                                        angular.forEach(response.data.asks, function(value, key) {
+                                                                            total = total + parseFloat(value.quote);
+                                                                            var parsed = {base: value.base, price: value.price, quote: value.quote, base_precision: base_precision, quote_precision: quote_precision, total: total};
+                                                                            asks.push(parsed);
+                                                                        });
+                                                                        $scope.asks = asks;
+
+                                                                        var total = 0;
+                                                                        angular.forEach(response.data.bids, function(value, key) {
+                                                                            total = total + parseFloat(value.quote);
+                                                                            var parsed = {base: value.base, price: value.price, quote: value.quote, base_precision: base_precision, quote_precision: quote_precision, total: total};
+                                                                            bids.push(parsed);
+                                                                        });
+                                                                        $scope.bids = bids;
+                                                                    });
+                                                                // end order book
+
+
+                                                                // grouped order book
+                                                                var grouped = [];
+                                                                $http.get(appConfig.urls.python_backend + "/get_grouped_limit_orders?base=" + name + "&quote=" + name2 + "&group=100&limit=100")
+                                                                    .then(function(response) {
+                                                                        //console.log(response);
+                                                                        var total = 0;
+                                                                        angular.forEach(response.data, function(value, key) {
+                                                                            //console.log(value);
+                                                                            var total_for_sale = value.total_for_sale;
+                                                                            var max_base_amount = value.max_price.base.amount;
+                                                                            var max_quote_amount = value.max_price.quote.amount;
+                                                                            var min_base_amount = value.min_price.base.amount;
+                                                                            var min_quote_amount = value.min_price.quote.amount;
+
+                                                                            var base_id = value.max_price.base.asset_id;
+                                                                            var quote_id = value.max_price.quote.asset_id;
+
+                                                                            var base_array = base_id.split(".");
+                                                                            var quote_array = quote_id.split(".");
+                                                                            var divide = 0;
+
+                                                                            if(base_array[2] > quote_array[2])
+                                                                            {
+                                                                                divide = 1;
+                                                                                base_precision, quote_precision = quote_precision, base_precision;
+                                                                            }
+                                                                            var qp = Math.pow(10, quote_precision);
+                                                                            var bp = Math.pow(10, base_precision);
+
+                                                                            if(divide) {
+                                                                                var max_price = 1 / (max_base_amount / base_precision) / (max_quote_amount / quote_precision);
+                                                                                var min_price = 1 / (min_base_amount / base_precision) / (min_quote_amount / quote_precision);
+                                                                            }
+                                                                            else {
+                                                                                var max_price = (max_base_amount / base_precision) / (max_quote_amount / quote_precision);
+                                                                                var min_price = (min_base_amount / base_precision) / (min_quote_amount / quote_precision);
+                                                                            }
+
+                                                                            //console.log(max_price);
+                                                                            //console.log(min_price);
+                                                                            //console.log(total_for_sale);
+                                                                            var parsed = {max_price: max_price, min_price: min_price, total_for_sale: total_for_sale, base_precision: base_precision, quote_precision: quote_precision};
+                                                                            grouped.push(parsed);
+                                                                            //total = total + parseInt(value.quote);
+                                                                            //var parsed = {base: value.base, price: value.price, quote: value.quote, base_precision: base_precision, quote_precision: quote_precision, total: total};
+                                                                            //asks.push(parsed);
+                                                                        });
+                                                                        $scope.grouped = grouped;
+                                                                    });
+                                                                // end order book
+
+
+
+                                                            });
+                                                    });
+                                                parsed = JSON.parse(message.data);
+                                                console.log(parsed);
+                                                //parsed = JSON.parse(message.data).params[1][0][0];
+                                            }
+                                            catch (err) {
+                                            }
+                                            //console.log(parsed);
+                                        });
+
+
+
+                                        /// end subscription
+                                    });
+
+
+
+
                             });
-
-
-                        //console.log(ticker);
                     });
                 //console.log(ticker);
                 //$scope.ticker = ticker;
