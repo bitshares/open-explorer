@@ -115,10 +115,10 @@
                                                                     .then(function(response) {
                                                                         angular.forEach(response.data, function(value, key) {
                                                                             var total_for_sale = value.total_for_sale;
-                                                                            var max_base_amount = value.max_price.base.amount;
-                                                                            var max_quote_amount = value.max_price.quote.amount;
-                                                                            var min_base_amount = value.min_price.base.amount;
-                                                                            var min_quote_amount = value.min_price.quote.amount;
+                                                                            var max_base_amount = parseInt(value.max_price.base.amount);
+                                                                            var max_quote_amount = parseInt(value.max_price.quote.amount);
+                                                                            var min_base_amount = parseInt(value.min_price.base.amount);
+                                                                            var min_quote_amount = parseInt(value.min_price.quote.amount);
 
                                                                             var base_id = value.max_price.base.asset_id;
                                                                             var quote_id = value.max_price.quote.asset_id;
@@ -132,16 +132,16 @@
                                                                                 divide = 1;
                                                                                 base_precision, quote_precision = quote_precision, base_precision;
                                                                             }
-                                                                            var qp = Math.pow(10, quote_precision);
-                                                                            var bp = Math.pow(10, base_precision);
+                                                                            var qp = Math.pow(10, parseInt(quote_precision));
+                                                                            var bp = Math.pow(10, parseInt(base_precision));
 
                                                                             if(divide) {
-                                                                                var max_price = 1 / (max_base_amount / base_precision) / (max_quote_amount / quote_precision);
-                                                                                var min_price = 1 / (min_base_amount / base_precision) / (min_quote_amount / quote_precision);
+                                                                                var max_price = 1 / parseFloat(max_base_amount / base_precision) / parseFloat(max_quote_amount / quote_precision);
+                                                                                var min_price = 1 / parseFloat(min_base_amount / base_precision) / parseFloat(min_quote_amount / quote_precision);
                                                                             }
                                                                             else {
-                                                                                var max_price = (max_base_amount / base_precision) / (max_quote_amount / quote_precision);
-                                                                                var min_price = (min_base_amount / base_precision) / (min_quote_amount / quote_precision);
+                                                                                var max_price = parseFloat(max_base_amount / base_precision) / parseFloat(max_quote_amount / quote_precision);
+                                                                                var min_price = parseFloat(min_base_amount / base_precision) / parseFloat(min_quote_amount / quote_precision);
                                                                             }
                                                                             var parsed = {max_price: max_price, min_price: min_price, total_for_sale: total_for_sale, base_precision: base_precision, quote_precision: quote_precision};
                                                                             grouped.push(parsed);

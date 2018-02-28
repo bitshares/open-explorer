@@ -351,6 +351,11 @@
                         var collection = [];
                         $scope.operations = [];
 
+                        $scope.$on("$locationChangeStart", function(event) {
+                            // when leaving page unsubscribe from everything
+                            dataStream.send('{"method": "call", "params": [0, "cancel_all_subscriptions", []], "id": 8}');
+                        });
+
 
                         dataStream.onMessage(function (message) {
                             var parsed;
