@@ -88,7 +88,7 @@
                             var account_name;
                             $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + value[0])
                                 .then(function(response_name) {
-                                    account_name = response_name.data[0].name;
+                                    account_name = response_name.data;
                                     var parsed = { account: value[0], threshold: value[1], account_name: account_name};
                                     owner_accounts.push(parsed);
                                 });
@@ -110,7 +110,7 @@
                             var account_name;
                             $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + value[0])
                                 .then(function(response_name) {
-                                    account_name = response_name.data[0].name;
+                                    account_name = response_name.data;
                                     var parsed = { account: value[0], threshold: value[1], account_name: account_name};
                                     active_accounts.push(parsed);
                                 });
@@ -368,7 +368,7 @@
                             if (typeof(parsed) == 'object') {
                                 if (parsed.id.substring(0, 4) == "2.9.") {
                                     var account = parsed.account;
-                                    $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + account)
+                                    $http.get(appConfig.urls.python_backend + "/account?account_id=" + account)
                                         .then(function (response) {
                                             parsed.account_name = response.data[0].name;
                                         });
