@@ -24,9 +24,14 @@
                     var votes_for = formatBalance(response.data[i][0].total_votes_for, 5);
                     var daily_pay = formatBalance(response.data[i][0].daily_pay, 5);
                     var tclass = "";
+
+                    var have_url = 0;
+                    if(response.data[i][0].url && response.data[i][0].url != "http://")
+                        have_url = 1;
+
                     if(now_d > end_d) {
                         tclass = "danger";
-                        var parsed = { name: response.data[i][0].name, daily_pay: daily_pay, url: response.data[i][0].url, votes_for: votes_for, votes_against: response.data[i][0].total_votes_against, worker: response.data[i][0].worker_account, start: start_date[0], end: end_date[0], id: response.data[i][0].id, worker_name: response.data[i][0].worker_account_name, tclass: tclass, perc: response.data[i][0].perc };
+                        var parsed = { name: response.data[i][0].name, daily_pay: daily_pay, url: response.data[i][0].url, have_url: have_url, votes_for: votes_for, votes_against: response.data[i][0].total_votes_against, worker: response.data[i][0].worker_account, start: start_date[0], end: end_date[0], id: response.data[i][0].id, worker_name: response.data[i][0].worker_account_name, tclass: tclass, perc: response.data[i][0].perc };
                         workers_expired.push(parsed);
                     }
                     else {
@@ -43,7 +48,7 @@
                             if(start_d > now_d)
                                 voting_now = "VOTING NOW!";
                         }
-                        var parsed = { name: response.data[i][0].name, daily_pay: daily_pay, url: response.data[i][0].url, votes_for: votes_for, votes_against: response.data[i][0].total_votes_against, worker: response.data[i][0].worker_account, start: start_date[0], end: end_date[0], id: response.data[i][0].id, worker_name: response.data[i][0].worker_account_name, tclass: tclass, perc: response.data[i][0].perc, voting_now: voting_now };
+                        var parsed = { name: response.data[i][0].name, daily_pay: daily_pay, url: response.data[i][0].url, have_url: have_url, votes_for: votes_for, votes_against: response.data[i][0].total_votes_against, worker: response.data[i][0].worker_account, start: start_date[0], end: end_date[0], id: response.data[i][0].id, worker_name: response.data[i][0].worker_account_name, tclass: tclass, perc: response.data[i][0].perc, voting_now: voting_now };
                         workers_current.push(parsed);
                     }
                 }
