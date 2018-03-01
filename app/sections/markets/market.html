@@ -147,8 +147,8 @@
                         </thead>
                         <tbody>
                         <tr data-ng-repeat="g in grouped | orderBy:column:reverse">
-                            <td style="text-align:right;">{{g.min_price | number: b.base_precision}}</td>
-                            <td style="text-align:right;">{{g.max_price | number: b.base_precision}}</td>
+                            <td style="text-align:right;">{{g.min_price | number}}</td>
+                            <td style="text-align:right;">{{g.max_price | number}}</td>
                             <td style="text-align:right;">{{g.total_for_sale | number: g.quote_precision}}</td>
                         </tbody>
                     </table>

@@ -108,28 +108,30 @@
                                     };
                                 });
                             });
-                    });
-                var markets = [];
-                $http.get(appConfig.urls.python_backend + "/get_markets?asset_id=" + name)
-                    .then(function(response) {
-                        //console.log(response.data);
-                        angular.forEach(response.data, function(value, key) {
-                            //console.log(value);
-                            var parsed = {pair: value[1], price: value[3], volume: value[4]};
-                            markets.push(parsed);
-                        });
-                        $scope.markets = markets;
-                    });
-                var accounts = [];
-                $http.get(appConfig.urls.python_backend + "/get_asset_holders?asset_id=" + name)
-                    .then(function(response) {
-                        //console.log(response.data);
-                        angular.forEach(response.data, function(value, key) {
-                            //console.log(value);
-                            var parsed = {name: value.name, amount: value.amount, id: value.account_id};
-                            accounts.push(parsed);
-                        });
-                        $scope.accounts = accounts;
+
+                            var markets = [];
+                            $http.get(appConfig.urls.python_backend + "/get_markets?asset_id=" + name)
+                                .then(function(response) {
+                                    //console.log(response.data);
+                                    angular.forEach(response.data, function(value, key) {
+                                        //console.log(value);
+                                        var parsed = {pair: value[1], price: value[3], volume: value[4]};
+                                        markets.push(parsed);
+                                    });
+                                    $scope.markets = markets;
+                                });
+                            var accounts = [];
+                            $http.get(appConfig.urls.python_backend + "/get_asset_holders?asset_id=" + name)
+                                .then(function(response_ah) {
+                                    //console.log(response.data);
+                                    angular.forEach(response_ah.data, function(value, key) {
+                                        //console.log(value);
+                                        //console.log(response.data[0].precision);
+                                        var parsed = {name: value.name, amount: formatBalance(value.amount, response.data[0].precision), id: value.account_id};
+                                        accounts.push(parsed);
+                                    });
+                                    $scope.accounts = accounts;
+                                });
                     });
             }
 
@@ -343,6 +345,15 @@
                 }
             }
 		}
+
+        function formatBalance(number, presicion) {
+
+            var result;
+            var divideby =  Math.pow(10, presicion);
+            var res = Number(number/divideby);
+            return res;
+        }
+
     }
 
 })();
