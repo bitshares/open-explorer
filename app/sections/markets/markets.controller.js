@@ -92,7 +92,7 @@
                                                                         //console.log(response);
                                                                         var total = 0;
                                                                         angular.forEach(response.data.asks, function(value, key) {
-                                                                            total = total + parseFloat(value.quote);
+                                                                            total = total + parseFloat(value.base);
                                                                             var parsed = {base: value.base, price: value.price, quote: value.quote, base_precision: base_precision, quote_precision: quote_precision, total: total};
                                                                             asks.push(parsed);
                                                                         });
@@ -100,7 +100,7 @@
 
                                                                         var total = 0;
                                                                         angular.forEach(response.data.bids, function(value, key) {
-                                                                            total = total + parseFloat(value.quote);
+                                                                            total = total + parseFloat(value.base);
                                                                             var parsed = {base: value.base, price: value.price, quote: value.quote, base_precision: base_precision, quote_precision: quote_precision, total: total};
                                                                             bids.push(parsed);
                                                                         });
@@ -110,8 +110,9 @@
 
 
                                                                 // grouped order book
+                                                                // sell side
                                                                 var grouped = [];
-                                                                $http.get(appConfig.urls.python_backend + "/get_grouped_limit_orders?base=" + name + "&quote=" + name2 + "&group=100&limit=10")
+                                                                $http.get(appConfig.urls.python_backend + "/get_grouped_limit_orders?base=" + name + "&quote=" + name2 + "&group=10&limit=10")
                                                                     .then(function(response) {
                                                                         angular.forEach(response.data, function(value, key) {
                                                                             var total_for_sale = value.total_for_sale;
@@ -130,26 +131,86 @@
                                                                             if(base_array[2] > quote_array[2])
                                                                             {
                                                                                 divide = 1;
-                                                                                base_precision, quote_precision = quote_precision, base_precision;
+                                                                                //base_precision, quote_precision = quote_precision, base_precision;
+                                                                                //quote_precision = [base_precision, base_precision = quote_precision][0];
                                                                             }
+                                                                            console.log(divide);
                                                                             var qp = Math.pow(10, parseInt(quote_precision));
                                                                             var bp = Math.pow(10, parseInt(base_precision));
 
                                                                             if(divide) {
-                                                                                var max_price = 1 / parseFloat(max_base_amount / bp) / parseFloat(max_quote_amount / qp);
-                                                                                var min_price = 1 / parseFloat(min_base_amount / bp) / parseFloat(min_quote_amount / qp);
+                                                                                var max = (max_quote_amount / qp) / (max_base_amount / bp);
+                                                                                var max_price = 1 / max;
+                                                                                var min = (min_quote_amount / qp) / (min_base_amount / bp);
+                                                                                var min_price = 1 / min;
                                                                             }
                                                                             else {
                                                                                 var max_price = parseFloat(max_base_amount / bp) / parseFloat(max_quote_amount / qp);
                                                                                 var min_price = parseFloat(min_base_amount / bp) / parseFloat(min_quote_amount / qp);
                                                                             }
-                                                                            total_for_sale = Number(total_for_sale/qp);
+                                                                            total_for_sale = Number(total_for_sale/bp);
 
                                                                             var parsed = {max_price: max_price, min_price: min_price, total_for_sale: total_for_sale, base_precision: base_precision, quote_precision: quote_precision};
                                                                             grouped.push(parsed);
                                                                         });
                                                                         $scope.grouped = grouped;
                                                                     });
+
+                                                                // end sell side
+                                                                // buy side
+                                                                var grouped2 = [];
+                                                                //name, name2 = name2, name;
+                                                                //name2 = [name, name = name2][0];
+                                                                var new_name = name2;
+                                                                var new_name2 = name;
+                                                                var new_base_precision = quote_precision;
+                                                                var new_quote_precision = base_precision;
+                                                                $http.get(appConfig.urls.python_backend + "/get_grouped_limit_orders?base=" + new_name + "&quote=" + new_name2 + "&group=10&limit=10")
+                                                                    .then(function(response2) {
+                                                                        angular.forEach(response2.data, function(value, key) {
+                                                                            var total_for_sale = value.total_for_sale;
+                                                                            // swap
+                                                                            var max_base_amount = parseInt(value.max_price.quote.amount);
+                                                                            var max_quote_amount = parseInt(value.max_price.base.amount);
+                                                                            var min_base_amount = parseInt(value.min_price.quote.amount);
+                                                                            var min_quote_amount = parseInt(value.min_price.base.amount);
+                                                                            var base_id = value.max_price.quote.asset_id;
+                                                                            var quote_id = value.max_price.base.asset_id;
+
+                                                                            var base_array = base_id.split(".");
+                                                                            var quote_array = quote_id.split(".");
+                                                                            var divide = 0;
+
+                                                                            if(base_array[2] > quote_array[2])
+                                                                            {
+                                                                                divide = 1;
+                                                                                //new_base_precision, new_quote_precision = new_quote_precision, new_base_precision;
+                                                                                //new_quote_precision = [new_base_precision, new_base_precision = new_quote_precision][0];
+                                                                            }
+                                                                            var qp = Math.pow(10, parseInt(new_quote_precision));
+                                                                            var bp = Math.pow(10, parseInt(new_base_precision));
+
+                                                                            if(divide) {
+                                                                                var max = (max_quote_amount / bp) / (max_base_amount / qp);
+                                                                                var max_price = 1 / max;
+                                                                                var min = (min_quote_amount / bp) / (min_base_amount / qp);
+                                                                                var min_price = 1 / min;
+                                                                                //total_for_sale = Number(total_for_sale/qp);
+                                                                            }
+                                                                            else {
+                                                                                var max_price = parseFloat(max_base_amount / qp) / parseFloat(max_quote_amount / bp);
+                                                                                var min_price = parseFloat(min_base_amount / qp) / parseFloat(min_quote_amount / bp);
+                                                                                //total_for_sale = Number(total_for_sale/bp);
+                                                                            }
+
+                                                                            total_for_sale = Number(total_for_sale/bp);
+                                                                            var parsed = {max_price: max_price, min_price: min_price, total_for_sale: total_for_sale, base_precision: new_quote_precision, quote_precision: new_base_precision};
+                                                                            grouped2.push(parsed);
+                                                                        });
+                                                                        $scope.grouped2 = grouped2;
+                                                                    });
+
+                                                                // end buy side
                                                                 // end grouped order book
 
 
