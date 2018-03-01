@@ -34,7 +34,14 @@
                     <td>{{w.start}}</td>
                     <td>{{w.end}}</td>
                     <td class="align-right">{{w.daily_pay | number}}</td>
-					<td><a href="{{w.url}}" target="_blank">Link</a></td>
+					<td>
+                        <div ng-if="w.have_url == 1">
+                            <a href="{{w.url}}" target="_blank">Link</a>
+                        </div>
+                        <div ng-if="w.have_url == 0">
+                            No Link
+                        </div>
+                    </td>
 					<td class="align-right">{{w.votes_for | number: 0}}</td>
                     <td>{{w.perc}}%</td>
                 </tbody>
@@ -64,7 +71,14 @@
                     <td>{{w.start}}</td>
                     <td>{{w.end}}</td>
                     <td class="align-right">{{w.daily_pay | number}}</td>
-                    <td><a href="{{w.url}}" target="_blank">Link</a></td>
+                    <td>
+                        <div ng-if="w.have_url == 1">
+                            <a href="{{w.url}}" target="_blank">Link</a>
+                        </div>
+                        <div ng-if="w.have_url == 0">
+                            No Link
+                        </div>
+                    </td>
                     <td class="align-right">{{w.votes_for | number: 0}}</td>
                 </tbody>
             </table>
