@@ -89,20 +89,18 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Operation ID</th>
+                        <th>Operation</th>
+                        <th>ID</th>
                         <th>DateTime</th>
-                        <th>History ID</th>
-                        <th>Account</th>
                         <th>Block</th>
-                        <th>OP Type</th>
+                        <th>Type</th>
                     </tr>
                 </thead>
                 <tbody>
-                <tr data-ng-repeat="operation in operations">
+                <tr data-ng-repeat="operation in operations track by $index">
+                    <td><div ng-bind-html="operation.operation_text | to_trusted" layout-align="center"></div></td>
                     <td><a href='#/operations/{{operation.operation_id}}/'>{{operation.operation_id}}</a></td>
                     <td>{{operation.time}}</td>
-                    <td><a href='#/objects/{{operation.id}}/'>{{operation.id}}</a></td>
-                    <td><a href='#/accounts/{{operation.account}}/'>{{operation.account_name}}</a></td>
 					<td><a href='#/blocks/{{operation.block_num}}/'>{{operation.block_num | number}} </a></td>
                     <td><span class="badge badge-primary" style="background-color: #{{operation.color}};">{{operation.type}}</span></td>
                 </tr>

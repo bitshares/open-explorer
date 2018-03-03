@@ -48,6 +48,7 @@
                         "<%= yeoman.app %>/index.html",
                         "<%= yeoman.app %>/sections/**/*.html",
                         "<%= yeoman.app %>/sections/**/*.js",
+                        "<%= yeoman.app %>/core/*.js",
                         "<%= yeoman.app %>/styles/**/*.scss",
                         "<%= yeoman.app %>/styles-less/**/*.less",
                         ".tmp/styles/**/*.css",

@@ -32,7 +32,7 @@
             brand: 'Expl0rer',
             name: 'oxarbitrage',
             year: year,
-            pageTransition: pageTransitionOpts[0], // 0, 1, 2, 3
+            pageTransition: pageTransitionOpts[0]
         };
         var color = {
             primary:    '#4E7FE1',
@@ -58,5 +58,6 @@
             urls: urls
         }
     }
+
 
 })();

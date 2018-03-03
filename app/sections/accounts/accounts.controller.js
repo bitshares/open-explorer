@@ -2,9 +2,9 @@
     'use strict';
 
     angular.module('app.accounts')
-        .controller('accountsCtrl', ['$scope', '$filter', '$routeParams', '$location', '$http', '$websocket', 'appConfig', accountsCtrl]);
+        .controller('accountsCtrl', ['$scope', '$filter', '$routeParams', '$location', '$http', '$websocket', 'appConfig', 'utilities', accountsCtrl]);
 
-    function accountsCtrl($scope, $filter, $routeParams, $location, $http, $websocket, appConfig) {
+    function accountsCtrl($scope, $filter, $routeParams, $location, $http, $websocket, appConfig, utilities) {
 
 		var path = $location.path();
 		var name = $routeParams.name;
@@ -333,10 +333,14 @@
                                         operation_id: value.id,
                                         block_num: value.block_num,
                                         time: timestamp,
-                                        witness: witness,
+                                        //witness: witness,
                                         op_type: op_type,
                                         op_color: op_color
                                     };
+                                    var operation_text = "";
+                                    operation_text = utilities.opText(appConfig, $http, value.op[0], value.op[1], function(returnData) {
+                                        parsed.operation_text = returnData;
+                                    });
                                     operations.push(parsed);
                                 });
                                 $scope.operations = operations;
@@ -387,7 +391,11 @@
                                                         var time = new Date(response2.data.timestamp);
                                                         time = time.toLocaleString();
                                                         parsed.time = time
-                                                        parsed.witness = response2.data.witness;
+                                                        //parsed.witness = response2.data.witness;
+                                                        var operation_text = "";
+                                                        operation_text = utilities.opText(appConfig, $http, response.data[0].op[0],response.data[0].op[1], function(returnData) {
+                                                            parsed.operation_text = returnData;
+                                                        });
                                                     });
                                             }
                                             catch (err) {
@@ -432,6 +440,10 @@
                                         op_type: op_type,
                                         op_color: op_color
                                     };
+                                    var operation_text = "";
+                                    operation_text = utilities.opText(appConfig, $http, value.op[0],value.op[1], function(returnData) {
+                                        parsed.operation_text = returnData;
+                                    });
                                     operations.push(parsed);
                                 });
                                 $scope.operations = operations;

@@ -1,9 +1,15 @@
 (function () {
     'use strict';
 
-    angular.module('app').controller('DashboardCtrl', ['$scope', '$http', '$websocket', '$timeout', '$window','appConfig',  DashboardCtrl])
+    angular.module('app').controller('DashboardCtrl', ['$scope', '$http', '$websocket', '$timeout', '$window','appConfig', 'utilities',  DashboardCtrl])
 
-    function DashboardCtrl($scope, $http, $websocket, $timeout, $window, appConfig) {
+        .filter('to_trusted', ['$sce', function($sce){
+            return function(text) {
+                return $sce.trustAsHtml(text);
+            };
+        }]);
+
+    function DashboardCtrl($scope, $http, $websocket, $timeout, $window, appConfig, utilities) {
 
         //var dataStream = $websocket('ws://node.testnet.bitshares.eu:18092');
         var dataStream = $websocket(appConfig.urls.websocket);
@@ -26,7 +32,7 @@
 				    var account = parsed.account;
 				    $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + account)
 					    .then(function(response) {
-					    parsed.account_name = response.data[0].name;
+					    parsed.account_name = response.data;
 				    });
 				    // get operation details
 				    var operation_id = parsed.operation_id;
@@ -47,10 +53,19 @@
 
                         $scope.dynamic = { head_block_number: response.data[0].block_num, accounts_registered_this_interval: accounts_registered_this_interval, bts_market_cap: bts_market_cap, quote_volume: quote_volume, witness_count: witness_count, commitee_count: commitee_count };
 
+                        var operation_text = "";
+                        var operation_type = response.data[0].op[0];
+                        var operation = response.data[0].op[1];
+                        operation_text = utilities.opText(appConfig, $http, operation_type, operation, function(returnData) {
+                            parsed.operation_text = returnData;
+                            //jdenticon.update(".identicon");
+                        });
+
+
+
 				    });
 				    parsed.time = new Date().toLocaleString();
 				    $scope.operations.unshift(parsed);
-				    //console.log($scope.operations);
 			    }
 		    }
 		    if($scope.operations.length > 10)
@@ -59,8 +74,6 @@
 
 	        $http.get(appConfig.urls.python_backend + "/header")
 		        .then(function(response) {
-		        //console.log(response);
-                //console.log("http://23.94.69.140:5000/lastnetworkops?last_block=" + response.data.head_block_number);
 
                 $http.get(appConfig.urls.python_backend + "/lastnetworkops?last_block=" + response.data.head_block_number)
                     .then(function(response2) {
@@ -68,28 +81,36 @@
                     $scope.dynamic = { head_block_number: response.data.head_block_number, accounts_registered_this_interval: response.data.accounts_registered_this_interval,  bts_market_cap: response.data.bts_market_cap, quote_volume: response.data.quote_volume, witness_count: response.data.witness_count, commitee_count: response.data.commitee_count };
 
                     var last10 = [];
-                    for(var i = 0; i < response2.data.length; i++) {
-                        var parsed = {};
-                        parsed.block_num = response2.data[i][3];
-                        parsed.operation_id = response2.data[i][2];
-                        parsed.account = response2.data[i][7];
-                        parsed.account_name = response2.data[i][8];
 
-                        var type_res = operationType(response2.data[i][9]);
+                    angular.forEach(response2.data, function(value, key) {
+                        var parsed = {};
+                        parsed.block_num = value[3];
+                        parsed.operation_id = value[2];
+                        parsed.account = value[7];
+                        parsed.account_name = value[8];
+
+                        var type_res = operationType(value[9]);
                         parsed.type = type_res[0];
                         parsed.color = type_res[1];
 
-
-                        //console.log( response2.data[i]);
-                        parsed.id = response2.data[i][1];;
-                        var time = new Date(response2.data[i][6]);
+                        parsed.id = value[1];
+                        var time = new Date(value[6]);
                         parsed.time = time.toLocaleString();
 
+                        var operation_type = value[9];
+                        var operation = value[11];
+
+                        var operation_text = "";
+                        operation_text = utilities.opText(appConfig, $http, operation_type, operation, function(returnData) {
+                            parsed.operation_text = returnData;
+                        });
+
                         last10.push(parsed);
-                    }
-                    $scope.operations = last10;
+                        $scope.operations = last10;
+
+                    });
+
                 });
-            //console.log(response.data)
             $scope.dynamic = { head_block_number: response.data.head_block_number, accounts_registered_this_interval: response.data.accounts_registered_this_interval, bts_market_cap: response.data.bts_market_cap, quote_volume: response.data.quote_volume, witness_count: response.data.witness_count, commitee_count: response.data.commitee_count};
         });
 
