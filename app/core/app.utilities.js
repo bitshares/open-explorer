@@ -191,7 +191,7 @@
                                 .then(function (response_asset) {
 
                                     operation_text = "<a href='/#/accounts/" + operation_account + "'>" + response_name.data + "</a>  published feed for ";
-                                    operation_text = "<a href='/#/assets/" + asset_id + "'>" + response_asset.data + "</a>";
+                                    operation_text = operation_text + "<a href='/#/assets/" + asset_id + "'>" + response_asset.data[0]["symbol"] + "</a>";
                                     callback(operation_text);
 
                                 });
