@@ -40,57 +40,6 @@
             <h2>{{account.name}}</h2> <p class="card-text">{{account.lifetime}}</p>
         </div>
 
-            <!--
-			<section class="panel panel-box ui-ribbon-container">
-                <div class="panel-top bg-primary ">
-                    <div class="text-center">
-                        <h3>{{account.name}}</h3>
-                        <p>{{account.lifetime}}</p>
-                    </div>
-                    <div class="divider divider-xl"></div>
-                    <div class="divider divider-lg"></div>
-                    <div class="ui-ribbon-wrapper ui-ribbon-success" ng-if="is_worker == 1">
-                        <div class="ui-ribbon">
-                            worker
-                        </div>
-                    </div>
-                    <div class="ui-ribbon-wrapper ui-ribbon-info" ng-if="is_witness == 1">
-                        <div class="ui-ribbon">
-                            witness
-                        </div>
-                    </div>
-                    <div class="ui-ribbon-wrapper ui-ribbon-warning" ng-if="is_committee_member == 1">
-                        <div class="ui-ribbon">
-                            committee
-                        </div>
-                    </div>
-                    <div class="ui-ribbon-wrapper ui-ribbon-danger" ng-if="is_proxy == 1">
-                        <div class="ui-ribbon">
-                            proxy
-                        </div>
-                    </div>
-                </div>
-                <div class="panel-img bg-primary">
-                    <img alt="" src="images/g1.jpg" class="img-circle">
-                </div>
-                <div class="list-justified-container">
-                    <ul class="list-justified text-center">
-                        <li>
-                            <p class="size-h3">{{account.bts_balance | number}}</p>
-                            <p class="text-muted">BTS Balance</p>
-                        </li>
-                        <li>
-                            <p class="size-h3">{{account.lifetime_fees_paid | number}}</p>
-                            <p class="text-muted">Lifetime fees paid</p>
-                        </li>
-                        <li>
-                            <p class="size-h3">{{account.total_ops | number}}</p>
-                            <p class="text-muted">Total ops</p>
-                        </li>
-                    </ul>
-                </div>
-            </section>
-            -->
 		<div class="col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading"> General Account Information</div>
@@ -262,18 +211,19 @@
             </div>
             <table class="table">
                 <thead>
-                <tr><th>Operation ID</th>
+                <tr>
+                    <th>Operation</th>
+                    <th>ID</th>
                     <th>DateTime</th>
-                    <th>Witness</th>
                     <th>Block</th>
-                    <th>Op Type</th>
+                    <th>Type</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr data-ng-repeat="operation in operations">
+                <tr data-ng-repeat="operation in operations track by $index">
+                    <td><div ng-bind-html="operation.operation_text | to_trusted" layout-align="center"></div></td>
                     <td><a href='#/operations/{{operation.operation_id}}/'>{{operation.operation_id}}</a></td>
                     <td>{{operation.time}}</td>
-                    <td><a href='#/objects/{{operation.witness}}/'>{{operation.witness}}</a></td>
                     <td><a href='#/blocks/{{operation.block_num}}/'>{{operation.block_num | number}} </a></td>
                     <td><span class="badge badge-primary" style="background-color: #{{operation.op_color}};">{{operation.op_type}}</span></td>
                 </tr>
