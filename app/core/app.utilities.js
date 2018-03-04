@@ -107,7 +107,28 @@
                 }
                 else if (operation_type == 3) {
                     var funding_account = operation.funding_account;
-                    operation_account = funding_account;
+                    var delta_collateral_asset_id = operation.delta_collateral.asset_id;
+                    var delta_debt_asset_id = operation.delta_debt.asset_id;
+
+                    $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + funding_account)
+                        .then(function (response_name) {
+
+                            $http.get(appConfig.urls.python_backend + "/get_asset?asset_id=" + delta_collateral_asset_id)
+                                .then(function (response_asset1) {
+
+                                    var asset1 = response_asset1.data[0]["symbol"];
+
+                                    $http.get(appConfig.urls.python_backend + "/get_asset?asset_id=" + delta_debt_asset_id)
+                                        .then(function (response_asset2) {
+
+                                            var asset2 = response_asset2.data[0]["symbol"];
+
+                                            operation_text = "<a href='/#/accounts/" + operation_account + "'>" + response_name.data + "</a> update debt/collateral for ";
+                                            operation_text = operation_text + "<a href='#/markets/" + asset1 + "/" + asset2 + "'>" + asset1 + "/" + asset2 + "</a>";
+                                            callback(operation_text);
+                                        });
+                                });
+                        });
                 }
                 else if (operation_type == 4) {
                     var account_id = operation.account_id;
