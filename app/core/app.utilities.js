@@ -179,6 +179,40 @@
                         });
                 }
 
+
+                else if (operation_type == 14) {
+                    var issuer = operation.issuer;
+                    var issue_to_account =  operation.issue_to_account;
+                    var asset_to_issue_amount = operation.asset_to_issue.amount;
+                    var asset_to_issue_asset_id = operation.asset_to_issue.asset_id;
+
+                    $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + issuer)
+                        .then(function (response_name) {
+
+                            $http.get(appConfig.urls.python_backend + "/get_asset?asset_id=" + asset_to_issue_asset_id)
+                                .then(function (response_asset) {
+
+                                    var asset_name = response_asset.data[0]["symbol"];
+                                    var asset_precision = response_asset.data[0]["precision"];
+
+                                    var divideby = Math.pow(10, asset_precision);
+                                    var amount = Number(asset_to_issue_amount / divideby);
+
+                                    $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + issue_to_account)
+                                        .then(function (response_name2) {
+
+                                        operation_text = "<a href='/#/accounts/" + issuer + "'>" + response_name.data + "</a>  issued " + amount;
+                                        operation_text = operation_text + " <a href='/#/assets/" + asset_to_issue_asset_id + "'>" + response_asset.data[0]["symbol"] + "</a>";
+                                        operation_text = operation_text + " to <a href='/#/accounts/" + issue_to_account + "'>" + response_name2.data + "</a>";
+                                        callback(operation_text);
+
+
+                                });
+                        });
+                    });
+                }
+
+
                 else if (operation_type == 19) {
                     var publisher = operation.publisher;
                     var asset_id =  operation.asset_id;
