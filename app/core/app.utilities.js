@@ -183,7 +183,7 @@
                     $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + operation_account)
                         .then(function (response_name) {
 
-                            operation_text = "<a href='/#/accounts/" + operation_account + "'>" + response_name.data + "</a>  register " + name;
+                            operation_text = "<a href='/#/accounts/" + operation_account + "'>" + response_name.data + "</a>  register <a href='/#/accounts/" + name + "'>" + name + "</a>";
 
                             if(registrar != referrer) {
 
