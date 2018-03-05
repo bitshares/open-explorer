@@ -2,9 +2,9 @@
     'use strict';
 
     angular.module('app.operations')
-        .controller('operationsCtrl', ['$scope', '$filter', '$routeParams', '$http', 'appConfig', operationsCtrl]);
+        .controller('operationsCtrl', ['$scope', '$filter', '$routeParams', '$http', 'appConfig', 'utilities', operationsCtrl]);
 
-    function operationsCtrl($scope, $filter, $routeParams, $http, appConfig) {
+    function operationsCtrl($scope, $filter, $routeParams, $http, appConfig, utilities) {
 
         var block_num = "";
         var virtual_op = "";
@@ -26,7 +26,12 @@
                 //console.log(response.data[0]);
                 var raw_obj = response.data[0].op[1];
                 var op_type = operationType(type);
-                $scope.data = { name: name , block_num: block_num, virtual_op: virtual_op, trx_in_block: trx_in_block, op_in_trx: op_in_trx , result: result, type: op_type[0], color: op_type[1], raw: raw_obj};
+
+                var operation_text = "";
+                operation_text = utilities.opText(appConfig, $http, type, raw_obj, function(returnData) {
+                    $scope.data = { name: name , block_num: block_num, virtual_op: virtual_op, trx_in_block: trx_in_block, op_in_trx: op_in_trx , result: result, type: op_type[0], color: op_type[1], raw: raw_obj, operation_text: returnData};
+
+                });
             });
     }
 

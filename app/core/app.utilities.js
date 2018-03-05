@@ -252,6 +252,10 @@
                                 });
                         });
                 }
+                else {
+                    operation_text = "";
+                    callback(operation_text);
+                }
 
 
             }
