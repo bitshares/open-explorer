@@ -122,24 +122,38 @@
 
 		// dashboard charts
 
-        // top 3 ops in chart
+        // top 7 ops in chart
         $http.get(appConfig.urls.python_backend + "/top_operations")
             .then(function(response) {
 
-                var name1 = operationType(response.data[0][0])[0];
-                var color1 = operationType(response.data[0][0])[1];
-                var name2 = operationType(response.data[1][0])[0];
-                var color2 = operationType(response.data[1][0])[1];
-                var name3 = operationType(response.data[2][0])[0];
-                var color3 = operationType(response.data[2][0])[1];
+                var legends = [];
+                var data = [];
+                var c = 0;
+                for(var i = 0; i < response.data.length; i++) {
+
+                    ++c;
+                    if(c > 7) break;
+
+                    var name = operationType(response.data[i][0])[0];
+                    var color = operationType(response.data[i][0])[1];
+
+                    data.push(
+                        {
+                            value: response.data[i][1],
+                            name: name,
+                            itemStyle: {
+                                normal: {
+                                    color: '#' + color
+                                }
+                            }
+                        });
+
+                    legends.push(name);
+                }
 
                 $scope.operations_chart = {};
                 $scope.operations_chart.options = {
                     animation: true,
-                    //title : {
-                    //    text: 'Operation Types',
-                    //    x:'left'
-                    //},
                     tooltip: {
                         trigger: 'item',
                         formatter: "{a} <br/>{b} : {c} ({d}%)"
@@ -147,7 +161,7 @@
                     legend: {
                         orient: 'vertical',
                         x: 'left',
-                        data: [name1, name2, name3]
+                        data: legends,
                     },
                     toolbox: {
                         show: true,
@@ -160,71 +174,26 @@
                         {
                             name: 'Operation Type',
                             type: 'pie',
-                            radius: '55%',
-                            center: ['50%', '60%'],
-                            data: [
-                                {
-                                    value: response.data[0][1],
-                                    name: name1,
-                                    itemStyle: {
-                                        normal: {
-                                            color: '#' + color1,
-                                            label: {
-                                                show: true,
-                                                textStyle: {
-                                                    color: '#' + color1
-                                                }
-                                            },
-                                            labelLine: {
-                                                show: true,
-                                                lineStyle: {
-                                                    color: '#' + color1
-                                                }
-                                            }
-                                        }
-                                    }
-                                }, {
-                                    value: response.data[1][1],
-                                    name: name2,
-                                    itemStyle: {
-                                        normal: {
-                                            color: '#' + color2,
-                                            label: {
-                                                show: true,
-                                                textStyle: {
-                                                    color: '#' + color2
-                                                }
-                                            },
-                                            labelLine: {
-                                                show: true,
-                                                lineStyle: {
-                                                    color: '#' + color2
-                                                }
-                                            }
-                                        }
-                                    }
-                                }, {
-                                    value: response.data[2][1],
-                                    name: name3,
-                                    itemStyle: {
-                                        normal: {
-                                            color: '#' + color3,
-                                            label: {
-                                                show: true,
-                                                textStyle: {
-                                                    color: '#' + color3
-                                                }
-                                            },
-                                            labelLine: {
-                                                show: true,
-                                                lineStyle: {
-                                                    color: '#' + color3
-                                                }
-                                            }
-                                        }
+                            radius: ['50%', '70%'],
+                            data: data,
+                            label: {
+                                normal: {
+                                    show: false,
+                                    position: 'center'
+                                },
+                                emphasis: {
+                                    show: true,
+                                    textStyle: {
+                                        fontSize: '30',
+                                        fontWeight: 'bold'
                                     }
                                 }
-                            ]
+                            },
+                            labelLine: {
+                                normal: {
+                                    show: false
+                                }
+                            }
                         }
                     ]
                 };
