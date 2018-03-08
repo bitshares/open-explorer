@@ -14,7 +14,7 @@
         var type = "";
         var name = $routeParams.name;
 
-        $http.get(appConfig.urls.python_backend + "/operation_full?operation_id=" + name)
+        $http.get(appConfig.urls.python_backend + "/operation_full_elastic?operation_id=" + name)
             .then(function(response) {
                 //console.log(response.data[0]);
                 block_num = response.data[0].block_num;

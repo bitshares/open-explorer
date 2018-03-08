@@ -416,7 +416,7 @@
                         if($scope.dataStream)
                             $scope.dataStream.close(true);
 
-                        $http.get(appConfig.urls.python_backend + "/account_history_pager?account_id=" + name + "&page=" + pager)
+                        $http.get(appConfig.urls.python_backend + "/account_history_pager_elastic?account_id=" + name + "&page=" + pager)
                             .then(function (response) {
                                 //console.log(response.data);
                                 var operations = [];
