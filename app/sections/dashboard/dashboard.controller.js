@@ -20,6 +20,7 @@
 
         dataStream.onMessage(function(message) {
 
+            //console.log(JSON.parse(message.data).params[1][0][0]["id"]);
             try {
                 var parsed = JSON.parse(message.data).params[1][0][0];
             }
