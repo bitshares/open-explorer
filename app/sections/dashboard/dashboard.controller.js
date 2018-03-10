@@ -39,28 +39,37 @@
 				    var operation_id = parsed.operation_id;
 				    $http.get(appConfig.urls.python_backend + "/operation?operation_id=" + operation_id)
 					    .then(function(response) {
-						parsed.block_num = response.data[0].block_num;
-						var op_type = operationType(response.data[0].op[0]);
+                            parsed.block_num = response.data[0].block_num;
+					        if(response.data[0].op) {
+                                var op_type = operationType(response.data[0].op[0]);
 
-                        parsed.type = op_type[0];
-                        parsed.color = op_type[1];
+                                parsed.type = op_type[0];
+                                parsed.color = op_type[1];
 
-                        var accounts_registered_this_interval = response.data[0].accounts_registered_this_interval;
-                        var bts_market_cap = response.data[0].bts_market_cap;
-                        var quote_volume = response.data[0].quote_volume;
-                        var witness_count = response.data[0].witness_count;
-                        var commitee_count = response.data[0].commitee_count;
+                                var accounts_registered_this_interval = response.data[0].accounts_registered_this_interval;
+                                var bts_market_cap = response.data[0].bts_market_cap;
+                                var quote_volume = response.data[0].quote_volume;
+                                var witness_count = response.data[0].witness_count;
+                                var commitee_count = response.data[0].commitee_count;
 
 
-                        $scope.dynamic = { head_block_number: response.data[0].block_num, accounts_registered_this_interval: accounts_registered_this_interval, bts_market_cap: bts_market_cap, quote_volume: quote_volume, witness_count: witness_count, commitee_count: commitee_count };
+                                $scope.dynamic = {
+                                    head_block_number: response.data[0].block_num,
+                                    accounts_registered_this_interval: accounts_registered_this_interval,
+                                    bts_market_cap: bts_market_cap,
+                                    quote_volume: quote_volume,
+                                    witness_count: witness_count,
+                                    commitee_count: commitee_count
+                                };
 
-                        var operation_text = "";
-                        var operation_type = response.data[0].op[0];
-                        var operation = response.data[0].op[1];
-                        operation_text = utilities.opText(appConfig, $http, operation_type, operation, function(returnData) {
-                            parsed.operation_text = returnData;
-                            //jdenticon.update(".identicon");
-                        });
+                                var operation_text = "";
+                                var operation_type = response.data[0].op[0];
+                                var operation = response.data[0].op[1];
+                                operation_text = utilities.opText(appConfig, $http, operation_type, operation, function (returnData) {
+                                    parsed.operation_text = returnData;
+                                    //jdenticon.update(".identicon");
+                                });
+                            }
 
 
 
