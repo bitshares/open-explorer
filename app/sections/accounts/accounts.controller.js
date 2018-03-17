@@ -13,25 +13,25 @@
 			if(path.includes("accounts")) {
 				$http.get(appConfig.urls.python_backend + "/full_account?account_id=" + name)
 					.then(function(response) {
-						//console.log(response.data[0][1]);
+                        //console.log(response.data[0][1]);
                         var cashback_balance_id;
                         var cashback_balance_balance;
                         try {
                             cashback_balance_id = response.data[0][1].cashback_balance.id;
                             cashback_balance_balance = response.data[0][1].cashback_balance.balance.amount;
                         }
-                        catch(err) {
+                        catch (err) {
                             cashback_balance_id = "";
                             cashback_balance_balance = 0;
                         }
                         var lifetime = "free member";
-                        if(response.data[0][1].account.id == response.data[0][1].account.lifetime_referrer)
+                        if (response.data[0][1].account.id == response.data[0][1].account.lifetime_referrer)
                             lifetime = "lifetime member";
                         var vesting_balances_string;
                         var vesting = [];
                         try {
                             var vesting_balances = response.data[0][1].vesting_balances;
-                            angular.forEach(vesting_balances, function(value, key){
+                            angular.forEach(vesting_balances, function (value, key) {
 
                                 var vesting_balance_id = value.id;
                                 var vesting_balance_balance = value.balance.amount;
@@ -39,11 +39,16 @@
                                 var vesting_balance_asset = value.balance.asset_id;
 
                                 $http.get(appConfig.urls.python_backend + "/get_asset?asset_id=" + vesting_balance_asset)
-                                    .then(function(response_a) {
+                                    .then(function (response_a) {
 
                                         var asset_name = response_a.data[0].symbol;
                                         var asset_precision = response_a.data[0].precision;
-                                        var parsed = { id: vesting_balance_id, balance: formatBalance(vesting_balance_balance, asset_precision), asset_id: vesting_balance_asset, asset_name: asset_name };
+                                        var parsed = {
+                                            id: vesting_balance_id,
+                                            balance: formatBalance(vesting_balance_balance, asset_precision),
+                                            asset_id: vesting_balance_asset,
+                                            asset_name: asset_name
+                                        };
 
                                         vesting.push(parsed);
 
@@ -53,7 +58,7 @@
                             });
 
                         }
-                        catch(err) {
+                        catch (err) {
                             //vesting_balances_string = "";
                         }
                         // TODO: get margin positions, call already in the api.py
@@ -62,100 +67,126 @@
                         try {
                             var bts_balance = response.data[0][1].balances[0].balance;
                         }
-                        catch(err) {
+                        catch (err) {
                             var bts_balance = 0;
                         }
                         jdenticon.update("#identicon", sha256(response.data[0][1].account.name));
                         //$scope.identicon = identicon;
-						$scope.account = { name:  response.data[0][1].account.name, id: response.data[0][1].account.id, referer: response.data[0][1].referrer_name, registrar: response.data[0][1].registrar_name,  statistics: response.data[0][1].account.statistics, cashback: cashback_balance_id, cashback_balance: formatBalance(cashback_balance_balance, 5), lifetime: lifetime,
-                        total_ops: total_ops, lifetime_fees_paid: parseInt(formatBalance(lifetime_fees_paid, 5)), bts_balance: parseInt(formatBalance(bts_balance, 5)), vesting: vesting};
+                        $scope.account = {
+                            name: response.data[0][1].account.name,
+                            id: response.data[0][1].account.id,
+                            referer: response.data[0][1].referrer_name,
+                            registrar: response.data[0][1].registrar_name,
+                            statistics: response.data[0][1].account.statistics,
+                            cashback: cashback_balance_id,
+                            cashback_balance: formatBalance(cashback_balance_balance, 5),
+                            lifetime: lifetime,
+                            total_ops: total_ops,
+                            lifetime_fees_paid: parseInt(formatBalance(lifetime_fees_paid, 5)),
+                            bts_balance: parseInt(formatBalance(bts_balance, 5)),
+                            vesting: vesting
+                        };
 
-						// owner keys
-						var owner_keys = [];
-						for(var i = 0; i < response.data[0][1].account.owner.key_auths.length; i++) {
-							var parsed = { key: response.data[0][1].account.owner.key_auths[i][0], threshold: response.data[0][1].account.owner.key_auths[i][1]};
-							//console.log(parsed);
-							owner_keys.push(parsed);
-						}
-						$scope.owner_keys = owner_keys;
+                        // owner keys
+                        var owner_keys = [];
+                        for (var i = 0; i < response.data[0][1].account.owner.key_auths.length; i++) {
+                            var parsed = {
+                                key: response.data[0][1].account.owner.key_auths[i][0],
+                                threshold: response.data[0][1].account.owner.key_auths[i][1]
+                            };
+                            //console.log(parsed);
+                            owner_keys.push(parsed);
+                        }
+                        $scope.owner_keys = owner_keys;
 
-						// owner accounts
-						var owner_accounts = [];
-                        angular.forEach(response.data[0][1].account.owner.account_auths, function(value, key){
+                        // owner accounts
+                        var owner_accounts = [];
+                        angular.forEach(response.data[0][1].account.owner.account_auths, function (value, key) {
 
                             //console.log(value);
-						    // get account name
+                            // get account name
                             var account_name;
                             $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + value[0])
-                                .then(function(response_name) {
+                                .then(function (response_name) {
                                     account_name = response_name.data;
-                                    var parsed = { account: value[0], threshold: value[1], account_name: account_name};
+                                    var parsed = {account: value[0], threshold: value[1], account_name: account_name};
                                     owner_accounts.push(parsed);
                                 });
-						});
-						$scope.owner_accounts = owner_accounts;
+                        });
+                        $scope.owner_accounts = owner_accounts;
 
-						// active keys
-						var active_keys = [];
-						for(var i = 0; i < response.data[0][1].account.active.key_auths.length; i++) {
-							var parsed = { key: response.data[0][1].account.active.key_auths[i][0], threshold: response.data[0][1].account.active.key_auths[i][1]};
-							//console.log(parsed);
-							active_keys.push(parsed);
-						}
-						$scope.active_keys = active_keys;
+                        // active keys
+                        var active_keys = [];
+                        for (var i = 0; i < response.data[0][1].account.active.key_auths.length; i++) {
+                            var parsed = {
+                                key: response.data[0][1].account.active.key_auths[i][0],
+                                threshold: response.data[0][1].account.active.key_auths[i][1]
+                            };
+                            //console.log(parsed);
+                            active_keys.push(parsed);
+                        }
+                        $scope.active_keys = active_keys;
 
-						// active accounts
-						var active_accounts = [];
-                        angular.forEach(response.data[0][1].account.active.account_auths, function(value, key){
+                        // active accounts
+                        var active_accounts = [];
+                        angular.forEach(response.data[0][1].account.active.account_auths, function (value, key) {
                             var account_name;
                             $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + value[0])
-                                .then(function(response_name) {
+                                .then(function (response_name) {
                                     account_name = response_name.data;
-                                    var parsed = { account: value[0], threshold: value[1], account_name: account_name};
+                                    var parsed = {account: value[0], threshold: value[1], account_name: account_name};
                                     active_accounts.push(parsed);
                                 });
                         });
-						$scope.active_accounts = active_accounts;
+                        $scope.active_accounts = active_accounts;
 
-						// balances
-						var balances = [];
-                        angular.forEach(response.data[0][1].balances, function(value, key) {
+                        // balances
+                        var balances = [];
+                        angular.forEach(response.data[0][1].balances, function (value, key) {
                             var asset_name = "";
                             var asset_precision = 0;
 
                             $http.get(appConfig.urls.python_backend + "/get_asset?asset_id=" + value.asset_type)
-                                .then(function(response2) {
+                                .then(function (response2) {
                                     asset_name = response2.data[0].symbol;
                                     asset_precision = response2.data[0].precision;
                                     // open limit orders
                                     var limit_orders_counter = 0;
-                                    angular.forEach(response.data[0][1].limit_orders, function(value2, key2) {
-                                        if(value2.sell_price.quote.asset_id == value.asset_type)
+                                    angular.forEach(response.data[0][1].limit_orders, function (value2, key2) {
+                                        if (value2.sell_price.quote.asset_id == value.asset_type)
                                             limit_orders_counter++;
                                     });
                                     //console.log(limit_orders_counter);
                                     // oppen call orders
                                     var call_orders_counter = 0;
-                                    angular.forEach(response.data[0][1].call_orders, function(value2, key2) {
+                                    angular.forEach(response.data[0][1].call_orders, function (value2, key2) {
                                         //console.log(value2);
-                                        if(value2.call_price.quote.asset_id == value.asset_type)
+                                        if (value2.call_price.quote.asset_id == value.asset_type)
                                             call_orders_counter++;
                                     });
                                     var balance = formatBalance(value.balance, asset_precision);
-                                    if(balance == 0) return;
-                                    var parsed = { asset: value.asset_type, asset_name: asset_name, balance: balance, id: value.id, owner: value.owner, call_orders_counter: call_orders_counter, limit_orders_counter: limit_orders_counter};
+                                    if (balance == 0) return;
+                                    var parsed = {
+                                        asset: value.asset_type,
+                                        asset_name: asset_name,
+                                        balance: balance,
+                                        id: value.id,
+                                        owner: value.owner,
+                                        call_orders_counter: call_orders_counter,
+                                        limit_orders_counter: limit_orders_counter
+                                    };
                                     balances.push(parsed);
                                 });
-						});
-						$scope.balances = balances;
+                        });
+                        $scope.balances = balances;
 
 
                         // user issued assets
                         var user_issued_assets = [];
-                        angular.forEach(response.data[0][1].assets, function(value, key) {
+                        angular.forEach(response.data[0][1].assets, function (value, key) {
 
                             $http.get(appConfig.urls.python_backend + "/get_asset?asset_id=" + value)
-                                .then(function(response) {
+                                .then(function (response) {
                                     //console.log(response);
                                     var parsed = {asset_id: value, asset_name: response.data[0].symbol};
                                     user_issued_assets.push(parsed);
@@ -166,20 +197,20 @@
 
                         // proposals
                         var proposals = [];
-                        angular.forEach(response.data[0][1].proposals, function(value, key) {
+                        angular.forEach(response.data[0][1].proposals, function (value, key) {
 
                             //$http.get(appConfig.urls.python_backend + "/get_asset?asset_id=" + value)
                             //    .then(function(response) {
-                                    console.log(value);
-                                    var parsed = {id: value};
-                                    user_issued_assets.push(parsed);
-                                //});
+                            console.log(value);
+                            var parsed = {id: value};
+                            user_issued_assets.push(parsed);
+                            //});
                         });
                         $scope.proposals = proposals;
 
                         // votes
                         var votes = [];
-                        angular.forEach(response.data[0][1].votes, function(value, key) {
+                        angular.forEach(response.data[0][1].votes, function (value, key) {
 
                             //$http.get(appConfig.urls.python_backend + "/get_asset?asset_id=" + value)
                             //    .then(function(response) {
@@ -187,15 +218,15 @@
                             var type = "";
                             var account;
                             console.log(value.id.substr(0, 4));
-                            if(value.id.substr(0, 4) == "1.6.") {
+                            if (value.id.substr(0, 4) == "1.6.") {
                                 type = "witness";
                                 account = value.witness_account;
                             }
-                            else if(value.id.substr(0, 4) == "1.5.") {
+                            else if (value.id.substr(0, 4) == "1.5.") {
                                 type = "committee member";
                                 account = value.committee_member_account;
                             }
-                            else if(value.id.substr(0, 4) == "1.14") {
+                            else if (value.id.substr(0, 4) == "1.14") {
                                 type = "worker";
                                 account = value.worker_account;
                             }
@@ -213,13 +244,13 @@
                         // get if is worker
                         $scope.is_worker = 0;
                         $http.get(appConfig.urls.python_backend + "/get_workers")
-                            .then(function(response_w) {
-                                for(var i = 0; i < response_w.data.length; i++) {
+                            .then(function (response_w) {
+                                for (var i = 0; i < response_w.data.length; i++) {
 
                                     //console.log(response.data[0][1].account.id);
                                     //console.log(response_w.data[i][0].worker_account);
                                     var worker_account = response_w.data[i][0].worker_account;
-                                    if(worker_account == response.data[0][1].account.id) {
+                                    if (worker_account == response.data[0][1].account.id) {
                                         $scope.is_worker = 1;
                                         break;
                                     }
@@ -230,13 +261,13 @@
                         // get if is witness
                         $scope.is_witness = 0;
                         $http.get(appConfig.urls.python_backend + "/get_witnesses")
-                            .then(function(response_w) {
-                                for(var i = 0; i < response_w.data.length; i++) {
+                            .then(function (response_w) {
+                                for (var i = 0; i < response_w.data.length; i++) {
 
                                     //console.log(response.data[0][1].account.id);
                                     //console.log(response_w.data[i][0].worker_account);
                                     var witness_account = response_w.data[i][0].witness_account;
-                                    if(witness_account == response.data[0][1].account.id) {
+                                    if (witness_account == response.data[0][1].account.id) {
                                         $scope.is_witness = 1;
                                         break;
                                     }
@@ -247,13 +278,13 @@
                         // get if is committee_member
                         $scope.is_committee_member = 0;
                         $http.get(appConfig.urls.python_backend + "/get_committee_members")
-                            .then(function(response_w) {
-                                for(var i = 0; i < response_w.data.length; i++) {
+                            .then(function (response_w) {
+                                for (var i = 0; i < response_w.data.length; i++) {
 
                                     //console.log(response.data[0][1].account.id);
                                     //console.log(response_w.data[i][0].worker_account);
                                     var committee_member_account = response_w.data[i][0].committee_member_account;
-                                    if(committee_member_account == response.data[0][1].account.id) {
+                                    if (committee_member_account == response.data[0][1].account.id) {
                                         $scope.is_committee_member = 1;
                                         break;
                                     }
@@ -264,13 +295,13 @@
                         // get if is top proxy
                         $scope.is_proxy = 0;
                         $http.get(appConfig.urls.python_backend + "/top_proxies")
-                            .then(function(response_w) {
-                                for(var i = 0; i < response_w.data.length; i++) {
+                            .then(function (response_w) {
+                                for (var i = 0; i < response_w.data.length; i++) {
 
                                     //console.log(response.data[0][1].account.id);
                                     //console.log(response_w.data[i][0].worker_account);
                                     var proxy_account = response_w.data[i][0];
-                                    if(proxy_account == response.data[0][1].account.id) {
+                                    if (proxy_account == response.data[0][1].account.id) {
                                         $scope.is_proxy = 1;
                                         break;
                                     }
@@ -280,7 +311,7 @@
 
                         // count of referrers
                         $http.get(appConfig.urls.python_backend + "/referrer_count?account_id=" + name)
-                            .then(function(referrer_count) {
+                            .then(function (referrer_count) {
                                 //console.log(referrer_count.data[0]);
                                 $scope.referral_count = referrer_count.data[0];
                             });
@@ -288,8 +319,8 @@
                         // get referrers
                         var refs = [];
                         $http.get(appConfig.urls.python_backend + "/get_all_referrers?account_id=" + name)
-                            .then(function(referrers) {
-                                for(var i = 0; i < referrers.data.length; i++) {
+                            .then(function (referrers) {
+                                for (var i = 0; i < referrers.data.length; i++) {
                                     var parsed = {account_id: referrers.data[i][1], account_name: referrers.data[i][2]};
                                     refs.push(parsed);
                                 }
@@ -297,228 +328,208 @@
                         $scope.referrers = refs;
 
 
-				});
+                        var update = true;
+                        $scope.select = function(page) {
+                            //var end, start;
+                            //start = (page - 1) * $scope.numPerPage;
+                            //end = start + $scope.numPerPage;
+                            //return $scope.currentPageStores = $scope.filteredStores.slice(start, end);
+                            //console.log(page);
 
-                var update = true;
-                $scope.select = function(page) {
-                    //var end, start;
-                    //start = (page - 1) * $scope.numPerPage;
-                    //end = start + $scope.numPerPage;
-                    //return $scope.currentPageStores = $scope.filteredStores.slice(start, end);
-                    //console.log(page);
+                            //var total_ops = response.data[0][1].statistics.total_ops;
+                            var pager = page -1;
+                            //$location.url("#/" + pager);
+                            if(pager == 0) {
 
-                    //var total_ops = response.data[0][1].statistics.total_ops;
-                    var pager = page -1;
-                    //$location.url("#/" + pager);
-                    if(pager == 0) {
-
-                        // get static account history
-                        $http.get(appConfig.urls.python_backend + "/account_history?account_id=" + name)
-                            .then(function (response) {
-                                //console.log(response.data);
-                                var operations = [];
-                                var c = 0;
-                                angular.forEach(response.data, function (value, key) {
-                                    // get the timestampt from block header
-                                    var timestamp;
-                                    var witness;
-                                    //console.log(value);
-                                    var op = operationType(value.op[0]);
-                                    var op_type = op[0];
-                                    var op_color = op[1];
-                                    var time = new Date(value.timestamp);
-                                    timestamp = time.toLocaleString();
-                                    witness = value.witness;
-                                    var parsed = {
-                                        operation_id: value.id,
-                                        block_num: value.block_num,
-                                        time: timestamp,
-                                        //witness: witness,
-                                        op_type: op_type,
-                                        op_color: op_color
-                                    };
-                                    var operation_text = "";
-                                    operation_text = utilities.opText(appConfig, $http, value.op[0], value.op[1], function(returnData) {
-                                        parsed.operation_text = returnData;
-                                    });
-                                    operations.push(parsed);
-                                });
-                                $scope.operations = operations;
-                                $scope.currentPage = 0;
-                            });
-
-                        var dataStream = $websocket(appConfig.urls.websocket);
-                        dataStream.send('{"method": "call", "params": [0, "set_subscribe_callback", [5, false]], "id": 6}');
-                        dataStream.send('{"method": "call", "params": [0, "get_full_accounts", [["' + name + '"], true]], "id": 7}');
-
-                        $scope.dataStream = dataStream;
-                        var collection = [];
-                        $scope.operations = [];
-
-                        $scope.$on("$locationChangeStart", function(event) {
-                            // when leaving page unsubscribe from everything
-                            dataStream.send('{"method": "call", "params": [0, "cancel_all_subscriptions", []], "id": 8}');
-                        });
-
-
-                        dataStream.onMessage(function (message) {
-                            var parsed;
-                            try {
-                                parsed = JSON.parse(message.data).params[1][0][0];
-                            }
-                            catch (err) {
-                            }
-
-                            if (typeof(parsed) == 'object') {
-                                if (parsed.id.substring(0, 4) == "2.9.") {
-                                    var account = parsed.account;
-                                    $http.get(appConfig.urls.python_backend + "/account?account_id=" + account)
-                                        .then(function (response) {
-                                            parsed.account_name = response.data[0].name;
+                                // get static account history
+                                $http.get(appConfig.urls.python_backend + "/account_history?account_id=" + name)
+                                    .then(function (response_ac) {
+                                        //console.log(response.data);
+                                        var operations = [];
+                                        var c = 0;
+                                        angular.forEach(response_ac.data, function (value, key) {
+                                            // get the timestampt from block header
+                                            var timestamp;
+                                            var witness;
+                                            //console.log(value);
+                                            var op = operationType(value.op[0]);
+                                            var op_type = op[0];
+                                            var op_color = op[1];
+                                            var time = new Date(value.timestamp);
+                                            timestamp = time.toLocaleString();
+                                            //witness = value.witness;
+                                            var parsed = {
+                                                operation_id: value.id,
+                                                block_num: value.block_num,
+                                                time: timestamp,
+                                                //witness: witness,
+                                                op_type: op_type,
+                                                op_color: op_color
+                                            };
+                                            var operation_text = "";
+                                            operation_text = utilities.opText(appConfig, $http, value.op[0], value.op[1], function(returnData) {
+                                                parsed.operation_text = returnData;
+                                            });
+                                            operations.push(parsed);
                                         });
-
-                                    // get operation details
-                                    var operation_id = parsed.operation_id;
-                                    $http.get(appConfig.urls.python_backend + "/operation?operation_id=" + operation_id)
-                                        .then(function (response) {
-                                            try {
-                                                parsed.block_num = response.data[0].block_num;
-                                                var op_type = operationType(response.data[0].op[0]);
-                                                parsed.op_type = op_type[0];
-                                                parsed.op_color = op_type[1];
-                                                $http.get(appConfig.urls.python_backend + "/block_header?block_num=" + parsed.block_num)
-                                                    .then(function (response2) {
-                                                        var time = new Date(response2.data.timestamp);
-                                                        time = time.toLocaleString();
-                                                        parsed.time = time
-                                                        //parsed.witness = response2.data.witness;
-                                                        var operation_text = "";
-                                                        operation_text = utilities.opText(appConfig, $http, response.data[0].op[0],response.data[0].op[1], function(returnData) {
-                                                            parsed.operation_text = returnData;
-                                                        });
-                                                    });
-                                            }
-                                            catch (err) {
-                                            }
-                                        });
-
-                                    $scope.operations.unshift(parsed);
-                                }
-                            }
-                            if ($scope.operations.length > 20)
-                                $scope.operations.splice(20, 1);
-                        });
-
-                    }
-                    else {
-                        //console.log(pager);
-                        //console.log($scope.dataStream);
-                        if($scope.dataStream)
-                            $scope.dataStream.close(true);
-
-                        $http.get(appConfig.urls.python_backend + "/account_history_pager_elastic?account_id=" + name + "&page=" + pager)
-                            .then(function (response) {
-                                //console.log(response.data);
-                                var operations = [];
-                                var c = 0;
-                                angular.forEach(response.data, function (value, key) {
-                                    // get the timestampt from block header
-                                    var timestamp;
-                                    var witness;
-                                    //console.log(value);
-                                    var op = operationType(value.op[0]);
-                                    var op_type = op[0];
-                                    var op_color = op[1];
-                                    var time = new Date(value.timestamp);
-                                    timestamp = time.toLocaleString();
-                                    witness = value.witness;
-                                    var parsed = {
-                                        operation_id: value.id,
-                                        block_num: value.block_num,
-                                        time: timestamp,
-                                        witness: witness,
-                                        op_type: op_type,
-                                        op_color: op_color
-                                    };
-                                    var operation_text = "";
-                                    operation_text = utilities.opText(appConfig, $http, value.op[0],value.op[1], function(returnData) {
-                                        parsed.operation_text = returnData;
+                                        $scope.operations = operations;
+                                        $scope.currentPage = 0;
                                     });
-                                    operations.push(parsed);
+
+
+                                // temporal removing websocket updates as it is not working propertly
+                                /*
+                                var dataStream = $websocket(appConfig.urls.websocket);
+                                dataStream.send('{"method": "call", "params": [0, "set_subscribe_callback", [5, false]], "id": 6}');
+                                dataStream.send('{"method": "call", "params": [0, "get_full_accounts", [["' + name + '"], true]], "id": 7}');
+                                //dataStream.send('{"method": "set_subscribe_callback", "params": [5, true], "id": 6}')
+
+                                $scope.dataStream = dataStream;
+                                var collection = [];
+                                $scope.operations = [];
+
+                                $scope.$on("$locationChangeStart", function(event) {
+                                    // when leaving page unsubscribe from everything
+                                    dataStream.send('{"method": "call", "params": [0, "cancel_all_subscriptions", []], "id": 8}');
                                 });
-                                $scope.operations = operations;
-                                $scope.currentPage = page;
-                                //$scope.total_ops = total_ops;
-                            });
-                    }
 
-                };
-                $scope.select(1);
+                                // destroy the websocket!
+                                $scope.$on('$destroy',function(){
+                                    if(dataStream)
+                                        dataStream.close();
+                                });
 
-                // column to sort
-                $scope.column = 'balance';
-                // sort ordering (Ascending or Descending). Set true for desending
-                $scope.reverse = true;
-                // called on header click
-                $scope.sortColumn = function(col){
-                    $scope.column = col;
-                    if($scope.reverse){
-                        $scope.reverse = false;
-                        $scope.reverseclass = 'arrow-up';
-                    }else{
+
+                                dataStream.onMessage(function (message) {
+
+                                    //console.log(JSON.parse(message.data));
+                                    var parsed;
+                                    //console.log(JSON.parse(message.data).params[1][0][0].account);
+                                    try {
+                                        parsed = JSON.parse(message.data).params[1][0][0];
+                                    }
+                                    catch (err) {
+                                    }
+                                    if (typeof(parsed) == 'object') {
+                                      //  if (parsed.id.substring(0, 4) == "2.9.") {
+                                            var account = parsed.account;
+                                            //if(account !=  response.data[0][1].account.id) return;
+                                            $http.get(appConfig.urls.python_backend + "/account?account_id=" + account)
+                                                .then(function (response_a) {
+                                                    parsed.account_name = response_a.data[0].name;
+                                                });
+
+                                            // get operation details
+                                            var operation_id = parsed.operation_id;
+                                            $http.get(appConfig.urls.python_backend + "/operation?operation_id=" + operation_id)
+                                                .then(function (response_o) {
+                                                    try {
+                                                        parsed.block_num = response_o.data[0].block_num;
+                                                        var op_type = operationType(response_o.data[0].op[0]);
+                                                        parsed.op_type = op_type[0];
+                                                        parsed.op_color = op_type[1];
+                                                        $http.get(appConfig.urls.python_backend + "/block_header?block_num=" + parsed.block_num)
+                                                            .then(function (response2) {
+                                                                var time = new Date(response2.data.timestamp);
+                                                                time = time.toLocaleString();
+                                                                parsed.time = time;
+                                                                //parsed.witness = response2.data.witness;
+                                                                var operation_text = "";
+                                                                operation_text = utilities.opText(appConfig, $http, response_o.data[0].op[0],response_o.data[0].op[1], function(returnData) {
+                                                                    parsed.operation_text = returnData;
+                                                                });
+                                                            });
+                                                    }
+                                                    catch (err) {
+                                                    }
+                                                });
+
+                                            $scope.operations.unshift(parsed);
+                                     //   }
+                                    }
+                                    if ($scope.operations.length > 20)
+                                        $scope.operations.splice(20, 1);
+                                });
+                                */
+
+                            }
+                            else {
+                                //console.log(pager);
+                                //console.log($scope.dataStream);
+                                if($scope.dataStream)
+                                    $scope.dataStream.close(true);
+
+                                $http.get(appConfig.urls.python_backend + "/account_history_pager_elastic?account_id=" + name + "&page=" + pager)
+                                    .then(function (response_ahp) {
+                                        //console.log(appConfig.urls.python_backend + "/account_history_pager_elastic?account_id=" + name + "&page=" + pager);
+                                        //console.log(response_ahp);
+                                        var operations = [];
+                                        var c = 0;
+                                        angular.forEach(response_ahp.data, function (value, key) {
+                                            // get the timestampt from block header
+                                            var timestamp;
+                                            var witness;
+                                            //console.log(value);
+                                            var op = operationType(value.op[0]);
+                                            var op_type = op[0];
+                                            var op_color = op[1];
+                                            var time = new Date(value.timestamp);
+                                            timestamp = time.toLocaleString();
+                                            witness = value.witness;
+                                            var parsed = {
+                                                operation_id: value.id,
+                                                block_num: value.block_num,
+                                                time: timestamp,
+                                                witness: witness,
+                                                op_type: op_type,
+                                                op_color: op_color
+                                            };
+                                            var operation_text = "";
+                                            operation_text = utilities.opText(appConfig, $http, value.op[0],value.op[1], function(returnData) {
+                                                parsed.operation_text = returnData;
+                                            });
+                                            operations.push(parsed);
+                                        });
+                                        $scope.operations = operations;
+                                        $scope.currentPage = page;
+                                        //$scope.total_ops = total_ops;
+                                    });
+                            }
+
+                        };
+                        $scope.select(1);
+
+                        // column to sort
+                        $scope.column = 'balance';
+                        // sort ordering (Ascending or Descending). Set true for desending
                         $scope.reverse = true;
-                        $scope.reverseclass = 'arrow-down';
-                    }
-                };
-                // remove and change class
-                $scope.sortClass = function(col) {
-                    if ($scope.column == col) {
-                        if ($scope.reverse) {
-                            return 'arrow-down';
-                        } else {
-                            return 'arrow-up';
+                        // called on header click
+                        $scope.sortColumn = function(col){
+                            $scope.column = col;
+                            if($scope.reverse){
+                                $scope.reverse = false;
+                                $scope.reverseclass = 'arrow-up';
+                            }else{
+                                $scope.reverse = true;
+                                $scope.reverseclass = 'arrow-down';
+                            }
+                        };
+                        // remove and change class
+                        $scope.sortClass = function(col) {
+                            if ($scope.column == col) {
+                                if ($scope.reverse) {
+                                    return 'arrow-down';
+                                } else {
+                                    return 'arrow-up';
+                                }
+                            } else {
+                                return '';
+                            }
                         }
-                    } else {
-                        return '';
-                    }
-                }
 
-                //console.log($scope.currentPage);
-                //if(update) {
-                    // get static account history
-/*
-                    $http.get(appConfig.urls.python_backend + "/account_history?account_id=" + name)
-                        .then(function (response) {
-                            //console.log(response.data);
-                            var operations = [];
-                            var c = 0;
-                            angular.forEach(response.data, function (value, key) {
-                                // get the timestampt from block header
-                                var timestamp;
-                                var witness;
-                                //console.log(value);
-                                var op = operationType(value.op[0]);
-                                var op_type = op[0];
-                                var op_color = op[1];
-                                var time = new Date(value.timestamp);
-                                timestamp = time.toLocaleString();
-                                witness = value.witness;
-                                var parsed = {
-                                    operation_id: value.id,
-                                    block_num: value.block_num,
-                                    time: timestamp,
-                                    witness: witness,
-                                    op_type: op_type,
-                                    op_color: op_color
-                                };
-                                operations.push(parsed);
-                            });
-                            $scope.operations = operations;
-                            $scope.currentPage = 0;
-                        });
-*/
+                    });
 
-                    }
+            }
 			//}
 		}
 		else {
@@ -730,98 +741,102 @@
                 color = "FF2A55";
             }
             else if(opType == 20) {
-                name = "WITNESS UPDATE";
+                name = "WITNESS CREATE";
                 color = "FFAA7F";
             }
             else if(opType == 21) {
+                name = "WITNESS UPDATE";
+                color = "F1AA2A";
+            }
+            else if(opType == 22) {
                 name = "PROPOSAL CREATE";
                 color = "FFAA55";
             }
-            else if(opType == 22) {
+            else if(opType == 23) {
                 name = "PROPOSAL UPDATE";
                 color = "FF7F55";
             }
-            else if(opType == 23) {
+            else if(opType == 24) {
                 name = "PROPOSAL DELETE";
                 color = "FF552A";
             }
-            else if(opType == 24) {
+            else if(opType == 25) {
                 name = "WITHDRAW PERMISSION CREATE";
                 color = "FF00AA";
             }
-            else if(opType == 25) {
+            else if(opType == 26) {
                 name = "WITHDRAW PERMISSION";
                 color = "FF00FF";
             }
-            else if(opType == 26) {
+            else if(opType == 27) {
                 name = "WITHDRAW PERMISSION CLAIM";
                 color = "FF0055";
             }
-            else if(opType == 27) {
+            else if(opType == 28) {
                 name = "WITHDRAW PERMISSION DELETE";
                 color = "37B68Cc";
             }
-            else if(opType == 28) {
+            else if(opType == 29) {
                 name = "COMITEE MEMBER CREATE";
                 color = "37B68C";
             }
-            else if(opType == 29) {
+            else if(opType == 30) {
                 name = "COMITEE MEMBER UPDATE";
                 color = "6712E7";
             }
-            else if(opType == 30) {
+            else if(opType == 31) {
                 name = "COMITEE MEMBER UPDATE GLOBAL PARAMETERS";
                 color = "B637B6";
             }
-            else if(opType == 31) {
+            else if(opType == 32) {
                 name = "VESTING BALANCE CREATE";
                 color = "A5A5A5";
             }
-            else if(opType == 32) {
+            else if(opType == 33) {
                 name = "VESTING BALANCE WITHDRAW";
                 color = "696969";
             }
-            else if(opType == 33) {
+            else if(opType == 34) {
                 name = "WORKER CREATE";
                 color = "0F0F0F";
             }
-            else if(opType == 34) {
+            else if(opType == 35) {
                 name = "CUSTOM";
                 color = "0DB762";
             }
-            else if(opType == 35) {
+            else if(opType == 36) {
                 name = "ASSERT";
                 color = "FFFFFF";
             }
-            else if(opType == 36) {
+            else if(opType == 37) {
                 name = "BALANCE CLAIM";
                 color = "939314";
             }
-            else if(opType == 37) {
+            else if(opType == 38) {
                 name = "OVERRIDE TRANSFER";
                 color = "8D0DB7";
             }
-            else if(opType == 38) {
+            else if(opType == 39) {
                 name = "TRANSFER TO BLIND";
                 color = "C4EFC4";
             }
-            else if(opType == 39) {
+            else if(opType == 40) {
                 name = "BLIND TRANSFER";
                 color = "F29DF2";
             }
-            else if(opType == 40) {
+            else if(opType == 41) {
                 name = "TRANSFER FROM BLIND";
                 color = "9D9DF2";
             }
-            else if(opType == 41) {
+            else if(opType == 42) {
                 name = "ASSET SETTLE CANCEL";
                 color = "4ECEF8";
             }
-            else if(opType == 42) {
+            else if(opType == 43) {
                 name = "ASSET CLAIM FEES";
                 color = "F8794E";
             }
-            else if(opType == 43) {
+            else if(opType == 44) {
                 name = "FBA DISTRIBUTE";
                 color = "8808B2";
             }
