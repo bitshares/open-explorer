@@ -142,98 +142,102 @@
             color = "FF2A55";
         }
         else if(opType == 20) {
-            name = "WITNESS UPDATE";
+            name = "WITNESS CREATE";
             color = "FFAA7F";
         }
         else if(opType == 21) {
+            name = "WITNESS UPDATE";
+            color = "F1AA2A";
+        }
+        else if(opType == 22) {
             name = "PROPOSAL CREATE";
             color = "FFAA55";
         }
-        else if(opType == 22) {
+        else if(opType == 23) {
             name = "PROPOSAL UPDATE";
             color = "FF7F55";
         }
-        else if(opType == 23) {
+        else if(opType == 24) {
             name = "PROPOSAL DELETE";
             color = "FF552A";
         }
-        else if(opType == 24) {
+        else if(opType == 25) {
             name = "WITHDRAW PERMISSION CREATE";
             color = "FF00AA";
         }
-        else if(opType == 25) {
+        else if(opType == 26) {
             name = "WITHDRAW PERMISSION";
             color = "FF00FF";
         }
-        else if(opType == 26) {
+        else if(opType == 27) {
             name = "WITHDRAW PERMISSION CLAIM";
             color = "FF0055";
         }
-        else if(opType == 27) {
+        else if(opType == 28) {
             name = "WITHDRAW PERMISSION DELETE";
             color = "37B68Cc";
         }
-        else if(opType == 28) {
+        else if(opType == 29) {
             name = "COMITEE MEMBER CREATE";
             color = "37B68C";
         }
-        else if(opType == 29) {
+        else if(opType == 30) {
             name = "COMITEE MEMBER UPDATE";
             color = "6712E7";
         }
-        else if(opType == 30) {
+        else if(opType == 31) {
             name = "COMITEE MEMBER UPDATE GLOBAL PARAMETERS";
             color = "B637B6";
         }
-        else if(opType == 31) {
+        else if(opType == 32) {
             name = "VESTING BALANCE CREATE";
             color = "A5A5A5";
         }
-        else if(opType == 32) {
+        else if(opType == 33) {
             name = "VESTING BALANCE WITHDRAW";
             color = "696969";
         }
-        else if(opType == 33) {
+        else if(opType == 34) {
             name = "WORKER CREATE";
             color = "0F0F0F";
         }
-        else if(opType == 34) {
+        else if(opType == 35) {
             name = "CUSTOM";
             color = "0DB762";
         }
-        else if(opType == 35) {
+        else if(opType == 36) {
             name = "ASSERT";
             color = "FFFFFF";
         }
-        else if(opType == 36) {
+        else if(opType == 37) {
             name = "BALANCE CLAIM";
             color = "939314";
         }
-        else if(opType == 37) {
+        else if(opType == 38) {
             name = "OVERRIDE TRANSFER";
             color = "8D0DB7";
         }
-        else if(opType == 38) {
+        else if(opType == 39) {
             name = "TRANSFER TO BLIND";
             color = "C4EFC4";
         }
-        else if(opType == 39) {
+        else if(opType == 40) {
             name = "BLIND TRANSFER";
             color = "F29DF2";
         }
-        else if(opType == 40) {
+        else if(opType == 41) {
             name = "TRANSFER FROM BLIND";
             color = "9D9DF2";
         }
-        else if(opType == 41) {
+        else if(opType == 42) {
             name = "ASSET SETTLE CANCEL";
             color = "4ECEF8";
         }
-        else if(opType == 42) {
+        else if(opType == 43) {
             name = "ASSET CLAIM FEES";
             color = "F8794E";
         }
-        else if(opType == 43) {
+        else if(opType == 44) {
             name = "FBA DISTRIBUTE";
             color = "8808B2";
         }
