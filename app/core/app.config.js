@@ -29,8 +29,10 @@
         var date = new Date();
         var year = date.getFullYear();
         var main = {
-            brand: 'Expl0rer',
+            brand: 'Bitshares Explorer',
             name: 'oxarbitrage',
+            api_link: 'https://github.com/oxarbitrage/bitshares-python-api-backend',
+            source_code_link: 'https://github.com/oxarbitrage/open-explorer',
             year: year,
             pageTransition: pageTransitionOpts[0]
         };
