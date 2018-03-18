@@ -3,26 +3,31 @@
     width:32px
 }
 .flags-american,.flags-china,.flags-japan,.flags-portugal,.flags-russia,.flags-spain,.flags-sprite {
-    background-image:url(ui/images/flags-s5f0622be95.png);
     background-repeat:no-repeat
 }
 .flags-american {
+    background-image:url(images/flags/american.png);
     background-position:0 0
 }
 .flags-china {
-    background-position:0 -21px
+    background-image:url(images/flags/china.png);
+    background-position:0 0
 }
 .flags-japan {
-    background-position:0 -42px
+    background-image:url(images/flags/japan.png);
+    background-position:0 0
 }
 .flags-portugal {
-    background-position:0 -63px
+    background-image:url(images/flags/portugal.png);
+    background-position:0 0
 }
 .flags-russia {
-    background-position:0 -84px
+    background-image:url(images/flags/russia.png);
+    background-position:0 0
 }
 .flags-spain {
-    background-position:0 -105px
+    background-image:url(images/flags/spain.png);
+    background-position:0 0
 }
 
 /* arrows */

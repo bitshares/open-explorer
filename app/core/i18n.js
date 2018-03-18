@@ -50,7 +50,7 @@
                     case '日本語':
                         $translate.use('ja');
                         break;
-                    case 'Portugal':
+                    case 'Portugues':
                         $translate.use('pt');
                         break;
                     case 'Русский язык':
@@ -73,7 +73,7 @@
                     case '中文':
                         return 'flags-china';
                         break;
-                    case 'Portugal':
+                    case 'Portugues':
                         return 'flags-portugal';
                         break;
                     case '日本語':
