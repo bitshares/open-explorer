@@ -241,6 +241,7 @@
                                 "fonts/**/*",
                                 "i18n/**/*",
                                 "images/**/*",
+                                "styles/custom/images/flags/*",
                                 "sections/**/*.html",
                                 "charting_library/**/*.*"
                             ]
