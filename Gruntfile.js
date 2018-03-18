@@ -48,7 +48,6 @@
                         "<%= yeoman.app %>/index.html",
                         "<%= yeoman.app %>/sections/**/*.html",
                         "<%= yeoman.app %>/sections/**/*.js",
-                        "<%= yeoman.app %>/core/*.js",
                         "<%= yeoman.app %>/styles/**/*.scss",
                         "<%= yeoman.app %>/styles-less/**/*.less",
                         ".tmp/styles/**/*.css",
@@ -125,13 +124,13 @@
                 options: {
                     sassDir: "<%= yeoman.app %>/styles",
                     cssDir: ".tmp/styles",
-                    generatedImagesDir: ".tmp/styles/ui/images/",
-                    imagesDir: "<%= yeoman.app %>/styles/ui/images/",
+                    generatedImagesDir: ".tmp/styles/custom/images/",
+                    imagesDir: "<%= yeoman.app %>/styles/custom/images/",
                     javascriptsDir: "<%= yeoman.app %>/scripts",
                     fontsDir: "<%= yeoman.app %>/fonts",
                     importPath: "<%= yeoman.app %>/bower_components",
-                    httpImagesPath: "styles/ui/images/",
-                    httpGeneratedImagesPath: "styles/ui/images/",
+                    httpImagesPath: "styles/custom/images/",
+                    httpGeneratedImagesPath: "styles/custom/images/",
                     httpFontsPath: "fonts",
                     relativeAssets: true
                 },
@@ -219,7 +218,7 @@
                         {
                             expand: true,
                             cwd: "<%= yeoman.app %>",
-                            src: ["*.html", "sections/*.html"],
+                            src: ["sections/*.html", "views/*.html"],
                             dest: "<%= yeoman.dist %>"
                         }
                     ]
@@ -237,7 +236,7 @@
                                 "favicon.ico",
                                 "bower_components/components-font-awesome/css/*",
                                 "bower_components/components-font-awesome/fonts/*",
-                                //"bower_components/themify-icons/css/*",
+                                "bower_components/themify-icons/css/*",
                                 "bower_components/angular-loading-bar/build/*.css",
                                 "fonts/**/*",
                                 "i18n/**/*",
