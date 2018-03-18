@@ -199,6 +199,16 @@
                             }
                         });
                 }
+                else if (operation_type == 6) {
+                    var operation_account = operation.account;
+
+                    $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + operation_account)
+                        .then(function (response_name) {
+
+                            operation_text = "<a href='/#/accounts/" + operation_account + "'>" + response_name.data + "</a> updated account data";
+                            callback(operation_text);
+                        });
+                }
 
 
                 else if (operation_type == 14) {
