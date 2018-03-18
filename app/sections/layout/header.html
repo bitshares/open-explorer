@@ -33,11 +33,87 @@
                 </li>
 
             </ul>
-            <!-- <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a href="./">Default <span class="sr-only">(current)</span></a></li>
-                <li><a href="../navbar-static-top/">Static top</a></li>
-                <li><a href="../navbar-fixed-top/">Fixed top</a></li>
-            </ul> -->
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown langs text-normal" uib-dropdown is-open="status.isopenLang" data-ng-controller="LangCtrl">
+                    <a href="javascript:;" class="active-flag" uib-dropdown-toggle ng-disabled="disabled">
+                        <div class="flag {{ getFlag() }}"></div>
+                    </a>
+                    <ul class="dropdown-menu list-langs pull-right">
+                        <li data-ng-show="lang !== 'English' ">
+                            <a href="javascript:;" data-ng-click="setLang('English')">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="flag flags-american"></div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        English
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li data-ng-show="lang !== 'Español' ">
+                            <a href="javascript:;" data-ng-click="setLang('Español')">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="flag flags-spain"></div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        Español
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li data-ng-show="lang !== 'Portugues' ">
+                            <a href="javascript:;" data-ng-click="setLang('Portugues')">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="flag flags-portugal"></div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        Portugues
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li data-ng-show="lang !== '中文' ">
+                            <a href="javascript:;" data-ng-click="setLang('中文')">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="flag flags-china"></div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        中文
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li data-ng-show="lang !== '日本語' ">
+                            <a href="javascript:;" data-ng-click="setLang('日本語')">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="flag flags-japan"></div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        日本語
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li data-ng-show="lang !== 'Русский язык' ">
+                            <a href="javascript:;" data-ng-click="setLang('Русский язык')">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="flag flags-russia"></div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        Русский язык
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
         </div><!--/.nav-collapse -->
     </div><!--/.container-fluid -->
 </nav>
