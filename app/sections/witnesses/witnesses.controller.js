@@ -6,24 +6,38 @@
 
     function witnessesCtrl($scope, $filter, $routeParams, $http, appConfig) {
 
-        $http.get(appConfig.urls.python_backend + "/get_witnesses")
-            .then(function(response) {
-                var active_witnesses = [];
-                var standby_witnesses = [];
-                var counter = 1;
-                angular.forEach(response.data, function(value, key) {
-                    var parsed = {id: value[0].id, last_aslot: value[0].last_aslot, last_confirmed_block_num: value[0].last_confirmed_block_num,
-                        pay_vb: value[0].pay_vb, total_missed: value[0].total_missed, total_votes: formatBalance(value[0].total_votes, 5), url: value[0].url,
-                        witness_account: value[0].witness_account, witness_account_name: value[0].witness_account_name, counter: counter};
-                    if(counter <= 19)
-                        active_witnesses.push(parsed);
-                    else
-                        standby_witnesses.push(parsed);
-                    counter++;
-                });
+        $http.get(appConfig.urls.python_backend + "/header")
+            .then(function(response_h) {
+                var witness_count = response_h.data.witness_count;
 
-                $scope.active_witnesses = active_witnesses;
-                $scope.standby_witnesses = standby_witnesses;
+                $http.get(appConfig.urls.python_backend + "/get_witnesses")
+                    .then(function (response) {
+                        var active_witnesses = [];
+                        var standby_witnesses = [];
+                        var counter = 1;
+                        angular.forEach(response.data, function (value, key) {
+                            var parsed = {
+                                id: value[0].id,
+                                last_aslot: value[0].last_aslot,
+                                last_confirmed_block_num: value[0].last_confirmed_block_num,
+                                pay_vb: value[0].pay_vb,
+                                total_missed: value[0].total_missed,
+                                total_votes: formatBalance(value[0].total_votes, 5),
+                                url: value[0].url,
+                                witness_account: value[0].witness_account,
+                                witness_account_name: value[0].witness_account_name,
+                                counter: counter
+                            };
+                            if (counter <= witness_count)
+                                active_witnesses.push(parsed);
+                            else
+                                standby_witnesses.push(parsed);
+                            counter++;
+                        });
+
+                        $scope.active_witnesses = active_witnesses;
+                        $scope.standby_witnesses = standby_witnesses;
+                    });
             });
 
         // table 1
