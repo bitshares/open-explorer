@@ -262,6 +262,28 @@
                                 });
                         });
                 }
+                else if (operation_type == 22) {
+                    var fee_paying_account = operation.fee_paying_account;
+                    operation_account = fee_paying_account;
+
+                    $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + operation_account)
+                        .then(function (response_name) {
+                            operation_text = "<a href='/#/accounts/" + operation_account + "'>" + response_name.data + "</a>  created a proposal";
+                            callback(operation_text);
+                        });
+                }
+                else if (operation_type == 23) {
+                    var fee_paying_account = operation.fee_paying_account;
+                    var proposal = operation.proposal;
+                    operation_account = fee_paying_account;
+
+                    $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + operation_account)
+                        .then(function (response_name) {
+                            operation_text = "<a href='/#/accounts/" + operation_account + "'>" + response_name.data + "</a>  updated ";
+                            operation_text = operation_text + " proposal <a href='/#objects/"+proposal+"'>"+proposal+"</a>";
+                            callback(operation_text);
+                        });
+                }
                 else {
                     operation_text = "";
                     callback(operation_text);
