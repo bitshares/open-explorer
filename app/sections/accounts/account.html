@@ -83,25 +83,27 @@
 		<div class="col-md-10">
             <div class="panel panel-primary">
                 <div class="panel-heading"> Balances</div>
-                <table class="table">
-                    <thead>
-                        <tr>
-						    <th ng-click='sortColumn("id")' ng-class='sortClass("id")'>ID</th>
-							<th ng-click='sortColumn("asset_name")' ng-class='sortClass("asset_name")'>Asset</th>
-							<th class="align-right" ng-click='sortColumn("balance")' ng-class='sortClass("balance")'>Balance</th>
-							<th class="align-right" ng-click='sortColumn("call_orders_counter")' ng-class='sortClass("call_orders_counter")'>Open Call Orders</th>
-                            <th class="align-right" ng-click='sortColumn("limit_orders_counter")' ng-class='sortClass("limit_orders_counter")'>Open Limit Orders</th>
-                        </tr>
-                    </thead>
-					<tbody>
-					<tr data-ng-repeat="balance in balances | orderBy:column:reverse">
-						<td><a href="#/objects/{{balance.id}}/">{{balance.id}}</a></td>
-						<td><a href="#/assets/{{balance.asset}}/">{{balance.asset_name}}</a></td>
-						<td class="align-right">{{balance.balance | number}}</td>
-						<td class="align-right">{{balance.call_orders_counter | number}}</td>
-                        <td class="align-right">{{balance.limit_orders_counter | number}}</td>
-                    </tbody>
-                </table>
+                <div class="panel-body table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th ng-click='sortColumn("id")' ng-class='sortClass("id")'>ID</th>
+                                <th ng-click='sortColumn("asset_name")' ng-class='sortClass("asset_name")'>Asset</th>
+                                <th class="align-right" ng-click='sortColumn("balance")' ng-class='sortClass("balance")'>Balance</th>
+                                <th class="align-right" ng-click='sortColumn("call_orders_counter")' ng-class='sortClass("call_orders_counter")'>Open Call Orders</th>
+                                <th class="align-right" ng-click='sortColumn("limit_orders_counter")' ng-class='sortClass("limit_orders_counter")'>Open Limit Orders</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr data-ng-repeat="balance in balances | orderBy:column:reverse">
+                            <td><a href="#/objects/{{balance.id}}/">{{balance.id}}</a></td>
+                            <td><a href="#/assets/{{balance.asset}}/">{{balance.asset_name}}</a></td>
+                            <td class="align-right">{{balance.balance | number}}</td>
+                            <td class="align-right">{{balance.call_orders_counter | number}}</td>
+                            <td class="align-right">{{balance.limit_orders_counter | number}}</td>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 		</div>
 
@@ -109,17 +111,19 @@
         <div class="col-md-2">
             <div class="panel panel-primary">
                 <div class="panel-heading"> Issued Assets</div>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th ng-click='sortColumn("asset_name")' ng-class='sortClass("asset_name")'>Asset</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr data-ng-repeat="uia in user_issued_assets">
-                        <td><a href="#/assets/{{uia.asset_id}}/">{{uia.asset_name}}</a></td>
-                    </tbody>
-                </table>
+                <div class="panel-body table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th ng-click='sortColumn("asset_name")' ng-class='sortClass("asset_name")'>Asset</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr data-ng-repeat="uia in user_issued_assets">
+                            <td><a href="#/assets/{{uia.asset_id}}/">{{uia.asset_name}}</a></td>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
