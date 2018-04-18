@@ -6,6 +6,19 @@
 
     function utilities() {
 
+        function formatNumber(x) {
+            var parts = x.toString().split(".");
+
+            if(x < 1) parts[1] = parts[1];
+            else if(x > 1 && x < 100) parts[1] = parts[1].substr(0,2);
+            else if(x > 100 && x < 1000) parts[1] = parts[1].substr(0,1);
+            else if(x > 1000) parts[1] = "";
+
+            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            if(x > 1000) return parts[0];
+            else return parts.join(".");
+        }
+
         return {
             opText: function (appConfig, $http, operation_type, operation, callback) {
                 var operation_account = 0;
@@ -38,7 +51,7 @@
                                             var amount = Number(amount_amount / divideby);
 
                                             operation_text =  "<a href='/#/accounts/" + from + "'>" + response_name.data + "</a>";
-                                            operation_text = operation_text + " sent " + amount + " <a href='/#/assets/" + amount_asset_id + "'>" + asset_name + "</a> to <a href='/#/accounts/" + to + "'>" + to_name + "</a>";
+                                            operation_text = operation_text + " sent " + formatNumber(amount) + " <a href='/#/assets/" + amount_asset_id + "'>" + asset_name + "</a> to <a href='/#/accounts/" + to + "'>" + to_name + "</a>";
 
                                             callback(operation_text);
                                         });
@@ -84,8 +97,8 @@
                                             var receive_amount = Number(min_to_receive_amount / divideby);
 
                                             operation_text =  "<a href='/#/accounts/" + operation_account + "'>" + response_name.data + "</a>";
-                                            operation_text = operation_text + " wants " + sell_amount + " <a href='/#/assets/" + amount_to_sell_asset_id + "'>" + sell_asset_name + "</a> for ";
-                                            operation_text = operation_text + receive_amount + " <a href='/#/assets/" + min_to_receive_asset_id + "'>" + receive_asset_name + "</a>";
+                                            operation_text = operation_text + " wants " + formatNumber(receive_amount) + " <a href='/#/assets/" + min_to_receive_asset_id + "'>" + receive_asset_name + "</a> for ";
+                                            operation_text = operation_text + formatNumber(sell_amount) + " <a href='/#/assets/" + amount_to_sell_asset_id + "'>" + sell_asset_name + "</a>";
                                             callback(operation_text);
                                         });
                                 });
@@ -164,8 +177,8 @@
                                             var receive_amount = Number(receives_amount / divideby);
 
                                             operation_text = "<a href='/#/accounts/" + operation_account + "'>" + response_name.data + "</a>";
-                                            operation_text = operation_text + " paid " + p_amount + " <a href='/#/assets/" + pays_asset_id + "'>" + pays_asset_name + "</a> for ";
-                                            operation_text = operation_text + receive_amount + " <a href='/#/assets/" + receives_asset_id + "'>" + receive_asset_name + "</a>";
+                                            operation_text = operation_text + " paid " + formatNumber(p_amount) + " <a href='/#/assets/" + pays_asset_id + "'>" + pays_asset_name + "</a> for ";
+                                            operation_text = operation_text + formatNumber(receive_amount) + " <a href='/#/assets/" + receives_asset_id + "'>" + receive_asset_name + "</a>";
                                             callback(operation_text);
 
                                         });
