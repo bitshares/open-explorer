@@ -7,16 +7,21 @@
     function utilities() {
 
         function formatNumber(x) {
-            var parts = x.toString().split(".");
+            try {
+                var parts = x.toString().split(".");
 
-            if(x < 1) parts[1] = parts[1];
-            else if(x > 1 && x < 100) parts[1] = parts[1].substr(0,2);
-            else if(x > 100 && x < 1000) parts[1] = parts[1].substr(0,1);
-            else if(x > 1000) parts[1] = "";
+                if (x < 1) parts[1] = parts[1];
+                else if (x > 1 && x < 100) parts[1] = parts[1].substr(0, 2);
+                else if (x > 100 && x < 1000) parts[1] = parts[1].substr(0, 1);
+                else if (x > 1000) parts[1] = "";
 
-            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            if(x > 1000) return parts[0];
-            else return parts.join(".");
+                parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                if (x > 1000) return parts[0];
+                else return parts.join(".");
+            }
+            catch(err) {
+                return x;
+            }
         }
 
         return {
