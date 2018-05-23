@@ -58,6 +58,7 @@
                 .when('/markets/:name/:name2', {templateUrl: 'sections/markets/market.html'})
 
                 .when('/txs', {templateUrl: 'sections/txs/txs.html'})
+                .when('/txs/:name', {templateUrl: 'sections/txs/tx.html'})
 
                 .otherwise({ redirectTo: '/404'});
 

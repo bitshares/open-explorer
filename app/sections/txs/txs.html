@@ -26,7 +26,7 @@
                 </thead>
                 <tbody>
                 <tr data-ng-repeat="trx in transactions">
-                    <td><a href=''>{{trx.trx_id}}</a></td>
+                    <td><a href='#/txs/{{trx.trx_id}}/'>{{trx.trx_id}}</a></td>
                     <td>{{trx.count | number}}</td>
                 </tbody>
             </table>
