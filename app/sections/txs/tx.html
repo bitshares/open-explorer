@@ -1,0 +1,72 @@
+<div class="page page-table" data-ng-controller="txsCtrl">
+
+    <div class="row">
+        <div class="col-md-6">
+            <ol class="breadcrumb">
+                <li><a href="#/">Home</a></li>
+                <li><a href="#/txs/">Transactions</a></li>
+                <li class="active">{{data.name}}</li>
+            </ol>
+        </div>
+        <div class="col-md-6">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-primary" >
+                <div class="panel-heading" >Operations in Transaction</div>
+                <div class="panel-body table-responsive">
+
+                    <!-- <h1>Work in progress ...</h1> -->
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Operation</th>
+                            <th>ID</th>
+                            <th>Type</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr data-ng-repeat="op in operations">
+                            <td><div ng-bind-html="op.operation_text | to_trusted" layout-align="center"></div></td>
+                            <td><a href='#/operations/{{op.operation_id}}/'>{{op.operation_id}}</a></td>
+                            <td><span class="badge badge-primary" style="background-color: #{{op.op_color}};">{{op.op_type}}</span></td>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+
+            <div class="panel panel-primary" >
+                <div class="panel-heading" >Transaction Data</div>
+                <div class="panel-body table-responsive">
+
+                    <!-- <h1>Work in progress ...</h1> -->
+
+                    <table class="table">
+                        <tr>
+                            <td>Hash:</td>
+                            <td>{{data.name}}</td>
+                        </tr>
+                        <tr>
+                            <td>Block:</td>
+                            <td><a href="#/operations/{{data.block_num}}/">{{data.block_num | number}}</a></td>
+                        </tr>
+                        <tr>
+                            <td>Date:</td>
+                            <td>{{data.date}}</td>
+                        </tr>
+                        <tr>
+                            <td>Op Count:</td>
+                            <td>{{data.counter | number}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
