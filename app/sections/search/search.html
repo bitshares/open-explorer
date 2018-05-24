@@ -12,7 +12,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
 
             <div class="panel panel-primary">
                 <div class="panel-heading"> Search Block</div>
@@ -31,7 +31,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="panel panel-primary">
                 <div class="panel-heading">Search Account</div>
                 <div class="panel-body">
@@ -49,7 +49,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title">Search Object</h3>
@@ -68,7 +68,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+    </div>
+    <div class="row">
+        <div class="col-md-4">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title">Search Asset</h3>
@@ -88,6 +90,28 @@
                 </div>
             </div>
         </div>
+
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Search Transaction Hash</h3>
+                </div>
+                <div class="panel-body">
+                    <p>Looking for a TRX.</p>
+                    <p>Sample input: <a data-ng-click="add2tx('738be2bd22e2da31d587d281ea7ee9bd02b9dbf0')" style="cursor: pointer;">738be2bd22e2da31d587d281ea7ee9bd02b9dbf0</a></p>
+                    <form role="form" data-ng-submit="submit()">
+                        <input type="hidden" class="form-control" ng-model="type" value="asset">
+                        <div class="form-group ui-typeahead">
+                            <label for="asset">Transaction ID</label>
+                            <input type="text" class="form-control" ng-model="tx" ng-change="updateData('tx')" id="tx" placeholder="enter tx hash"
+                                   uib-typeahead="a for a in txs | filter:$viewValue | limitTo:8" ng-required="required">
+                        </div>
+                        <button type="submit" class="btn btn-success btn-w-md">Go</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 </div>

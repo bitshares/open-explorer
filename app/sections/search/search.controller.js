@@ -8,16 +8,19 @@
 
         $scope.add2block = function(block) {
             $scope.block = block;
-        }
+        };
         $scope.add2account = function(account) {
             $scope.account = account;
-        }
+        };
         $scope.add2asset = function(asset) {
             $scope.asset = asset;
-        }
+        };
         $scope.add2object = function(object) {
             $scope.object = object;
-        }
+        };
+        $scope.add2tx = function(tx) {
+            $scope.tx = tx;
+        };
 
         $scope.submit = function() {
             //console.log($scope);
@@ -29,6 +32,8 @@
                 $location.path('/objects/' + $scope.object + '/');
             else if ($scope.asset)
                 $location.path('/assets/' + $scope.asset + '/');
+            else if ($scope.tx)
+                $location.path('/txs/' + $scope.tx + '/');
         };
         $scope.required = true;
         $scope.updateData = function(param) {
@@ -69,6 +74,19 @@
                         }
                     });
                 $scope.accounts = account_data;
+            }
+            else if(param == "tx") {
+                /*
+                var start = $scope.account;
+                var account_data = [];
+                $http.get(appConfig.urls.python_backend + "/lookup_accounts?start=" + start)
+                    .then(function (response) {
+                        for (var i = 0; i < response.data.length; i++) {
+                            account_data[i] = response.data[i][0];
+                        }
+                    });
+                $scope.accounts = account_data;
+                */
             }
         }
     }
