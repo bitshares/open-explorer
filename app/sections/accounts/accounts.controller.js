@@ -317,15 +317,26 @@
                             });
 
                         // get referrers
-                        var refs = [];
-                        $http.get(appConfig.urls.python_backend + "/get_all_referrers?account_id=" + name)
-                            .then(function (referrers) {
-                                for (var i = 0; i < referrers.data.length; i++) {
-                                    var parsed = {account_id: referrers.data[i][1], account_name: referrers.data[i][2]};
-                                    refs.push(parsed);
-                                }
-                            });
-                        $scope.referrers = refs;
+                        $scope.select_referers = function(page_referers) {
+                            var pager = page_referers -1;
+
+
+                            var refs = [];
+                            $http.get(appConfig.urls.python_backend + "/get_all_referrers?account_id=" + name + "&page=" + pager)
+                                .then(function (referrers) {
+                                    for (var i = 0; i < referrers.data.length; i++) {
+                                        var parsed = {account_id: referrers.data[i][1], account_name: referrers.data[i][2]};
+                                        refs.push(parsed);
+                                    }
+                                });
+                            $scope.referrers = refs;
+                            $scope.currentPageReferer = page_referers;
+
+
+                        };
+                        $scope.select_referers(1);
+
+
 
 
                         var update = true;
