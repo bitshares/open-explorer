@@ -374,6 +374,21 @@
                         </tr>
                         </tbody>
                     </table>
+                    <footer class="table-footer">
+                        <div class="row">
+                            <div class="col-md-12 text-right pagination-container">
+                                <ul uib-pagination class="pagination-sm"
+                                    ng-model="currentPageReferer"
+                                    total-items="referral_count"
+                                    max-size="4"
+                                    ng-change="currentPageReferer===undefined || select_referers(currentPageReferer)"
+                                    items-per-page="20"
+                                    rotate="false"
+                                    previous-text="&lsaquo;" next-text="&rsaquo;"
+                                    boundary-links="true"></ul>
+                            </div>
+                        </div>
+                    </footer>
                 </div>
             </div>
         </div>
