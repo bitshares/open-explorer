@@ -2,9 +2,9 @@
     'use strict';
 
     angular.module('app.proxies')
-        .controller('proxiesCtrl', ['$scope', '$filter', '$routeParams', '$http', 'appConfig', proxiesCtrl]);
+        .controller('proxiesCtrl', ['$scope', '$filter', '$routeParams', '$http', 'appConfig', 'utilities', proxiesCtrl]);
 
-    function proxiesCtrl($scope, $filter, $routeParams, $http, appConfig) {
+    function proxiesCtrl($scope, $filter, $routeParams, $http, appConfig, utilities) {
 
         $http.get(appConfig.urls.python_backend + "/top_proxies")
             .then(function(response) {
@@ -12,7 +12,7 @@
                 var proxies = [];
                 var counter = 1;
                 angular.forEach(response.data, function(value, key) {
-                    var parsed = { position: counter, account: value[0], account_name: value[1], power: formatBalance(value[2], 5), followers: value[3], perc: value[4]};
+                    var parsed = { position: counter, account: value[0], account_name: value[1], power: utilities.formatBalance(value[2], 5), followers: value[3], perc: value[4]};
                     if(counter <= 10)
                         proxies.push(parsed);
                     counter++;
@@ -49,12 +49,5 @@
         }
 
     }
-
-    function formatBalance(number, presicion) {
-        var result;
-        var divideby =  Math.pow(10, presicion);
-        var res = Number(number/divideby);
-        return res;
-    }
-
+    
 })();

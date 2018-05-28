@@ -45,7 +45,7 @@
                                         var asset_precision = response_a.data[0].precision;
                                         var parsed = {
                                             id: vesting_balance_id,
-                                            balance: formatBalance(vesting_balance_balance, asset_precision),
+                                            balance: utilities.formatBalance(vesting_balance_balance, asset_precision),
                                             asset_id: vesting_balance_asset,
                                             asset_name: asset_name
                                         };
@@ -79,11 +79,11 @@
                             registrar: response.data[0][1].registrar_name,
                             statistics: response.data[0][1].account.statistics,
                             cashback: cashback_balance_id,
-                            cashback_balance: formatBalance(cashback_balance_balance, 5),
+                            cashback_balance: utilities.formatBalance(cashback_balance_balance, 5),
                             lifetime: lifetime,
                             total_ops: total_ops,
-                            lifetime_fees_paid: parseInt(formatBalance(lifetime_fees_paid, 5)),
-                            bts_balance: parseInt(formatBalance(bts_balance, 5)),
+                            lifetime_fees_paid: parseInt(utilities.formatBalance(lifetime_fees_paid, 5)),
+                            bts_balance: parseInt(utilities.formatBalance(bts_balance, 5)),
                             vesting: vesting
                         };
 
@@ -164,7 +164,7 @@
                                         if (value2.call_price.quote.asset_id == value.asset_type)
                                             call_orders_counter++;
                                     });
-                                    var balance = formatBalance(value.balance, asset_precision);
+                                    var balance = utilities.formatBalance(value.balance, asset_precision);
                                     if (balance == 0) return;
                                     var parsed = {
                                         asset: value.asset_type,
@@ -352,7 +352,7 @@
                                             var timestamp;
                                             var witness;
                                             //console.log(value);
-                                            var op = operationType(value.op[0]);
+                                            var op = utilities.operationType(value.op[0]);
                                             var op_type = op[0];
                                             var op_color = op[1];
                                             var time = new Date(value.timestamp);
@@ -425,7 +425,7 @@
                                                 .then(function (response_o) {
                                                     try {
                                                         parsed.block_num = response_o.data[0].block_num;
-                                                        var op_type = operationType(response_o.data[0].op[0]);
+                                                        var op_type = utilities.operationType(response_o.data[0].op[0]);
                                                         parsed.op_type = op_type[0];
                                                         parsed.op_color = op_type[1];
                                                         $http.get(appConfig.urls.python_backend + "/block_header?block_num=" + parsed.block_num)
@@ -470,7 +470,7 @@
                                             var timestamp;
                                             var witness;
                                             //console.log(value);
-                                            var op = operationType(value.op[0]);
+                                            var op = utilities.operationType(value.op[0]);
                                             var op_type = op[0];
                                             var op_color = op[1];
                                             var time = new Date(value.timestamp);
@@ -540,7 +540,7 @@
 						//console.log(response.data);
 						var richs = [];
 						for(var i = 0; i < response.data.length; i++) { // for de 100 y ya esta
-                            var amount = formatBalance(response.data[i].amount, 5);
+                            var amount = utilities.formatBalance(response.data[i].amount, 5);
 							var parsed = { name: response.data[i].name, id: response.data[i].account_id, amount: amount };
 							//console.log(parsed);
 							richs.push(parsed);
@@ -578,272 +578,6 @@
                 }
 			}
 		}
-
-        function formatBalance(number, presicion) {
-
-            var result;
-            var divideby =  Math.pow(10, presicion);
-            var res = Number(number/divideby);
-            return res;
-        }
-
-        function objectType(id) {
-            var name;
-            var color;
-            var parts = id.split(".");
-            var object_type = "";
-            if (parts[0] == "1" && parts[1] == "1")
-                object_type = "BASE";
-            else if (parts[0] == "1" && parts[1] == "2")
-                object_type = "ACCOUNT";
-            else if (parts[0] == "1" && parts[1] == "3")
-                object_type = "ASSET";
-            else if (parts[0] == "1" && parts[1] == "4")
-                object_type = "FORCE SETTLEMENT";
-            else if (parts[0] == "1" && parts[1] == "5")
-                object_type = "COMMITE MEMBER";
-            else if (parts[0] == "1" && parts[1] == "6")
-                object_type = "WITNESS";
-            else if (parts[0] == "1" && parts[1] == "7")
-                object_type = "LIMIT ORDER";
-            else if (parts[0] == "1" && parts[1] == "8")
-                object_type = "CALL ORDER";
-            else if (parts[0] == "1" && parts[1] == "9")
-                object_type = "CUSTOM";
-            else if (parts[0] == "1" && parts[1] == "10")
-                object_type = "PROPOSAL";
-            else if (parts[0] == "1" && parts[1] == "11")
-                object_type = "OPERATION HISTORY";
-            else if (parts[0] == "1" && parts[1] == "12")
-                object_type = "WITHDRAW PERMISSION";
-            else if (parts[0] == "1" && parts[1] == "13")
-                object_type = "VESTING BALANCE";
-            else if (parts[0] == "1" && parts[1] == "14")
-                object_type = "WORKER";
-            else if (parts[0] == "1" && parts[1] == "15")
-                object_type = "BALANCE";
-            else if (parts[0] == "2" && parts[1] == "0")
-                object_type = "GLOBAL PROPERTY";
-            else if (parts[0] == "2" && parts[1] == "1")
-                object_type = "DYNAMIC GLOBAL PROPERTY";
-            //else if (parts[0] == "2" && parts[1] == "2")
-            //    object_type = "ASSET DYNAMIC DATA";
-            else if (parts[0] == "2" && parts[1] == "3")
-                object_type = "ASSET DYNAMIC DATA";
-            else if (parts[0] == "2" && parts[1] == "4")
-                object_type = "ASSET BITASSET DATA";
-            else if (parts[0] == "2" && parts[1] == "5")
-                object_type = "ACCOUNT BALANCE";
-            else if (parts[0] == "2" && parts[1] == "6")
-                object_type = "ACCOUNT STATISTICS";
-            else if (parts[0] == "2" && parts[1] == "7")
-                object_type = "TRANSACTION";
-            else if (parts[0] == "2" && parts[1] == "8")
-                object_type = "BLOCK SUMMARY";
-            else if (parts[0] == "2" && parts[1] == "9")
-                object_type = "ACCOUNT TRANSACTION HISTORY";
-            else if (parts[0] == "2" && parts[1] == "10")
-                object_type = "BLINDER BALANCE";
-            else if (parts[0] == "2" && parts[1] == "11")
-                object_type = "CHAIN PROPERTY";
-            else if (parts[0] == "2" && parts[1] == "12")
-                object_type = "WITNESS SCHEDULE";
-            else if (parts[0] == "2" && parts[1] == "13")
-                object_type = "BUDGET RECORD";
-            else if (parts[0] == "2" && parts[1] == "14")
-                object_type = "SPECIAL AUTHORITY";
-
-            return object_type;
-        }
-
-        function operationType(opType) {
-            var name;
-            var color;
-            var results = [];
-            if(opType == 0) {
-                name = "TRANSFER";
-                color = "81CA80";
-            }
-            else if(opType == 1) {
-                name = "LIMIT ORDER CREATE";
-                color = "6BBCD7";
-            }
-            else if(opType == 2) {
-                name = "LIMIT ORDER CANCEL";
-                color = "E9C842";
-            }
-            else if(opType == 3) {
-                name = "CALL ORDER UPDATE";
-                color = "E96562";
-            }
-            else if(opType == 4) {
-                name = "FILL ORDER (VIRTUAL)";
-                color = "008000";
-            }
-            else if(opType == 5) {
-                name = "ACCOUNT CREATE";
-                color = "CCCCCC";
-            }
-            else if(opType == 6) {
-                name = "ACCOUNT UPDATE";
-                color = "FF007F";
-            }
-            else if(opType == 7) {
-                name = "ACCOUNT WHIELIST";
-                color = "FB8817";
-            }
-            else if(opType == 8) {
-                name = "ACCOUNT UPGRADE";
-                color = "552AFF";
-            }
-            else if(opType == 9) {
-                name = "ACCOUNT TRANSFER";
-                color = "AA2AFF";
-            }
-            else if(opType == 10) {
-                name = "ASSET CREATE";
-                color = "D400FF";
-            }
-            else if(opType == 11) {
-                name = "ASSET UPDATE";
-                color = "0000FF";
-            }
-            else if(opType == 12) {
-                name = "ASSET UPDATE BITASSET";
-                color = "AA7FFF";
-            }
-            else if(opType == 13) {
-                name = "ASSET UPDATE FEED PRODUCERS";
-                color = "2A7FFF";
-            }
-            else if(opType == 14) {
-                name = "ASSET ISSUE";
-                color = "7FAAFF";
-            }
-            else if(opType == 15) {
-                name = "ASSET RESERVE";
-                color = "55FF7F";
-            }
-            else if(opType == 16) {
-                name = "ASSET FUND FEE POOL";
-                color = "55FF7F";
-            }
-            else if(opType == 17) {
-                name = "ASSET SETTLE";
-                color = "FFFFAA";
-            }
-            else if(opType == 18) {
-                name = "ASSET GLOBAL SETTLE";
-                color = "FFFF7F";
-            }
-            else if(opType == 19) {
-                name = "ASSET PUBLISH FEED";
-                color = "FF2A55";
-            }
-            else if(opType == 20) {
-                name = "WITNESS CREATE";
-                color = "FFAA7F";
-            }
-            else if(opType == 21) {
-                name = "WITNESS UPDATE";
-                color = "F1AA2A";
-            }
-            else if(opType == 22) {
-                name = "PROPOSAL CREATE";
-                color = "FFAA55";
-            }
-            else if(opType == 23) {
-                name = "PROPOSAL UPDATE";
-                color = "FF7F55";
-            }
-            else if(opType == 24) {
-                name = "PROPOSAL DELETE";
-                color = "FF552A";
-            }
-            else if(opType == 25) {
-                name = "WITHDRAW PERMISSION CREATE";
-                color = "FF00AA";
-            }
-            else if(opType == 26) {
-                name = "WITHDRAW PERMISSION";
-                color = "FF00FF";
-            }
-            else if(opType == 27) {
-                name = "WITHDRAW PERMISSION CLAIM";
-                color = "FF0055";
-            }
-            else if(opType == 28) {
-                name = "WITHDRAW PERMISSION DELETE";
-                color = "37B68Cc";
-            }
-            else if(opType == 29) {
-                name = "COMITEE MEMBER CREATE";
-                color = "37B68C";
-            }
-            else if(opType == 30) {
-                name = "COMITEE MEMBER UPDATE";
-                color = "6712E7";
-            }
-            else if(opType == 31) {
-                name = "COMITEE MEMBER UPDATE GLOBAL PARAMETERS";
-                color = "B637B6";
-            }
-            else if(opType == 32) {
-                name = "VESTING BALANCE CREATE";
-                color = "A5A5A5";
-            }
-            else if(opType == 33) {
-                name = "VESTING BALANCE WITHDRAW";
-                color = "696969";
-            }
-            else if(opType == 34) {
-                name = "WORKER CREATE";
-                color = "0F0F0F";
-            }
-            else if(opType == 35) {
-                name = "CUSTOM";
-                color = "0DB762";
-            }
-            else if(opType == 36) {
-                name = "ASSERT";
-                color = "FFFFFF";
-            }
-            else if(opType == 37) {
-                name = "BALANCE CLAIM";
-                color = "939314";
-            }
-            else if(opType == 38) {
-                name = "OVERRIDE TRANSFER";
-                color = "8D0DB7";
-            }
-            else if(opType == 39) {
-                name = "TRANSFER TO BLIND";
-                color = "C4EFC4";
-            }
-            else if(opType == 40) {
-                name = "BLIND TRANSFER";
-                color = "F29DF2";
-            }
-            else if(opType == 41) {
-                name = "TRANSFER FROM BLIND";
-                color = "9D9DF2";
-            }
-            else if(opType == 42) {
-                name = "ASSET SETTLE CANCEL";
-                color = "4ECEF8";
-            }
-            else if(opType == 43) {
-                name = "ASSET CLAIM FEES";
-                color = "F8794E";
-            }
-            else if(opType == 44) {
-                name = "FBA DISTRIBUTE";
-                color = "8808B2";
-            }
-            results[0] = name;
-            results[1] = color;
-            return results;
-        }
     }
 
 })();

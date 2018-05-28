@@ -2,9 +2,9 @@
     'use strict';
 
     angular.module('app.witnesses')
-        .controller('witnessesCtrl', ['$scope', '$filter', '$routeParams', '$http', 'appConfig', witnessesCtrl]);
+        .controller('witnessesCtrl', ['$scope', '$filter', '$routeParams', '$http', 'appConfig', 'utilities', witnessesCtrl]);
 
-    function witnessesCtrl($scope, $filter, $routeParams, $http, appConfig) {
+    function witnessesCtrl($scope, $filter, $routeParams, $http, appConfig, utilities) {
 
         $http.get(appConfig.urls.python_backend + "/header")
             .then(function(response_h) {
@@ -22,7 +22,7 @@
                                 last_confirmed_block_num: value[0].last_confirmed_block_num,
                                 pay_vb: value[0].pay_vb,
                                 total_missed: value[0].total_missed,
-                                total_votes: formatBalance(value[0].total_votes, 5),
+                                total_votes: utilities.formatBalance(value[0].total_votes, 5),
                                 url: value[0].url,
                                 witness_account: value[0].witness_account,
                                 witness_account_name: value[0].witness_account_name,
@@ -97,12 +97,5 @@
             }
         }
     }
-
-    function formatBalance(number, presicion) {
-        var result;
-        var divideby =  Math.pow(10, presicion);
-        var res = Number(number/divideby);
-        return res;
-    }
-
+    
 })();
