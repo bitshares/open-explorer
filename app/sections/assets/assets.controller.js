@@ -2,9 +2,9 @@
     'use strict';
 
     angular.module('app.assets')
-        .controller('assetsCtrl', ['$scope', '$filter', '$routeParams', '$location', '$http', 'orderByFilter', 'appConfig', assetsCtrl]);
+        .controller('assetsCtrl', ['$scope', '$filter', '$routeParams', '$location', '$http', 'orderByFilter', 'appConfig', 'utilities', assetsCtrl]);
 
-    function assetsCtrl($scope, $filter, $routeParams, $location, $http, orderByFilter, appConfig) {
+    function assetsCtrl($scope, $filter, $routeParams, $location, $http, orderByFilter, appConfig, utilities) {
 
         //$scope.scrollTo = function(id) {
         //    $location.hash(id);
@@ -127,7 +127,7 @@
                                     angular.forEach(response_ah.data, function(value, key) {
                                         //console.log(value);
                                         //console.log(response.data[0].precision);
-                                        var parsed = {name: value.name, amount: formatBalance(value.amount, response.data[0].precision), id: value.account_id};
+                                        var parsed = {name: value.name, amount: utilities.formatBalance(value.amount, response.data[0].precision), id: value.account_id};
                                         accounts.push(parsed);
                                     });
                                     $scope.accounts = accounts;
@@ -345,15 +345,6 @@
                 }
             }
 		}
-
-        function formatBalance(number, presicion) {
-
-            var result;
-            var divideby =  Math.pow(10, presicion);
-            var res = Number(number/divideby);
-            return res;
-        }
-
     }
 
 })();

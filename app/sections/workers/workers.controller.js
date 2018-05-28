@@ -2,11 +2,11 @@
     'use strict';
 
     angular.module('app.workers')
-        .controller('workersCtrl', ['$scope', '$filter', '$routeParams', '$http', workersCtrl]);
+        .controller('workersCtrl', ['$scope', '$filter', '$routeParams', '$http', 'appConfig', 'utilities', workersCtrl]);
 
-    function workersCtrl($scope, $filter, $routeParams, $http) {
+    function workersCtrl($scope, $filter, $routeParams, $http, appConfig, utilities) {
 
-        $http.get("http://23.94.69.140:5000/get_workers")
+        $http.get(appConfig.urls.python_backend + "/get_workers")
             .then(function(response) {
                 //console.log(response.data);
                 var workers_current = [];
@@ -21,8 +21,8 @@
                     now = now_d.toLocaleString();
                     var start_date = start.split(" ", 1);
                     var end_date = end.split(" ", 1);
-                    var votes_for = formatBalance(response.data[i][0].total_votes_for, 5);
-                    var daily_pay = formatBalance(response.data[i][0].daily_pay, 5);
+                    var votes_for = utilities.formatBalance(response.data[i][0].total_votes_for, 5);
+                    var daily_pay = utilities.formatBalance(response.data[i][0].daily_pay, 5);
                     var tclass = "";
 
                     var have_url = 0;
@@ -114,11 +114,5 @@
         }
     }
 
-    function formatBalance(number, presicion) {
-        var result;
-        var divideby =  Math.pow(10, presicion);
-        var res = Number(number/divideby);
-        return res;
-    }
 
 })();
