@@ -86,10 +86,10 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th style="text-align:right;" ng-click='sortColumn("price")' ng-class='sortClass("price")'>Price</th>
-                                <th style="text-align:right;" ng-click='sortColumn("quote")' ng-class='sortClass("quote")'>{{ticker.quote}}</th>
-                                <th style="text-align:right;" ng-click='sortColumn("base")' ng-class='sortClass("base")'>{{ticker.base}}</th>
-                                <th style="text-align:right;" ng-click='sortColumn("total")' ng-class='sortClass("total")'>Total({{ticker.base}})</th>
+                                <th style="text-align:right;" ng-click='sortColumn("price1")' ng-class='sortClass("price1")'>Price</th>
+                                <th style="text-align:right;" ng-click='sortColumn("quote1")' ng-class='sortClass("quote1")'>{{ticker.quote}}</th>
+                                <th style="text-align:right;" ng-click='sortColumn("base1")' ng-class='sortClass("base1")'>{{ticker.base}}</th>
+                                <th style="text-align:right;" ng-click='sortColumn("total1")' ng-class='sortClass("total1")'>Total({{ticker.base}})</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -111,10 +111,10 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th style="text-align:right;" ng-click='sortColumn2("price")' ng-class='sortClass2("price")'>Price</th>
-                            <th style="text-align:right;" ng-click='sortColumn2("base")' ng-class='sortClass2("base")'>{{ticker.base}}</th>
-                            <th style="text-align:right;" ng-click='sortColumn2("quote")' ng-class='sortClass2("quote")'>{{ticker.quote}}</th>
-                            <th style="text-align:right;" ng-click='sortColumn("total")' ng-class='sortClass("total")'>Total({{ticker.base}})</th>
+                            <th style="text-align:right;" ng-click='sortColumn2("price2")' ng-class='sortClass2("price2")'>Price</th>
+                            <th style="text-align:right;" ng-click='sortColumn2("base2")' ng-class='sortClass2("base2")'>{{ticker.base}}</th>
+                            <th style="text-align:right;" ng-click='sortColumn2("quote2")' ng-class='sortClass2("quote2")'>{{ticker.quote}}</th>
+                            <th style="text-align:right;" ng-click='sortColumn2("total2")' ng-class='sortClass2("total2")'>Total({{ticker.base}})</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -140,13 +140,13 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th style="text-align:right;" ng-click='sortColumn("price")' ng-class='sortClass("min_price")'>Min</th>
-                            <th style="text-align:right;" ng-click='sortColumn("base")' ng-class='sortClass("max_price")'>Max</th>
-                            <th style="text-align:right;" ng-click='sortColumn("total")' ng-class='sortClass("total_for_sale")'>Total({{ticker.base}})</th>
+                            <th style="text-align:right;" ng-click='sortColumn3("min_price3")' ng-class='sortClass3("min_price3")'>Min</th>
+                            <th style="text-align:right;" ng-click='sortColumn3("max_price3")' ng-class='sortClass3("max_price3")'>Max</th>
+                            <th style="text-align:right;" ng-click='sortColumn3("total_for_sale3")' ng-class='sortClass3("total_for_sale3")'>Total({{ticker.base}})</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr data-ng-repeat="g2 in grouped2 | orderBy:column:reverse">
+                        <tr data-ng-repeat="g2 in grouped2 | orderBy:column3:reverse3">
                             <td style="text-align:right;">{{g2.max_price | number: g2.base_precision}}</td>
                             <td style="text-align:right;">{{g2.min_price | number: g2.base_precision}}</td>
                             <td style="text-align:right;">{{g2.total_for_sale | number: g2.base_precision}}</td>
@@ -162,13 +162,13 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th style="text-align:right;" ng-click='sortColumn("price")' ng-class='sortClass("min_price")'>Min</th>
-                            <th style="text-align:right;" ng-click='sortColumn("base")' ng-class='sortClass("max_price")'>Max</th>
-                            <th style="text-align:right;" ng-click='sortColumn("total")' ng-class='sortClass("total_for_sale")'>Total({{ticker.base}})</th>
+                            <th style="text-align:right;" ng-click='sortColumn4("min_price4")' ng-class='sortClass4("min_price4")'>Min</th>
+                            <th style="text-align:right;" ng-click='sortColumn4("max_price4")' ng-class='sortClass4("max_price4")'>Max</th>
+                            <th style="text-align:right;" ng-click='sortColumn4("total_for_sale4")' ng-class='sortClass4("total_for_sale4")'>Total({{ticker.base}})</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr data-ng-repeat="g in grouped | orderBy:column:reverse">
+                        <tr data-ng-repeat="g in grouped | orderBy:column4:reverse4">
                             <td style="text-align:right;">{{g.min_price | number: g.base_precision}}</td>
                             <td style="text-align:right;">{{g.max_price | number: g.base_precision}}</td>
                             <td style="text-align:right;">{{g.total_for_sale | number: g.base_precision}}</td>

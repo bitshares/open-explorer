@@ -326,7 +326,7 @@
                  */
                 // table 1
                 // column to sort
-                $scope.column = 'price';
+                $scope.column = 'price1';
                 // sort ordering (Ascending or Descending). Set true for desending
                 $scope.reverse = false;
                 // called on header click
@@ -351,10 +351,10 @@
                     } else {
                         return '';
                     }
-                }
+                };
                 // table 2
                 // column to sort
-                $scope.column2 = 'price';
+                $scope.column2 = 'price2';
                 // sort ordering (Ascending or Descending). Set true for desending
                 $scope.reverse2 = true;
                 // called on header click
@@ -379,7 +379,63 @@
                     } else {
                         return '';
                     }
-                }
+                };
+                // table 3
+                // column to sort
+                $scope.column3 = 'min_price3';
+                // sort ordering (Ascending or Descending). Set true for desending
+                $scope.reverse3 = true;
+                // called on header click
+                $scope.sortColumn3 = function(col3){
+                    $scope.column3 = col3;
+                    if($scope.reverse3){
+                        $scope.reverse3 = false;
+                        $scope.reverseclass3 = 'arrow-up';
+                    }else{
+                        $scope.reverse3 = true;
+                        $scope.reverseclass3 = 'arrow-down';
+                    }
+                };
+                // remove and change class
+                $scope.sortClass3 = function(col3) {
+                    if ($scope.column3 == col3) {
+                        if ($scope.reverse3) {
+                            return 'arrow-down';
+                        } else {
+                            return 'arrow-up';
+                        }
+                    } else {
+                        return '';
+                    }
+                };
+                // table 4
+                // column to sort
+                $scope.column4 = 'min_price4';
+                // sort ordering (Ascending or Descending). Set true for desending
+                $scope.reverse4 = true;
+                // called on header click
+                $scope.sortColumn4 = function(col4){
+                    $scope.column4 = col4;
+                    if($scope.reverse4){
+                        $scope.reverse4 = false;
+                        $scope.reverseclass4 = 'arrow-up';
+                    }else{
+                        $scope.reverse4 = true;
+                        $scope.reverseclass4 = 'arrow-down';
+                    }
+                };
+                // remove and change class
+                $scope.sortClass4 = function(col4) {
+                    if ($scope.column4 == col4) {
+                        if ($scope.reverse4) {
+                            return 'arrow-down';
+                        } else {
+                            return 'arrow-up';
+                        }
+                    } else {
+                        return '';
+                    }
+                };
 
 
             }
