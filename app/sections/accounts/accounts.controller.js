@@ -336,177 +336,44 @@
                         };
                         $scope.select_referers(1);
 
-
-
-
                         var update = true;
                         $scope.select = function(page) {
-                            //var end, start;
-                            //start = (page - 1) * $scope.numPerPage;
-                            //end = start + $scope.numPerPage;
-                            //return $scope.currentPageStores = $scope.filteredStores.slice(start, end);
-                            //console.log(page);
-
-                            //var total_ops = response.data[0][1].statistics.total_ops;
                             var pager = page -1;
-                            //$location.url("#/" + pager);
-                            if(pager == 0) {
+                            if($scope.dataStream)
+                                $scope.dataStream.close(true);
 
-                                // get static account history
-                                $http.get(appConfig.urls.python_backend + "/account_history?account_id=" + name)
-                                    .then(function (response_ac) {
-                                        //console.log(response.data);
-                                        var operations = [];
-                                        var c = 0;
-                                        angular.forEach(response_ac.data, function (value, key) {
-                                            // get the timestampt from block header
-                                            var timestamp;
-                                            var witness;
-                                            //console.log(value);
-                                            var op = utilities.operationType(value.op[0]);
-                                            var op_type = op[0];
-                                            var op_color = op[1];
-                                            var time = new Date(value.timestamp);
-                                            timestamp = time.toLocaleString();
-                                            //witness = value.witness;
-                                            var parsed = {
-                                                operation_id: value.id,
-                                                block_num: value.block_num,
-                                                time: timestamp,
-                                                //witness: witness,
-                                                op_type: op_type,
-                                                op_color: op_color
-                                            };
-                                            var operation_text = "";
-                                            operation_text = utilities.opText(appConfig, $http, value.op[0], value.op[1], function(returnData) {
-                                                parsed.operation_text = returnData;
-                                            });
-                                            operations.push(parsed);
+                            $http.get(appConfig.urls.python_backend + "/account_history_pager_elastic?account_id=" + name + "&page=" + pager)
+                                .then(function (response_ahp) {
+
+                                    var operations = [];
+                                    var c = 0;
+                                    angular.forEach(response_ahp.data, function (value, key) {
+                                        // get the timestampt from block header
+                                        var timestamp;
+                                        var witness;
+                                        var op = utilities.operationType(value.op[0]);
+                                        var op_type = op[0];
+                                        var op_color = op[1];
+                                        var time = new Date(value.timestamp);
+                                        timestamp = time.toLocaleString();
+                                        witness = value.witness;
+                                        var parsed = {
+                                            operation_id: value.id,
+                                            block_num: value.block_num,
+                                            time: timestamp,
+                                            witness: witness,
+                                            op_type: op_type,
+                                            op_color: op_color
+                                        };
+                                        var operation_text = "";
+                                        operation_text = utilities.opText(appConfig, $http, value.op[0],value.op[1], function(returnData) {
+                                            parsed.operation_text = returnData;
                                         });
-                                        $scope.operations = operations;
-                                        $scope.currentPage = 0;
+                                        operations.push(parsed);
                                     });
-
-
-                                // temporal removing websocket updates as it is not working propertly
-                                /*
-                                var dataStream = $websocket(appConfig.urls.websocket);
-                                dataStream.send('{"method": "call", "params": [0, "set_subscribe_callback", [5, false]], "id": 6}');
-                                dataStream.send('{"method": "call", "params": [0, "get_full_accounts", [["' + name + '"], true]], "id": 7}');
-                                //dataStream.send('{"method": "set_subscribe_callback", "params": [5, true], "id": 6}')
-
-                                $scope.dataStream = dataStream;
-                                var collection = [];
-                                $scope.operations = [];
-
-                                $scope.$on("$locationChangeStart", function(event) {
-                                    // when leaving page unsubscribe from everything
-                                    dataStream.send('{"method": "call", "params": [0, "cancel_all_subscriptions", []], "id": 8}');
+                                    $scope.operations = operations;
+                                    $scope.currentPage = page;
                                 });
-
-                                // destroy the websocket!
-                                $scope.$on('$destroy',function(){
-                                    if(dataStream)
-                                        dataStream.close();
-                                });
-
-
-                                dataStream.onMessage(function (message) {
-
-                                    //console.log(JSON.parse(message.data));
-                                    var parsed;
-                                    //console.log(JSON.parse(message.data).params[1][0][0].account);
-                                    try {
-                                        parsed = JSON.parse(message.data).params[1][0][0];
-                                    }
-                                    catch (err) {
-                                    }
-                                    if (typeof(parsed) == 'object') {
-                                      //  if (parsed.id.substring(0, 4) == "2.9.") {
-                                            var account = parsed.account;
-                                            //if(account !=  response.data[0][1].account.id) return;
-                                            $http.get(appConfig.urls.python_backend + "/account?account_id=" + account)
-                                                .then(function (response_a) {
-                                                    parsed.account_name = response_a.data[0].name;
-                                                });
-
-                                            // get operation details
-                                            var operation_id = parsed.operation_id;
-                                            $http.get(appConfig.urls.python_backend + "/operation?operation_id=" + operation_id)
-                                                .then(function (response_o) {
-                                                    try {
-                                                        parsed.block_num = response_o.data[0].block_num;
-                                                        var op_type = utilities.operationType(response_o.data[0].op[0]);
-                                                        parsed.op_type = op_type[0];
-                                                        parsed.op_color = op_type[1];
-                                                        $http.get(appConfig.urls.python_backend + "/block_header?block_num=" + parsed.block_num)
-                                                            .then(function (response2) {
-                                                                var time = new Date(response2.data.timestamp);
-                                                                time = time.toLocaleString();
-                                                                parsed.time = time;
-                                                                //parsed.witness = response2.data.witness;
-                                                                var operation_text = "";
-                                                                operation_text = utilities.opText(appConfig, $http, response_o.data[0].op[0],response_o.data[0].op[1], function(returnData) {
-                                                                    parsed.operation_text = returnData;
-                                                                });
-                                                            });
-                                                    }
-                                                    catch (err) {
-                                                    }
-                                                });
-
-                                            $scope.operations.unshift(parsed);
-                                     //   }
-                                    }
-                                    if ($scope.operations.length > 20)
-                                        $scope.operations.splice(20, 1);
-                                });
-                                */
-
-                            }
-                            else {
-                                //console.log(pager);
-                                //console.log($scope.dataStream);
-                                if($scope.dataStream)
-                                    $scope.dataStream.close(true);
-
-                                $http.get(appConfig.urls.python_backend + "/account_history_pager_elastic?account_id=" + name + "&page=" + pager)
-                                    .then(function (response_ahp) {
-                                        //console.log(appConfig.urls.python_backend + "/account_history_pager_elastic?account_id=" + name + "&page=" + pager);
-                                        //console.log(response_ahp);
-                                        var operations = [];
-                                        var c = 0;
-                                        angular.forEach(response_ahp.data, function (value, key) {
-                                            // get the timestampt from block header
-                                            var timestamp;
-                                            var witness;
-                                            //console.log(value);
-                                            var op = utilities.operationType(value.op[0]);
-                                            var op_type = op[0];
-                                            var op_color = op[1];
-                                            var time = new Date(value.timestamp);
-                                            timestamp = time.toLocaleString();
-                                            witness = value.witness;
-                                            var parsed = {
-                                                operation_id: value.id,
-                                                block_num: value.block_num,
-                                                time: timestamp,
-                                                witness: witness,
-                                                op_type: op_type,
-                                                op_color: op_color
-                                            };
-                                            var operation_text = "";
-                                            operation_text = utilities.opText(appConfig, $http, value.op[0],value.op[1], function(returnData) {
-                                                parsed.operation_text = returnData;
-                                            });
-                                            operations.push(parsed);
-                                        });
-                                        $scope.operations = operations;
-                                        $scope.currentPage = page;
-                                        //$scope.total_ops = total_ops;
-                                    });
-                            }
-
                         };
                         $scope.select(1);
 
@@ -541,7 +408,6 @@
                     });
 
             }
-			//}
 		}
 		else {
 			var init;
