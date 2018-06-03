@@ -7,7 +7,7 @@
 
     angular.module('app').config(['AnalyticsProvider', function (AnalyticsProvider) {
         // Add configuration code as desired
-        AnalyticsProvider.setAccount('UA-101388661-2');  //UU-XXXXXXX-X should be your tracking code
+        AnalyticsProvider.setAccount('UA-101388661-3');  //UU-XXXXXXX-X should be your tracking code
     }]).run(['Analytics', function(Analytics) { }]);
 
     function appConfig() {
