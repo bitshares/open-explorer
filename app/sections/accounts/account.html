@@ -130,7 +130,7 @@
 	</div>
 
 	<div class="row">
-		<div class="col-md-6">
+		<div class="col-md-4">
 
             <div class="panel panel-primary">
                 <div class="panel-heading"><i class="fa fa-key"></i>  Owner Keys</div>
@@ -144,8 +144,8 @@
                         </thead>
                         <tbody>
                         <tr data-ng-repeat="ok in owner_keys">
-                            <td align="left">{{ok.key}}</td>
-                            <td class="align-right">{{ok.threshold}}</td>
+                            <td align="left"><font size="-1">{{ok.key}}</font></td>
+                            <td class="align-right"><font size="-1">{{ok.threshold}}</font></td>
                         </tbody>
                     </table>
                     <table class="table">
@@ -157,15 +157,15 @@
                         </thead>
                         <tbody>
                         <tr data-ng-repeat="oa in owner_accounts">
-                            <td align="left"><a href="#/accounts/{{oa.account}}/">{{oa.account_name}}</a></td>
-                            <td class="align-right">{{oa.threshold}}</td>
+                            <td align="left"><a href="#/accounts/{{oa.account}}/"><font size="-1">{{oa.account_name}}</font></a></td>
+                            <td class="align-right"><font size="-1">{{oa.threshold}}</font></td>
                         </tbody>
                     </table>
                 </div>
             </div>
 		</div>
 
-		<div class="col-md-6">
+		<div class="col-md-4">
 
             <div class="panel panel-primary">
                 <div class="panel-heading"><i class="fa fa-key"></i>  Active Keys</div>
@@ -180,8 +180,8 @@
                             </thead>
                             <tbody>
                             <tr data-ng-repeat="ak in active_keys">
-                                <td align="left">{{ak.key}}</td>
-                                <td class="align-right">{{ak.threshold}}</td>
+                                <td align="left"><font size="-1">{{ak.key}}</font></td>
+                                <td class="align-right"><font size="-1">{{ak.threshold}}</font></td>
                             </tbody>
                         </table>
 
@@ -194,13 +194,25 @@
                             </thead>
                             <tbody>
                             <tr data-ng-repeat="aa in active_accounts">
-                                <td align="left"><a href="#/accounts/{{aa.account}}/">{{aa.account_name}}</a></td>
-                                <td class="align-right">{{aa.threshold}}</td>
+                                <td align="left"><a href="#/accounts/{{aa.account}}/"><font size="-1">{{aa.account_name}}</font></a></td>
+                                <td class="align-right"><font size="-1">{{aa.threshold}}</font></td>
                             </tbody>
                         </table>
 					</div>
                 </div>
 		    </div>
+        <div class="col-md-4">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading"><i class="fa fa-key"></i>  Memo Key</div>
+
+                <div class="panel-body table-responsive">
+
+                    <font size="-1">{{account.memo_key}}</font>
+
+                </div>
+            </div>
+        </div>
 	</div>
 
     <div class="panel panel-primary">

@@ -84,7 +84,8 @@
                             total_ops: total_ops,
                             lifetime_fees_paid: parseInt(utilities.formatBalance(lifetime_fees_paid, 5)),
                             bts_balance: parseInt(utilities.formatBalance(bts_balance, 5)),
-                            vesting: vesting
+                            vesting: vesting,
+                            memo_key: response.data[0][1].account.options.memo_key
                         };
 
                         // owner keys
