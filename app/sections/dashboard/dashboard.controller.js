@@ -29,12 +29,6 @@
             }
             if(typeof(parsed) == 'object') {
 			    if(parsed.id.substring(0,4) == "2.9.") {
-				    // try to get account name
-				    var account = parsed.account;
-				    $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + account)
-					    .then(function(response) {
-					    parsed.account_name = response.data;
-				    });
 				    // get operation details
 				    var operation_id = parsed.operation_id;
 				    $http.get(appConfig.urls.python_backend + "/operation?operation_id=" + operation_id)
