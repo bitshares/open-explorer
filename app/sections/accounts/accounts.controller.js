@@ -72,21 +72,30 @@
                         }
                         jdenticon.update("#identicon", sha256(response.data[0][1].account.name));
                         //$scope.identicon = identicon;
-                        $scope.account = {
-                            name: response.data[0][1].account.name,
-                            id: response.data[0][1].account.id,
-                            referer: response.data[0][1].referrer_name,
-                            registrar: response.data[0][1].registrar_name,
-                            statistics: response.data[0][1].account.statistics,
-                            cashback: cashback_balance_id,
-                            cashback_balance: utilities.formatBalance(cashback_balance_balance, 5),
-                            lifetime: lifetime,
-                            total_ops: total_ops,
-                            lifetime_fees_paid: parseInt(utilities.formatBalance(lifetime_fees_paid, 5)),
-                            bts_balance: parseInt(utilities.formatBalance(bts_balance, 5)),
-                            vesting: vesting,
-                            memo_key: response.data[0][1].account.options.memo_key
-                        };
+
+                        var voting_account_id = response.data[0][1].account.options.voting_account;
+                        var voting_account_name = "";
+                        $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + response.data[0][1].account.options.voting_account)
+                            .then(function (response_v_a) {
+                                voting_account_name = response_v_a.data;
+                                $scope.account = {
+                                    name: response.data[0][1].account.name,
+                                    id: response.data[0][1].account.id,
+                                    referer: response.data[0][1].referrer_name,
+                                    registrar: response.data[0][1].registrar_name,
+                                    statistics: response.data[0][1].account.statistics,
+                                    cashback: cashback_balance_id,
+                                    cashback_balance: utilities.formatBalance(cashback_balance_balance, 5),
+                                    lifetime: lifetime,
+                                    total_ops: total_ops,
+                                    lifetime_fees_paid: parseInt(utilities.formatBalance(lifetime_fees_paid, 5)),
+                                    bts_balance: parseInt(utilities.formatBalance(bts_balance, 5)),
+                                    vesting: vesting,
+                                    memo_key: response.data[0][1].account.options.memo_key,
+                                    voting_account_id: voting_account_id,
+                                    voting_account_name: voting_account_name
+                                };
+                        });
 
                         // owner keys
                         var owner_keys = [];
