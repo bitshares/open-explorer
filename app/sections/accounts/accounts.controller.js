@@ -260,8 +260,9 @@
                                     //console.log(response.data[0][1].account.id);
                                     //console.log(response_w.data[i][0].worker_account);
                                     var worker_account = response_w.data[i][0].worker_account;
-                                    if (worker_account == response.data[0][1].account.id) {
+                                    if (worker_account === response.data[0][1].account.id) {
                                         $scope.is_worker = 1;
+                                        $scope.worker_votes = utilities.formatBalance(response_w.data[i][0].total_votes_for, 5);
                                         break;
                                     }
 
@@ -277,8 +278,9 @@
                                     //console.log(response.data[0][1].account.id);
                                     //console.log(response_w.data[i][0].worker_account);
                                     var witness_account = response_w.data[i][0].witness_account;
-                                    if (witness_account == response.data[0][1].account.id) {
+                                    if (witness_account === response.data[0][1].account.id) {
                                         $scope.is_witness = 1;
+                                        $scope.witness_votes = utilities.formatBalance(response_w.data[i][0].total_votes, 5);
                                         break;
                                     }
 
@@ -294,8 +296,9 @@
                                     //console.log(response.data[0][1].account.id);
                                     //console.log(response_w.data[i][0].worker_account);
                                     var committee_member_account = response_w.data[i][0].committee_member_account;
-                                    if (committee_member_account == response.data[0][1].account.id) {
+                                    if (committee_member_account === response.data[0][1].account.id) {
                                         $scope.is_committee_member = 1;
+                                        $scope.committee_votes = utilities.formatBalance(response_w.data[i][0].total_votes, 5);
                                         break;
                                     }
 
@@ -311,8 +314,9 @@
                                     //console.log(response.data[0][1].account.id);
                                     //console.log(response_w.data[i][0].worker_account);
                                     var proxy_account = response_w.data[i][0];
-                                    if (proxy_account == response.data[0][1].account.id) {
+                                    if (proxy_account === response.data[0][1].account.id) {
                                         $scope.is_proxy = 1;
+                                        $scope.proxy_votes = utilities.formatBalance(response_w.data[i][2], 5);
                                         break;
                                     }
 
