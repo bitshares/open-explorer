@@ -54,7 +54,7 @@
             //elasticsearch_wrapper: "http://185.208.208.184:5000",
             //elasticsearch_wrapper: "http://95.216.32.252:5010", // clockwork
             elasticsearch_wrapper: "https://eswrapper.bitshares.eu", // bbf
-            udf_wrapper: "http://23.94.69.140:5001"
+            udf_wrapper: "http://185.208.208.184:5001"
         };
 
         return {
