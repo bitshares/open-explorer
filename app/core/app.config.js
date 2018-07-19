@@ -47,8 +47,8 @@
         };
 
         var urls = {
-            //websocket: "ws://88.99.145.10:9999",
-            websocket: "ws://209.188.21.157:8090/ws",
+            websocket: "wss://na.openledger.info/ws",
+            //websocket: "ws://209.188.21.157:8090/ws",
             //python_backend: "http://23.94.69.140:5000",
             python_backend: "http://185.208.208.184:5000",
             //elasticsearch_wrapper: "http://185.208.208.184:5000",
