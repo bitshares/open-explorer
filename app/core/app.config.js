@@ -47,13 +47,9 @@
         };
 
         var urls = {
-            websocket: "wss://na.openledger.info/ws",
-            //websocket: "ws://209.188.21.157:8090/ws",
-            //python_backend: "http://23.94.69.140:5000",
+            websocket: "ws://bts-seoul.clockwork.gr/ws",
             python_backend: "http://185.208.208.184:5000",
-            //elasticsearch_wrapper: "http://185.208.208.184:5000",
-            //elasticsearch_wrapper: "http://95.216.32.252:5010", // clockwork
-            elasticsearch_wrapper: "https://eswrapper.bitshares.eu", // bbf
+            elasticsearch_wrapper: "http://95.216.32.252:5000", // clockwork
             udf_wrapper: "http://185.208.208.184:5001"
         };
 
