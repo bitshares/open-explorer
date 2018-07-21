@@ -132,23 +132,23 @@
 		// dashboard charts
 
         // top 7 ops in chart
-        $http.get(appConfig.urls.python_backend + "/top_operations")
+        $http.get(appConfig.urls.elasticsearch_wrapper + "/get_account_history?from_date=now-1d&to_date=now&type=aggs&agg_field=operation_type&size=10")
             .then(function(response) {
-
+                
                 var legends = [];
                 var data = [];
                 var c = 0;
                 for(var i = 0; i < response.data.length; i++) {
 
                     ++c;
-                    if(c > 7) break;
+                    if(c > 7) { break; }
 
-                    var name =  utilities.operationType(response.data[i][0])[0];
-                    var color =  utilities.operationType(response.data[i][0])[1];
+                    var name =  utilities.operationType(response.data[i].key)[0];
+                    var color =  utilities.operationType(response.data[i].key)[1];
 
                     data.push(
                         {
-                            value: response.data[i][1],
+                            value: response.data[i].doc_count,
                             name: name,
                             itemStyle: {
                                 normal: {
