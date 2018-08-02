@@ -47,7 +47,7 @@
         };
 
         var urls = {
-            websocket: "ws://bts-seoul.clockwork.gr/ws",
+            websocket: "ws://23.94.69.140:8090/ws",
             python_backend: "http://185.208.208.184:5000",
             elasticsearch_wrapper: "http://95.216.32.252:5000", // clockwork
             udf_wrapper: "http://185.208.208.184:5001"
