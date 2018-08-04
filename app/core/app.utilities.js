@@ -567,6 +567,40 @@
                     object_type = "SPECIAL AUTHORITY";
 
                 return object_type;
+            },
+            columnsort: function ($scope, column, sortColumn, sortClass, reverse, reverseclass, columnToSort) {
+
+                $scope[column] = column;
+                $scope[columnToSort] = column;
+
+
+                // sort ordering (Ascending or Descending). Set true for desending
+                $scope[reverse] = false;
+
+                // called on header click
+                $scope[sortColumn] = function(col){
+                    $scope[columnToSort] = col;
+                    if($scope[reverse]){
+                        $scope[reverse] = false;
+                        $scope[reverseclass] = 'arrow-up';
+                    } else {
+                        $scope[reverse] = true;
+                        $scope[reverseclass] = 'arrow-down';
+                    }
+                };
+                // remove and change class
+                $scope[sortClass] = function(col) {
+                    if ($scope[columnToSort] === col) {
+                        //console.log($scope[column_name] + " - " + col);
+                        if ($scope[reverse]) {
+                            return 'arrow-down';
+                        } else {
+                            return 'arrow-up';
+                        }
+                    } else {
+                        return '';
+                    }
+                };
             }
         }
     }

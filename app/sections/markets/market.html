@@ -93,11 +93,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <tr data-ng-repeat="a in asks | orderBy:column:reverse">
-                            <td style="text-align:right;">{{a.price | number: a.base_precision}}</td>
-                            <td style="text-align:right;">{{a.quote | number: a.quote_precision}}</td>
-                            <td style="text-align:right;">{{a.base | number: a.base_precision}}</td>
-                            <td style="text-align:right;">{{a.total | number: a.base_precision}}</td>
+                        <tr data-ng-repeat="a in asks | orderBy:columnToSort:reverse">
+                            <td style="text-align:right;">{{a.price1 | number: a.base_precision}}</td>
+                            <td style="text-align:right;">{{a.quote1 | number: a.quote_precision}}</td>
+                            <td style="text-align:right;">{{a.base1 | number: a.base_precision}}</td>
+                            <td style="text-align:right;">{{a.total1 | number: a.base_precision}}</td>
                         </tbody>
                     </table>
                 </div>
@@ -118,19 +118,17 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr data-ng-repeat="b in bids | orderBy:column2:reverse2">
-                            <td style="text-align:right;" class="align-right">{{b.price | number: b.base_precision}}</td>
-                            <td style="text-align:right;" class="align-right">{{b.base | number: b.base_precision}}</td>
-                            <td style="text-align:right;" class="align-right">{{b.quote | number: b.quote_precision}}</td>
-                            <td style="text-align:right;">{{b.total | number: b.base_precision}}</td>
+                        <tr data-ng-repeat="b in bids | orderBy:columnToSort2:reverse2">
+                            <td style="text-align:right;" class="align-right">{{b.price2 | number: b.base_precision}}</td>
+                            <td style="text-align:right;" class="align-right">{{b.base2 | number: b.base_precision}}</td>
+                            <td style="text-align:right;" class="align-right">{{b.quote2 | number: b.quote_precision}}</td>
+                            <td style="text-align:right;">{{b.total2 | number: b.base_precision}}</td>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
-
-
     <h2>Grouped Order Book</h2>
     <div class="row">
         <div class="col-md-6">
@@ -146,10 +144,10 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr data-ng-repeat="g2 in grouped2 | orderBy:column3:reverse3">
-                            <td style="text-align:right;">{{g2.max_price | number: g2.base_precision}}</td>
-                            <td style="text-align:right;">{{g2.min_price | number: g2.base_precision}}</td>
-                            <td style="text-align:right;">{{g2.total_for_sale | number: g2.base_precision}}</td>
+                        <tr data-ng-repeat="g in grouped | orderBy:columnToSort3:reverse3">
+                            <td style="text-align:right;">{{g.max_price3 | number: g2.base_precision}}</td>
+                            <td style="text-align:right;">{{g.min_price3 | number: g2.base_precision}}</td>
+                            <td style="text-align:right;">{{g.total_for_sale3 | number: g2.base_precision}}</td>
                         </tbody>
                     </table>
                 </div>
@@ -168,10 +166,10 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr data-ng-repeat="g in grouped | orderBy:column4:reverse4">
-                            <td style="text-align:right;">{{g.min_price | number: g.base_precision}}</td>
-                            <td style="text-align:right;">{{g.max_price | number: g.base_precision}}</td>
-                            <td style="text-align:right;">{{g.total_for_sale | number: g.base_precision}}</td>
+                        <tr data-ng-repeat="g in grouped2 | orderBy:columnToSort4:reverse4">
+                            <td style="text-align:right;">{{g.min_price4 | number: g.base_precision}}</td>
+                            <td style="text-align:right;">{{g.max_price4 | number: g.base_precision}}</td>
+                            <td style="text-align:right;">{{g.total_for_sale4 | number: g.base_precision}}</td>
                         </tbody>
                     </table>
                 </div>

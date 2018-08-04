@@ -2,9 +2,9 @@
     'use strict';
 
     angular.module('app.markets')
-        .controller('marketsCtrl', ['$scope', '$filter', '$routeParams', '$location', '$http', '$websocket', 'appConfig', marketsCtrl]);
+        .controller('marketsCtrl', ['$scope', '$filter', '$routeParams', '$location', '$http', '$websocket', 'appConfig', 'utilities', marketsCtrl]);
 
-    function marketsCtrl($scope, $filter, $routeParams, $location, $http, $websocket, appConfig) {
+    function marketsCtrl($scope, $filter, $routeParams, $location, $http, $websocket, appConfig, utilities) {
 
         var path = $location.path();
         var name = $routeParams.name;
@@ -93,15 +93,27 @@
                                                                         var total = 0;
                                                                         angular.forEach(response.data.asks, function(value, key) {
                                                                             total = total + parseFloat(value.base);
-                                                                            var parsed = {base: value.base, price: value.price, quote: value.quote, base_precision: base_precision, quote_precision: quote_precision, total: total};
+                                                                            var parsed = { base1: parseFloat(value.base),
+                                                                                           price1: parseFloat(value.price),
+                                                                                           quote1: parseFloat(value.quote),
+                                                                                           base_precision: base_precision,
+                                                                                           quote_precision: quote_precision,
+                                                                                           total1: total
+                                                                            };
                                                                             asks.push(parsed);
                                                                         });
                                                                         $scope.asks = asks;
 
-                                                                        var total = 0;
+                                                                        total = 0;
                                                                         angular.forEach(response.data.bids, function(value, key) {
                                                                             total = total + parseFloat(value.base);
-                                                                            var parsed = {base: value.base, price: value.price, quote: value.quote, base_precision: base_precision, quote_precision: quote_precision, total: total};
+                                                                            var parsed = { base2: parseFloat(value.base),
+                                                                                           price2: parseFloat(value.price),
+                                                                                           quote2: parseFloat(value.quote),
+                                                                                           base_precision: base_precision,
+                                                                                           quote_precision: quote_precision,
+                                                                                           total2: total
+                                                                            };
                                                                             bids.push(parsed);
                                                                         });
                                                                         $scope.bids = bids;
@@ -134,23 +146,31 @@
                                                                                 //base_precision, quote_precision = quote_precision, base_precision;
                                                                                 //quote_precision = [base_precision, base_precision = quote_precision][0];
                                                                             }
-                                                                            console.log(divide);
+                                                                            //console.log(divide);
                                                                             var qp = Math.pow(10, parseInt(quote_precision));
                                                                             var bp = Math.pow(10, parseInt(base_precision));
 
+                                                                            var max_price;
+                                                                            var min_price;
+                                                                            var min;
+                                                                            var max;
                                                                             if(divide) {
-                                                                                var max = (max_quote_amount / qp) / (max_base_amount / bp);
-                                                                                var max_price = 1 / max;
-                                                                                var min = (min_quote_amount / qp) / (min_base_amount / bp);
-                                                                                var min_price = 1 / min;
+                                                                                max = (max_quote_amount / qp) / (max_base_amount / bp);
+                                                                                max_price = 1 / max;
+                                                                                min = (min_quote_amount / qp) / (min_base_amount / bp);
+                                                                                min_price = 1 / min;
                                                                             }
                                                                             else {
-                                                                                var max_price = parseFloat(max_base_amount / bp) / parseFloat(max_quote_amount / qp);
-                                                                                var min_price = parseFloat(min_base_amount / bp) / parseFloat(min_quote_amount / qp);
+                                                                                max_price = parseFloat(max_base_amount / bp) / parseFloat(max_quote_amount / qp);
+                                                                                min_price = parseFloat(min_base_amount / bp) / parseFloat(min_quote_amount / qp);
                                                                             }
                                                                             total_for_sale = Number(total_for_sale/bp);
 
-                                                                            var parsed = {max_price: max_price, min_price: min_price, total_for_sale: total_for_sale, base_precision: base_precision, quote_precision: quote_precision};
+                                                                            var parsed = { max_price3: max_price,
+                                                                                           min_price3: min_price,
+                                                                                           total_for_sale3: total_for_sale,
+                                                                                           base_precision: base_precision,
+                                                                                           quote_precision: quote_precision};
                                                                             grouped.push(parsed);
                                                                         });
                                                                         $scope.grouped = grouped;
@@ -190,21 +210,29 @@
                                                                             var qp = Math.pow(10, parseInt(new_quote_precision));
                                                                             var bp = Math.pow(10, parseInt(new_base_precision));
 
+                                                                            var max_price;
+                                                                            var min_price;
+                                                                            var min;
+                                                                            var max;
                                                                             if(divide) {
-                                                                                var max = (max_quote_amount / bp) / (max_base_amount / qp);
-                                                                                var max_price = 1 / max;
-                                                                                var min = (min_quote_amount / bp) / (min_base_amount / qp);
-                                                                                var min_price = 1 / min;
+                                                                                max = (max_quote_amount / bp) / (max_base_amount / qp);
+                                                                                max_price = 1 / max;
+                                                                                min = (min_quote_amount / bp) / (min_base_amount / qp);
+                                                                                min_price = 1 / min;
                                                                                 //total_for_sale = Number(total_for_sale/qp);
                                                                             }
                                                                             else {
-                                                                                var max_price = parseFloat(max_base_amount / qp) / parseFloat(max_quote_amount / bp);
-                                                                                var min_price = parseFloat(min_base_amount / qp) / parseFloat(min_quote_amount / bp);
+                                                                                max_price = parseFloat(max_base_amount / qp) / parseFloat(max_quote_amount / bp);
+                                                                                min_price = parseFloat(min_base_amount / qp) / parseFloat(min_quote_amount / bp);
                                                                                 //total_for_sale = Number(total_for_sale/bp);
                                                                             }
 
                                                                             total_for_sale = Number(total_for_sale/bp);
-                                                                            var parsed = {max_price: max_price, min_price: min_price, total_for_sale: total_for_sale, base_precision: new_quote_precision, quote_precision: new_base_precision};
+                                                                            var parsed = { max_price4: max_price,
+                                                                                           min_price4: min_price,
+                                                                                           total_for_sale4: total_for_sale,
+                                                                                           base_precision: new_quote_precision,
+                                                                                           quote_precision: new_base_precision};
                                                                             grouped2.push(parsed);
                                                                         });
                                                                         $scope.grouped2 = grouped2;
@@ -214,11 +242,10 @@
                                                                 // end grouped order book
 
 
-
                                                             });
                                                     });
                                                 parsed = JSON.parse(message.data);
-                                                console.log(parsed);
+                                                //console.log(parsed);
                                                 //parsed = JSON.parse(message.data).params[1][0][0];
                                             }
                                             catch (err) {
@@ -230,8 +257,6 @@
 
                                         /// end subscription
                                     });
-
-
 
 
                             });
@@ -259,189 +284,15 @@
                     client_id: 'tradingview.com',
                     user_id: 'public_user_id'
                 });
-                //});
-                /*
-                 $scope.pricechart = {};
-                 $http.get(appConfig.urls.python_backend + "/market_chart_dates")
-                 .then(function(response) {
-                 //console.log(response.data);
-                 $http.get(appConfig.urls.python_backend + "/market_chart_data?base=" + name + "&quote=" + name2)
-                 .then(function(response2) {
 
-                 $scope.pricechart.options = {
-                 animation: true,
-                 title : {
-                 text: name + '/' + name2
-                 },
-                 tooltip : {
-                 trigger: 'axis'
-                 },
-                 legend: {
-                 data:['Blu']
-                 },
-                 toolbox: {
-                 show : true,
-                 feature : {
-                 saveAsImage : {show: true, title: "save as image"}
-                 }
-                 },
-
-                 xAxis : [
-                 {
-                 type : 'category',
-                 boundaryGap : true,
-                 axisTick: {onGap:false},
-                 splitLine: {show:false},
-                 data : response.data,
-                 }
-                 ],
-                 yAxis : [
-                 {
-                 type : 'value',
-                 scale:true,
-                 boundaryGap: [0.01, 0.01],
-                 min: 0
-                 }
-                 ],
-                 calculable : true,
-                 series : [
-                 {
-                 name:'Price',
-                 type:'candlestick',
-                 itemStyle: {
-                 normal: {
-                 color: 'green',
-                 color0: 'red',
-                 borderColor: 'green',
-                 borderColor0: 'red'
-
-                 }
-                 },
-                 data: response2.data
-                 }
-                 ]
-                 };
-                 });
-                 });
-                 */
-                // table 1
-                // column to sort
-                $scope.column = 'price1';
-                // sort ordering (Ascending or Descending). Set true for desending
-                $scope.reverse = false;
-                // called on header click
-                $scope.sortColumn = function(col){
-                    $scope.column = col;
-                    if($scope.reverse){
-                        $scope.reverse = false;
-                        $scope.reverseclass = 'arrow-up';
-                    }else{
-                        $scope.reverse = true;
-                        $scope.reverseclass = 'arrow-down';
-                    }
-                };
-                // remove and change class
-                $scope.sortClass = function(col) {
-                    if ($scope.column == col) {
-                        if ($scope.reverse) {
-                            return 'arrow-down';
-                        } else {
-                            return 'arrow-up';
-                        }
-                    } else {
-                        return '';
-                    }
-                };
-                // table 2
-                // column to sort
-                $scope.column2 = 'price2';
-                // sort ordering (Ascending or Descending). Set true for desending
-                $scope.reverse2 = true;
-                // called on header click
-                $scope.sortColumn2 = function(col2){
-                    $scope.column2 = col2;
-                    if($scope.reverse2){
-                        $scope.reverse2 = false;
-                        $scope.reverseclass2 = 'arrow-up';
-                    }else{
-                        $scope.reverse2 = true;
-                        $scope.reverseclass2 = 'arrow-down';
-                    }
-                };
-                // remove and change class
-                $scope.sortClass2 = function(col2) {
-                    if ($scope.column2 == col2) {
-                        if ($scope.reverse2) {
-                            return 'arrow-down';
-                        } else {
-                            return 'arrow-up';
-                        }
-                    } else {
-                        return '';
-                    }
-                };
-                // table 3
-                // column to sort
-                $scope.column3 = 'min_price3';
-                // sort ordering (Ascending or Descending). Set true for desending
-                $scope.reverse3 = true;
-                // called on header click
-                $scope.sortColumn3 = function(col3){
-                    $scope.column3 = col3;
-                    if($scope.reverse3){
-                        $scope.reverse3 = false;
-                        $scope.reverseclass3 = 'arrow-up';
-                    }else{
-                        $scope.reverse3 = true;
-                        $scope.reverseclass3 = 'arrow-down';
-                    }
-                };
-                // remove and change class
-                $scope.sortClass3 = function(col3) {
-                    if ($scope.column3 == col3) {
-                        if ($scope.reverse3) {
-                            return 'arrow-down';
-                        } else {
-                            return 'arrow-up';
-                        }
-                    } else {
-                        return '';
-                    }
-                };
-                // table 4
-                // column to sort
-                $scope.column4 = 'min_price4';
-                // sort ordering (Ascending or Descending). Set true for desending
-                $scope.reverse4 = true;
-                // called on header click
-                $scope.sortColumn4 = function(col4){
-                    $scope.column4 = col4;
-                    if($scope.reverse4){
-                        $scope.reverse4 = false;
-                        $scope.reverseclass4 = 'arrow-up';
-                    }else{
-                        $scope.reverse4 = true;
-                        $scope.reverseclass4 = 'arrow-down';
-                    }
-                };
-                // remove and change class
-                $scope.sortClass4 = function(col4) {
-                    if ($scope.column4 == col4) {
-                        if ($scope.reverse4) {
-                            return 'arrow-down';
-                        } else {
-                            return 'arrow-up';
-                        }
-                    } else {
-                        return '';
-                    }
-                };
-
-
+                utilities.columnsort($scope, "price1", "sortColumn", "sortClass", "reverse", "reverseclass", "columnToSort");
+                utilities.columnsort($scope, "price2", "sortColumn2", "sortClass2", "reverse2", "reverseclass2", "columnToSort2");
+                utilities.columnsort($scope, "min_price3", "sortColumn3", "sortClass3", "reverse3", "reverseclass3", "columnToSort3");
+                utilities.columnsort($scope, "min_price4", "sortColumn4", "sortClass4", "reverse4", "reverseclass4", "columnToSort4");
             }
         }
         else {
-            if(path == "/markets") {
+            if(path === "/markets") {
                 $http.get(appConfig.urls.python_backend + "/get_most_active_markets")
                     .then(function(response) {
                         //console.log(response.data);
@@ -453,6 +304,9 @@
                         $scope.markets = markets;
                     });
             }
+            //utilities.columnsort($scope, "volume");
+
+
             // column to sort
             $scope.column = 'volume';
             // sort ordering (Ascending or Descending). Set true for desending
@@ -470,7 +324,7 @@
             };
             // remove and change class
             $scope.sortClass = function(col) {
-                if ($scope.column == col) {
+                if ($scope.column === col) {
                     if ($scope.reverse) {
                         return 'arrow-down';
                     } else {
@@ -479,7 +333,8 @@
                 } else {
                     return '';
                 }
-            }
+            };
+
         }
     }
     function getParameterByName(name) {
@@ -488,4 +343,5 @@
             results = regex.exec(location.search);
         return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
     }
+
 })();
