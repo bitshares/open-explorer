@@ -35,7 +35,6 @@
 
                                 var vesting_balance_id = value.id;
                                 var vesting_balance_balance = value.balance.amount;
-
                                 var vesting_balance_asset = value.balance.asset_id;
 
                                 $http.get(appConfig.urls.python_backend + "/get_asset?asset_id=" + vesting_balance_asset)
@@ -59,11 +58,12 @@
                         // TODO: get margin positions, call already in the api.py
                         var total_ops = response.data[0][1].statistics.total_ops;
                         var lifetime_fees_paid = response.data[0][1].statistics.lifetime_fees_paid;
+                        var bts_balance;
                         try {
-                            var bts_balance = response.data[0][1].balances[0].balance;
+                            bts_balance = response.data[0][1].balances[0].balance;
                         }
                         catch (err) {
-                            var bts_balance = 0;
+                            bts_balance = 0;
                         }
 
                         jdenticon.update("#identicon", sha256(response.data[0][1].account.name));
@@ -92,12 +92,13 @@
                                 };
                         });
 
+                        var parsed;
                         // owner keys
                         var owner_keys = [];
-                        for (var i = 0; i < response.data[0][1].account.owner.key_auths.length; i++) {
-                            var parsed = {
-                                key: response.data[0][1].account.owner.key_auths[i][0],
-                                threshold: response.data[0][1].account.owner.key_auths[i][1]
+                        for (var ok = 0; ok < response.data[0][1].account.owner.key_auths.length; ok++) {
+                            parsed = {
+                                key: response.data[0][1].account.owner.key_auths[ok][0],
+                                threshold: response.data[0][1].account.owner.key_auths[ok][1]
                             };
                             owner_keys.push(parsed);
                         }
@@ -105,13 +106,14 @@
 
                         // owner accounts
                         var owner_accounts = [];
+                        //var parsed;
                         angular.forEach(response.data[0][1].account.owner.account_auths, function (value, key) {
                             // get account name
                             var account_name;
                             $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + value[0])
                                 .then(function (response_name) {
                                     account_name = response_name.data;
-                                    var parsed = {account: value[0], threshold: value[1], account_name: account_name};
+                                    parsed = {account: value[0], threshold: value[1], account_name: account_name};
                                     owner_accounts.push(parsed);
                             });
                         });
@@ -119,10 +121,9 @@
 
                         // active keys
                         var active_keys = [];
-                        for (var i = 0; i < response.data[0][1].account.active.key_auths.length; i++) {
-                            var parsed = {
-                                key: response.data[0][1].account.active.key_auths[i][0],
-                                threshold: response.data[0][1].account.active.key_auths[i][1]
+                        for (var ak = 0; ak < response.data[0][1].account.active.key_auths.length; ak++) {
+                            parsed = { key: response.data[0][1].account.active.key_auths[ak][0],
+                                       threshold: response.data[0][1].account.active.key_auths[ak][1]
                             };
                             active_keys.push(parsed);
                         }
@@ -154,7 +155,7 @@
                                     // open limit orders
                                     var limit_orders_counter = 0;
                                     angular.forEach(response.data[0][1].limit_orders, function (value2, key2) {
-                                        if (value2.sell_price.quote.asset_id == value.asset_type) {
+                                        if (value2.sell_price.quote.asset_id === value.asset_type) {
                                             limit_orders_counter++;
                                         }
                                     });
@@ -229,7 +230,6 @@
                             votes.push(parsed);
                         });
                         $scope.votes = votes;
-
 
                         // get if is worker
                         $scope.is_worker = 0;

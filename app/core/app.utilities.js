@@ -501,8 +501,7 @@
             },
             formatBalance: function (number, presicion) {
                 var divideby =  Math.pow(10, presicion);
-                var res = Number(number/divideby);
-                return res;
+                return Number(number/divideby);
             },
             objectType: function (id) {
                 var parts = id.split(".");
@@ -575,7 +574,7 @@
 
 
                 // sort ordering (Ascending or Descending). Set true for desending
-                $scope[reverse] = false;
+                $scope[reverse] = true;
 
                 // called on header click
                 $scope[sortColumn] = function(col){
