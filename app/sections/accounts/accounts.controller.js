@@ -13,7 +13,6 @@
 			if(path.includes("accounts")) {
 				$http.get(appConfig.urls.python_backend + "/full_account?account_id=" + name)
 					.then(function(response) {
-                        //console.log(response.data[0][1]);
                         var cashback_balance_id;
                         var cashback_balance_balance;
                         try {
@@ -25,8 +24,9 @@
                             cashback_balance_balance = 0;
                         }
                         var lifetime = "free member";
-                        if (response.data[0][1].account.id == response.data[0][1].account.lifetime_referrer)
+                        if (response.data[0][1].account.id === response.data[0][1].account.lifetime_referrer) {
                             lifetime = "lifetime member";
+                        }
                         var vesting_balances_string;
                         var vesting = [];
                         try {
@@ -49,14 +49,9 @@
                                             asset_id: vesting_balance_asset,
                                             asset_name: asset_name
                                         };
-
                                         vesting.push(parsed);
-
                                     });
-
-
                             });
-
                         }
                         catch (err) {
                             //vesting_balances_string = "";
@@ -70,8 +65,8 @@
                         catch (err) {
                             var bts_balance = 0;
                         }
+
                         jdenticon.update("#identicon", sha256(response.data[0][1].account.name));
-                        //$scope.identicon = identicon;
 
                         var voting_account_id = response.data[0][1].account.options.voting_account;
                         var voting_account_name = "";
@@ -104,7 +99,6 @@
                                 key: response.data[0][1].account.owner.key_auths[i][0],
                                 threshold: response.data[0][1].account.owner.key_auths[i][1]
                             };
-                            //console.log(parsed);
                             owner_keys.push(parsed);
                         }
                         $scope.owner_keys = owner_keys;
@@ -112,8 +106,6 @@
                         // owner accounts
                         var owner_accounts = [];
                         angular.forEach(response.data[0][1].account.owner.account_auths, function (value, key) {
-
-                            //console.log(value);
                             // get account name
                             var account_name;
                             $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + value[0])
@@ -121,7 +113,7 @@
                                     account_name = response_name.data;
                                     var parsed = {account: value[0], threshold: value[1], account_name: account_name};
                                     owner_accounts.push(parsed);
-                                });
+                            });
                         });
                         $scope.owner_accounts = owner_accounts;
 
@@ -132,7 +124,6 @@
                                 key: response.data[0][1].account.active.key_auths[i][0],
                                 threshold: response.data[0][1].account.active.key_auths[i][1]
                             };
-                            //console.log(parsed);
                             active_keys.push(parsed);
                         }
                         $scope.active_keys = active_keys;
@@ -163,33 +154,33 @@
                                     // open limit orders
                                     var limit_orders_counter = 0;
                                     angular.forEach(response.data[0][1].limit_orders, function (value2, key2) {
-                                        if (value2.sell_price.quote.asset_id == value.asset_type)
+                                        if (value2.sell_price.quote.asset_id == value.asset_type) {
                                             limit_orders_counter++;
+                                        }
                                     });
-                                    //console.log(limit_orders_counter);
-                                    // oppen call orders
+                                    // open call orders
                                     var call_orders_counter = 0;
                                     angular.forEach(response.data[0][1].call_orders, function (value2, key2) {
                                         //console.log(value2);
-                                        if (value2.call_price.quote.asset_id == value.asset_type)
+                                        if (value2.call_price.quote.asset_id === value.asset_type) {
                                             call_orders_counter++;
+                                        }
                                     });
                                     var balance = utilities.formatBalance(value.balance, asset_precision);
-                                    if (balance == 0) return;
+                                    if (balance === 0) { return; }
                                     var parsed = {
                                         asset: value.asset_type,
                                         asset_name: asset_name,
-                                        balance: balance,
+                                        balance: parseFloat(balance),
                                         id: value.id,
                                         owner: value.owner,
-                                        call_orders_counter: call_orders_counter,
-                                        limit_orders_counter: limit_orders_counter
+                                        call_orders_counter: parseInt(call_orders_counter),
+                                        limit_orders_counter: parseInt(limit_orders_counter)
                                     };
                                     balances.push(parsed);
                                 });
                         });
                         $scope.balances = balances;
-
 
                         // user issued assets
                         var user_issued_assets = [];
@@ -197,7 +188,6 @@
 
                             $http.get(appConfig.urls.python_backend + "/get_asset?asset_id=" + value)
                                 .then(function (response) {
-                                    //console.log(response);
                                     var parsed = {asset_id: value, asset_name: response.data[0].symbol};
                                     user_issued_assets.push(parsed);
                                 });
@@ -208,35 +198,26 @@
                         // proposals
                         var proposals = [];
                         angular.forEach(response.data[0][1].proposals, function (value, key) {
-
-                            //$http.get(appConfig.urls.python_backend + "/get_asset?asset_id=" + value)
-                            //    .then(function(response) {
-                            console.log(value);
                             var parsed = {id: value};
                             user_issued_assets.push(parsed);
-                            //});
                         });
                         $scope.proposals = proposals;
 
                         // votes
                         var votes = [];
                         angular.forEach(response.data[0][1].votes, function (value, key) {
-
-                            //$http.get(appConfig.urls.python_backend + "/get_asset?asset_id=" + value)
-                            //    .then(function(response) {
-                            //console.log(value);
                             var type = "";
                             var account;
-                            console.log(value.id.substr(0, 4));
-                            if (value.id.substr(0, 4) == "1.6.") {
+                            //console.log(value.id.substr(0, 4));
+                            if (value.id.substr(0, 4) === "1.6.") {
                                 type = "witness";
                                 account = value.witness_account;
                             }
-                            else if (value.id.substr(0, 4) == "1.5.") {
+                            else if (value.id.substr(0, 4) === "1.5.") {
                                 type = "committee member";
                                 account = value.committee_member_account;
                             }
-                            else if (value.id.substr(0, 4) == "1.14") {
+                            else if (value.id.substr(0, 4) === "1.14") {
                                 type = "worker";
                                 account = value.worker_account;
                             }
@@ -246,7 +227,6 @@
                             }
                             var parsed = {id: value.id, type: type, account: account};
                             votes.push(parsed);
-                            //});
                         });
                         $scope.votes = votes;
 
@@ -256,9 +236,6 @@
                         $http.get(appConfig.urls.python_backend + "/get_workers")
                             .then(function (response_w) {
                                 for (var i = 0; i < response_w.data.length; i++) {
-
-                                    //console.log(response.data[0][1].account.id);
-                                    //console.log(response_w.data[i][0].worker_account);
                                     var worker_account = response_w.data[i][0].worker_account;
                                     if (worker_account === response.data[0][1].account.id) {
                                         $scope.is_worker = 1;
@@ -267,52 +244,41 @@
                                     }
 
                                 }
-                            });
+                        });
 
                         // get if is witness
                         $scope.is_witness = 0;
                         $http.get(appConfig.urls.python_backend + "/get_witnesses")
                             .then(function (response_w) {
                                 for (var i = 0; i < response_w.data.length; i++) {
-
-                                    //console.log(response.data[0][1].account.id);
-                                    //console.log(response_w.data[i][0].worker_account);
                                     var witness_account = response_w.data[i][0].witness_account;
                                     if (witness_account === response.data[0][1].account.id) {
                                         $scope.is_witness = 1;
                                         $scope.witness_votes = utilities.formatBalance(response_w.data[i][0].total_votes, 5);
                                         break;
                                     }
-
                                 }
-                            });
+                        });
 
                         // get if is committee_member
                         $scope.is_committee_member = 0;
                         $http.get(appConfig.urls.python_backend + "/get_committee_members")
                             .then(function (response_w) {
                                 for (var i = 0; i < response_w.data.length; i++) {
-
-                                    //console.log(response.data[0][1].account.id);
-                                    //console.log(response_w.data[i][0].worker_account);
                                     var committee_member_account = response_w.data[i][0].committee_member_account;
                                     if (committee_member_account === response.data[0][1].account.id) {
                                         $scope.is_committee_member = 1;
                                         $scope.committee_votes = utilities.formatBalance(response_w.data[i][0].total_votes, 5);
                                         break;
                                     }
-
                                 }
-                            });
+                        });
 
                         // get if is top proxy
                         $scope.is_proxy = 0;
                         $http.get(appConfig.urls.python_backend + "/top_proxies")
                             .then(function (response_w) {
                                 for (var i = 0; i < response_w.data.length; i++) {
-
-                                    //console.log(response.data[0][1].account.id);
-                                    //console.log(response_w.data[i][0].worker_account);
                                     var proxy_account = response_w.data[i][0];
                                     if (proxy_account === response.data[0][1].account.id) {
                                         $scope.is_proxy = 1;
@@ -321,20 +287,17 @@
                                     }
 
                                 }
-                            });
+                        });
 
                         // count of referrers
                         $http.get(appConfig.urls.python_backend + "/referrer_count?account_id=" + name)
                             .then(function (referrer_count) {
-                                //console.log(referrer_count.data[0]);
                                 $scope.referral_count = referrer_count.data[0];
-                            });
+                        });
 
                         // get referrers
                         $scope.select_referers = function(page_referers) {
                             var pager = page_referers -1;
-
-
                             var refs = [];
                             $http.get(appConfig.urls.python_backend + "/get_all_referrers?account_id=" + name + "&page=" + pager)
                                 .then(function (referrers) {
@@ -342,10 +305,9 @@
                                         var parsed = {account_id: referrers.data[i][1], account_name: referrers.data[i][2]};
                                         refs.push(parsed);
                                     }
-                                });
+                            });
                             $scope.referrers = refs;
                             $scope.currentPageReferer = page_referers;
-
 
                         };
                         $scope.select_referers(1);
@@ -353,9 +315,9 @@
                         var update = true;
                         $scope.select = function(page) {
                             var pager = page -1;
-                            if($scope.dataStream)
+                            if($scope.dataStream) {
                                 $scope.dataStream.close(true);
-
+                            }
                             $http.get(appConfig.urls.python_backend + "/account_history_pager_elastic?account_id=" + name + "&page=" + pager)
                                 .then(function (response_ahp) {
 
@@ -391,41 +353,14 @@
                         };
                         $scope.select(1);
 
-                        // column to sort
-                        $scope.column = 'balance';
-                        // sort ordering (Ascending or Descending). Set true for desending
-                        $scope.reverse = true;
-                        // called on header click
-                        $scope.sortColumn = function(col){
-                            $scope.column = col;
-                            if($scope.reverse){
-                                $scope.reverse = false;
-                                $scope.reverseclass = 'arrow-up';
-                            }else{
-                                $scope.reverse = true;
-                                $scope.reverseclass = 'arrow-down';
-                            }
-                        };
-                        // remove and change class
-                        $scope.sortClass = function(col) {
-                            if ($scope.column == col) {
-                                if ($scope.reverse) {
-                                    return 'arrow-down';
-                                } else {
-                                    return 'arrow-up';
-                                }
-                            } else {
-                                return '';
-                            }
-                        }
+                        utilities.columnsort($scope, "balance", "sortColumn", "sortClass", "reverse", "reverseclass", "column");
 
-                    });
-
+					});
             }
 		}
 		else {
 			var init;
-            if(path == "/accounts") {
+            if(path === "/accounts") {
 				$http.get(appConfig.urls.python_backend + "/accounts")
 					.then(function(response) {
 						//console.log(response.data);
@@ -433,40 +368,13 @@
 						for(var i = 0; i < response.data.length; i++) { // for de 100 y ya esta
                             var amount = utilities.formatBalance(response.data[i].amount, 5);
 							var parsed = { name: response.data[i].name, id: response.data[i].account_id, amount: amount };
-							//console.log(parsed);
 							richs.push(parsed);
 						}
 						$scope.richs = richs;
-						//console.log($scope.richs);
 				});
 
-                // column to sort
-                $scope.column = 'amount';
-                // sort ordering (Ascending or Descending). Set true for desending
-                $scope.reverse = true;
-                // called on header click
-                $scope.sortColumn = function(col){
-                    $scope.column = col;
-                    if($scope.reverse){
-                        $scope.reverse = false;
-                        $scope.reverseclass = 'arrow-up';
-                    }else{
-                        $scope.reverse = true;
-                        $scope.reverseclass = 'arrow-down';
-                    }
-                };
-                // remove and change class
-                $scope.sortClass = function(col) {
-                    if ($scope.column == col) {
-                        if ($scope.reverse) {
-                            return 'arrow-down';
-                        } else {
-                            return 'arrow-up';
-                        }
-                    } else {
-                        return '';
-                    }
-                }
+                utilities.columnsort($scope, "amount", "sortColumn", "sortClass", "reverse", "reverseclass", "column");
+
 			}
 		}
     }

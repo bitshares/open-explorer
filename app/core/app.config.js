@@ -49,6 +49,7 @@
         var urls = {
             websocket: "ws://23.94.69.140:8090/ws",
             python_backend: "http://185.208.208.184:5000",
+            //python_backend: "http://95.216.32.252:5010",
             elasticsearch_wrapper: "http://95.216.32.252:5000", // clockwork
             udf_wrapper: "http://185.208.208.184:5001"
         };
