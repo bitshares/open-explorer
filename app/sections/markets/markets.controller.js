@@ -2,9 +2,9 @@
     'use strict';
 
     angular.module('app.markets')
-        .controller('marketsCtrl', ['$scope', '$filter', '$routeParams', '$location', '$http', '$websocket', 'appConfig', 'utilities', marketsCtrl]);
+        .controller('marketsCtrl', ['$scope', '$filter', '$routeParams', '$location', '$http', '$websocket', 'appConfig', 'utilities', 'marketService', marketsCtrl]);
 
-    function marketsCtrl($scope, $filter, $routeParams, $location, $http, $websocket, appConfig, utilities) {
+    function marketsCtrl($scope, $filter, $routeParams, $location, $http, $websocket, appConfig, utilities, marketService) {
 
         var path = $location.path();
         var name = $routeParams.name;
@@ -280,20 +280,13 @@
         }
         else {
             if(path === "/markets") {
-                $http.get(appConfig.urls.python_backend + "/get_most_active_markets")
-                    .then(function(response) {
-                        //console.log(response.data);
-                        var markets = [];
-                        angular.forEach(response.data, function(value, key) {
-                            var parsed = {pair: value[1], price: value[3], volume: value[4]};
-                            markets.push(parsed);
-                        });
-                        $scope.markets = markets;
-                    });
+
+                marketService.getActiveMarkets(function (returnData) {
+                    $scope.markets = returnData;
+                });
+
+                utilities.columnsort($scope, "volume", "sortColumn", "sortClass", "reverse", "reverseclass", "column");
             }
-
-            utilities.columnsort($scope, "volume", "sortColumn", "sortClass", "reverse", "reverseclass", "column");
-
         }
     }
     function getParameterByName(name) {
