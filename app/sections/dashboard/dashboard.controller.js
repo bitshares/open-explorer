@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('app').controller('DashboardCtrl', ['$scope', '$http', '$websocket', '$timeout', '$window','appConfig', 'utilities',  DashboardCtrl])
+    angular.module('app').controller('DashboardCtrl', ['$scope', '$http', '$websocket', '$timeout', '$window','appConfig', 'utilities', 'networkService',  DashboardCtrl])
 
         .filter('to_trusted', ['$sce', function($sce){
             return function(text) {
@@ -9,14 +9,26 @@
             };
         }]);
 
-    function DashboardCtrl($scope, $http, $websocket, $timeout, $window, appConfig, utilities) {
+    function DashboardCtrl($scope, $http, $websocket, $timeout, $window, appConfig, utilities, networkService) {
 
         //var dataStream = $websocket('ws://node.testnet.bitshares.eu:18092');
-        var dataStream = $websocket(appConfig.urls.websocket);
-        dataStream.send('{"method": "set_subscribe_callback", "params": [5, true], "id": 6}')
+        //var dataStream = $websocket(appConfig.urls.websocket);
+        //dataStream.send('{"method": "set_subscribe_callback", "params": [5, true], "id": 6}')
 
         var collection = [];
         $scope.operations = [];
+
+        //$scope.dynamic = networkService.getHeader();
+
+        networkService.getHeader(function (returnData) {
+            $scope.dynamic = returnData;
+        });
+
+        networkService.getLastOperations(function (returnData) {
+            $scope.operations = returnData;
+        });
+
+        /*
 
         dataStream.onMessage(function(message) {
 
@@ -76,6 +88,7 @@
 			    $scope.operations.splice(10, 1);
             });
 
+
 	        $http.get(appConfig.urls.python_backend + "/header")
 		        .then(function(response) {
 
@@ -128,13 +141,14 @@
             if(dataStream)
                 dataStream.close();
         });
+         */
 
 		// dashboard charts
 
         // top 7 ops in chart
         $http.get(appConfig.urls.elasticsearch_wrapper + "/get_account_history?from_date=now-1d&to_date=now&type=aggs&agg_field=operation_type&size=10")
             .then(function(response) {
-                
+
                 var legends = [];
                 var data = [];
                 var c = 0;

@@ -2,9 +2,9 @@
     'use strict';
 
     angular.module('app.blocks')
-        .controller('blocksCtrl', ['$scope', '$filter', '$routeParams', '$location', '$http', 'appConfig', 'utilities', blocksCtrl]);
+        .controller('blocksCtrl', ['$scope', '$filter', '$routeParams', '$location', '$http', 'appConfig', 'utilities', 'networkService', blocksCtrl]);
 
-    function blocksCtrl($scope, $filter, $routeParams, $location, $http, appConfig, utilities) {
+    function blocksCtrl($scope, $filter, $routeParams, $location, $http, appConfig, utilities, networkService) {
 
         var path = $location.path();
         var name = $routeParams.name;
@@ -65,24 +65,10 @@
         {
             if (path === "/blocks") {
 
-                $http.get(appConfig.urls.elasticsearch_wrapper + "/get_account_history?from_date=now-1w&to_date=now&type=aggs&agg_field=block_data.block_num&size=20")
-                    .then(function (response) {
-
-                        var blocks = [];
-                        angular.forEach(response.data, function (value, key) {
-                            $http.get(appConfig.urls.python_backend + "/get_block?block_num=" + value.key).then(function (response) {
-
-                                var parsed = { block_num: value.key,
-                                               operations: value.doc_count,
-                                               transactions: response.data.transactions.length,
-                                               timestamp: response.data.timestamp
-                                };
-                                blocks.push(parsed);
-                            });
-                        });
-                        $scope.blocks = blocks;
+                networkService.getBigBlocks(function (returnData) {
+                    $scope.blocks = returnData;
                 });
-
+                
                 utilities.columnsort($scope, "operations", "sortColumn", "sortClass", "reverse", "reverseclass", "column");
 
             }
