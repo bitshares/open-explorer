@@ -1,0 +1,40 @@
+<div class="page page-table" data-ng-controller="blocksCtrl">
+
+    <div class="row">
+        <div class="col-md-6">
+            <ol class="breadcrumb">
+                <li><a href="#/">Home</a></li>
+                <li class="active"><a href="#/blocks/">Blocks</a></li>
+            </ol>
+        </div>
+        <div class="col-md-6">
+        </div>
+    </div>
+
+    <div class="panel panel-primary" >
+		<div class="panel-heading" >Biggest Network Blocks</div>
+        <div class="panel-body table-responsive">
+
+            <!-- <h1>Work in progress ...</h1> -->
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th ng-click='sortColumn("block_num")' ng-class='sortClass("block_num")'>Block Number</th>
+                        <th ng-click='sortColumn("timestamp")' ng-class='sortClass("timestamp")'>Date</th>
+                        <th ng-click='sortColumn("transactions")' ng-class='sortClass("transactions")'>Transactions</th>
+                        <th ng-click='sortColumn("operations")' ng-class='sortClass("operations")'>Operations</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="block in blocks | orderBy:column:reverse">
+                    <td><a href='#/blocks/{{block.block_num}}/'>{{block.block_num}}</a></td>
+                    <td>{{block.timestamp}}</td>
+                    <td>{{block.transactions}}</td>
+                    <td>{{block.operations}}</td>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

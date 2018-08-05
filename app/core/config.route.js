@@ -35,6 +35,7 @@
                 .when('/assets', {templateUrl: 'sections/assets/assets.html'})
                 .when('/assets/:name', {templateUrl: 'sections/assets/asset.html'})
 
+                .when('/blocks', {templateUrl: 'sections/blocks/blocks.html'})
                 .when('/blocks/:name', {templateUrl: 'sections/blocks/block.html'})
 
                 .when('/objects/:name', {templateUrl: 'sections/objects/object.html'})
