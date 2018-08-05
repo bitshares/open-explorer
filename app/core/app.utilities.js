@@ -10,14 +10,14 @@
             try {
                 var parts = x.toString().split(".");
 
-                if (x < 1) parts[1] = parts[1];
-                else if (x > 1 && x < 100) parts[1] = parts[1].substr(0, 2);
-                else if (x > 100 && x < 1000) parts[1] = parts[1].substr(0, 1);
-                else if (x > 1000) parts[1] = "";
+                if (x < 1) { parts[1] = parts[1]; }
+                else if (x > 1 && x < 100) { parts[1] = parts[1].substr(0, 2); }
+                else if (x > 100 && x < 1000) { parts[1] = parts[1].substr(0, 1); }
+                else if (x > 1000) { parts[1] = ""; }
 
                 parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                if (x > 1000) return parts[0];
-                else return parts.join(".");
+                if (x > 1000) { return parts[0]; }
+                else { return parts.join("."); }
             }
             catch(err) {
                 return x;
@@ -28,8 +28,9 @@
             opText: function (appConfig, $http, operation_type, operation, callback) {
                 var operation_account = 0;
                 var operation_text;
+                var fee_paying_account;
 
-                if (operation_type == 0) {
+                if (operation_type === 0) {
                     var from = operation.from;
                     var to = operation.to;
 
@@ -59,16 +60,11 @@
                                             operation_text = operation_text + " sent " + formatNumber(amount) + " <a href='/#/assets/" + amount_asset_id + "'>" + asset_name + "</a> to <a href='/#/accounts/" + to + "'>" + to_name + "</a>";
 
                                             callback(operation_text);
-                                        });
-
-                                });
-
-
-                        });
-
-                    //console.log(from);
+                                    });
+                            });
+                    });
                 }
-                else if (operation_type == 1) {
+                else if (operation_type === 1) {
                     var seller = operation.seller;
                     operation_account = seller;
 
@@ -83,8 +79,6 @@
 
                             $http.get(appConfig.urls.python_backend + "/get_asset?asset_id=" + amount_to_sell_asset_id)
                                 .then(function (response_asset1) {
-
-                                    //console.log(response_asset);
 
                                     var sell_asset_name = response_asset1.data[0]["symbol"];
                                     var sell_asset_precision = response_asset1.data[0]["precision"];
@@ -105,14 +99,12 @@
                                             operation_text = operation_text + " wants " + formatNumber(receive_amount) + " <a href='/#/assets/" + min_to_receive_asset_id + "'>" + receive_asset_name + "</a> for ";
                                             operation_text = operation_text + formatNumber(sell_amount) + " <a href='/#/assets/" + amount_to_sell_asset_id + "'>" + sell_asset_name + "</a>";
                                             callback(operation_text);
-                                        });
-                                });
-                        });
-
-
+                                    });
+                            });
+                    });
                 }
-                else if (operation_type == 2) {
-                    var fee_paying_account = operation.fee_paying_account;
+                else if (operation_type === 2) {
+                    fee_paying_account = operation.fee_paying_account;
                     operation_account = fee_paying_account;
 
                     $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + operation_account)
@@ -120,10 +112,9 @@
 
                             operation_text = "<a href='/#/accounts/" + operation_account + "'>" + response_name.data + "</a> cancel order";
                             callback(operation_text);
-                        });
-
+                    });
                 }
-                else if (operation_type == 3) {
+                else if (operation_type === 3) {
                     var funding_account = operation.funding_account;
                     var delta_collateral_asset_id = operation.delta_collateral.asset_id;
                     var delta_debt_asset_id = operation.delta_debt.asset_id;
@@ -144,11 +135,11 @@
                                             operation_text = "<a href='/#/accounts/" + operation_account + "'>" + response_name.data + "</a> update debt/collateral for ";
                                             operation_text = operation_text + "<a href='#/markets/" + asset1 + "/" + asset2 + "'>" + asset1 + "/" + asset2 + "</a>";
                                             callback(operation_text);
-                                        });
-                                });
-                        });
+                                    });
+                            });
+                    });
                 }
-                else if (operation_type == 4) {
+                else if (operation_type === 4) {
                     var account_id = operation.account_id;
                     operation_account = account_id;
 
@@ -185,14 +176,11 @@
                                             operation_text = operation_text + " paid " + formatNumber(p_amount) + " <a href='/#/assets/" + pays_asset_id + "'>" + pays_asset_name + "</a> for ";
                                             operation_text = operation_text + formatNumber(receive_amount) + " <a href='/#/assets/" + receives_asset_id + "'>" + receive_asset_name + "</a>";
                                             callback(operation_text);
-
-                                        });
-                                });
-                        });
-
-
+                                    });
+                            });
+                    });
                 }
-                else if (operation_type == 5) {
+                else if (operation_type === 5) {
                     var registrar = operation.registrar;
                     var referrer =  operation.referrer;
                     var name =  operation.name;
@@ -203,7 +191,7 @@
 
                             operation_text = "<a href='/#/accounts/" + operation_account + "'>" + response_name.data + "</a>  register <a href='/#/accounts/" + name + "'>" + name + "</a>";
 
-                            if(registrar != referrer) {
+                            if(registrar !== referrer) {
 
                                 $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + referrer)
                                     .then(function (response_name2) {
@@ -215,21 +203,19 @@
                             else {
                                 callback(operation_text);
                             }
-                        });
+                    });
                 }
-                else if (operation_type == 6) {
-                    var operation_account = operation.account;
+                else if (operation_type === 6) {
+                    operation_account = operation.account;
 
                     $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + operation_account)
                         .then(function (response_name) {
 
                             operation_text = "<a href='/#/accounts/" + operation_account + "'>" + response_name.data + "</a> updated account data";
                             callback(operation_text);
-                        });
+                    });
                 }
-
-
-                else if (operation_type == 14) {
+                else if (operation_type === 14) {
                     var issuer = operation.issuer;
                     var issue_to_account =  operation.issue_to_account;
                     var asset_to_issue_amount = operation.asset_to_issue.amount;
@@ -254,15 +240,37 @@
                                         operation_text = operation_text + " <a href='/#/assets/" + asset_to_issue_asset_id + "'>" + response_asset.data[0]["symbol"] + "</a>";
                                         operation_text = operation_text + " to <a href='/#/accounts/" + issue_to_account + "'>" + response_name2.data + "</a>";
                                         callback(operation_text);
-
-
-                                });
-                        });
+                                    });
+                            });
                     });
                 }
 
+                else if (operation_type === 15) {
+                    operation_account = operation.payer;
 
-                else if (operation_type == 19) {
+                    var amount_to_reserve_amount = operation.amount_to_reserve.amount;
+                    var amount_to_reserve_asset_id = operation.amount_to_reserve.asset_id;
+
+                    $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + operation_account)
+                        .then(function (response_name) {
+
+                            $http.get(appConfig.urls.python_backend + "/get_asset?asset_id=" + amount_to_reserve_asset_id)
+                                .then(function (response_asset) {
+
+                                    var asset_name = response_asset.data[0]["symbol"];
+                                    var asset_precision = response_asset.data[0]["precision"];
+                                    var divideby = Math.pow(10, asset_precision);
+                                    var amount = Number(amount_to_reserve_amount / divideby);
+
+                                    operation_text = "<a href='/#/accounts/" + operation_account + "'>" + response_name.data +
+                                        "</a> burned(reserved) " + formatNumber(amount) + " <a href='/#/assets/" + amount_to_reserve_asset_id + "'>" +
+                                        asset_name + "</a>";
+                                    callback(operation_text);
+                            });
+                    });
+                }
+
+                else if (operation_type === 19) {
                     var publisher = operation.publisher;
                     var asset_id =  operation.asset_id;
                     operation_account = publisher;
@@ -276,22 +284,21 @@
                                     operation_text = "<a href='/#/accounts/" + operation_account + "'>" + response_name.data + "</a>  published feed for ";
                                     operation_text = operation_text + "<a href='/#/assets/" + asset_id + "'>" + response_asset.data[0]["symbol"] + "</a>";
                                     callback(operation_text);
-
-                                });
-                        });
+                            });
+                    });
                 }
-                else if (operation_type == 22) {
-                    var fee_paying_account = operation.fee_paying_account;
+                else if (operation_type === 22) {
+                    fee_paying_account = operation.fee_paying_account;
                     operation_account = fee_paying_account;
 
                     $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + operation_account)
                         .then(function (response_name) {
                             operation_text = "<a href='/#/accounts/" + operation_account + "'>" + response_name.data + "</a>  created a proposal";
                             callback(operation_text);
-                        });
+                    });
                 }
-                else if (operation_type == 23) {
-                    var fee_paying_account = operation.fee_paying_account;
+                else if (operation_type === 23) {
+                    fee_paying_account = operation.fee_paying_account;
                     var proposal = operation.proposal;
                     operation_account = fee_paying_account;
 
@@ -300,196 +307,195 @@
                             operation_text = "<a href='/#/accounts/" + operation_account + "'>" + response_name.data + "</a>  updated ";
                             operation_text = operation_text + " proposal <a href='/#objects/"+proposal+"'>"+proposal+"</a>";
                             callback(operation_text);
-                        });
+                    });
                 }
                 else {
                     operation_text = "";
                     callback(operation_text);
                 }
 
-
             },
             operationType: function (opType) {
                 var name;
                 var color;
                 var results = [];
-                if(opType == 0) {
+                if(opType === 0) {
                     name = "TRANSFER";
                     color = "81CA80";
                 }
-                else if(opType == 1) {
+                else if(opType === 1) {
                     name = "LIMIT ORDER CREATE";
                     color = "6BBCD7";
                 }
-                else if(opType == 2) {
+                else if(opType === 2) {
                     name = "LIMIT ORDER CANCEL";
                     color = "E9C842";
                 }
-                else if(opType == 3) {
+                else if(opType === 3) {
                     name = "CALL ORDER UPDATE";
                     color = "E96562";
                 }
-                else if(opType == 4) {
+                else if(opType === 4) {
                     name = "FILL ORDER (VIRTUAL)";
                     color = "008000";
                 }
-                else if(opType == 5) {
+                else if(opType === 5) {
                     name = "ACCOUNT CREATE";
                     color = "CCCCCC";
                 }
-                else if(opType == 6) {
+                else if(opType === 6) {
                     name = "ACCOUNT UPDATE";
                     color = "FF007F";
                 }
-                else if(opType == 7) {
+                else if(opType === 7) {
                     name = "ACCOUNT WHIELIST";
                     color = "FB8817";
                 }
-                else if(opType == 8) {
+                else if(opType === 8) {
                     name = "ACCOUNT UPGRADE";
                     color = "552AFF";
                 }
-                else if(opType == 9) {
+                else if(opType === 9) {
                     name = "ACCOUNT TRANSFER";
                     color = "AA2AFF";
                 }
-                else if(opType == 10) {
+                else if(opType === 10) {
                     name = "ASSET CREATE";
                     color = "D400FF";
                 }
-                else if(opType == 11) {
+                else if(opType === 11) {
                     name = "ASSET UPDATE";
                     color = "0000FF";
                 }
-                else if(opType == 12) {
+                else if(opType === 12) {
                     name = "ASSET UPDATE BITASSET";
                     color = "AA7FFF";
                 }
-                else if(opType == 13) {
+                else if(opType === 13) {
                     name = "ASSET UPDATE FEED PRODUCERS";
                     color = "2A7FFF";
                 }
-                else if(opType == 14) {
+                else if(opType === 14) {
                     name = "ASSET ISSUE";
                     color = "7FAAFF";
                 }
-                else if(opType == 15) {
+                else if(opType === 15) {
                     name = "ASSET RESERVE";
                     color = "55FF7F";
                 }
-                else if(opType == 16) {
+                else if(opType === 16) {
                     name = "ASSET FUND FEE POOL";
                     color = "55FF7F";
                 }
-                else if(opType == 17) {
+                else if(opType === 17) {
                     name = "ASSET SETTLE";
                     color = "FFFFAA";
                 }
-                else if(opType == 18) {
+                else if(opType === 18) {
                     name = "ASSET GLOBAL SETTLE";
                     color = "FFFF7F";
                 }
-                else if(opType == 19) {
+                else if(opType === 19) {
                     name = "ASSET PUBLISH FEED";
                     color = "FF2A55";
                 }
-                else if(opType == 20) {
+                else if(opType === 20) {
                     name = "WITNESS CREATE";
                     color = "FFAA7F";
                 }
-                else if(opType == 21) {
+                else if(opType === 21) {
                     name = "WITNESS UPDATE";
                     color = "F1AA2A";
                 }
-                else if(opType == 22) {
+                else if(opType === 22) {
                     name = "PROPOSAL CREATE";
                     color = "FFAA55";
                 }
-                else if(opType == 23) {
+                else if(opType === 23) {
                     name = "PROPOSAL UPDATE";
                     color = "FF7F55";
                 }
-                else if(opType == 24) {
+                else if(opType === 24) {
                     name = "PROPOSAL DELETE";
                     color = "FF552A";
                 }
-                else if(opType == 25) {
+                else if(opType === 25) {
                     name = "WITHDRAW PERMISSION CREATE";
                     color = "FF00AA";
                 }
-                else if(opType == 26) {
+                else if(opType === 26) {
                     name = "WITHDRAW PERMISSION";
                     color = "FF00FF";
                 }
-                else if(opType == 27) {
+                else if(opType === 27) {
                     name = "WITHDRAW PERMISSION CLAIM";
                     color = "FF0055";
                 }
-                else if(opType == 28) {
+                else if(opType === 28) {
                     name = "WITHDRAW PERMISSION DELETE";
                     color = "37B68Cc";
                 }
-                else if(opType == 29) {
+                else if(opType === 29) {
                     name = "COMITEE MEMBER CREATE";
                     color = "37B68C";
                 }
-                else if(opType == 30) {
+                else if(opType === 30) {
                     name = "COMITEE MEMBER UPDATE";
                     color = "6712E7";
                 }
-                else if(opType == 31) {
+                else if(opType === 31) {
                     name = "COMITEE MEMBER UPDATE GLOBAL PARAMETERS";
                     color = "B637B6";
                 }
-                else if(opType == 32) {
+                else if(opType === 32) {
                     name = "VESTING BALANCE CREATE";
                     color = "A5A5A5";
                 }
-                else if(opType == 33) {
+                else if(opType === 33) {
                     name = "VESTING BALANCE WITHDRAW";
                     color = "696969";
                 }
-                else if(opType == 34) {
+                else if(opType === 34) {
                     name = "WORKER CREATE";
                     color = "0F0F0F";
                 }
-                else if(opType == 35) {
+                else if(opType === 35) {
                     name = "CUSTOM";
                     color = "0DB762";
                 }
-                else if(opType == 36) {
+                else if(opType === 36) {
                     name = "ASSERT";
                     color = "FFFFFF";
                 }
-                else if(opType == 37) {
+                else if(opType === 37) {
                     name = "BALANCE CLAIM";
                     color = "939314";
                 }
-                else if(opType == 38) {
+                else if(opType === 38) {
                     name = "OVERRIDE TRANSFER";
                     color = "8D0DB7";
                 }
-                else if(opType == 39) {
+                else if(opType === 39) {
                     name = "TRANSFER TO BLIND";
                     color = "C4EFC4";
                 }
-                else if(opType == 40) {
+                else if(opType === 40) {
                     name = "BLIND TRANSFER";
                     color = "F29DF2";
                 }
-                else if(opType == 41) {
+                else if(opType === 41) {
                     name = "TRANSFER FROM BLIND";
                     color = "9D9DF2";
                 }
-                else if(opType == 42) {
+                else if(opType === 42) {
                     name = "ASSET SETTLE CANCEL";
                     color = "4ECEF8";
                 }
-                else if(opType == 43) {
+                else if(opType === 43) {
                     name = "ASSET CLAIM FEES";
                     color = "F8794E";
                 }
-                else if(opType == 44) {
+                else if(opType === 44) {
                     name = "FBA DISTRIBUTE";
                     color = "8808B2";
                 }
