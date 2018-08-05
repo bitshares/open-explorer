@@ -67,7 +67,6 @@
                                                         //var base_precision = 5;
                                                         $http.get(appConfig.urls.python_backend + "/get_asset?asset_id=" + name)
                                                             .then(function(response_p) {
-                                                                //base_precision = response_p.data[0].precision;
 
                                                                 var parsed = {
                                                                     price: response3.data.latest,
@@ -81,8 +80,6 @@
                                                                     base_precision: base_precision
                                                                 };
                                                                 $scope.ticker = parsed;
-
-
 
                                                                 // order book
                                                                 var asks = [];
@@ -117,7 +114,7 @@
                                                                             bids.push(parsed);
                                                                         });
                                                                         $scope.bids = bids;
-                                                                    });
+                                                                });
                                                                 // end order book
 
 
@@ -174,7 +171,7 @@
                                                                             grouped.push(parsed);
                                                                         });
                                                                         $scope.grouped = grouped;
-                                                                    });
+                                                                });
 
                                                                 // end sell side
                                                                 // buy side
@@ -236,12 +233,10 @@
                                                                             grouped2.push(parsed);
                                                                         });
                                                                         $scope.grouped2 = grouped2;
-                                                                    });
+                                                                });
 
                                                                 // end buy side
                                                                 // end grouped order book
-
-
                                                             });
                                                     });
                                                 parsed = JSON.parse(message.data);
@@ -252,18 +247,10 @@
                                             }
                                             //console.log(parsed);
                                         });
-
-
-
                                         /// end subscription
                                     });
-
-
                             });
                     });
-                //console.log(ticker);
-                //$scope.ticker = ticker;
-
                 //TradingView.onready(function()
                 //{
                 var widget = window.tvWidget = new TradingView.widget({
@@ -304,36 +291,8 @@
                         $scope.markets = markets;
                     });
             }
-            //utilities.columnsort($scope, "volume");
 
-
-            // column to sort
-            $scope.column = 'volume';
-            // sort ordering (Ascending or Descending). Set true for desending
-            $scope.reverse = true;
-            // called on header click
-            $scope.sortColumn = function(col){
-                $scope.column = col;
-                if($scope.reverse){
-                    $scope.reverse = false;
-                    $scope.reverseclass = 'arrow-up';
-                }else{
-                    $scope.reverse = true;
-                    $scope.reverseclass = 'arrow-down';
-                }
-            };
-            // remove and change class
-            $scope.sortClass = function(col) {
-                if ($scope.column === col) {
-                    if ($scope.reverse) {
-                        return 'arrow-down';
-                    } else {
-                        return 'arrow-up';
-                    }
-                } else {
-                    return '';
-                }
-            };
+            utilities.columnsort($scope, "volume", "sortColumn", "sortClass", "reverse", "reverseclass", "column");
 
         }
     }
