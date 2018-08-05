@@ -335,6 +335,31 @@
                         });
                 }
 
+                else if (operation_type === 37) { // BALANCE_CLAIM
+                    operation_account = operation.deposit_to_account;
+
+                    var total_claimed_amount = operation.total_claimed.amount;
+                    var total_claimed_asset_id = operation.total_claimed.asset_id;
+
+                    $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + operation_account)
+                        .then(function (response_name) {
+
+                            $http.get(appConfig.urls.python_backend + "/get_asset?asset_id=" + total_claimed_asset_id)
+                                .then(function (response_asset) {
+
+                                    var asset_name = response_asset.data[0]["symbol"];
+                                    var asset_precision = response_asset.data[0]["precision"];
+                                    var divideby = Math.pow(10, asset_precision);
+                                    var amount = Number(total_claimed_amount / divideby);
+
+                                    operation_text = "<a href='/#/accounts/" + operation_account + "'>" + response_name.data +
+                                        "</a> claimed a balance of " + formatNumber(amount) + " <a href='/#/assets/" + amount_to_reserve_asset_id + "'>" +
+                                        asset_name + "</a>";
+                                    callback(operation_text);
+                                });
+                        });
+                }
+
                 else {
                     operation_text = "";
                     callback(operation_text);
