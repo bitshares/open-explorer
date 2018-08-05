@@ -13,7 +13,6 @@
                 var start, end, now;
                 for(var i = 0; i < response.data.length; i++) {
 
-
                     var now_d = new Date();
                     var start_d = new Date(response.data[i][0].work_begin_date);
                     var end_d = new Date(response.data[i][0].work_end_date);
@@ -88,70 +87,9 @@
                 $scope.workers_expired = workers_expired;
             });
 
-
         utilities.columnsort($scope, "start", "sortColumn", "sortClass", "reverse", "reverseclass", "column");
         utilities.columnsort($scope, "start", "sortColumn2", "sortClass2", "reverse2", "reverseclass2", "column2");
 
-
-        /*
-        // table 1
-        // column to sort
-        $scope.column = 'start';
-        // sort ordering (Ascending or Descending). Set true for desending
-        $scope.reverse = true;
-        // called on header click
-        $scope.sortColumn = function(col){
-            $scope.column = col;
-            if($scope.reverse){
-                $scope.reverse = false;
-                $scope.reverseclass = 'arrow-up';
-            }else{
-                $scope.reverse = true;
-                $scope.reverseclass = 'arrow-down';
-            }
-        };
-        // remove and change class
-        $scope.sortClass = function(col) {
-            if ($scope.column == col) {
-                if ($scope.reverse) {
-                    return 'arrow-down';
-                } else {
-                    return 'arrow-up';
-                }
-            } else {
-                return '';
-            }
-        }
-        // table 2
-        // column to sort
-        $scope.column2 = 'start';
-        // sort ordering (Ascending or Descending). Set true for desending
-        $scope.reverse2 = true;
-        // called on header click
-        $scope.sortColumn2 = function(col2){
-            $scope.column2 = col2;
-            if($scope.reverse2){
-                $scope.reverse2 = false;
-                $scope.reverseclass2 = 'arrow-up';
-            }else{
-                $scope.reverse2 = true;
-                $scope.reverseclass2 = 'arrow-down';
-            }
-        };
-        // remove and change class
-        $scope.sortClass2 = function(col2) {
-            if ($scope.column2 == col2) {
-                if ($scope.reverse2) {
-                    return 'arrow-down';
-                } else {
-                    return 'arrow-up';
-                }
-            } else {
-                return '';
-            }
-        }
-        */
     }
-
 
 })();
