@@ -8,7 +8,7 @@
 
         var name = $routeParams.name;
 
-        networkService.getBigBlocks(name, function (returnData) {
+        networkService.getObject(name, function (returnData) {
             $scope.data = returnData;
         });
     }

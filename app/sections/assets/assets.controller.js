@@ -2,9 +2,9 @@
     'use strict';
 
     angular.module('app.assets')
-        .controller('assetsCtrl', ['$scope', '$filter', '$routeParams', '$location', '$http', 'orderByFilter', 'appConfig', 'utilities', assetsCtrl]);
+        .controller('assetsCtrl', ['$scope', '$filter', '$routeParams', '$location', '$http', 'orderByFilter', 'appConfig', 'utilities', 'assetService', assetsCtrl]);
 
-    function assetsCtrl($scope, $filter, $routeParams, $location, $http, orderByFilter, appConfig, utilities) {
+    function assetsCtrl($scope, $filter, $routeParams, $location, $http, orderByFilter, appConfig, utilities, assetService) {
 
 		var path = $location.path();
 		var name = $routeParams.name;
@@ -125,67 +125,77 @@
             }
 
             utilities.columnsort($scope, "volume", "sortColumn", "sortClass", "reverse", "reverseclass", "column");
-            utilities.columnsort($scope, "amount", "sortColumn2", "sortClass2", "reverse2", "reverseclass2", "column2");
+            utilities.columnsort($scope, "amount", "sortColumn2", "sortClass2", "reverse2", "reverseclass2", "column");
 
 		}
 		else {
 			var init;
             if(path === "/assets") {
 
+                /*
                 $http.get(appConfig.urls.python_backend + "/get_dex_total_volume")
-                    .then(function(response) {
+                    .then(function (response) {
                         //console.log(response);
 
-                        var parsed = {volume_bts: response.data["volume_bts"], volume_cny: response.data["volume_cny"], volume_usd: response.data["volume_usd"],
-                            market_cap_bts: response.data["market_cap_bts"].toString().slice(0, -12), market_cap_cny: response.data["market_cap_cny"].toString().slice(0, -12), market_cap_usd: response.data["market_cap_usd"].toString().slice(0, -12)};
+                        var parsed = {
+                            volume_bts: response.data["volume_bts"],
+                            volume_cny: response.data["volume_cny"],
+                            volume_usd: response.data["volume_usd"],
+                            market_cap_bts: response.data["market_cap_bts"].toString().slice(0, -12),
+                            market_cap_cny: response.data["market_cap_cny"].toString().slice(0, -12),
+                            market_cap_usd: response.data["market_cap_usd"].toString().slice(0, -12)
+                        };
                         $scope.dynamic = parsed;
 
                     });
+                */
+                assetService.getDexVolume(function (returnData) {
+                    $scope.dynamic = returnData;
+                });
 
                 $scope.dex_volume_chart = {};
                 $http.get(appConfig.urls.python_backend + "/daily_volume_dex_dates")
-                    .then(function(response) {
+                    .then(function (response) {
                         $http.get(appConfig.urls.python_backend + "/daily_volume_dex_data")
-                            .then(function(response2) {
+                            .then(function (response2) {
 
                                 $scope.dex_volume_chart.options = {
                                     animation: true,
-                                    title : {
+                                    title: {
                                         text: 'Daily DEX Volume in BTS for the last 30 days'
                                     },
-                                    tooltip : {
+                                    tooltip: {
                                         trigger: 'axis'
                                     },
                                     toolbox: {
-                                        show : true,
-                                        feature : {
-                                            saveAsImage : {show: true, title: "save as image"}
+                                        show: true,
+                                        feature: {
+                                            saveAsImage: {show: true, title: "save as image"}
                                         }
                                     },
 
-                                    xAxis : [
+                                    xAxis: [
                                         {
-                                            boundaryGap : true,
-                                            data : response.data
+                                            boundaryGap: true,
+                                            data: response.data
                                         }
                                     ],
-                                    yAxis : [
+                                    yAxis: [
                                         {
-                                            type : 'value',
-                                            scale:true,
-                                            axisLabel : {
-                                                formatter: function(value)
-                                                {
-                                                        return value/1000000 + "M";
+                                            type: 'value',
+                                            scale: true,
+                                            axisLabel: {
+                                                formatter: function (value) {
+                                                    return value / 1000000 + "M";
                                                 }
                                             }
                                         }
                                     ],
-                                    calculable : true,
-                                    series : [
+                                    calculable: true,
+                                    series: [
                                         {
-                                            name:'Volume',
-                                            type:'bar',
+                                            name: 'Volume',
+                                            type: 'bar',
                                             itemStyle: {
                                                 normal: {
                                                     color: 'green',
@@ -200,53 +210,12 @@
                             });
                     });
 
-                $http.get(appConfig.urls.python_backend + "/assets")
-                    .then(function(response) {
-                        var assets = [];
-                        var name = "";
-                        angular.forEach(response.data, function(value, key) {
-                            var market_cap;
-                            var supply;
-                            if(value[1].indexOf("OPEN") >= 0 || value[1].indexOf("RUDEX") >= 0) {
-                                market_cap = "-";
-                                supply = "-";
-                            }
-                            else {
-                                market_cap = Math.round(value[5]/100000); // in bts always by now
-                                var precision = 100000;
-                                if(value[10]) {
-                                    precision = Math.pow(10, value[10]);
-                                }
-                                supply = Math.round(value[7]/precision);
-                            }
-                            var volume = Math.round(value[4]);
-                            var name_lower = value[1].replace("OPEN.", "").toLowerCase();
-                            var url = "images/asset-symbols/"+name_lower+".png";
-                            var image_url = "";
+                assetService.getActiveAssets(function (returnData) {
+                    $scope.assets = returnData;
+                });
 
-                            $http({
-                                method: 'GET',
-                                url: url
-                            }).then(function successCallback(response) {
-                                image_url = "images/asset-symbols/"+name_lower+".png";
-                                var parsed = {name: value[1], image_url: image_url, id: value[2], price: value[3], volume: volume, type: value[6], market_cap: market_cap, supply: supply, holders: value[8]};
-                                assets.push(parsed);
-                            }, function errorCallback(response) {
-                                if(type === "SmartCoin") {
-                                    image_url = "images/asset-symbols/white.png";
-                                }
-                                else {
-                                    image_url = "images/asset-symbols/white.png";
-                                }
-                                var parsed = {name: value[1], image_url: image_url, id: value[2], price: value[3], volume: parseInt(volume), type: value[6], market_cap: market_cap, supply: supply, holders: value[8]};
-                                assets.push(parsed);
-                            });
-                        });
-                        $scope.assets = assets;
-                    });
-			}
-
-            utilities.columnsort($scope, "volume", "sortColumn", "sortClass", "reverse", "reverseclass", "column");
+                utilities.columnsort($scope, "volume", "sortColumn", "sortClass", "reverse", "reverseclass", "column");
+            }
 		}
     }
 
