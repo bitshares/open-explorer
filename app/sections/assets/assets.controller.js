@@ -2,131 +2,32 @@
     'use strict';
 
     angular.module('app.assets')
-        .controller('assetsCtrl', ['$scope', '$filter', '$routeParams', '$location', '$http', 'orderByFilter', 'appConfig', 'utilities', 'assetService', 'chartService', assetsCtrl]);
+        .controller('assetsCtrl', ['$scope', '$routeParams', '$location', 'utilities', 'assetService', 'chartService', 'marketService', assetsCtrl]);
 
-    function assetsCtrl($scope, $filter, $routeParams, $location, $http, orderByFilter, appConfig, utilities, assetService, chartService) {
+    function assetsCtrl($scope, $routeParams, $location, utilities, assetService, chartService, marketService) {
 
 		var path = $location.path();
 		var name = $routeParams.name;
 		if(name) {
 		    name = name.toUpperCase();
             if(path.includes("assets")) {
-                var block_num = "";
-                var virtual_op = "";
-                var trx_in_block = "";
-                var op_in_trx = "";
-                var result = [];
-                var type = "";
-                //var raw = "";
-                $http.get(appConfig.urls.python_backend + "/get_asset_and_volume?asset_id=" + name)
-                    .then(function(response) {
-                        var type;
-                        var description;
-                        if(response.data[0].issuer === "1.2.0") {
-                            description = response.data[0].options.description;
-                            type = "SmartCoin";
-                        }
-                        else {
-                            var description_p = response.data[0].options.description.split('"');
-                            description = description_p[3];
-                            type = "User Issued";
-                        }
-                        if(response.data[0].symbol === "BTS") {
-                            type = "Core Token";
-                        }
 
-                        var long_description = false;
-                        try {
-                            if (description.length > 100) {
-                                long_description = true;
-                            }
-                        }
-                        catch(err) { }
-                        $http.get(appConfig.urls.python_backend + "/get_asset_holders_count?asset_id=" + name)
-                            .then(function(response2) {
-                                var name_lower = response.data[0].symbol.replace("OPEN.", "").toLowerCase();
-                                var url = "images/asset-symbols/"+name_lower+".png";
-                                var image_url = "";
-
-                                $http({
-                                    method: 'GET',
-                                    url: url
-                                }).then(function successCallback(response3) {
-                                    image_url = "images/asset-symbols/"+name_lower+".png";
-
-                                    $scope.data = {
-                                        symbol: response.data[0].symbol,
-                                        id: response.data[0].id,
-                                        description: description,
-                                        long_description: long_description,
-                                        max_supply: utilities.formatBalance(response.data[0].options.max_supply, response.data[0].precision),
-                                        issuer: response.data[0].issuer,
-                                        precision: response.data[0].precision,
-                                        current_supply: utilities.formatBalance(response.data[0].current_supply, response.data[0].precision),
-                                        confidential_supply: utilities.formatBalance(response.data[0].confidential_supply, response.data[0].precision),
-                                        holders: response2.data,
-                                        issuer_name: response.data[0].issuer_name,
-                                        accumulated_fees: utilities.formatBalance(response.data[0].accumulated_fees, response.data[0].precision),
-                                        fee_pool: utilities.formatBalance(response.data[0].fee_pool, response.data[0].precision),
-                                        type: type,
-                                        image_url: image_url,
-                                        volume: parseInt(response.data[0].volume),
-                                        market_cap: response.data[0].mcap/100000
-                                    };
-                                }, function errorCallback(response3) {
-                                    if(type === "SmartCoin") {
-                                        image_url = "images/asset-symbols/white.png";
-                                    }
-                                    else {
-                                        image_url = "images/asset-symbols/white.png";
-                                    }
-
-                                    $scope.data = {
-                                        symbol: response.data[0].symbol,
-                                        id: response.data[0].id,
-                                        description: description,
-                                        long_description: long_description,
-                                        max_supply: utilities.formatBalance(response.data[0].options.max_supply, response.data[0].precision),
-                                        issuer: response.data[0].issuer,
-                                        precision: response.data[0].precision,
-                                        current_supply: utilities.formatBalance(response.data[0].current_supply, response.data[0].precision),
-                                        confidential_supply: utilities.formatBalance(response.data[0].confidential_supply, response.data[0].precision),
-                                        holders: response2.data,
-                                        issuer_name: response.data[0].issuer_name,
-                                        accumulated_fees: utilities.formatBalance(response.data[0].accumulated_fees, response.data[0].precision),
-                                        fee_pool: utilities.formatBalance(response.data[0].fee_pool, response.data[0].precision),
-                                        type: type,
-                                        image_url: image_url,
-                                        volume: parseInt(response.data[0].volume),
-                                        market_cap: response.data[0].mcap/100000
-                                    };
-                                });
-                            });
-
-                            var markets = [];
-                            $http.get(appConfig.urls.python_backend + "/get_markets?asset_id=" + name)
-                                .then(function(response) {
-                                    angular.forEach(response.data, function(value, key) {
-                                        var parsed = {pair: value[1], price: value[3], volume: value[4]};
-                                        markets.push(parsed);
-                                    });
-                                    $scope.markets = markets;
-                                });
-                            var accounts = [];
-                            $http.get(appConfig.urls.python_backend + "/get_asset_holders?asset_id=" + name)
-                                .then(function(response_ah) {
-                                    angular.forEach(response_ah.data, function(value, key) {
-                                        var parsed = {name: value.name, amount: utilities.formatBalance(value.amount, response.data[0].precision), id: value.account_id};
-                                        accounts.push(parsed);
-                                    });
-                                    $scope.accounts = accounts;
-                                });
+                assetService.getAssetFull(name, function (returnData) {
+                    $scope.data = returnData;
+                    assetService.getAssetHoldersCount(name, function (returnDataHolders) {
+                        $scope.data.holders = returnDataHolders;
                     });
+                    var precision = returnData.precision;
+                    assetService.getAssetHolders(name, precision, function (returnDataHolders) {
+                        $scope.accounts = returnDataHolders;
+                    });
+                });
+                marketService.getAssetMarkets(name, function (returnData) {
+                    $scope.markets = returnData;
+                });
             }
-
             utilities.columnsort($scope, "volume", "sortColumn", "sortClass", "reverse", "reverseclass", "column");
             utilities.columnsort($scope, "amount", "sortColumn2", "sortClass2", "reverse2", "reverseclass2", "column");
-
 		}
 		else {
             if(path === "/assets") {

@@ -22,6 +22,20 @@
 
                     callback(markets);
                 });
+            },
+            getAssetMarkets: function(asset_id, callback) {
+                var markets = [];
+                $http.get(appConfig.urls.python_backend + "/get_markets?asset_id=" + asset_id).then(function(response) {
+                    angular.forEach(response.data, function(value, key) {
+                        var market = {
+                            pair: value[1],
+                            price: value[3],
+                            volume: value[4]
+                        };
+                        markets.push(market);
+                    });
+                    callback(markets);
+                });
             }
         };
     }
