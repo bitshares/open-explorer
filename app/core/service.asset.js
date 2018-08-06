@@ -33,7 +33,7 @@
                         var volume = Math.round(value[4]);
 
                         var name_lower = value[1].replace("OPEN.", "").toLowerCase();
-                        var url = "http://open-explorer/images/asset-symbols/" + name_lower + ".png";
+                        var url = "images/asset-symbols/" + name_lower + ".png";
                         var image_url = "";
 
                         var asset = {
@@ -49,11 +49,11 @@
 
                         $http({method: 'GET', url: url}).then(function successCallback(response) {
                             image_url = "images/asset-symbols/" + name_lower + ".png";
-                            asset.push({image_url: image_url});
+                            asset.image_url = image_url;
                             assets.push(asset);
                         }, function errorCallback(response) {
                             image_url = "images/asset-symbols/white.png";
-                            asset.push({image_url: image_url});
+                            asset.image_url = image_url;
                             assets.push(asset);
                         });
                     });
