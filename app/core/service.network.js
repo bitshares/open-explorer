@@ -158,7 +158,30 @@
                     }
                 });
                 callback(fees);
+            },
+            getOperation: function(operation, callback) {
+                var op;
+                $http.get(appConfig.urls.python_backend + "/operation_full_elastic?operation_id=" + operation).then(function(response) {
+                    var raw_obj = response.data[0].op[1];
+                    var op_type =  utilities.operationType(response.data[0].op[0]);
 
+                    utilities.opText(appConfig, $http, response.data[0].op[0], raw_obj, function(returnData) {
+                        op = {
+                            name: operation,
+                            block_num: response.data[0].block_num,
+                            virtual_op: response.data[0].virtual_op,
+                            trx_in_block: response.data[0].trx_in_block,
+                            op_in_trx: response.data[0].op_in_trx,
+                            result: response.data[0].result,
+                            type: op_type[0],
+                            color: op_type[1],
+                            raw: raw_obj,
+                            operation_text: returnData,
+                            block_time: response.data[0].block_time
+                        };
+                        callback(op);
+                    });
+                });
             }
         };
     }
