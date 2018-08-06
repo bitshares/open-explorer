@@ -182,6 +182,29 @@
                         callback(op);
                     });
                 });
+            },
+            getBlock: function(block_num, callback) {
+                var block;
+                $http.get(appConfig.urls.python_backend + "/get_block?block_num=" + block_num).then(function (response) {
+                    var operations_count = 0;
+                    for (var i = 0; i < response.data.transactions.length; i++) {
+                        operations_count = operations_count + response.data.transactions[i].operations.length;
+                    }
+                    block = {
+                        transactions: response.data.transactions,
+                        block_num: name,
+                        previous: response.data.previous,
+                        timestamp: response.data.timestamp,
+                        witness: response.data.witness,
+                        witness_signature: response.data.witness_signature,
+                        transaction_merkle_root: response.data.transaction_merkle_root,
+                        transactions_count: response.data.transactions.length,
+                        operations_count: operations_count,
+                        next: parseInt(name) + 1,
+                        prev: parseInt(name) - 1
+                    };
+                    callback(block);
+                });
             }
         };
     }
