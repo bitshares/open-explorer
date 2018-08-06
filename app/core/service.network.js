@@ -205,6 +205,19 @@
                     };
                     callback(block);
                 });
+            },
+            getObject: function(object, callback) {
+                $http.get(appConfig.urls.python_backend + "/get_object?object=" + object).then(function(response) {
+                    var object_id = response.data[0].id;
+                    var object_type = utilities.objectType(object_id);
+
+                    var object = {
+                        raw: response.data,
+                        name: name,
+                        type: object_type
+                    };
+                    callback(object);
+                });
             }
         };
     }
