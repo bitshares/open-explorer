@@ -192,7 +192,7 @@
                     }
                     block = {
                         transactions: response.data.transactions,
-                        block_num: name,
+                        block_num: block_num,
                         previous: response.data.previous,
                         timestamp: response.data.timestamp,
                         witness: response.data.witness,
@@ -200,8 +200,8 @@
                         transaction_merkle_root: response.data.transaction_merkle_root,
                         transactions_count: response.data.transactions.length,
                         operations_count: operations_count,
-                        next: parseInt(name) + 1,
-                        prev: parseInt(name) - 1
+                        next: parseInt(block_num) + 1,
+                        prev: parseInt(block_num) - 1
                     };
                     callback(block);
                 });
