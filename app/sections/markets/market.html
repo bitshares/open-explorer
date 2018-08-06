@@ -144,10 +144,10 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr data-ng-repeat="g in grouped | orderBy:columnToSort3:reverse3">
-                            <td style="text-align:right;">{{g.max_price3 | number: g2.base_precision}}</td>
-                            <td style="text-align:right;">{{g.min_price3 | number: g2.base_precision}}</td>
-                            <td style="text-align:right;">{{g.total_for_sale3 | number: g2.base_precision}}</td>
+                        <tr data-ng-repeat="sg in sell_grouped | orderBy:columnToSort3:reverse3">
+                            <td style="text-align:right;">{{sg.max_price | number: sg.base_precision}}</td>
+                            <td style="text-align:right;">{{sg.min_price | number: sg.base_precision}}</td>
+                            <td style="text-align:right;">{{sg.total_for_sale | number: sg.base_precision}}</td>
                         </tbody>
                     </table>
                 </div>
@@ -166,43 +166,16 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr data-ng-repeat="g in grouped2 | orderBy:columnToSort4:reverse4">
-                            <td style="text-align:right;">{{g.min_price4 | number: g.base_precision}}</td>
-                            <td style="text-align:right;">{{g.max_price4 | number: g.base_precision}}</td>
-                            <td style="text-align:right;">{{g.total_for_sale4 | number: g.base_precision}}</td>
+                        <tr data-ng-repeat="bg in buy_grouped | orderBy:columnToSort4:reverse4">
+                            <td style="text-align:right;">{{bg.min_price | number: bg.base_precision}}</td>
+                            <td style="text-align:right;">{{bg.max_price | number: bg.base_precision}}</td>
+                            <td style="text-align:right;">{{bg.total_for_sale | number: bg.base_precision}}</td>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-<!--
-        <div class="col-md-6">
-            <div class="panel panel-primary">
-                <div class="panel-heading">Sell Orders</div>
-                <div class="panel-body table-responsive">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th style="text-align:right;" ng-click='sortColumn2("price")' ng-class='sortClass2("price")'>Price</th>
-                            <th style="text-align:right;" ng-click='sortColumn2("base")' ng-class='sortClass2("base")'>{{ticker.base}}</th>
-                            <th style="text-align:right;" ng-click='sortColumn2("quote")' ng-class='sortClass2("quote")'>{{ticker.quote}}</th>
-                            <th style="text-align:right;" ng-click='sortColumn("total")' ng-class='sortClass("total")'>Total({{ticker.quote}})</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr data-ng-repeat="b in bids | orderBy:column2:reverse2">
-                            <td style="text-align:right;" class="align-right">{{b.price | number: b.base_precision}}</td>
-                            <td style="text-align:right;" class="align-right">{{b.base | number: b.base_precision}}</td>
-                            <td style="text-align:right;" class="align-right">{{b.quote | number: b.quote_precision}}</td>
-                            <td style="text-align:right;">{{b.total | number: b.quote_precision}}</td>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div> -->
     </div>
-
-
 </div>
 
 
