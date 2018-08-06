@@ -2,9 +2,9 @@
     'use strict';
 
     angular.module('app.assets')
-        .controller('assetsCtrl', ['$scope', '$filter', '$routeParams', '$location', '$http', 'orderByFilter', 'appConfig', 'utilities', 'assetService', assetsCtrl]);
+        .controller('assetsCtrl', ['$scope', '$filter', '$routeParams', '$location', '$http', 'orderByFilter', 'appConfig', 'utilities', 'assetService', 'chartService', assetsCtrl]);
 
-    function assetsCtrl($scope, $filter, $routeParams, $location, $http, orderByFilter, appConfig, utilities, assetService) {
+    function assetsCtrl($scope, $filter, $routeParams, $location, $http, orderByFilter, appConfig, utilities, assetService, chartService) {
 
 		var path = $location.path();
 		var name = $routeParams.name;
@@ -129,86 +129,15 @@
 
 		}
 		else {
-			var init;
             if(path === "/assets") {
 
-                /*
-                $http.get(appConfig.urls.python_backend + "/get_dex_total_volume")
-                    .then(function (response) {
-                        //console.log(response);
-
-                        var parsed = {
-                            volume_bts: response.data["volume_bts"],
-                            volume_cny: response.data["volume_cny"],
-                            volume_usd: response.data["volume_usd"],
-                            market_cap_bts: response.data["market_cap_bts"].toString().slice(0, -12),
-                            market_cap_cny: response.data["market_cap_cny"].toString().slice(0, -12),
-                            market_cap_usd: response.data["market_cap_usd"].toString().slice(0, -12)
-                        };
-                        $scope.dynamic = parsed;
-
-                    });
-                */
                 assetService.getDexVolume(function (returnData) {
                     $scope.dynamic = returnData;
                 });
 
-                $scope.dex_volume_chart = {};
-                $http.get(appConfig.urls.python_backend + "/daily_volume_dex_dates")
-                    .then(function (response) {
-                        $http.get(appConfig.urls.python_backend + "/daily_volume_dex_data")
-                            .then(function (response2) {
-
-                                $scope.dex_volume_chart.options = {
-                                    animation: true,
-                                    title: {
-                                        text: 'Daily DEX Volume in BTS for the last 30 days'
-                                    },
-                                    tooltip: {
-                                        trigger: 'axis'
-                                    },
-                                    toolbox: {
-                                        show: true,
-                                        feature: {
-                                            saveAsImage: {show: true, title: "save as image"}
-                                        }
-                                    },
-
-                                    xAxis: [
-                                        {
-                                            boundaryGap: true,
-                                            data: response.data
-                                        }
-                                    ],
-                                    yAxis: [
-                                        {
-                                            type: 'value',
-                                            scale: true,
-                                            axisLabel: {
-                                                formatter: function (value) {
-                                                    return value / 1000000 + "M";
-                                                }
-                                            }
-                                        }
-                                    ],
-                                    calculable: true,
-                                    series: [
-                                        {
-                                            name: 'Volume',
-                                            type: 'bar',
-                                            itemStyle: {
-                                                normal: {
-                                                    color: 'green',
-                                                    borderColor: 'green'
-
-                                                }
-                                            },
-                                            data: response2.data
-                                        }
-                                    ]
-                                };
-                            });
-                    });
+                chartService.dailyDEXChart(function (returnData) {
+                    $scope.dex_volume_chart = returnData;
+                });
 
                 assetService.getActiveAssets(function (returnData) {
                     $scope.assets = returnData;
