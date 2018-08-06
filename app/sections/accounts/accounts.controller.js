@@ -2,9 +2,9 @@
     'use strict';
 
     angular.module('app.accounts')
-        .controller('accountsCtrl', ['$scope', '$filter', '$routeParams', '$location', '$http', '$websocket', 'appConfig', 'utilities', accountsCtrl]);
+        .controller('accountsCtrl', ['$scope', '$filter', '$routeParams', '$location', '$http', '$websocket', 'appConfig', 'utilities', 'accountService', accountsCtrl]);
 
-    function accountsCtrl($scope, $filter, $routeParams, $location, $http, $websocket, appConfig, utilities) {
+    function accountsCtrl($scope, $filter, $routeParams, $location, $http, $websocket, appConfig, utilities, accountService) {
 
 		var path = $location.path();
 		var name = $routeParams.name;
@@ -359,8 +359,8 @@
             }
 		}
 		else {
-			var init;
             if(path === "/accounts") {
+                /*
 				$http.get(appConfig.urls.python_backend + "/accounts")
 					.then(function(response) {
 						//console.log(response.data);
@@ -372,6 +372,10 @@
 						}
 						$scope.richs = richs;
 				});
+				*/
+                accountService.getRichList(function (returnData) {
+                    $scope.richs = returnData;
+                });
 
                 utilities.columnsort($scope, "amount", "sortColumn", "sortClass", "reverse", "reverseclass", "column");
 
