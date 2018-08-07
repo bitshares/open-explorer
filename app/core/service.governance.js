@@ -78,6 +78,85 @@
                     witnesses[1] = standby_witnesses;
                     callback(witnesses);
                 });
+            },
+            getWorkers: function(callback) {
+                $http.get(appConfig.urls.python_backend + "/get_workers").then(function(response) {
+                    var workers_current = [];
+                    var workers_expired = [];
+                    var workers = [];
+                    for(var i = 0; i < response.data.length; i++) {
+                        var now = new Date();
+                        var start = new Date(response.data[i][0].work_begin_date);
+                        var end = new Date(response.data[i][0].work_end_date);
+
+                        var votes_for = utilities.formatBalance(response.data[i][0].total_votes_for, 5);
+                        var daily_pay = utilities.formatBalance(response.data[i][0].daily_pay, 5);
+                        var tclass = "";
+
+                        var worker;
+
+                        var have_url = 0;
+                        if(response.data[i][0].url && response.data[i][0].url !== "http://") {
+                            have_url = 1;
+                        }
+
+                        if(now > end) {
+                            tclass = "danger";
+                            worker = {
+                                name: response.data[i][0].name,
+                                daily_pay: daily_pay,
+                                url: response.data[i][0].url,
+                                have_url: have_url,
+                                votes_for: votes_for,
+                                votes_against: response.data[i][0].total_votes_against,
+                                worker: response.data[i][0].worker_account,
+                                start: start.toDateString(),
+                                end: end.toDateString(),
+                                id: response.data[i][0].id,
+                                worker_name: response.data[i][0].worker_account_name,
+                                tclass: tclass, perc: response.data[i][0].perc
+                            };
+                            workers_expired.push(worker);
+                        }
+                        else {
+                            var voting_now = "";
+                            if(now > start) {
+                                if(response.data[i][0].perc >= 50 && response.data[i][0].perc < 100) {
+                                    tclass = "warning";
+                                }
+                                else if(response.data[i][0].perc >= 100) {
+                                    tclass = "success";
+                                }
+                            }
+                            else {
+                                tclass = "";
+                                if(start > now) {
+                                    voting_now = "VOTING NOW!";
+                                }
+                            }
+                            worker = {
+                                name: response.data[i][0].name,
+                                daily_pay: daily_pay,
+                                url: response.data[i][0].url,
+                                have_url: have_url,
+                                votes_for: votes_for,
+                                votes_against: response.data[i][0].total_votes_against,
+                                worker: response.data[i][0].worker_account,
+                                start: start.toDateString(),
+                                end: end.toDateString(),
+                                id: response.data[i][0].id,
+                                worker_name: response.data[i][0].worker_account_name,
+                                tclass: tclass,
+                                perc: response.data[i][0].perc,
+                                voting_now: voting_now
+                            };
+                            workers_current.push(worker);
+                        }
+                    }
+                    workers[0] = workers_current;
+                    workers[1] = workers_expired;
+                    callback(workers);
+                });
             }
         };
     }
