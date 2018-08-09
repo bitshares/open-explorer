@@ -14,8 +14,6 @@
     <div class="row">
 
         <div class="col-md-3">
-
-                <!-- <identicon size='300' username="" ng-attr-username="account.name">{{account.name}}</identicon> -->
             <canvas id="identicon" width="300" height="300" />
         </div>
 
@@ -273,13 +271,13 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">Proxy</div>
                 <div class="panel-body table-responsive">
-                    <div ng-if="is_proxy == 1">
+                    <div ng-if="is_proxy == true">
                         <font size="+1">YES</font>
                         <br>
                         <font size="-1">Votes {{proxy_votes | number:0}}</font>
 
                     </div>
-                    <div ng-if="is_proxy == 0">
+                    <div ng-if="is_proxy != true">
                         <font size="+1">NO</font>
                     </div>
                 </div>
@@ -289,12 +287,12 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">Committee Member</div>
                 <div class="panel-body table-responsive">
-                    <div ng-if="is_committee_member == 1">
+                    <div ng-if="is_committee_member == true">
                         <font size="+1">YES</font>
                         <br>
                         <font size="-1">Votes {{committee_votes | number:0}}</font>
                     </div>
-                    <div ng-if="is_committee_member == 0">
+                    <div ng-if="is_committee_member != true">
                         <font size="+1">NO</font>
                     </div>
                 </div>
@@ -304,12 +302,12 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">Witness</div>
                 <div class="panel-body table-responsive">
-                    <div ng-if="is_witness == 1">
+                    <div ng-if="is_witness == true">
                         <font size="+1">YES</font>
                         <br>
                         <font size="-1">Votes {{witness_votes | number:0}}</font>
                     </div>
-                    <div ng-if="is_witness == 0">
+                    <div ng-if="is_witness != true">
                         <font size="+1">NO</font>
                     </div>
                 </div>
@@ -319,12 +317,12 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">Worker</div>
                 <div class="panel-body table-responsive">
-                    <div ng-if="is_worker == 1">
+                    <div ng-if="is_worker == true">
                         <font size="+1">YES</font>
                         <br>
                         <font size="-1">Votes {{worker_votes | number:0}}</font>
                     </div>
-                    <div ng-if="is_worker == 0">
+                    <div ng-if="is_worker != true">
                         <font size="+1">NO</font>
                     </div>
                 </div>

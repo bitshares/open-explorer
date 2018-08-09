@@ -43,10 +43,10 @@
                             holders: value[8]
                         };
 
+                        /* Todo: create function */
                         var name_lower = value[1].replace("OPEN.", "").toLowerCase();
                         var url = "images/asset-symbols/" + name_lower + ".png";
                         var image_url = "";
-
                         $http({method: 'GET', url: url}).then(function successCallback(response) {
                             image_url = "images/asset-symbols/" + name_lower + ".png";
                             asset.image_url = image_url;
@@ -56,6 +56,7 @@
                             asset.image_url = image_url;
                             assets.push(asset);
                         });
+
                     });
                     callback(assets);
                 });
@@ -112,16 +113,15 @@
                         precision: response.data[0].precision,
                         current_supply: utilities.formatBalance(response.data[0].current_supply, response.data[0].precision),
                         confidential_supply: utilities.formatBalance(response.data[0].confidential_supply, response.data[0].precision),
-                        //holders: response2.data,
                         issuer_name: response.data[0].issuer_name,
                         accumulated_fees: utilities.formatBalance(response.data[0].accumulated_fees, response.data[0].precision),
                         fee_pool: utilities.formatBalance(response.data[0].fee_pool, response.data[0].precision),
                         type: type,
-                        //image_url: image_url,
                         volume: parseInt(response.data[0].volume),
                         market_cap: response.data[0].mcap/100000
                     };
 
+                    /* Todo: create function */
                     var name_lower = response.data[0].symbol.replace("OPEN.", "").toLowerCase();
                     var url = "images/asset-symbols/" + name_lower + ".png";
                     var image_url = "";
@@ -156,8 +156,15 @@
                     var holders_count = response.data;
                     callback(holders_count);
                 });
+            },
+            getAssetNameAndPrecision: function(asset_id, callback) {
+                var results = {};
+                $http.get(appConfig.urls.python_backend + "/get_asset?asset_id=" + asset_id).then(function (response) {
+                    results.symbol = response.data[0].symbol;
+                    results.precision = response.data[0].precision;
+                    callback(results);
+                });
             }
-
         };
     }
 
