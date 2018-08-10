@@ -13,6 +13,16 @@
     <div class="panel panel-primary">
 		<div class="panel-heading">Current Active Committee Members</div>
         <div class="panel-body table-responsive">
+            <form>
+                <div class="col-md-8">
+                </div>
+                <div class="form-group col-md-4">
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                        <input type="text" class="form-control" placeholder="Search for active committee member" ng-model="search">
+                    </div>
+                </div>
+            </form>
             <table class="table">
                 <thead>
                     <tr>
@@ -24,7 +34,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                <tr data-ng-repeat="ac in active_committee | orderBy:column:reverse">
+                <tr data-ng-repeat="ac in active_committee | orderBy:column:reverse | filter:search">
                     <td>{{ac.counter}}</td>
                     <td><a href="#/objects/{{ac.id}}/">{{ac.id}}</a></td>
                     <td><a href="#/accounts/{{ac.committee_member_account}}/">{{ac.committee_member_account_name}}</a></td>
@@ -38,6 +48,16 @@
     <div class="panel panel-primary">
         <div class="panel-heading">Standby Committee Members </div>
         <div class="panel-body table-responsive">
+            <form>
+                <div class="col-md-8">
+                </div>
+                <div class="form-group col-md-4">
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                        <input type="text" class="form-control" placeholder="Search for standby committee member" ng-model="search2">
+                    </div>
+                </div>
+            </form>
             <table class="table">
                 <thead>
                 <tr>
@@ -49,7 +69,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr data-ng-repeat="sc in standby_committee | orderBy:column2:reverse2">
+                <tr data-ng-repeat="sc in standby_committee | orderBy:column2:reverse2 | filter:search2">
                     <td>{{sc.counter}}</td>
                     <td><a href="#/objects/{{sc.id}}/">{{sc.id}}</a></td>
                     <td><a href="#/accounts/{{sc.committee_member_account}}/">{{sc.committee_member_account_name}}</a></td>

@@ -14,6 +14,16 @@
     <div class="panel panel-primary">
 		<div class="panel-heading">Current Workers </div>
         <div class="panel-body table-responsive">
+            <form>
+                <div class="col-md-8">
+                </div>
+                <div class="form-group col-md-4">
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                        <input type="text" class="form-control" placeholder="Search for current workers" ng-model="search">
+                    </div>
+                </div>
+            </form>
             <table class="table">
                 <thead>
                     <tr>
@@ -28,7 +38,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                <tr data-ng-repeat="w in workers_current | orderBy:column:reverse" class="{{w.tclass}}">
+                <tr data-ng-repeat="w in workers_current | orderBy:column:reverse | filter:search" class="{{w.tclass}}">
                     <td><a href='#/objects/{{w.id}}/'>{{w.name}}</a> <span class='label label-info'>{{w.voting_now}}</span></td>
                     <td><a href='#/accounts/{{w.worker}}/'>{{w.worker_name}}</a></td>
                     <td>{{w.start}}</td>
@@ -52,6 +62,16 @@
     <div class="panel panel-primary">
         <div class="panel-heading">Expired Workers </div>
         <div class="panel-body table-responsive">
+            <form>
+                <div class="col-md-8">
+                </div>
+                <div class="form-group col-md-4">
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                        <input type="text" class="form-control" placeholder="Search for expired workers" ng-model="search2">
+                    </div>
+                </div>
+            </form>
             <table class="table">
                 <thead>
                 <tr>
@@ -65,7 +85,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr data-ng-repeat="w in workers_expired | orderBy:column2:reverse2" class="{{w.tclass}}">
+                <tr data-ng-repeat="w in workers_expired | orderBy:column2:reverse2 | filter:search2" class="{{w.tclass}}">
                     <td><a href='#/objects/{{w.id}}/'>{{w.name}}</a></td>
                     <td><a href='#/accounts/{{w.worker}}/'>{{w.worker_name}}</a></td>
                     <td>{{w.start}}</td>

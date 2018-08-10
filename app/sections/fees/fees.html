@@ -1,28 +1,4 @@
 <div class="page page-table" data-ng-controller="feesCtrl">
-<!--
-    <div class="row">
-        <div class="col-md-6">
-
-            <div class="panel panel-success">
-                <div class="panel-heading">Daily Network Fee Distribution</div>
-                <div class="panel-body">
-                    <div data-echarts data-options="radar1.options" style="height: 350px;"></div>
-                </div>
-            </div>
-
-        </div>
-        <div class="col-md-6">
-
-            <div class="panel panel-success">
-                <div class="panel-heading">LifeTime Network Fee Distribution</div>
-                <div class="panel-body">
-                    <div data-echarts data-options="radar2.options" style="height: 350px;"></div>
-                </div>
-            </div>
-
-        </div>
-    </div>
--->
 
     <div class="row">
         <div class="col-md-6">
@@ -39,6 +15,16 @@
     <div class="panel panel-primary">
 		<div class="panel-heading">Fee Schedule </div>
         <div class="panel-body table-responsive">
+            <form>
+                <div class="col-md-8">
+                </div>
+                <div class="form-group col-md-4">
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                        <input type="text" class="form-control" placeholder="Search for a fee" ng-model="search">
+                    </div>
+                </div>
+            </form>
             <table class="table">
                 <thead>
                     <tr>
@@ -50,7 +36,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                <tr data-ng-repeat="fee in fees | orderBy:column:reverse">
+                <tr data-ng-repeat="fee in fees | orderBy:column:reverse | filter:search">
                     <td>{{fee.identifier}}</td>
                     <td><span class="badge badge-primary" style="background-color: #{{fee.color}};">{{fee.operation}}</span></td>
                     <td class="align-right">{{fee.basic_fee | number}}</td>

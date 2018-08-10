@@ -13,6 +13,16 @@
     <div class="panel panel-primary">
 		<div class="panel-heading">Active Witnesses </div>
         <div class="panel-body table-responsive">
+            <form>
+                <div class="col-md-8">
+                </div>
+                <div class="form-group col-md-4">
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                        <input type="text" class="form-control" placeholder="Search for active witness" ng-model="search">
+                    </div>
+                </div>
+            </form>
             <table class="table">
                 <thead>
                     <tr>
@@ -26,7 +36,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                <tr data-ng-repeat="w in active_witnesses | orderBy:column:reverse">
+                <tr data-ng-repeat="w in active_witnesses | orderBy:column:reverse | filter:search">
                     <td>{{w.counter}}</td>
                     <td><a href="#/objects/{{w.id}}/">{{w.id}}</a></td>
                     <td><a href="#/accounts/{{w.witness_account}}/">{{w.witness_account_name}}</a></td>
@@ -42,6 +52,16 @@
     <div class="panel panel-primary">
         <div class="panel-heading">Standby Witnesses </div>
         <div class="panel-body table-responsive">
+            <form>
+                <div class="col-md-8">
+                </div>
+                <div class="form-group col-md-4">
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                        <input type="text" class="form-control" placeholder="Search for standby witness" ng-model="search2">
+                    </div>
+                </div>
+            </form>
             <table class="table">
                 <thead>
                 <tr>
@@ -55,7 +75,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr data-ng-repeat="w in standby_witnesses | orderBy:column2:reverse2">
+                <tr data-ng-repeat="w in standby_witnesses | orderBy:column2:reverse2 | filter:search2">
                     <td>{{w.counter}}</td>
                     <td><a href="#/objects/{{w.id}}/">{{w.id}}</a></td>
                     <td><a href="#/accounts/{{w.witness_account}}/">{{w.witness_account_name}}</a></td>

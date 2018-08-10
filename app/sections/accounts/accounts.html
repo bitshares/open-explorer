@@ -13,6 +13,16 @@
     <div class="panel panel-primary" >
 		<div class="panel-heading" >Rich List</div>
         <div class="panel-body table-responsive">
+            <form>
+                <div class="col-md-8">
+                </div>
+                <div class="form-group col-md-4">
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                        <input type="text" class="form-control" placeholder="Search for account" ng-model="search">
+                    </div>
+                </div>
+            </form>
             <table class="table">
                 <thead>
                     <tr>
@@ -21,7 +31,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                <tr data-ng-repeat="rich in richs | orderBy:column:reverse">
+                <tr data-ng-repeat="rich in richs | orderBy:column:reverse | filter:search">
                     <td><a href='#/accounts/{{rich.id}}/'>{{rich.name}}</a></td>
                     <td class="align-right">{{rich.amount | number: 0}} <a href='#/assets/1.3.0/'>BTS</a></td>
                 </tbody>

@@ -14,6 +14,16 @@
     <div class="panel panel-primary">
 		<div class="panel-heading">Most active Markets</div>
         <div class="panel-body table-responsive">
+            <form>
+                <div class="col-md-8">
+                </div>
+                <div class="form-group col-md-4">
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                        <input type="text" class="form-control" placeholder="Search for a market" ng-model="search">
+                    </div>
+                </div>
+            </form>
             <table class="table">
                 <thead>
                     <tr>
@@ -23,7 +33,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                <tr data-ng-repeat="market in markets | orderBy:column:reverse">
+                <tr data-ng-repeat="market in markets | orderBy:column:reverse | filter:search">
                     <td><a href='#/markets/{{market.pair}}/'>{{market.pair}}</a></td>
                     <td style="text-align:right">{{market.price | number:10}}</td>
 					<td style="text-align:right">{{market.volume | number}}</td>
