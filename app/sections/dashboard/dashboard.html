@@ -106,6 +106,23 @@
                 </tr>
                 </tbody>
             </table>
+            <footer class="table-footer">
+                <div class="row">
+                    <div class="col-md-6 page-num-info">
+                    </div>
+                    <div class="col-md-6 text-right pagination-container">
+                        <ul uib-pagination class="pagination-sm"
+                            ng-model="currentPage"
+                            total-items="total_ops"
+                            max-size="4"
+                            ng-change="currentPage===undefined || select(currentPage)"
+                            items-per-page="20"
+                            rotate="false"
+                            previous-text="&lsaquo;" next-text="&rsaquo;"
+                            boundary-links="true"></ul>
+                    </div>
+                </div>
+            </footer>
         </div>
     </div>
 

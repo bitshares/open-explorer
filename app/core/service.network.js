@@ -43,8 +43,8 @@
                     callback(blocks);
                 });
             },
-            getLastOperations: function(callback) {
-                $http.get(appConfig.urls.elasticsearch_wrapper + "/get_account_history?from_date=now-1h&to_date=now&size=20")
+            getLastOperations: function(limit, from, callback) {
+                $http.get(appConfig.urls.elasticsearch_wrapper + "/get_account_history?size=" + limit + "&from_=" + from)
                     .then(function (response) {
 
                     var lastops = [];

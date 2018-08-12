@@ -112,6 +112,21 @@
                             <td class="align-right">{{balance.limit_orders_counter | number}}</td>
                         </tbody>
                     </table>
+                    <footer class="table-footer">
+                        <div class="row">
+                            <div class="col-md-12 text-right pagination-container">
+                                <ul uib-pagination class="pagination-sm"
+                                    ng-model="currentPageBalance"
+                                    total-items="balance_count"
+                                    max-size="4"
+                                    ng-change="currentPageBalance===undefined || select_balance(currentPageBalance)"
+                                    items-per-page="10"
+                                    rotate="false"
+                                    previous-text="&lsaquo;" next-text="&rsaquo;"
+                                    boundary-links="true"></ul>
+                            </div>
+                        </div>
+                    </footer>
                 </div>
             </div>
 		</div>

@@ -14,10 +14,19 @@
         networkService.getHeader(function (returnData) {
             $scope.dynamic = returnData;
         });
+        
+        $scope.select = function(page_operations) {
+            var page = page_operations -1;
+            var limit = 20;
+            var from = page * limit;
 
-        networkService.getLastOperations(function (returnData) {
-            $scope.operations = returnData;
-        });
+            networkService.getLastOperations(limit, from, function (returnData) {
+                $scope.operations = returnData;
+                $scope.currentPage = page_operations;
+                $scope.total_ops = 10000;
+            });
+        };
+        $scope.select(1);
 
 		chartService.topOperationsChart(function (returnData) {
             $scope.operations_chart = returnData;
