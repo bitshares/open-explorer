@@ -4,4 +4,4 @@ node_modules/
 bower_components/
 tmp
 .DS_Store
-.idea
+.ideaapp/charting_library/
