@@ -53,6 +53,10 @@
                             witness_votes = utilities.formatBalance(response.data[i][0].total_votes, 5);
                             results[0] = is_witness;
                             results[1] = witness_votes;
+                            results[2] = witness_account;
+                            results[3] = response.data[i][0].witness_account_name;
+                            results[4] = response.data[i][0].id;
+                            results[5] = response.data[i][0].url;
                             callback(results);
                             break;
                         }
@@ -71,6 +75,11 @@
                             committee_votes = utilities.formatBalance(response.data[i][0].total_votes, 5);
                             results[0] = is_committee_member;
                             results[1] = committee_votes;
+                            results[2] = committee_member_account;
+                            results[3] = response.data[i][0].committee_member_account_name;
+                            results[4] = response.data[i][0].id;
+                            results[5] = response.data[i][0].url;
+
                             callback(results);
                             break;
                         }

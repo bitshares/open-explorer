@@ -35,10 +35,7 @@
 
                     var total_ops = fullAccount.statistics.total_ops;
                     var lifetime_fees_paid = fullAccount.statistics.lifetime_fees_paid;
-                    var bts_balance = 0;
-                    if(fullAccount.balances[0].length > 0) {
-                        bts_balance = fullAccount.balances[0].balance;
-                    }
+                    var bts_balance = fullAccount.balances[0].balance;
 
                     jdenticon.update("#identicon", sha256(fullAccount.account.name));
 
@@ -98,16 +95,6 @@
                         $scope.active_accounts = returnData;
                     });
 
-                    $scope.select = function(page_operations) {
-                        var page = page_operations -1;
-
-                        accountService.getAccountHistory(name, page, function (returnData) {
-                            $scope.operations = returnData;
-                            $scope.currentPage = page_operations;
-                        });
-                    };
-                    $scope.select(1);
-
                     var account_id = fullAccount.account.id;
                     accountService.checkIfWorker(account_id, function (returnData) {
                         $scope.is_worker = returnData[0];
@@ -116,10 +103,18 @@
                     accountService.checkIfWitness(account_id, function (returnData) {
                         $scope.is_witness = returnData[0];
                         $scope.witness_votes = returnData[1];
+                        $scope.witness_account = returnData[2];
+                        $scope.witness_account_name = returnData[3];
+                        $scope.witness_id = returnData[4];
+                        $scope.witness_url = returnData[5];
                     });
                     accountService.checkIfCommittee(account_id, function (returnData) {
                         $scope.is_committee_member = returnData[0];
                         $scope.committee_votes = returnData[1];
+                        $scope.committee_member_account = returnData[2];
+                        $scope.committee_member_account_name = returnData[3];
+                        $scope.committee_id = returnData[4];
+                        $scope.committee_url = returnData[5];
                     });
                     accountService.checkIfProxy(account_id, function (returnData) {
                         $scope.is_proxy = returnData[0];
@@ -147,6 +142,18 @@
                         });
                     };
                     $scope.select_referers(1);
+
+
+                    $scope.select = function(page_operations) {
+                        var page = page_operations -1;
+
+                        accountService.getAccountHistory(name, page, function (returnData) {
+                            $scope.operations = returnData;
+                            $scope.currentPage = page_operations;
+                        });
+                    };
+                    $scope.select(1);
+
 
                     utilities.columnsort($scope, "balance", "sortColumn", "sortClass", "reverse", "reverseclass", "column");
 
