@@ -7,7 +7,7 @@
 
     angular.module('app').config(['AnalyticsProvider', function (AnalyticsProvider) {
         // Add configuration code as desired
-        AnalyticsProvider.setAccount('UA-101388661-2');  //UU-XXXXXXX-X should be your tracking code
+        AnalyticsProvider.setAccount('UA-101388661-3');  //UU-XXXXXXX-X should be your tracking code
     }]).run(['Analytics', function(Analytics) { }]);
 
     function appConfig() {
@@ -47,11 +47,10 @@
         };
 
         var urls = {
-            websocket: "ws://23.94.69.140:8090/ws",
-            python_backend: "http://185.208.208.184:5000",
-            //python_backend: "http://95.216.32.252:5010",
-            elasticsearch_wrapper: "http://95.216.32.252:5000", // clockwork
-            udf_wrapper: "http://185.208.208.184:5001"
+            websocket: "wss://node.testnet.bitshares.eu/ws",
+            python_backend: "http://148.251.10.231:5001",
+            elasticsearch_wrapper: "http://148.251.10.231:5000",
+            udf_wrapper: "http://148.251.10.231:5003"
         };
 
         return {
