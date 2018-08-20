@@ -177,7 +177,6 @@
                         call_orders_counter++;
                     }
                 });
-                //if (balance === 0) { return; }
                 var balanceline = {
                     asset: balance.asset_type,
                     asset_name: symbol,

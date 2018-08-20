@@ -124,7 +124,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="panel panel-default">
-                                        <div class="panel-heading"> Balances</div>
+                                        <div class="panel-heading"> {{balance_count}} Asset Balances</div>
                                         <div class="panel-body table-responsive">
                                             <form>
                                                 <div class="col-md-6">
@@ -142,8 +142,6 @@
                                                     <th ng-click='sortColumn("id")' ng-class='sortClass("id")'>ID</th>
                                                     <th ng-click='sortColumn("asset_name")' ng-class='sortClass("asset_name")'>Asset</th>
                                                     <th class="align-right" ng-click='sortColumn("balance")' ng-class='sortClass("balance")'>Balance</th>
-                                                    <!-- <th class="align-right" ng-click='sortColumn("call_orders_counter")' ng-class='sortClass("call_orders_counter")'>Open Call Orders</th>
-                                                    <th class="align-right" ng-click='sortColumn("limit_orders_counter")' ng-class='sortClass("limit_orders_counter")'>Open Limit Orders</th> -->
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -151,8 +149,6 @@
                                                     <td><a href="#/objects/{{balance.id}}/">{{balance.id}}</a></td>
                                                     <td><a href="#/assets/{{balance.asset}}/">{{balance.asset_name}}</a></td>
                                                     <td class="align-right">{{balance.balance | number}}</td>
-                                                    <!-- <td class="align-right">{{balance.call_orders_counter | number}}</td>
-                                                    <td class="align-right">{{balance.limit_orders_counter | number}}</td> -->
                                                 </tbody>
                                             </table>
                                             <footer class="table-footer">
@@ -162,7 +158,7 @@
                                                             ng-model="currentPageBalance"
                                                             total-items="balance_count"
                                                             max-size="4"
-                                                            ng-change="currentPageBalance===undefined || select_balance(currentPageBalance)"
+                                                            ng-change="currentPageBalance===undefined || select_balances(currentPageBalance)"
                                                             items-per-page="10"
                                                             rotate="false"
                                                             previous-text="&lsaquo;" next-text="&rsaquo;"

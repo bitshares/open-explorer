@@ -60,20 +60,39 @@
                         };
                     });
 
-                    var balances = [];
-                    angular.forEach(fullAccount.balances, function (value, key) {
-                        assetService.getAssetNameAndPrecision(value.asset_type, function (returnData) {
 
-                            accountService.parseBalance(fullAccount.limit_orders,
-                                fullAccount.call_orders,
-                                value,
-                                returnData.precision,
-                                returnData.symbol, function (returnData2) {
-                                    balances.push(returnData2);
+                    $scope.select_balances = function(page_balances) {
+                        var page = page_balances -1;
+                        var balances = [];
+                        var total_counter = 0;
+                        var limit_counter = 0;
+                        var limit = 10;
+                        var start = page * limit;
+                        angular.forEach(fullAccount.balances, function (value, key) {
+
+                            if(total_counter >= start && limit_counter <= limit) {
+                                //if (value.balance === 0) { return; }
+                                //console.log(value);
+                                assetService.getAssetNameAndPrecision(value.asset_type, function (returnData) {
+                                    accountService.parseBalance(fullAccount.limit_orders,
+                                        fullAccount.call_orders,
+                                        value,
+                                        returnData.precision,
+                                        returnData.symbol, function (returnData2) {
+                                            balances.push(returnData2);
+
+                                        });
                                 });
+                                ++limit_counter;
+                            }
+                            ++total_counter;
                         });
-                    });
-                    $scope.balances = balances;
+                        $scope.balances = balances;
+                        $scope.currentPageBalance = page_balances;
+                        $scope.balance_count = total_counter;
+
+                    };
+                    $scope.select_balances(1);
 
                     accountService.parseUIAs(fullAccount.assets, function (returnData) {
                         $scope.user_issued_assets = returnData;
