@@ -213,7 +213,7 @@
 
                     var object = {
                         raw: response.data,
-                        name: name,
+                        name: object_id,
                         type: object_type
                     };
                     callback(object);
