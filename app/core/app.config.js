@@ -47,10 +47,9 @@
         };
 
         var urls = {
-            websocket: "ws://23.94.69.140:8090/ws",
+            websocket: "ws://bts-seoul.clockwork.gr/ws",
             python_backend: "http://185.208.208.184:5000",
-            //python_backend: "http://95.216.32.252:5010",
-            elasticsearch_wrapper: "http://95.216.32.252:5000", // clockwork
+            elasticsearch_wrapper: "https://eswrapper.bitshares.eu", // infrastructure
             udf_wrapper: "http://185.208.208.184:5001"
         };
 
@@ -59,7 +58,7 @@
             main: main,
             color: color,
             urls: urls
-        }
+        };
     }
 
 
