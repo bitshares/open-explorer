@@ -49,7 +49,8 @@
         var urls = {
             websocket: "ws://bts-seoul.clockwork.gr/ws",
             python_backend: "http://185.208.208.184:5000",
-            elasticsearch_wrapper: "https://eswrapper.bitshares.eu", // infrastructure
+            //elasticsearch_wrapper: "https://eswrapper.bitshares.eu", // infrastructure
+            elasticsearch_wrapper: "https://wrapper.elasticsearch.bitshares.ws", // infrastructure
             udf_wrapper: "http://185.208.208.184:5001"
         };
 
