@@ -487,15 +487,15 @@
                     color = "37B68Cc";
                 }
                 else if(opType === 29) {
-                    name = "COMITEE MEMBER CREATE";
+                    name = "COMMITTEE MEMBER CREATE";
                     color = "37B68C";
                 }
                 else if(opType === 30) {
-                    name = "COMITEE MEMBER UPDATE";
+                    name = "COMMITTEE MEMBER UPDATE";
                     color = "6712E7";
                 }
                 else if(opType === 31) {
-                    name = "COMITEE MEMBER UPDATE GLOBAL PARAMETERS";
+                    name = "COMMITTEE MEMBER UPDATE GLOBAL PARAMETERS";
                     color = "B637B6";
                 }
                 else if(opType === 32) {
@@ -572,7 +572,7 @@
                 else if (parts[0] == "1" && parts[1] == "4")
                     object_type = "FORCE SETTLEMENT";
                 else if (parts[0] == "1" && parts[1] == "5")
-                    object_type = "COMMITE MEMBER";
+                    object_type = "COMMITTEE MEMBER";
                 else if (parts[0] == "1" && parts[1] == "6")
                     object_type = "WITNESS";
                 else if (parts[0] == "1" && parts[1] == "7")
@@ -612,7 +612,7 @@
                 else if (parts[0] == "2" && parts[1] == "9")
                     object_type = "ACCOUNT TRANSACTION HISTORY";
                 else if (parts[0] == "2" && parts[1] == "10")
-                    object_type = "BLINDER BALANCE";
+                    object_type = "BLINDED BALANCE";
                 else if (parts[0] == "2" && parts[1] == "11")
                     object_type = "CHAIN PROPERTY";
                 else if (parts[0] == "2" && parts[1] == "12")
