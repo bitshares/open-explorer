@@ -164,7 +164,7 @@
                 $http.get(appConfig.urls.python_backend + "/operation_full_elastic?operation_id=" + operation).then(function(response) {
                     var raw_obj = response.data[0].op[1];
                     var op_type =  utilities.operationType(response.data[0].op[0]);
-
+                    
                     utilities.opText(appConfig, $http, response.data[0].op[0], raw_obj, function(returnData) {
                         op = {
                             name: operation,
@@ -177,7 +177,8 @@
                             color: op_type[1],
                             raw: raw_obj,
                             operation_text: returnData,
-                            block_time: response.data[0].block_time
+                            block_time: response.data[0].block_time,
+                            trx_id: response.data[0].trx_id
                         };
                         callback(op);
                     });
