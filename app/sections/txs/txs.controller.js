@@ -18,6 +18,7 @@
 
                 networkService.getTransactionOperations(name, function (returnData) {
                     $scope.operations = returnData;
+                    $scope.count = returnData.length;
                 });
             }
         }

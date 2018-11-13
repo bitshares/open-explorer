@@ -164,7 +164,7 @@
                 $http.get(appConfig.urls.python_backend + "/operation_full_elastic?operation_id=" + operation).then(function(response) {
                     var raw_obj = response.data[0].op[1];
                     var op_type =  utilities.operationType(response.data[0].op[0]);
-                    
+
                     utilities.opText(appConfig, $http, response.data[0].op[0], raw_obj, function(returnData) {
                         op = {
                             name: operation,
