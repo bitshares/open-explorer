@@ -34,8 +34,8 @@
                     var from = operation.from;
                     var to = operation.to;
 
-                    var amount_asset_id = operation.amount.asset_id;
-                    var amount_amount = operation.amount.amount;
+                    var amount_asset_id = operation.amount_.asset_id;
+                    var amount_amount = operation.amount_.amount;
 
                     operation_account = from;
 

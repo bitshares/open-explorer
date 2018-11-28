@@ -163,10 +163,10 @@
             getOperation: function(operation, callback) {
                 var op;
                 $http.get(appConfig.urls.python_backend + "/operation_full_elastic?operation_id=" + operation).then(function(response) {
-                    var raw_obj = response.data[0].op[1];
-                    var op_type =  utilities.operationType(response.data[0].op[0]);
+                    var raw_obj = response.data[0].op;
+                    var op_type =  utilities.operationType(response.data[0].op_type);
 
-                    utilities.opText(appConfig, $http, response.data[0].op[0], raw_obj, function(returnData) {
+                    utilities.opText(appConfig, $http, response.data[0].op_type, raw_obj, function(returnData) {
                         op = {
                             name: operation,
                             block_num: response.data[0].block_num,
