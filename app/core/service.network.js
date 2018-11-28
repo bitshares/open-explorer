@@ -55,9 +55,10 @@
                         operation.operation_id = value.account_history.operation_id;
                         operation.time = value.block_data.block_time;
 
-                        var parsed_op = JSON.parse(value.operation_history.op);
+                        //var parsed_op = JSON.parse(value.operation_history.op);
+                        var parsed_op = value.operation_history.op_object;
 
-                        utilities.opText(appConfig, $http, value.operation_type, parsed_op[1], function(returnData) {
+                        utilities.opText(appConfig, $http, value.operation_type, parsed_op, function(returnData) {
                             operation.operation_text = returnData;
                         });
 
@@ -122,8 +123,8 @@
                             op_type: op_type
                         };
 
-                        var opArray = JSON.parse(value.operation_history.op);
-                        utilities.opText(appConfig, $http, opArray[0], opArray[1], function (returnData) {
+                        var opArray = value.operation_history.op_object;
+                        utilities.opText(appConfig, $http, value.operation_type, opArray, function (returnData) {
                             parsed.operation_text = returnData;
                         });
                         operations.push(parsed);
