@@ -133,6 +133,16 @@
                     callback(full_account);
                 });
             },
+            getTotalAccountOps: function(account_id, callback) {
+                $http.get(appConfig.urls.elasticsearch_wrapper + "/get_account_history?account_id="+account_id+"&from_date=2015-10-10&to_date=now&type=count")
+                    .then(function(response) {
+                        var count = 0;
+                        angular.forEach(response.data, function (value, key) {
+                            count = count + value.doc_count;
+                        });
+                    callback(count);
+                });
+            },
             getAccountName: function(account_id, callback) {
                 var account_name = "";
                 $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + account_id).then(function (response) {

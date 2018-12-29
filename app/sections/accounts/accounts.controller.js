@@ -33,33 +33,36 @@
 
                     // TODO: get margin positions, call already in the api.py
 
-                    var total_ops = fullAccount.statistics.total_ops;
                     var lifetime_fees_paid = fullAccount.statistics.lifetime_fees_paid;
                     var bts_balance = fullAccount.balances[0].balance;
 
                     jdenticon.update("#identicon", sha256(fullAccount.account.name));
 
-                    accountService.getAccountName(fullAccount.account.options.voting_account, function (returnData) {
+                    // get total ops from ES
+                    accountService.getTotalAccountOps(fullAccount.account.id, function (returnDataTotalOps) {
+                        var total_ops = returnDataTotalOps;
 
-                        $scope.account = {
-                            name: fullAccount.account.name,
-                            id: fullAccount.account.id,
-                            referer: fullAccount.referrer_name,
-                            registrar: fullAccount.registrar_name,
-                            statistics: fullAccount.account.statistics,
-                            cashback: cashback_balance_id,
-                            cashback_balance: utilities.formatBalance(cashback_balance_balance, 5),
-                            lifetime: lifetime,
-                            total_ops: total_ops,
-                            lifetime_fees_paid: parseInt(utilities.formatBalance(lifetime_fees_paid, 5)),
-                            bts_balance: parseInt(utilities.formatBalance(bts_balance, 5)),
-                            vesting: vesting_balances,
-                            memo_key: fullAccount.account.options.memo_key,
-                            voting_account_id: fullAccount.account.options.voting_account,
-                            voting_account_name: returnData
-                        };
+                        accountService.getAccountName(fullAccount.account.options.voting_account, function (returnData) {
+
+                            $scope.account = {
+                                name: fullAccount.account.name,
+                                id: fullAccount.account.id,
+                                referer: fullAccount.referrer_name,
+                                registrar: fullAccount.registrar_name,
+                                statistics: fullAccount.account.statistics,
+                                cashback: cashback_balance_id,
+                                cashback_balance: utilities.formatBalance(cashback_balance_balance, 5),
+                                lifetime: lifetime,
+                                total_ops: total_ops,
+                                lifetime_fees_paid: parseInt(utilities.formatBalance(lifetime_fees_paid, 5)),
+                                bts_balance: parseInt(utilities.formatBalance(bts_balance, 5)),
+                                vesting: vesting_balances,
+                                memo_key: fullAccount.account.options.memo_key,
+                                voting_account_id: fullAccount.account.options.voting_account,
+                                voting_account_name: returnData
+                            };
+                        });
                     });
-
 
                     $scope.select_balances = function(page_balances) {
                         var page = page_balances -1;
