@@ -118,7 +118,10 @@
                         fee_pool: utilities.formatBalance(response.data[0].fee_pool, response.data[0].precision),
                         type: type,
                         volume: parseInt(response.data[0].volume),
-                        market_cap: response.data[0].mcap/100000
+                        market_cap: response.data[0].mcap/100000,
+                        bitasset_data_id: response.data[0].bitasset_data_id,
+                        dynamic_asset_data_id: response.data[0].dynamic_asset_data_id
+
                     };
 
                     /* Todo: create function */

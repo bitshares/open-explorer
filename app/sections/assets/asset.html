@@ -34,6 +34,14 @@
                         <span class="badge" style="background-color: #FFFFFF; color: #000000">{{data.holders | number}}</span>
                         Holders
                     </li>
+                    <li class="list-group-item">
+                        <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#/objects/{{data.dynamic_asset_data_id}}/'>{{data.dynamic_asset_data_id}}</a></span>
+                        Dynamic Asset
+                    </li>
+                    <li class="list-group-item" ng-if="data.bitasset_data_id">
+                        <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#/objects/{{data.bitasset_data_id}}/'>{{data.bitasset_data_id}}</a></span>
+                        Bitasset Data
+                    </li>
                 </ul>
             </div>
             <h2>{{data.symbol}}</h2>
