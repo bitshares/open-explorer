@@ -48,10 +48,13 @@
 
         var urls = {
             websocket: "ws://bts-seoul.clockwork.gr/ws",
-            python_backend: "http://185.208.208.184:5000",
+            //python_backend: "http://185.208.208.184:5000",
+            python_backend: "/api",
             //elasticsearch_wrapper: "https://eswrapper.bitshares.eu", // infrastructure
-            elasticsearch_wrapper: "http://bts-es.clockwork.gr:5000", // clockwork
-            udf_wrapper: "http://185.208.208.184:5001"
+            //elasticsearch_wrapper: "http://bts-es.clockwork.gr:5000", // clockwork
+            elasticsearch_wrapper: "/elastic",
+            //udf_wrapper: "http://185.208.208.184:5001"
+            udf_wrapper: "/udf"
         };
 
         return {
