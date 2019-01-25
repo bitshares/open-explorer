@@ -358,13 +358,15 @@
                                             <th>ID</th>
                                             <th>Type</th>
                                             <th>Account</th>
+                                            <th>Total Votes</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr data-ng-repeat="v in votes">
-                                            <td><a href="#/objects/{{v.id}}/">{{v.id}}</a></td>
+                                            <td><a href="#/objects/{{v.id}}/">{{v.id}}</a> <font size="-1"> - {{v.votable_object_name}}</font></td>
                                             <td>{{v.type}}</td>
-                                            <td><a href="#/accounts/{{v.account}}/">{{v.account}}</a></td>
+                                            <td><a href="#/accounts/{{v.account}}/">{{v.account_name}}</a></td>
+                                            <td>{{v.votes_for | number}}</td>
                                         </tr>
                                         </tbody>
                                     </table>

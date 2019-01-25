@@ -203,28 +203,39 @@
                 angular.forEach(votes, function (value, key) {
                     var type = "";
                     var account;
+                    var votable_object_name = "";
+                    var votes_for = 0;
                     if (value.id.substr(0, 4) === "1.6.") {
-                        type = "witness";
+                        type = "Witness";
                         account = value.witness_account;
+                        votes_for = value.total_votes;
                     }
                     else if (value.id.substr(0, 4) === "1.5.") {
-                        type = "committee member";
+                        type = "Committee Member";
                         account = value.committee_member_account;
+                        votes_for = value.total_votes;
                     }
                     else if (value.id.substr(0, 4) === "1.14") {
-                        type = "worker";
+                        type = "Worker";
                         account = value.worker_account;
+                        votable_object_name = value.name;
+                        votes_for = value.total_votes_for;
                     }
                     else {
-                        type = "other";
-                        account = "no name";
+                        type = "Other";
+                        account = "No name";
                     }
-                    var parsed = {
-                        id: value.id,
-                        type: type,
-                        account: account
-                    };
-                    results.push(parsed);
+                    $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + account).then(function (response) {
+                        var parsed = {
+                            id: value.id,
+                            type: type,
+                            account: account,
+                            account_name: response.data,
+                            votable_object_name: votable_object_name,
+                            votes_for: votes_for
+                        };
+                        results.push(parsed);
+                    });
                 });
                 callback(results);
             },
