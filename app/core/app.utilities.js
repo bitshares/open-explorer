@@ -387,7 +387,7 @@
                     color = "E96562";
                 }
                 else if(opType === 4) {
-                    name = "FILL ORDER (VIRTUAL)";
+                    name = "FILL ORDER";
                     color = "008000";
                 }
                 else if(opType === 5) {
@@ -440,11 +440,11 @@
                 }
                 else if(opType === 17) {
                     name = "ASSET SETTLE";
-                    color = "FFFFAA";
+                    color = "F1CFBB";
                 }
                 else if(opType === 18) {
                     name = "ASSET GLOBAL SETTLE";
-                    color = "FFFF7F";
+                    color = "F1DFCC";
                 }
                 else if(opType === 19) {
                     name = "ASSET PUBLISH FEED";
@@ -516,7 +516,7 @@
                 }
                 else if(opType === 36) {
                     name = "ASSERT";
-                    color = "FFFFFF";
+                    color = "D1EEFF";
                 }
                 else if(opType === 37) {
                     name = "BALANCE CLAIM";
@@ -549,6 +549,22 @@
                 else if(opType === 44) {
                     name = "FBA DISTRIBUTE";
                     color = "8808B2";
+                }
+                else if(opType === 45) {
+                    name = "BID COLLATERAL";
+                    color = "6012B1";
+                }
+                else if(opType === 46) {
+                    name = "EXECUTE BID";
+                    color = "1D04BB";
+                }
+                else if(opType === 47) {
+                    name = "ASSET CLAIM POOL";
+                    color = "AAF654";
+                }
+                else if(opType === 48) {
+                    name = "ASSET UPDATE ISSUER";
+                    color = "AB7781";
                 }
 
                 results[0] = name;
