@@ -359,7 +359,44 @@
                                 });
                         });
                 }
+                else if (operation_type === 45) { // BID COLLATERAL
+                    operation_account = operation.bidder;
 
+                    var additional_collateral_amount = operation.additional_collateral.amount;
+                    var additional_collateral_asset_id = operation.additional_collateral.asset_id;
+
+                    var debt_covered_amount = operation.debt_covered.amount;
+                    var debt_covered_asset_id = operation.debt_covered.asset_id;
+
+                    $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + operation_account)
+                        .then(function (response_name) {
+
+                            $http.get(appConfig.urls.python_backend + "/get_asset?asset_id=" + additional_collateral_asset_id)
+                                .then(function (additional_collateral_asset) {
+
+                                    var asset_name1 = additional_collateral_asset.data[0].symbol;
+                                    var asset_precision1 = additional_collateral_asset.data[0].precision;
+                                    var divideby1 = Math.pow(10, asset_precision1);
+                                    var amount1 = Number(additional_collateral_amount / divideby1);
+
+                                    $http.get(appConfig.urls.python_backend + "/get_asset?asset_id=" + debt_covered_asset_id)
+                                        .then(function (debt_covered_asset) {
+
+
+                                            var asset_name2 = debt_covered_asset.data[0].symbol;
+                                            var asset_precision2 = debt_covered_asset.data[0].precision;
+                                            var divideby2 = Math.pow(10, asset_precision2);
+                                            var amount2 = Number(debt_covered_amount / divideby2);
+
+                                            operation_text = "<a href='/#/accounts/" + operation_account + "'>" + response_name.data +
+                                                "</a> bid " + formatNumber(amount1) + " <a href='/#/assets/" + additional_collateral_asset_id + "'>" +
+                                                asset_name1 + "</a> for " + formatNumber(amount2) + " <a href='/#/assets/" + debt_covered_asset_id + "'>" +
+                                                asset_name2 + "</a>";
+                                            callback(operation_text);
+                                        });
+                                });
+                        });
+                }
                 else {
                     operation_text = "";
                     callback(operation_text);
