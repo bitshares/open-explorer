@@ -311,10 +311,10 @@
                 }
 
                 else if (operation_type === 33) {
-                    operation_account = operation.owner;
+                    operation_account = operation.owner_;
 
-                    var amount_amount = operation.amount.amount;
-                    var amount_asset_id = operation.amount.asset_id;
+                    var amount_amount = operation.amount_.amount;
+                    var amount_asset_id = operation.amount_.asset_id;
 
                     $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + operation_account)
                         .then(function (response_name) {
@@ -328,7 +328,7 @@
                                     var amount = Number(amount_amount / divideby);
 
                                     operation_text = "<a href='/#/accounts/" + operation_account + "'>" + response_name.data +
-                                        "</a> withdrew vesting balance of " + formatNumber(amount) + " <a href='/#/assets/" + amount_to_reserve_asset_id + "'>" +
+                                        "</a> withdrew vesting balance of " + formatNumber(amount) + " <a href='/#/assets/" + amount_asset_id + "'>" +
                                         asset_name + "</a>";
                                     callback(operation_text);
                                 });
