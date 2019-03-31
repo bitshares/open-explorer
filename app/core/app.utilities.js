@@ -436,7 +436,7 @@
                     color = "FF007F";
                 }
                 else if(opType === 7) {
-                    name = "ACCOUNT WHIELIST";
+                    name = "ACCOUNT WHITELIST";
                     color = "FB8817";
                 }
                 else if(opType === 8) {
