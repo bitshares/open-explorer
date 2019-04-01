@@ -215,6 +215,25 @@
                             callback(operation_text);
                     });
                 }
+                else if (operation_type === 7) { // ACCOUNT WHITELIST
+                    operation_account = operation.authorizing_account;
+                    var account_to_list = operation.account_to_list;
+                    var new_listing = operation.new_listing;
+                    var type = "whitelisted";
+                    if(new_listing == 2) type = "blacklisted";
+
+                    $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + operation_account)
+                        .then(function (response_name) {
+
+                        $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + account_to_list)
+                            .then(function (response_name2) {
+
+                            operation_text = "<a href='/#/accounts/" + operation_account + "'>" + response_name.data + "</a> " +
+                                type + " the account " + "<a href='/#/accounts/" + account_to_list + "'>" + response_name2.data + "</a>";
+                            callback(operation_text);
+                        });
+                    });
+                }
                 else if (operation_type === 14) {
                     var issuer = operation.issuer;
                     var issue_to_account =  operation.issue_to_account;
