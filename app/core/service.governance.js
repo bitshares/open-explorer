@@ -15,7 +15,7 @@
                 networkService.getHeader(function (returnData) {
                     var committee_count = returnData.committee_count;
 
-                    $http.get(appConfig.urls.python_backend + "/get_committee_members").then(function(response) {
+                    $http.get(appConfig.urls.python_backend + "/committee_members").then(function(response) {
                         var counter = 1;
                         angular.forEach(response.data, function(value, key) {
                             var parsed = {
@@ -49,19 +49,19 @@
                 networkService.getHeader(function (returnData) {
                     var witness_count = returnData.witness_count;
 
-                    $http.get(appConfig.urls.python_backend + "/get_witnesses").then(function(response) {
+                    $http.get(appConfig.urls.python_backend + "/witnesses").then(function(response) {
                         var counter = 1;
                         angular.forEach(response.data, function(value, key) {
                             var parsed = {
-                                id: value[0].id,
-                                last_aslot: value[0].last_aslot,
-                                last_confirmed_block_num: value[0].last_confirmed_block_num,
-                                pay_vb: value[0].pay_vb,
-                                total_missed: value[0].total_missed,
-                                total_votes: utilities.formatBalance(value[0].total_votes, 5),
-                                url: value[0].url,
-                                witness_account: value[0].witness_account,
-                                witness_account_name: value[0].witness_account_name,
+                                id: value.id,
+                                last_aslot: value.last_aslot,
+                                last_confirmed_block_num: value.last_confirmed_block_num,
+                                pay_vb: value.pay_vb,
+                                total_missed: value.total_missed,
+                                total_votes: utilities.formatBalance(value.total_votes, 5),
+                                url: value.url,
+                                witness_account: value.witness_account,
+                                witness_account_name: value.witness_account_name,
                                 counter: counter
                             };
 
@@ -80,7 +80,7 @@
                 });
             },
             getWorkers: function(callback) {
-                $http.get(appConfig.urls.python_backend + "/get_workers").then(function(response) {
+                $http.get(appConfig.urls.python_backend + "/workers").then(function(response) {
                     var workers_current = [];
                     var workers_expired = [];
                     var workers = [];
@@ -165,11 +165,11 @@
                     angular.forEach(response.data, function(value, key) {
                         var parsed = {
                             position: counter,
-                            account: value[0],
-                            account_name: value[1],
-                            power: value[2],
-                            followers: value[3],
-                            perc: value[4]
+                            account: value.id,
+                            account_name: value.name,
+                            power: value.bts_weight,
+                            followers: value.followers,
+                            perc: value.bts_weight_percentage
                         };
                         if(counter <= 10) {
                             proxies.push(parsed);
@@ -184,8 +184,8 @@
                     var witnesses = [];
                     angular.forEach(response2.data, function (value, key) {
                         var parsed = {
-                            id: value[1],
-                            witness_account_name: value[0],
+                            id: value.worker_id,
+                            witness_account_name: value.worker_account_name,
                             proxy1: value[2].split(":")[1],
                             proxy2: value[3].split(":")[1],
                             proxy3: value[4].split(":")[1],

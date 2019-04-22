@@ -84,7 +84,7 @@
                 }
             },
             topOperationsChart: function(callback) {
-                $http.get(appConfig.urls.elasticsearch_wrapper + "/get_account_history?from_date=now-1d&to_date=now&type=aggs&agg_field=operation_type&size=10")
+                $http.get(appConfig.urls.elasticsearch_wrapper + "/es/account_history?from_date=now-1d&to_date=now&type=aggs&agg_field=operation_type&size=10")
                     .then(function(response) {
 
                     var legends = [];
@@ -171,13 +171,13 @@
                             orient: 'vertical',
                             x: 'left',
                             data: [
-                                response.data[0][1],
-                                response.data[1][1],
-                                response.data[2][1],
-                                response.data[3][1],
-                                response.data[4][1],
-                                response.data[5][1],
-                                response.data[6][1]
+                                response.data[0].name,
+                                response.data[1].name,
+                                response.data[2].name,
+                                response.data[3].name,
+                                response.data[4].name,
+                                response.data[5].name,
+                                response.data[6].name
                             ]
                         },
                         toolbox: {
@@ -213,13 +213,13 @@
                                 }
                             },
                             data: [
-                                {value: response.data[0][2], name: response.data[0][1]},
-                                {value: response.data[1][2], name: response.data[1][1]},
-                                {value: response.data[2][2], name: response.data[2][1]},
-                                {value: response.data[3][2], name: response.data[3][1]},
-                                {value: response.data[4][2], name: response.data[4][1]},
-                                {value: response.data[5][2], name: response.data[5][1]},
-                                {value: response.data[6][2], name: response.data[6][1]}
+                                {value: response.data[0].bts_weight, name: response.data[0].name},
+                                {value: response.data[1].bts_weight, name: response.data[1].name},
+                                {value: response.data[2].bts_weight, name: response.data[2].name},
+                                {value: response.data[3].bts_weight, name: response.data[3].name},
+                                {value: response.data[4].bts_weight, name: response.data[4].name},
+                                {value: response.data[5].bts_weight, name: response.data[5].name},
+                                {value: response.data[6].bts_weight, name: response.data[6].name}
                             ]
                         }]
                     };
@@ -240,13 +240,13 @@
                             orient: 'vertical',
                             x: 'left',
                             data: [
-                                response.data[0][0],
-                                response.data[1][0],
-                                response.data[2][0],
-                                response.data[3][0],
-                                response.data[4][0],
-                                response.data[5][0],
-                                response.data[6][0]
+                                response.data[0].pair,
+                                response.data[1].pair,
+                                response.data[2].pair,
+                                response.data[3].pair,
+                                response.data[4].pair,
+                                response.data[5].pair,
+                                response.data[6].pair
                             ]
                         },
                         toolbox: {
@@ -282,13 +282,13 @@
                                 }
                             },
                             data: [
-                                {value: response.data[0][1], name: response.data[0][0]},
-                                {value: response.data[1][1], name: response.data[1][0]},
-                                {value: response.data[2][1], name: response.data[2][0]},
-                                {value: response.data[3][1], name: response.data[3][0]},
-                                {value: response.data[4][1], name: response.data[4][0]},
-                                {value: response.data[5][1], name: response.data[5][0]},
-                                {value: response.data[6][1], name: response.data[6][0]}
+                                {value: response.data[0]["24h_volume"], name: response.data[0].pair},
+                                {value: response.data[1]["24h_volume"], name: response.data[1].pair},
+                                {value: response.data[2]["24h_volume"], name: response.data[2].pair},
+                                {value: response.data[3]["24h_volume"], name: response.data[3].pair},
+                                {value: response.data[4]["24h_volume"], name: response.data[4].pair},
+                                {value: response.data[5]["24h_volume"], name: response.data[5].pair},
+                                {value: response.data[6]["24h_volume"], name: response.data[6].pair}
                             ]
                         }]
                     };
@@ -308,13 +308,13 @@
                             orient: 'vertical',
                             x: 'left',
                             data: [
-                                response.data[0][0],
-                                response.data[1][0],
-                                response.data[2][0],
-                                response.data[3][0],
-                                response.data[4][0],
-                                response.data[5][0],
-                                response.data[6][0]
+                                response.data[0].asset_name,
+                                response.data[1].asset_name,
+                                response.data[2].asset_name,
+                                response.data[3].asset_name,
+                                response.data[4].asset_name,
+                                response.data[5].asset_name,
+                                response.data[6].asset_name
                             ]
                         },
                         toolbox: {
@@ -349,13 +349,13 @@
                                 }
                             },
                             data: [
-                                {value: response.data[0][1], name: response.data[0][0]},
-                                {value: response.data[1][1], name: response.data[1][0]},
-                                {value: response.data[2][1], name: response.data[2][0]},
-                                {value: response.data[3][1], name: response.data[3][0]},
-                                {value: response.data[4][1], name: response.data[4][0]},
-                                {value: response.data[5][1], name: response.data[5][0]},
-                                {value: response.data[6][1], name: response.data[6][0]}
+                                {value: response.data[0]["24h_volume"], name: response.data[0].asset_name},
+                                {value: response.data[1]["24h_volume"], name: response.data[1].asset_name},
+                                {value: response.data[2]["24h_volume"], name: response.data[2].asset_name},
+                                {value: response.data[3]["24h_volume"], name: response.data[3].asset_name},
+                                {value: response.data[4]["24h_volume"], name: response.data[4].asset_name},
+                                {value: response.data[5]["24h_volume"], name: response.data[5].asset_name},
+                                {value: response.data[6]["24h_volume"], name: response.data[6].asset_name}
                             ]
                         }]
                     };
@@ -375,13 +375,13 @@
                             orient: 'vertical',
                             x: 'left',
                             data: [
-                                response.data[0][0],
-                                response.data[1][0],
-                                response.data[2][0],
-                                response.data[3][0],
-                                response.data[4][0],
-                                response.data[5][0],
-                                response.data[6][0]
+                                response.data[0].asset_name,
+                                response.data[1].asset_name,
+                                response.data[2].asset_name,
+                                response.data[3].asset_name,
+                                response.data[4].asset_name,
+                                response.data[5].asset_name,
+                                response.data[6].asset_name
                             ]
                         },
                         toolbox: {
@@ -416,13 +416,13 @@
                                 }
                             },
                             data: [
-                                {value: response.data[0][1], name: response.data[0][0]},
-                                {value: response.data[1][1], name: response.data[1][0]},
-                                {value: response.data[2][1], name: response.data[2][0]},
-                                {value: response.data[3][1], name: response.data[3][0]},
-                                {value: response.data[4][1], name: response.data[4][0]},
-                                {value: response.data[5][1], name: response.data[5][0]},
-                                {value: response.data[6][1], name: response.data[6][0]}
+                                {value: response.data[0]["24h_volume"], name: response.data[0].asset_name},
+                                {value: response.data[1]["24h_volume"], name: response.data[1].asset_name},
+                                {value: response.data[2]["24h_volume"], name: response.data[2].asset_name},
+                                {value: response.data[3]["24h_volume"], name: response.data[3].asset_name},
+                                {value: response.data[4]["24h_volume"], name: response.data[4].asset_name},
+                                {value: response.data[5]["24h_volume"], name: response.data[5].asset_name},
+                                {value: response.data[6]["24h_volume"], name: response.data[6].asset_name}
                             ]
                         }]
                     };
@@ -443,13 +443,13 @@
                             orient: 'vertical',
                             x: 'left',
                             data: [
-                                response.data[0][2],
-                                response.data[1][2],
-                                response.data[2][2],
-                                response.data[3][2],
-                                response.data[4][2],
-                                response.data[5][2],
-                                response.data[6][2]
+                                response.data[0].account_name,
+                                response.data[1].account_name,
+                                response.data[2].account_name,
+                                response.data[3].account_name,
+                                response.data[4].account_name,
+                                response.data[5].account_name,
+                                response.data[6].account_name
                             ]
                         },
                         toolbox: {
@@ -485,13 +485,13 @@
                                 }
                             },
                             data: [
-                                {value: response.data[0][3], name: response.data[0][2]},
-                                {value: response.data[1][3], name: response.data[1][2]},
-                                {value: response.data[2][3], name: response.data[2][2]},
-                                {value: response.data[3][3], name: response.data[3][2]},
-                                {value: response.data[4][3], name: response.data[4][2]},
-                                {value: response.data[5][3], name: response.data[5][2]},
-                                {value: response.data[6][3], name: response.data[6][2]}
+                                {value: response.data[0].amount, name: response.data[0].account_name},
+                                {value: response.data[1].amount, name: response.data[1].account_name},
+                                {value: response.data[2].amount, name: response.data[2].account_name},
+                                {value: response.data[3].amount, name: response.data[3].account_name},
+                                {value: response.data[4].amount, name: response.data[4].account_name},
+                                {value: response.data[5].amount, name: response.data[5].account_name},
+                                {value: response.data[6].amount, name: response.data[6].account_name}
                             ]
                         }]
                     };

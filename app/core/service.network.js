@@ -24,12 +24,12 @@
             },
 
             getBigBlocks: function(callback) {
-                $http.get(appConfig.urls.elasticsearch_wrapper + "/get_account_history?from_date=now-1w&to_date=now&type=aggs&agg_field=block_data.block_num&size=20")
+                $http.get(appConfig.urls.elasticsearch_wrapper + "/es/account_history?from_date=now-1w&to_date=now&type=aggs&agg_field=block_data.block_num&size=20")
                     .then(function (response) {
 
                     var blocks = [];
                     angular.forEach(response.data, function (value, key) {
-                        $http.get(appConfig.urls.python_backend + "/get_block?block_num=" + value.key).then(function (response) {
+                        $http.get(appConfig.urls.python_backend + "/block?block_num=" + value.key).then(function (response) {
 
                             var parsed = {
                                 block_num: value.key,
@@ -44,7 +44,7 @@
                 });
             },
             getLastOperations: function(limit, from, callback) {
-                $http.get(appConfig.urls.elasticsearch_wrapper + "/get_account_history?size=" + limit + "&from_=" + from)
+                $http.get(appConfig.urls.elasticsearch_wrapper + "/es/account_history?size=" + limit + "&from_=" + from)
                     .then(function (response) {
 
                     var lastops = [];
@@ -74,7 +74,7 @@
             },
 
             getBigTransactions: function(callback) {
-                $http.get(appConfig.urls.elasticsearch_wrapper + "/get_account_history?from_date=now-1h&to_date=now&type=aggs&agg_field=block_data.trx_id.keyword&size=20")
+                $http.get(appConfig.urls.elasticsearch_wrapper + "/es/account_history?from_date=now-1h&to_date=now&type=aggs&agg_field=block_data.trx_id.keyword&size=20")
                     .then(function (response) {
 
                     var transactions = [];
@@ -93,7 +93,7 @@
 
             getTransactionMetaData: function(trx, callback) {
                 var data;
-                $http.get(appConfig.urls.elasticsearch_wrapper + "/get_trx?trx=" + trx + "&size=1&sort=-operation_history.sequence")
+                $http.get(appConfig.urls.elasticsearch_wrapper + "/es/trx?trx=" + trx + "&size=1&sort=-operation_history.sequence")
                     .then(function(response) {
 
                     data = {
@@ -108,7 +108,7 @@
 
             getTransactionOperations: function(trx, callback) {
                 var data;
-                $http.get(appConfig.urls.elasticsearch_wrapper + "/get_trx?trx=" + trx + "&size=100&sort=-operation_history.sequence")
+                $http.get(appConfig.urls.elasticsearch_wrapper + "/es/trx?trx=" + trx + "&size=100&sort=-operation_history.sequence")
                     .then(function(response) {
 
                     var operations = [];
@@ -162,24 +162,24 @@
             },
             getOperation: function(operation, callback) {
                 var op;
-                $http.get(appConfig.urls.python_backend + "/operation_full_elastic?operation_id=" + operation).then(function(response) {
-                    var raw_obj = response.data[0].op;
-                    var op_type =  utilities.operationType(response.data[0].op_type);
+                $http.get(appConfig.urls.python_backend + "/operation?operation_id=" + operation).then(function(response) {
+                    var raw_obj = response.data.op;
+                    var op_type =  utilities.operationType(response.data.op_type);
 
-                    utilities.opText(appConfig, $http, response.data[0].op_type, raw_obj, function(returnData) {
+                    utilities.opText(appConfig, $http, response.data.op_type, raw_obj, function(returnData) {
                         op = {
                             name: operation,
-                            block_num: response.data[0].block_num,
-                            virtual_op: response.data[0].virtual_op,
-                            trx_in_block: response.data[0].trx_in_block,
-                            op_in_trx: response.data[0].op_in_trx,
-                            result: response.data[0].result,
+                            block_num: response.data.block_num,
+                            virtual_op: response.data.virtual_op,
+                            trx_in_block: response.data.trx_in_block,
+                            op_in_trx: response.data.op_in_trx,
+                            result: response.data.result,
                             type: op_type[0],
                             color: op_type[1],
                             raw: raw_obj,
                             operation_text: returnData,
-                            block_time: response.data[0].block_time,
-                            trx_id: response.data[0].trx_id
+                            block_time: response.data.block_time,
+                            trx_id: response.data.trx_id
                         };
                         callback(op);
                     });
@@ -187,7 +187,7 @@
             },
             getBlock: function(block_num, callback) {
                 var block;
-                $http.get(appConfig.urls.python_backend + "/get_block?block_num=" + block_num).then(function (response) {
+                $http.get(appConfig.urls.python_backend + "/block?block_num=" + block_num).then(function (response) {
                     var operations_count = 0;
                     for (var i = 0; i < response.data.transactions.length; i++) {
                         operations_count = operations_count + response.data.transactions[i].operations.length;
@@ -209,8 +209,8 @@
                 });
             },
             getObject: function(object, callback) {
-                $http.get(appConfig.urls.python_backend + "/get_object?object=" + object).then(function(response) {
-                    var object_id = response.data[0].id;
+                $http.get(appConfig.urls.python_backend + "/object?object=" + object).then(function(response) {
+                    var object_id = response.data.id;
                     var object_type = utilities.objectType(object_id);
 
                     var object = {

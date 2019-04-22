@@ -9,13 +9,13 @@
         return {
             getActiveMarkets: function(callback) {
                 var markets = [];
-                $http.get(appConfig.urls.python_backend + "/get_most_active_markets").then(function(response) {
+                $http.get(appConfig.urls.python_backend + "/most_active_markets").then(function(response) {
 
                     angular.forEach(response.data, function(value, key) {
                         var market = {
-                            pair: value[1],
-                            price: value[3],
-                            volume: value[4]
+                            pair: value.pair,
+                            price: value.latest_price,
+                            volume: value["24h_volume"]
                         };
                         markets.push(market);
                     });
@@ -25,12 +25,12 @@
             },
             getAssetMarkets: function(asset_id, callback) {
                 var markets = [];
-                $http.get(appConfig.urls.python_backend + "/get_markets?asset_id=" + asset_id).then(function(response) {
+                $http.get(appConfig.urls.python_backend + "/markets?asset_id=" + asset_id).then(function(response) {
                     angular.forEach(response.data, function(value, key) {
                         var market = {
-                            pair: value[1],
-                            price: value[3],
-                            volume: value[4]
+                            pair: value.pair,
+                            price: value.latest_price,
+                            volume: value["24h_volume"]
                         };
                         markets.push(market);
                     });
@@ -41,7 +41,7 @@
                 var order_book = [];
                 var asks = [];
                 var bids = [];
-                $http.get(appConfig.urls.python_backend + "/get_order_book?base=" + base + "&quote=" + quote + "&limit=10")
+                $http.get(appConfig.urls.python_backend + "/order_book?base=" + base + "&quote=" + quote + "&limit=10")
                     .then(function(response) {
 
                     var total = 0;
@@ -77,7 +77,7 @@
             },
             getGroupedOrderBook: function(base, quote, base_precision, quote_precision, callback) {
                 var grouped = [];
-                $http.get(appConfig.urls.python_backend + "/get_grouped_limit_orders?base=" + base + "&quote=" + quote + "&group=10&limit=10")
+                $http.get(appConfig.urls.python_backend + "/grouped_limit_orders?base=" + base + "&quote=" + quote + "&group=10&limit=10")
                     .then(function(response) {
 
                     angular.forEach(response.data, function(value, key) {
@@ -131,14 +131,14 @@
             },
             getAssetPrecision: function(asset_id, callback) {
                 var precision;
-                $http.get(appConfig.urls.python_backend + "/get_asset?asset_id=" + asset_id).then(function (response) {
-                    precision = response.data[0].precision;
+                $http.get(appConfig.urls.python_backend + "/asset?asset_id=" + asset_id).then(function (response) {
+                    precision = response.data.precision;
                     callback(precision);
                 });
             },
             getTicker: function(base, quote, callback) {
                 var ticker = {};
-                $http.get(appConfig.urls.python_backend + "/get_ticker?base=" + base + "&quote=" + quote).then(function(response) {
+                $http.get(appConfig.urls.python_backend + "/ticker?base=" + base + "&quote=" + quote).then(function(response) {
                     var ticker = {
                         price: response.data.latest,
                         ask: response.data.lowest_ask,

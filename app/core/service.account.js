@@ -27,7 +27,7 @@
                 var results = [];
                 var is_worker = false;
                 var worker_votes = 0;
-                $http.get(appConfig.urls.python_backend + "/get_workers").then(function (response) {
+                $http.get(appConfig.urls.python_backend + "/workers").then(function (response) {
                     for (var i = 0; i < response.data.length; i++) {
                         var worker_account = response.data[i][0].worker_account;
                         if (worker_account === account_id) {
@@ -45,18 +45,18 @@
                 var results = [];
                 var is_witness = false;
                 var witness_votes = 0;
-                $http.get(appConfig.urls.python_backend + "/get_witnesses").then(function (response) {
+                $http.get(appConfig.urls.python_backend + "/witnesses").then(function (response) {
                     for (var i = 0; i < response.data.length; i++) {
-                        var witness_account = response.data[i][0].witness_account;
+                        var witness_account = response.data[i].witness_account;
                         if (witness_account === account_id) {
                             is_witness = true;
-                            witness_votes = utilities.formatBalance(response.data[i][0].total_votes, 5);
+                            witness_votes = utilities.formatBalance(response.data[i].total_votes, 5);
                             results[0] = is_witness;
                             results[1] = witness_votes;
                             results[2] = witness_account;
-                            results[3] = response.data[i][0].witness_account_name;
-                            results[4] = response.data[i][0].id;
-                            results[5] = response.data[i][0].url;
+                            results[3] = response.data[i].witness_account_name;
+                            results[4] = response.data[i].id;
+                            results[5] = response.data[i].url;
                             callback(results);
                             break;
                         }
@@ -67,7 +67,7 @@
                 var results = [];
                 var is_committee_member = false;
                 var committee_votes = 0;
-                $http.get(appConfig.urls.python_backend + "/get_committee_members").then(function (response) {
+                $http.get(appConfig.urls.python_backend + "/committee_members").then(function (response) {
                     for (var i = 0; i < response.data.length; i++) {
                         var committee_member_account = response.data[i][0].committee_member_account;
                         if (committee_member_account === account_id) {
@@ -92,10 +92,10 @@
                 var proxy_votes = 0;
                 $http.get(appConfig.urls.python_backend + "/top_proxies").then(function (response) {
                     for (var i = 0; i < response.data.length; i++) {
-                        var proxy_account = response.data[i][0];
+                        var proxy_account = response.data[i].id;
                         if (proxy_account === account_id) {
                             is_proxy = true;
-                            proxy_votes = utilities.formatBalance(response.data[i][2], 5);
+                            proxy_votes = utilities.formatBalance(response.data[i].bts_weight, 5);
                             results[0] = is_proxy;
                             results[1] = proxy_votes;
                             callback(results);
@@ -106,13 +106,13 @@
             },
             getReferrers: function(account_id, page, callback) {
                 var results = [];
-                $http.get(appConfig.urls.python_backend + "/get_all_referrers?account_id=" + account_id + "&page=" + page)
+                $http.get(appConfig.urls.python_backend + "/all_referrers?account_id=" + account_id + "&page=" + page)
                     .then(function (response) {
 
                     for (var i = 0; i < response.data.length; i++) {
                         var referrer = {
-                            account_id: response.data[i][1],
-                            account_name: response.data[i][2]
+                            account_id: response.data[i].account_id,
+                            account_name: response.data[i].account_name
                         };
                         results.push(referrer);
                     }
@@ -122,19 +122,19 @@
             getReferrerCount: function(account, callback) {
                 var count = 0;
                 $http.get(appConfig.urls.python_backend + "/referrer_count?account_id=" + account).then(function (response) {
-                    count = response.data[0];
+                    count = response.data;
                     callback(count);
                 });
             },
             getFullAccount: function(account, callback) {
                 var full_account = {};
                 $http.get(appConfig.urls.python_backend + "/full_account?account_id=" + account).then(function (response) {
-                    full_account  = response.data[0][1];
+                    full_account  = response.data;
                     callback(full_account);
                 });
             },
             getTotalAccountOps: function(account_id, callback) {
-                $http.get(appConfig.urls.elasticsearch_wrapper + "/get_account_history?account_id="+account_id+"&from_date=2015-10-10&to_date=now&type=count")
+                $http.get(appConfig.urls.elasticsearch_wrapper + "/es/account_history?account_id="+account_id+"&from_date=2015-10-10&to_date=now&type=count")
                     .then(function(response) {
                         var count = 0;
                         angular.forEach(response.data, function (value, key) {
@@ -282,7 +282,7 @@
                 }
             },
             getAccountHistory: function(account_id, page, callback) {
-                $http.get(appConfig.urls.python_backend + "/account_history_pager_elastic?account_id=" + account_id + "&page=" + page)
+                $http.get(appConfig.urls.python_backend + "/account_history?account_id=" + account_id + "&page=" + page)
                     .then(function (response) {
 
                     var results = [];

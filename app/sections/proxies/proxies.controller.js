@@ -12,7 +12,7 @@
                 var proxies = [];
                 var counter = 1;
                 angular.forEach(response.data, function(value, key) {
-                    var parsed = { position: counter, account: value[0], account_name: value[1], power: utilities.formatBalance(value[2], 5), followers: value[3], perc: value[4]};
+                    var parsed = { position: counter, account: value.id, account_name: value.name, power: utilities.formatBalance(value.bts_weight, 5), followers: value.followers, perc: value.bts_weight_percentage};
                     if(counter <= 10)
                         proxies.push(parsed);
                     counter++;

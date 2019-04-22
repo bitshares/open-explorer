@@ -47,11 +47,11 @@
                                 .then(function (response_name_to) {
                                     var to_name = response_name_to.data;
 
-                                    $http.get(appConfig.urls.python_backend + "/get_asset?asset_id=" + amount_asset_id)
+                                    $http.get(appConfig.urls.python_backend + "/asset?asset_id=" + amount_asset_id)
                                         .then(function (response_asset) {
 
-                                            var asset_name = response_asset.data[0]["symbol"];
-                                            var asset_precision = response_asset.data[0]["precision"];
+                                            var asset_name = response_asset.data.symbol;
+                                            var asset_precision = response_asset.data.precision;
 
                                             var divideby = Math.pow(10, asset_precision);
                                             var amount = Number(amount_amount / divideby);
@@ -77,20 +77,20 @@
                     $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + operation_account)
                         .then(function (response_name) {
 
-                            $http.get(appConfig.urls.python_backend + "/get_asset?asset_id=" + amount_to_sell_asset_id)
+                            $http.get(appConfig.urls.python_backend + "/asset?asset_id=" + amount_to_sell_asset_id)
                                 .then(function (response_asset1) {
 
-                                    var sell_asset_name = response_asset1.data[0]["symbol"];
-                                    var sell_asset_precision = response_asset1.data[0]["precision"];
+                                    var sell_asset_name = response_asset1.data.symbol;
+                                    var sell_asset_precision = response_asset1.data.precision;
 
                                     var divideby = Math.pow(10, sell_asset_precision);
                                     var sell_amount = Number(amount_to_sell_amount / divideby);
 
-                                    $http.get(appConfig.urls.python_backend + "/get_asset?asset_id=" + min_to_receive_asset_id)
+                                    $http.get(appConfig.urls.python_backend + "/asset?asset_id=" + min_to_receive_asset_id)
                                         .then(function (response_asset2) {
 
-                                            var receive_asset_name = response_asset2.data[0]["symbol"];
-                                            var receive_asset_precision = response_asset2.data[0]["precision"];
+                                            var receive_asset_name = response_asset2.data.symbol;
+                                            var receive_asset_precision = response_asset2.data.precision;
 
                                             var divideby = Math.pow(10, receive_asset_precision);
                                             var receive_amount = Number(min_to_receive_amount / divideby);
@@ -122,15 +122,15 @@
                     $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + funding_account)
                         .then(function (response_name) {
 
-                            $http.get(appConfig.urls.python_backend + "/get_asset?asset_id=" + delta_collateral_asset_id)
+                            $http.get(appConfig.urls.python_backend + "/asset?asset_id=" + delta_collateral_asset_id)
                                 .then(function (response_asset1) {
 
-                                    var asset1 = response_asset1.data[0]["symbol"];
+                                    var asset1 = response_asset1.data.symbol;
 
-                                    $http.get(appConfig.urls.python_backend + "/get_asset?asset_id=" + delta_debt_asset_id)
+                                    $http.get(appConfig.urls.python_backend + "/asset?asset_id=" + delta_debt_asset_id)
                                         .then(function (response_asset2) {
 
-                                            var asset2 = response_asset2.data[0]["symbol"];
+                                            var asset2 = response_asset2.data.symbol;
 
                                             operation_text = "<a href='/#/accounts/" + operation_account + "'>" + response_name.data + "</a> update debt/collateral for ";
                                             operation_text = operation_text + "<a href='#/markets/" + asset1 + "/" + asset2 + "'>" + asset1 + "/" + asset2 + "</a>";
@@ -153,21 +153,21 @@
                         .then(function (response_name) {
 
 
-                            $http.get(appConfig.urls.python_backend + "/get_asset?asset_id=" + pays_asset_id)
+                            $http.get(appConfig.urls.python_backend + "/asset?asset_id=" + pays_asset_id)
                                 .then(function (response_asset1) {
 
-                                    var pays_asset_name = response_asset1.data[0]["symbol"];
-                                    var pays_asset_precision = response_asset1.data[0]["precision"];
+                                    var pays_asset_name = response_asset1.data.symbol;
+                                    var pays_asset_precision = response_asset1.data.precision;
 
                                     var divideby = Math.pow(10, pays_asset_precision);
 
                                     var p_amount = parseFloat(pays_amount / divideby);
 
-                                    $http.get(appConfig.urls.python_backend + "/get_asset?asset_id=" + receives_asset_id)
+                                    $http.get(appConfig.urls.python_backend + "/asset?asset_id=" + receives_asset_id)
                                         .then(function (response_asset2) {
 
-                                            var receive_asset_name = response_asset2.data[0]["symbol"];
-                                            var receive_asset_precision = response_asset2.data[0]["precision"];
+                                            var receive_asset_name = response_asset2.data.symbol;
+                                            var receive_asset_precision = response_asset2.data.precision;
 
                                             var divideby = Math.pow(10, receive_asset_precision);
                                             var receive_amount = Number(receives_amount / divideby);
@@ -243,11 +243,11 @@
                     $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + issuer)
                         .then(function (response_name) {
 
-                            $http.get(appConfig.urls.python_backend + "/get_asset?asset_id=" + asset_to_issue_asset_id)
+                            $http.get(appConfig.urls.python_backend + "/asset?asset_id=" + asset_to_issue_asset_id)
                                 .then(function (response_asset) {
 
-                                    var asset_name = response_asset.data[0]["symbol"];
-                                    var asset_precision = response_asset.data[0]["precision"];
+                                    var asset_name = response_asset.data.symbol;
+                                    var asset_precision = response_asset.data.precision;
 
                                     var divideby = Math.pow(10, asset_precision);
                                     var amount = Number(asset_to_issue_amount / divideby);
@@ -273,11 +273,11 @@
                     $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + operation_account)
                         .then(function (response_name) {
 
-                            $http.get(appConfig.urls.python_backend + "/get_asset?asset_id=" + amount_to_reserve_asset_id)
+                            $http.get(appConfig.urls.python_backend + "/asset?asset_id=" + amount_to_reserve_asset_id)
                                 .then(function (response_asset) {
 
-                                    var asset_name = response_asset.data[0]["symbol"];
-                                    var asset_precision = response_asset.data[0]["precision"];
+                                    var asset_name = response_asset.data.symbol;
+                                    var asset_precision = response_asset.data.precision;
                                     var divideby = Math.pow(10, asset_precision);
                                     var amount = Number(amount_to_reserve_amount / divideby);
 
@@ -297,11 +297,11 @@
                     $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + operation_account)
                         .then(function (response_name) {
 
-                            $http.get(appConfig.urls.python_backend + "/get_asset?asset_id=" + asset_id)
+                            $http.get(appConfig.urls.python_backend + "/asset?asset_id=" + asset_id)
                                 .then(function (response_asset) {
 
                                     operation_text = "<a href='/#/accounts/" + operation_account + "'>" + response_name.data + "</a>  published feed for ";
-                                    operation_text = operation_text + "<a href='/#/assets/" + asset_id + "'>" + response_asset.data[0]["symbol"] + "</a>";
+                                    operation_text = operation_text + "<a href='/#/assets/" + asset_id + "'>" + response_asset.data.symbol + "</a>";
                                     callback(operation_text);
                             });
                     });
@@ -338,11 +338,11 @@
                     $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + operation_account)
                         .then(function (response_name) {
 
-                            $http.get(appConfig.urls.python_backend + "/get_asset?asset_id=" + amount_asset_id)
+                            $http.get(appConfig.urls.python_backend + "/asset?asset_id=" + amount_asset_id)
                                 .then(function (response_asset) {
 
-                                    var asset_name = response_asset.data[0]["symbol"];
-                                    var asset_precision = response_asset.data[0]["precision"];
+                                    var asset_name = response_asset.data.symbol;
+                                    var asset_precision = response_asset.data.precision;
                                     var divideby = Math.pow(10, asset_precision);
                                     var amount = Number(amount_amount / divideby);
 
@@ -363,11 +363,11 @@
                     $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + operation_account)
                         .then(function (response_name) {
 
-                            $http.get(appConfig.urls.python_backend + "/get_asset?asset_id=" + total_claimed_asset_id)
+                            $http.get(appConfig.urls.python_backend + "/asset?asset_id=" + total_claimed_asset_id)
                                 .then(function (response_asset) {
 
-                                    var asset_name = response_asset.data[0]["symbol"];
-                                    var asset_precision = response_asset.data[0]["precision"];
+                                    var asset_name = response_asset.data.symbol;
+                                    var asset_precision = response_asset.data.precision;
                                     var divideby = Math.pow(10, asset_precision);
                                     var amount = Number(total_claimed_amount / divideby);
 
@@ -390,20 +390,20 @@
                     $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + operation_account)
                         .then(function (response_name) {
 
-                            $http.get(appConfig.urls.python_backend + "/get_asset?asset_id=" + additional_collateral_asset_id)
+                            $http.get(appConfig.urls.python_backend + "/asset?asset_id=" + additional_collateral_asset_id)
                                 .then(function (additional_collateral_asset) {
 
-                                    var asset_name1 = additional_collateral_asset.data[0].symbol;
-                                    var asset_precision1 = additional_collateral_asset.data[0].precision;
+                                    var asset_name1 = additional_collateral_asset.data.symbol;
+                                    var asset_precision1 = additional_collateral_asset.data.precision;
                                     var divideby1 = Math.pow(10, asset_precision1);
                                     var amount1 = Number(additional_collateral_amount / divideby1);
 
-                                    $http.get(appConfig.urls.python_backend + "/get_asset?asset_id=" + debt_covered_asset_id)
+                                    $http.get(appConfig.urls.python_backend + "/asset?asset_id=" + debt_covered_asset_id)
                                         .then(function (debt_covered_asset) {
 
 
-                                            var asset_name2 = debt_covered_asset.data[0].symbol;
-                                            var asset_precision2 = debt_covered_asset.data[0].precision;
+                                            var asset_name2 = debt_covered_asset.data.symbol;
+                                            var asset_precision2 = debt_covered_asset.data.precision;
                                             var divideby2 = Math.pow(10, asset_precision2);
                                             var amount2 = Number(debt_covered_amount / divideby2);
 

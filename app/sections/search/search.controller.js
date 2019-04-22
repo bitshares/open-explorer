@@ -41,7 +41,7 @@
                 var start_block = $scope.block;
                 var block_data = [];
                 var number = start_block;
-                $http.get(appConfig.urls.python_backend + "/getlastblocknumber")
+                $http.get(appConfig.urls.python_backend + "/last_block_number")
                     .then(function (response) {
                         //console.log(response.data);
                         while (number <= response.data) {
