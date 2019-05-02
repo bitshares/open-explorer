@@ -416,6 +416,85 @@
                                 });
                         });
                 }
+                else if (operation_type === 49) { // HTLC CREATE
+                    operation_account = operation.from;
+
+                    var amount_ = operation.amount_.amount;
+                    var asset_id = operation.amount_.asset_id;
+
+                    var to = operation.to;
+
+                    $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + operation_account)
+                        .then(function (response_name) {
+
+                            $http.get(appConfig.urls.python_backend + "/asset?asset_id=" + asset_id)
+                                .then(function (asset) {
+
+                                    var asset_name = asset.data.symbol;
+                                    var asset_precision = asset.data.precision;
+                                    var divideby = Math.pow(10, asset_precision);
+                                    var amount = Number(amount_ / divideby);
+
+                                    $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + to)
+                                        .then(function (response_name2) {
+
+                                            operation_text = "<a href='/#/accounts/" + operation_account + "'>" + response_name.data +
+                                                "</a> create HTLC to <a href='/#/accounts/" + to + "'>" + response_name2.data + "</a> to transfer " +
+                                                formatNumber(amount) + " <a href='/#/assets/" + asset_id + "'>" +
+                                                asset_name + "</a>";
+                                            callback(operation_text);
+                                        });
+                                });
+                        });
+                }
+                else if (operation_type === 50) { // HTLC REDEEM
+                    operation_account = operation.redeemer;
+                    var htlc_id = operation.htlc_id;
+
+                    $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + operation_account)
+                        .then(function (response_name) {
+
+                            operation_text = "<a href='/#/accounts/" + operation_account + "'>" + response_name.data +
+                                "</a> redeem HTLC";
+                            callback(operation_text);
+                        });
+                }
+                else if (operation_type === 51) { // HTLC REDEEMED
+                    operation_account = operation.from;
+                    var htlc_id = operation.htlc_id;
+
+                    $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + operation_account)
+                        .then(function (response_name) {
+
+                            operation_text = "<a href='/#/accounts/" + operation_account + "'>" + response_name.data +
+                                "</a> redeemed HTLC";
+                            callback(operation_text);
+                        });
+                }
+                else if (operation_type === 52) { // HTLC EXTEND
+                    operation_account = operation.update_issuer;
+                    var htlc_id = operation.htlc_id;
+
+                    $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + operation_account)
+                        .then(function (response_name) {
+
+                            operation_text = "<a href='/#/accounts/" + operation_account + "'>" + response_name.data +
+                                "</a> extend HTLC";
+                            callback(operation_text);
+                        });
+                }
+                else if (operation_type === 53) { // HTLC REFUND
+                    operation_account = operation.to;
+                    var htlc_id = operation.htlc_id;
+
+                    $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + operation_account)
+                        .then(function (response_name) {
+
+                            operation_text = "<a href='/#/accounts/" + operation_account + "'>" + response_name.data +
+                                "</a> refund HTLC";
+                            callback(operation_text);
+                        });
+                }
                 else {
                     operation_text = "";
                     callback(operation_text);
