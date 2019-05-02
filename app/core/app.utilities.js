@@ -622,6 +622,26 @@
                     name = "ASSET UPDATE ISSUER";
                     color = "AB7781";
                 }
+                else if(opType === 49) {
+                    name = "HTLC CREATE";
+                    color = "11e0dc";
+                }
+                else if(opType === 50) {
+                    name = "HTLC REDEEM";
+                    color = "085957";
+                }
+                else if(opType === 51) {
+                    name = "HTLC REDEEMED";
+                    color = "AB7781";
+                }
+                else if(opType === 52) {
+                    name = "HTLC EXTEND";
+                    color = "093f3e";
+                }
+                else if(opType === 53) {
+                    name = "HTLC REFUND";
+                    color = "369694";
+                }
 
                 results[0] = name;
                 results[1] = color;
@@ -665,6 +685,8 @@
                     object_type = "WORKER";
                 else if (parts[0] == "1" && parts[1] == "15")
                     object_type = "BALANCE";
+                else if (parts[0] == "1" && parts[1] == "16")
+                    object_type = "HTLC";
                 else if (parts[0] == "2" && parts[1] == "0")
                     object_type = "GLOBAL PROPERTY";
                 else if (parts[0] == "2" && parts[1] == "1")
