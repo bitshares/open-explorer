@@ -49,12 +49,12 @@
         var urls = {
             websocket: "ws://bts-seoul.clockwork.gr/ws",
             //python_backend: "http://185.208.208.184:5000",
-            python_backend: "/api",
+            python_backend: "https://explorer.bitshares-kibana.info/",
             //elasticsearch_wrapper: "https://eswrapper.bitshares.eu", // infrastructure
             elasticsearch_wrapper: "https://explorer.bitshares-kibana.info/", // clockwork
             //elasticsearch_wrapper: "/elastic",
             //udf_wrapper: "http://185.208.208.184:5001"
-            udf_wrapper: "/udf"
+            udf_wrapper: "https://explorer.bitshares-kibana.info/"
         };
 
         return {
