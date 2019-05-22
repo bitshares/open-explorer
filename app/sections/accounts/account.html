@@ -2,8 +2,8 @@
     <div class="row">
         <div class="col-md-4 align-baseline">
             <ol class="breadcrumb">
-                <li><a href="#/">Home</a></li>
-                <li><a href="#/accounts/">Accounts</a></li>
+                <li><a href="#/"><span data-translate="Home"></span></a></li>
+                <li><a href="#/accounts/"><span data-translate="Accounts"></span></a></li>
                 <li class="active"><a href="#/accounts/{{account.id}}/">{{account.name}}</a></li>
             </ol>
         </div>
@@ -16,36 +16,6 @@
 
     <div class="row">
 
-        <!--
-        <div class="col-md-3">
-            <div class="panel panel-default">
-                <canvas id="identicon" width="300" height="300" />
-            </div>
-        </div> -->
-
-<!--
-        <div class="col-md-3">
-            <div class="panel panel-default">
-                <div class="panel-heading"><h4 class="panel-title">Stats</h4></div>
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <span class="badge" style="background-color: #FFFFFF; color: #000000">{{account.bts_balance | number}}</span>
-                        BTS Balance
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge" style="background-color: #FFFFFF; color: #000000">{{account.lifetime_fees_paid | number}}</span>
-                        Lifetime fees paid
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge" style="background-color: #FFFFFF; color: #000000">{{account.total_ops | number}}</span>
-                        Total ops
-                    </li>
-                </ul>
-            </div>
-            <h2>{{account.name}}</h2> <p class="card-text">{{account.lifetime}}</p> <p class="card-text">Voting as:
-            <a href='#/accounts/{{account.voting_account_id}}/'>{{account.voting_account_name}}</a></p>
-        </div>
--->
 		<div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -63,7 +33,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="panel panel-default">
-                                            <div class="panel-heading"> Account Information</div>
+                                            <div class="panel-heading"><span data-translate="Account Information"></span></div>
                                             <div class="panel-body">
                                                 <ul class="list-group">
                                                     <li class="list-group-item">
@@ -72,19 +42,19 @@
                                                     </li>
                                                     <li class="list-group-item">
                                                         <span class="badge" style="background-color: #FFFFFF; color: #000000">{{account.name}}</span>
-                                                        Name
+                                                        <span data-translate="Name"></span>
                                                     </li>
                                                     <li class="list-group-item">
                                                         <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#/accounts/{{account.referer}}/'>{{account.referer}}</a></span>
-                                                        Referrer
+                                                        <span data-translate="Referrer"></span>
                                                     </li>
                                                     <li class="list-group-item">
                                                         <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#/accounts/{{account.registrar}}/'>{{account.registrar}}</a></span>
-                                                        Registrar
+                                                        <span data-translate="Registrar"></span>
                                                     </li>
                                                     <li class="list-group-item">
                                                         <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#/objects/{{account.voting_account_id}}/'>{{account.voting_account_name}}</a></span>
-                                                        Voting As
+                                                        <span data-translate="Voting as"></span>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -92,25 +62,25 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="panel panel-default">
-                                            <div class="panel-heading"> Account Statistics</div>
+                                            <div class="panel-heading"><span data-translate="Account statistics"></span></div>
                                             <div class="panel-body">
                                                 <ul class="list-group">
                                                     <li class="list-group-item">
                                                         <span class="badge" style="background-color: #FFFFFF; color: #000000">{{account.bts_balance | number}}</span>
-                                                        BTS Balance
+                                                        BTS <span data-translate="Balance"></span>
                                                     </li>
                                                     <li class="list-group-item">
                                                         <span class="badge" style="background-color: #FFFFFF; color: #000000">{{account.lifetime_fees_paid | number}}</span>
-                                                        Lifetime fees paid
+                                                        <span data-translate="Lifetime fees paid"></span>
                                                     </li>
                                                     <li class="list-group-item">
                                                         <span class="badge" style="background-color: #FFFFFF; color: #000000">{{account.total_ops | number}}</span>
-                                                        Total ops
+                                                        <span data-translate="Total operations"></span>
                                                     </li>
 
                                                     <li class="list-group-item">
                                                         <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#/objects/{{account.statistics}}/'>{{account.statistics}}</a></span>
-                                                        Statistics
+                                                        <span data-translate="Statistics"></span>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -124,7 +94,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="panel panel-default">
-                                        <div class="panel-heading"> {{balance_count}} Asset Balances</div>
+                                        <div class="panel-heading"> {{balance_count}} <span data-translate="Asset Balances"></span></div>
                                         <div class="panel-body table-responsive">
                                             <form>
                                                 <div class="col-md-6">
@@ -140,8 +110,8 @@
                                                 <thead>
                                                 <tr>
                                                     <th ng-click='sortColumn("id")' ng-class='sortClass("id")'>ID</th>
-                                                    <th ng-click='sortColumn("asset_name")' ng-class='sortClass("asset_name")'>Asset</th>
-                                                    <th class="align-right" ng-click='sortColumn("balance")' ng-class='sortClass("balance")'>Balance</th>
+                                                    <th ng-click='sortColumn("asset_name")' ng-class='sortClass("asset_name")'><span data-translate="Asset"></span></th>
+                                                    <th class="align-right" ng-click='sortColumn("balance")' ng-class='sortClass("balance")'><span data-translate="Balance"></span></th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -172,7 +142,7 @@
                                 <div class="col-md-6">
 
                                     <div class="panel panel-default">
-                                        <div class="panel-heading"> Vesting Balances</div>
+                                        <div class="panel-heading"><span data-translate="Vesting balances"></span></div>
                                         <div class="panel-body table-responsive">
                                             <form>
                                                 <div class="col-md-6">
@@ -188,8 +158,8 @@
                                                 <thead>
                                                 <tr>
                                                     <th>ID</th>
-                                                    <th>Asset</th>
-                                                    <th class="align-right">Balance</th>
+                                                    <th><span data-translate="Asset"></span></th>
+                                                    <th class="align-right"><span data-translate="Balance"></span></th>
                                                 </tr>
                                                 </thead>
                                                 <tr data-ng-repeat="v in account.vesting">
@@ -201,16 +171,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!--
-                                <div class="col-md-3">
-
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading"> Cashback Balances</div>
-                                        <div class="panel-body table-responsive">
-                                            {{account.cashback_balance | number}} BTS - <a href='#/objects/{{account.cashback}}/'>{{account.cashback}}</a>
-                                        </div>
-                                    </div>
-                                </div> -->
                             </div>
                         </uib-tab>
 
@@ -220,13 +180,13 @@
                                 <div class="col-md-6">
 
                                     <div class="panel panel-default">
-                                        <div class="panel-heading"><i class="fa fa-key"></i>  Owner Keys</div>
+                                        <div class="panel-heading"><i class="fa fa-key"></i><span data-translate="Owner keys"></span></div>
                                         <div class="panel-body table-responsive">
                                             <table class="table" ng-if="owner_keys.length">
                                                 <thead>
                                                 <tr>
                                                     <th>Key</th>
-                                                    <th class="align-right">Threshold</th>
+                                                    <th class="align-right"><span data-translate="Threshold"></span></th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -239,7 +199,7 @@
                                                 <thead>
                                                 <tr>
                                                     <th>Account</th>
-                                                    <th class="align-right">Threshold</th>
+                                                    <th class="align-right"><span data-translate="Threshold"></span></th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -255,14 +215,14 @@
                                 <div class="col-md-6">
 
                                     <div class="panel panel-default">
-                                        <div class="panel-heading"><i class="fa fa-key"></i>  Active Keys</div>
+                                        <div class="panel-heading"><i class="fa fa-key"></i><span data-translate="Active keys"></span></div>
 
                                         <div class="panel-body table-responsive">
                                             <table class="table" ng-if="active_keys.length">
                                                 <thead>
                                                 <tr>
                                                     <th>Key</th>
-                                                    <th class="align-right">Threshold</th>
+                                                    <th class="align-right"><span data-translate="Threshold"></span></th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -276,7 +236,7 @@
                                                 <thead>
                                                 <tr>
                                                     <th>Account</th>
-                                                    <th class="align-right">Threshold</th>
+                                                    <th class="align-right"><span data-translate="Threshold"></span></th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -293,7 +253,7 @@
                                 <div class="col-md-12">
 
                                     <div class="panel panel-default">
-                                        <div class="panel-heading"><i class="fa fa-key"></i>  Memo Key</div>
+                                        <div class="panel-heading"><i class="fa fa-key"></i> <span data-translate="Memo key"></span></div>
 
                                         <div class="panel-body table-responsive">
 
@@ -309,12 +269,12 @@
                         <uib-tab ng-if="user_issued_assets.length" heading="Created Assets" index="3" class="text-small">
                             <br>
                             <div class="panel panel-default">
-                                <div class="panel-heading"> Issued Assets</div>
+                                <div class="panel-heading"> <span data-translate="Issued Assets"></span></div>
                                 <div class="panel-body table-responsive">
                                     <table class="table">
                                         <thead>
                                         <tr>
-                                            <th ng-click='sortColumn("asset_name")' ng-class='sortClass("asset_name")'>Asset</th>
+                                            <th ng-click='sortColumn("asset_name")' ng-class='sortClass("asset_name")'><span data-translate="Asset"></span></th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -330,7 +290,7 @@
                         <uib-tab ng-if="proposals.length" heading="Active proposals" index="4" class="text-small">
                             <br>
                             <div class="panel panel-default">
-                                <div class="panel-heading"> Currently Active Proposals</div>
+                                <div class="panel-heading"> <span data-translate="Currently Active Proposals"></span></div>
                                 <div class="panel-body table-responsive">
                                     <table class="table">
                                         <thead>
@@ -350,15 +310,15 @@
                         <uib-tab ng-if="votes.length" heading="Votes" index="5" class="text-small">
                             <br>
                             <div class="panel panel-default">
-                                <div class="panel-heading"> Supporting with my vote</div>
+                                <div class="panel-heading"> <span data-translate="Supporting with my vote"></span></div>
                                 <div class="panel-body table-responsive">
                                     <table class="table">
                                         <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Type</th>
-                                            <th>Account</th>
-                                            <th>Total Votes</th>
+                                            <th><span data-translate="Type"></span></th>
+                                            <th><span data-translate="Account"></span></th>
+                                            <th><span data-translate="Total votes"></span></th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -377,12 +337,12 @@
                         <uib-tab ng-if="referrers.length" heading="Referral" index="6" class="text-small">
                             <br>
                             <div class="panel panel-default">
-                                <div class="panel-heading"> <b>{{referral_count}}</b> referred accounts.</div>
+                                <div class="panel-heading"> <b>{{referral_count}}</b> <span data-translate="referred accounts"></span>.</div>
                                 <div class="panel-body table-responsive">
 
                                     <table class="table">
                                         <thead>
-                                        <tr><th>Account</th>
+                                        <tr><th> <span data-translate="Account"></span></th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -412,26 +372,26 @@
 
                         <uib-tab ng-if="is_proxy == true" heading="Proxy" index="7" class="text-small">
                             <br>
-                            Votes {{proxy_votes | number:0}}
+                            <span data-translate="Votes"></span> {{proxy_votes | number:0}}
                         </uib-tab>
                         <uib-tab ng-if="is_committee_member == true" heading="Committee Member" index="8" class="text-small">
                             <br>
 
                             <div class="panel panel-default">
-                                <div class="panel-heading"> Committee Member Data</div>
+                                <div class="panel-heading"> <span data-translate="Committee Member Data"></span></div>
                                 <div class="panel-body">
                                     <ul class="list-group">
                                         <li class="list-group-item">
                                             <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href="#/accounts/{{committee_member_account}}">{{committee_member_account_name}}</a></span>
-                                            Committee Account
+                                            <span data-translate="Committee member account"></span>
                                         </li>
                                         <li class="list-group-item">
                                             <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href="#/objects/{{committee_id}}">{{committee_id}}</a></span>
-                                            Committee ID
+                                            <span data-translate="Committee member ID"></span>
                                         </li>
                                         <li class="list-group-item">
                                             <span class="badge" style="background-color: #FFFFFF; color: #000000">{{committee_votes | number:0}}</span>
-                                            Votes
+                                            <span data-translate="Votes"></span>
                                         </li>
                                         <li class="list-group-item">
                                             <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href="{{committee_url}}">Link</a></span>
@@ -451,15 +411,15 @@
                                     <ul class="list-group">
                                         <li class="list-group-item">
                                             <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href="#/accounts/{{witness_account}}">{{witness_account_name}}</a></span>
-                                            Committee Account
+                                            <span data-translate="Witness account"></span>
                                         </li>
                                         <li class="list-group-item">
                                             <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href="#/objects/{{witness_id}}">{{witness_id}}</a></span>
-                                            Witness ID
+                                            <span data-translate="Witness ID"></span>
                                         </li>
                                         <li class="list-group-item">
                                             <span class="badge" style="background-color: #FFFFFF; color: #000000">{{witness_votes | number:0}}</span>
-                                            Votes
+                                            <span data-translate="Votes"></span>
                                         </li>
                                         <li class="list-group-item">
                                             <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href="{{witness_url}}">Link</a></span>
@@ -483,22 +443,22 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">Full Account History</h3>
+            <h3 class="panel-title"><span data-translate="Full Account History"></span></h3>
         </div>
         <div class="panel-body table-responsive">
             <div class="col-md-6">
             </div>
             <div class="col-md-6 text-right">
-                <a href="http://open-explorer.io/bitshares-account-exporter/" target="_blank"><span size="+1">Click here for a CSV account exporter</span></a>
+                <a href="http://open-explorer.io/bitshares-account-exporter/" target="_blank"><span size="+1"><span data-translate="Click here for a CSV account exporter"></span></span></a>
             </div>
             <table class="table">
                 <thead>
                 <tr>
-                    <th>Operation</th>
+                    <th><span data-translate="Operation"></span></th>
                     <th>ID</th>
-                    <th>DateTime</th>
-                    <th>Block</th>
-                    <th>Type</th>
+                    <th><span data-translate="Date and Time"></span></th>
+                    <th><span data-translate="Block"></span></th>
+                    <th><span data-translate="Type"></span></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -530,155 +490,4 @@
             </footer>
         </div>
     </div>
-
-<!--
-
-    <div class="row">
-        <div class="col-md-3">
-            <div class="panel panel-default">
-                <div class="panel-heading">Proxy</div>
-                <div class="panel-body table-responsive">
-                    <div ng-if="is_proxy == true">
-                        <font size="+1">YES</font>
-                        <br>
-                        <font size="-1">Votes {{proxy_votes | number:0}}</font>
-
-                    </div>
-                    <div ng-if="is_proxy != true">
-                        <font size="+1">NO</font>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="panel panel-default">
-                <div class="panel-heading">Committee Member</div>
-                <div class="panel-body table-responsive">
-                    <div ng-if="is_committee_member == true">
-                        <font size="+1">YES</font>
-                        <br>
-                        <font size="-1">Votes {{committee_votes | number:0}}</font>
-                    </div>
-                    <div ng-if="is_committee_member != true">
-                        <font size="+1">NO</font>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="panel panel-default">
-                <div class="panel-heading">Witness</div>
-                <div class="panel-body table-responsive">
-                    <div ng-if="is_witness == true">
-                        <font size="+1">YES</font>
-                        <br>
-                        <font size="-1">Votes {{witness_votes | number:0}}</font>
-                    </div>
-                    <div ng-if="is_witness != true">
-                        <font size="+1">NO</font>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="panel panel-default">
-                <div class="panel-heading">Worker</div>
-                <div class="panel-body table-responsive">
-                    <div ng-if="is_worker == true">
-                        <font size="+1">YES</font>
-                        <br>
-                        <font size="-1">Votes {{worker_votes | number:0}}</font>
-                    </div>
-                    <div ng-if="is_worker != true">
-                        <font size="+1">NO</font>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">Active proposal transactions</div>
-
-                <div class="panel-body table-responsive">
-                    <table class="table">
-                        <thead>
-                        <tr><th>ID</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr data-ng-repeat="p in proposals">
-                            <td><a href="#/blocks/{{p.id}}/">{{p.id}}</a></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">Votes</div>
-
-
-                <div class="panel-body table-responsive">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Type</th>
-                            <th>Account</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr data-ng-repeat="v in votes">
-                            <td><a href="#/objects/{{v.id}}/">{{v.id}}</a></td>
-                            <td>{{v.type}}</td>
-                            <td><a href="#/accounts/{{v.account}}/">{{v.account}}</a></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">Referral Information</div>
-
-
-                <div class="panel-body table-responsive">
-                    <b>{{referral_count}}</b> referred accounts.
-                    <table class="table">
-                        <thead>
-                        <tr><th>Account</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                         <tr data-ng-repeat="r in referrers">
-                            <td><a href="#/accounts/{{r.account_id}}/">{{r.account_name}}</a></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <footer class="table-footer">
-                        <div class="row">
-                            <div class="col-md-12 text-right pagination-container">
-                                <ul uib-pagination class="pagination-sm"
-                                    ng-model="currentPageReferer"
-                                    total-items="referral_count"
-                                    max-size="4"
-                                    ng-change="currentPageReferer===undefined || select_referers(currentPageReferer)"
-                                    items-per-page="20"
-                                    rotate="false"
-                                    previous-text="&lsaquo;" next-text="&rsaquo;"
-                                    boundary-links="true"></ul>
-                            </div>
-                        </div>
-                    </footer>
-                </div>
-            </div>
-        </div>
-
-    </div> -->
-
 </div>

@@ -1,3 +1,30 @@
 {
-    "DASHBOARD": "Dashboard"
+  "Dashboard": "Dashboard",
+  "Search": "Search",
+  "Transactions": "Transactions",
+  "Assets": "Assets",
+  "Markets": "Markets",
+  "Accounts": "Accounts",
+  "Fees": "Fees",
+  "Governance": "Governance",
+  "Committee": "Committee",
+  "Witnesses": "Witnesses",
+  "Workers": "Workers",
+  "Voting": "Voting",
+  "Proxies": "Proxies",
+
+  "Home": "Home",
+  "Accounts": "Accounts",
+  "Account Information": "Account Information",
+  "Name": "Name",
+  "Referrer": "Referrer",
+  "Registrar": "Registrar",
+  "Voting as": "Voting as",
+  "Account statistics": "Account statistics",
+  "Balance": "Balance",
+  "Lifetime fees paid": "Lifetime fees paid",
+  "Total operations": "Total operations",
+  "Statistics": "Statistics",
+
+  "COPYRIGHT": "COPYRIGHT"
 }

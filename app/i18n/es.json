@@ -1,3 +1,30 @@
 {
-    "DASHBOARD": "Dashboard"
+  "Dashboard": "Dashboard",
+  "Search": "Buscar",
+  "Transactions": "Transacciones",
+  "Assets": "Activos",
+  "Markets": "Mercados",
+  "Accounts": "Cuentas",
+  "Fees": "Comisiones",
+  "Governance": "Gobierno",
+  "Committee": "Comite",
+  "Witnesses": "Testigos",
+  "Workers": "Trabajadores",
+  "Voting": "Votacion",
+  "Proxies": "Proxies",
+
+  "Home": "Inicio",
+  "Accounts": "Cuentas",
+  "Account Information": "Informacion de cuenta",
+  "Name": "Nombre",
+  "Referrer": "Referente",
+  "Registrar": "Registrador",
+  "Voting as": "Votar como",
+  "Account statistics": "Estadisticas de cuenta",
+  "Balance": "Balance",
+  "Lifetime fees paid": "Total comisiones pagadas",
+  "Total operations": "Operaciones totales",
+  "Statistics": "Estadisticas",
+
+  "COPYRIGHT": "COPYRIGHT"
 }

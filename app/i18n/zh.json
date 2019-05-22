@@ -1,3 +1,30 @@
 {
-    "DASHBOARD": "儀表板"
+    "Dashboard": "儀表板",
+    "Search": "搜索",
+    "Transactions": "交易",
+    "Assets": "资产",
+    "Markets": "市场",
+    "Accounts": "帐号",
+    "Fees": "费用",
+    "Governance": "治理",
+    "Committee": "委员会",
+    "Witnesses": "目击者",
+    "Workers": "工作人员",
+    "Voting": "表决",
+    "Proxies": "代理",
+
+    "Home": "家",
+    "Accounts": "帐号",
+    "Account Information": "帐户信息",
+    "Name": "名称",
+    "Referrer": "介绍人",
+    "Registrar": "注册员",
+    "Voting as": "投票为",
+    "Account statistics": "帐户统计",
+    "Balance": "平衡",
+    "Lifetime fees paid": "支付终身费",
+    "Total operations": "总运营",
+    "Statistics": "统计",
+
+    "COPYRIGHT": "版权"
 }
