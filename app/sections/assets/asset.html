@@ -2,8 +2,8 @@
     <div class="row">
         <div class="col-md-6">
             <ol class="breadcrumb">
-                <li><a href="#/">Home</a></li>
-                <li><a href="#/assets/">Assets</a></li>
+                <li><a href="#/"><span data-translate="Home"></span></a></li>
+                <li><a href="#/assets/"><span data-translate="Assets"></span></a></li>
                 <li class="active"><a href="#/assets/{{data.id}}/">{{data.symbol}}</a></li>
             </ol>
         </div>
@@ -20,27 +20,27 @@
 
         <div class="col-md-3">
             <div class="panel panel-default">
-                <div class="panel-heading"> Stats</div>
+                <div class="panel-heading"> <span data-translate="Stats"></span></div>
                 <ul class="list-group">
                     <li class="list-group-item">
                         <span class="badge" style="background-color: #FFFFFF; color: #000000">{{data.volume | number}}</span>
-                        24 HS BTS Volume
+                        24 HS BTS <span data-translate="Volume"></span>
                     </li>
                     <li class="list-group-item">
                         <span class="badge" style="background-color: #FFFFFF; color: #000000">{{data.accumulated_fees | number}}</span>
-                        Accumulated Fees
+                        <span data-translate="Accumulated fees"></span>
                     </li>
                     <li class="list-group-item">
                         <span class="badge" style="background-color: #FFFFFF; color: #000000">{{data.holders | number}}</span>
-                        Holders
+                        <span data-translate="Holders"></span>
                     </li>
                     <li class="list-group-item">
                         <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#/objects/{{data.dynamic_asset_data_id}}/'>{{data.dynamic_asset_data_id}}</a></span>
-                        Dynamic Asset
+                        <span data-translate="Dynamic asset properties"></span>
                     </li>
                     <li class="list-group-item" ng-if="data.bitasset_data_id">
                         <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#/objects/{{data.bitasset_data_id}}/'>{{data.bitasset_data_id}}</a></span>
-                        Bitasset Data
+                        <span data-translate="Bit-Asset properties"></span>
                     </li>
                 </ul>
             </div>
@@ -50,7 +50,7 @@
         <div class="col-md-6">
 
             <div class="panel panel-default">
-                <div class="panel-heading"> Additional Asset Information</strong></div>
+                <div class="panel-heading"> <span data-translate="Additional asset information"></span></div>
                 <ul class="list-group">
                     <li class="list-group-item">
                         <span class="badge" style="background-color: #FFFFFF; color: #000000;">
@@ -59,31 +59,31 @@
                                   <!--  ... <a target="_self" ng-click="scrollTo('fulldescription')" title="{{data.description}}" style="cursor: pointer;"> READ FULL</a> -->
                                 </span>
                         </span>
-                        Description
+                        <span data-translate="Description"></span>
                     </li>
                     <li class="list-group-item">
                         <span class="badge" style="background-color: #FFFFFF; color: #000000">{{data.max_supply | number}} {{data.symbol}}</span>
-                        Max Supply
+                        <span data-translate="Max supply"></span>
                     </li>
                     <li class="list-group-item">
                         <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#/accounts/{{data.issuer}}/'>{{data.issuer_name}}</a></span>
-                        Issuer
+                        <span data-translate="Issuer"></span>
                     </li>
                     <li class="list-group-item">
                         <span class="badge" style="background-color: #FFFFFF; color: #000000">{{data.precision}}</span>
-                    Presicion
+                        <span data-translate="Precision"></span>
                     </li>
                     <li class="list-group-item">
                         <span class="badge" style="background-color: #FFFFFF; color: #000000">{{data.fee_pool | number}} {{data.symbol}}</span>
-                        Fee Pool
+                        <span data-translate="Fee pool"></span>
                     </li>
                     <li class="list-group-item">
                         <span class="badge" style="background-color: #FFFFFF; color: #000000">{{data.current_supply | number}} {{data.symbol}}</span>
-                        Current Supply
+                        <span data-translate="Current supply"></span>
                     </li>
                     <li class="list-group-item">
                         <span class="badge" style="background-color: #FFFFFF; color: #000000">{{data.confidential_supply | number}} {{data.symbol}} </span>
-                        Confidential Supply
+                        <span data-translate="Confidential supply"></span>
                     </li>
                 </ul>
             </div>
@@ -92,7 +92,7 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">Active Markets (in the last 24 hs)</h3>
+            <h3 class="panel-title"><span data-translate="Active markets"></span></h3>
         </div>
         <div class="panel-body">
 
@@ -110,9 +110,9 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th ng-click='sortColumn("pair")' ng-class='sortClass("pair")'>Name</th>
-                        <th class="align-right" ng-click='sortColumn("price")' ng-class='sortClass("price")'>Price</th>
-                        <th class="align-right" ng-click='sortColumn("volume")' ng-class='sortClass("volume")'>Volume</th>
+                        <th ng-click='sortColumn("pair")' ng-class='sortClass("pair")'><span data-translate="Name"></span></th>
+                        <th class="align-right" ng-click='sortColumn("price")' ng-class='sortClass("price")'><span data-translate="Price"></span></th>
+                        <th class="align-right" ng-click='sortColumn("volume")' ng-class='sortClass("volume")'><span data-translate="Volume"></span></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -129,7 +129,7 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">Top Holders</h3>
+            <h3 class="panel-title"><span data-translate="Top holders"></span></h3>
         </div>
         <div class="panel-body">
 
@@ -148,8 +148,8 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th ng-click='sortColumn2("account")' ng-class='sortClass2("account")'>Account</th>
-                        <th class="align-right" ng-click='sortColumn2("amount")' ng-class='sortClass2("amount")'>Amount</th>
+                        <th ng-click='sortColumn2("account")' ng-class='sortClass2("account")'><span data-translate="Account"></span></th>
+                        <th class="align-right" ng-click='sortColumn2("amount")' ng-class='sortClass2("amount")'><span data-translate="Amount"></span></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -167,7 +167,7 @@
     <a name="fulldescription" id="fulldescription"></a>
     <div class="panel panel-default" ng-if="data.long_description">
         <div class="panel-heading">
-            <h3 class="panel-title">Full description</h3>
+            <h3 class="panel-title"><span data-translate="Full description"></span></h3>
         </div>
         <div class="panel-body">
             {{data.description}}

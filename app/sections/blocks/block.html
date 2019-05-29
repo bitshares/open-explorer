@@ -2,9 +2,9 @@
     <div class="row">
         <div class="col-md-6">
             <ol class="breadcrumb">
-                <li><a href="#/">Home</a></li>
-                <li><a href="#/blocks/">Blocks</a></li>
-                <li class="active"><a href="#/blocks/{{data.block_num}}/">Block Number: {{data.block_num | number}}</a></li>
+                <li><a href="#/"><span data-translate="Home"></span></a></li>
+                <li><a href="#/blocks/"><span data-translate="Blocks"></span></a></li>
+                <li class="active"><a href="#/blocks/{{data.block_num}}/"><span data-translate="Block number"></span>: {{data.block_num | number}}</a></li>
             </ol>
         </div>
         <div class="col-md-6">
@@ -15,21 +15,21 @@
             <a href="#/blocks/{{data.prev}}/"><i class="fa fa-angle-double-left"></i> Block {{data.prev | number}}</a>
         </div>
         <div class="col-md-6" align="right">
-            <a href="#/blocks/{{data.next}}/">Block {{data.next | number}} <i class="fa fa-angle-double-right"></i> </a>
+            <a href="#/blocks/{{data.next}}/"><span data-translate="Block"></span> {{data.next | number}} <i class="fa fa-angle-double-right"></i> </a>
         </div>
     </div>
     <br>
 
     <div class="panel panel-default">
-        <div class="panel-heading"> Block: <strong>{{data.block_num | number}}</strong></div>
+        <div class="panel-heading"> <span data-translate="Block"></span>: <strong>{{data.block_num | number}}</strong></div>
         <ul class="list-group">
             <li class="list-group-item">
                 <span class="badge" style="background-color: #FFFFFF; color: #000000">{{data.previous}}</span>
-                Previous
+                <span data-translate="Previous"></span>
             </li>
             <li class="list-group-item">
                 <span class="badge" style="background-color: #FFFFFF; color: #000000">{{data.timestamp}}</span>
-                DateTime
+                <span data-translate="Date and time"></span>
             </li>
             <li class="list-group-item">
                 <span class="badge" style="background-color: #FFFFFF; color: #000000">{{data.transaction_merkle_root}}</span>
@@ -37,26 +37,27 @@
             </li>
             <li class="list-group-item">
                 <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#/objects/{{data.witness}}/'>{{data.witness}}</a></span>
-                Witness
+                <span data-translate="Witness"></span>
             </li>
             <li class="list-group-item">
                 <span class="badge" style="background-color: #FFFFFF; color: #000000">{{data.witness_signature}}</span>
-                Witness Signature
+                <span data-translate="Witness signature"></span>
+
             </li>
             <li class="list-group-item">
                 <span class="badge" style="background-color: #FFFFFF; color: #000000">{{data.transactions_count}}</span>
-                Transactions in Block
+                <span data-translate="Transactions in block"></span>
             </li>
             <li class="list-group-item">
                 <span class="badge" style="background-color: #FFFFFF; color: #000000">{{data.operations_count}}</span>
-                Operations in Block
+                <span data-translate="Operations in block"></span>
             </li>
         </ul>
     </div>
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">Transactions Raw Data</h3>
+            <h3 class="panel-title"><span data-translate="Transactions raw data"></span></h3>
         </div>
         <div class="panel-body">
             <pre>{{data.transactions | json}}</pre>

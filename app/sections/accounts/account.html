@@ -94,7 +94,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="panel panel-default">
-                                        <div class="panel-heading"> {{balance_count}} <span data-translate="Asset Balances"></span></div>
+                                        <div class="panel-heading"> {{balance_count}} <span data-translate="Asset balances"></span></div>
                                         <div class="panel-body table-responsive">
                                             <form>
                                                 <div class="col-md-6">
@@ -290,7 +290,7 @@
                         <uib-tab ng-if="proposals.length" heading="Active proposals" index="4" class="text-small">
                             <br>
                             <div class="panel panel-default">
-                                <div class="panel-heading"> <span data-translate="Currently Active Proposals"></span></div>
+                                <div class="panel-heading"> <span data-translate="Currently active proposals"></span></div>
                                 <div class="panel-body table-responsive">
                                     <table class="table">
                                         <thead>
@@ -378,7 +378,7 @@
                             <br>
 
                             <div class="panel panel-default">
-                                <div class="panel-heading"> <span data-translate="Committee Member Data"></span></div>
+                                <div class="panel-heading"> <span data-translate="Committee member data"></span></div>
                                 <div class="panel-body">
                                     <ul class="list-group">
                                         <li class="list-group-item">
@@ -406,7 +406,7 @@
                             <br>
 
                             <div class="panel panel-default">
-                                <div class="panel-heading"> Witness Data</div>
+                                <div class="panel-heading"> <span data-translate="Witness data"></span></div>
                                 <div class="panel-body">
                                     <ul class="list-group">
                                         <li class="list-group-item">
@@ -429,11 +429,11 @@
                                 </div>
                             </div>
 
-                            Votes {{witness_votes | number:0}}
+                            <span data-translate="Votes"></span> {{witness_votes | number:0}}
                         </uib-tab>
                         <uib-tab ng-if="is_worker == true" heading="Worker" index="10" class="text-small">
                             <br>
-                            Votes {{worker_votes | number:0}}
+                            <span data-translate="Votes"></span> {{worker_votes | number:0}}
                         </uib-tab>
 
                     </uib-tabset>
@@ -443,7 +443,7 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title"><span data-translate="Full Account History"></span></h3>
+            <h3 class="panel-title"><span data-translate="Full account history"></span></h3>
         </div>
         <div class="panel-body table-responsive">
             <div class="col-md-6">

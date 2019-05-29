@@ -3,8 +3,8 @@
     <div class="row">
         <div class="col-md-6">
             <ol class="breadcrumb">
-                <li><a href="#/">Home</a></li>
-                <li class="active"><a href="#/assets/">Assets</a></li>
+                <li><a href="#/"><span data-translate="Home"></span></a></li>
+                <li class="active"><a href="#/assets/"><span data-translate="Assets"></span></a></li>
             </ol>
         </div>
         <div class="col-md-6">
@@ -51,7 +51,7 @@
                     <div class="well">
                         <div class="box-info">
                             <p class="size-h4">{{dynamic.market_cap_usd | number}}</p>
-                            <p class="text-muted text-small"><span data-translate=" 24H MARKET CAP IN USD"></span></p>
+                            <p class="text-muted text-small"><span data-translate="24H MARKET CAP IN USD"></span></p>
                         </div>
                     </div>
                 </div>
@@ -75,7 +75,7 @@
     </div>
 
     <div class="panel panel-default">
-		<div class="panel-heading">Assets</div>
+		<div class="panel-heading"><span data-translate="Assets"></span></div>
         <div class="panel-body table-responsive">
             <form>
                 <div class="col-md-8">
@@ -91,20 +91,20 @@
                 <thead>
                     <tr>
                         <th></th>
-                        <th ng-click='sortColumn("name")' ng-class='sortClass("name")'>Name
+                        <th ng-click='sortColumn("name")' ng-class='sortClass("name")'><span data-translate="Name"></span>
                         </th>
-                        <th class="align-right" ng-click='sortColumn("price")' ng-class='sortClass("price")'>Price
+                        <th class="align-right" ng-click='sortColumn("price")' ng-class='sortClass("price")'><span data-translate="Price"></span>
 
                         </th>
-                        <th class="align-right" ng-click='sortColumn("volume")' ng-class='sortClass("volume")'>24H Volume
+                        <th class="align-right" ng-click='sortColumn("volume")' ng-class='sortClass("volume")'>24H <span data-translate="volume"></span>
                         </th>
-						<th ng-click='sortColumn("type")' ng-class='sortClass("type")'>Type
+						<th ng-click='sortColumn("type")' ng-class='sortClass("type")'><span data-translate="Type"></span>
                         </th>
-						<th class="align-right" ng-click='sortColumn("market_cap")' ng-class='sortClass("market_cap")'>Market Cap
+						<th class="align-right" ng-click='sortColumn("market_cap")' ng-class='sortClass("market_cap")'><span data-translate="Market cap"></span>
                         </th>
-                        <th class="align-right" ng-click='sortColumn("supply")' ng-class='sortClass("supply")'>Supply
+                        <th class="align-right" ng-click='sortColumn("supply")' ng-class='sortClass("supply")'><span data-translate="Supply"></span>
                         </th>
-                        <th class="align-right" ng-click='sortColumn("holders")' ng-class='sortClass("holders")'>Holders
+                        <th class="align-right" ng-click='sortColumn("holders")' ng-class='sortClass("holders")'><span data-translate="Holders"></span>
                         </th>
                     </tr>
                 </thead>
