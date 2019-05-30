@@ -98,5 +98,43 @@
   "Transactions": "Transacciones",
   "Operations": "Operaciones",
 
+  "Committee members": "Miembros del comite",
+  "Current active committee members": "Miembros del comite activos ahora",
+  "Position": "Posicion",
+  "Standby committee members": "Miembros del comite en espera",
+
+  "BLOCK NUMBER": "BLOQUE NUMERO",
+  "NEW USERS": "NUEVOS USUARTOS",
+  "BTS MARKET CAP": "BTS CAPITALIZACION",
+  "BTS/BTC VOLUME": "BTS/BTC VOLUMEN",
+  "WITNESSES": "TESTIGOS",
+  "COMMITTEE": "COMITE",
+
+  "Fees": "Comisiones",
+  "Fee schedule": "Listado de comisiones",
+  "Basic": "Basico",
+  "Premium": "Premium",
+  "Price per KB": "Precio por KB",
+
+  "Objects": "Objectos",
+  "Exploring object": "Explorando objecto",
+  "Object type": "Tipo de objecto",
+  "Object raw data": "Objecto crudo",
+
+  "Exploring operation ID": "Explorando ID de operacion",
+  "Fee": "Comision",
+  "Operation in transaction": "Operacion en transaccion",
+  "Transaction in block": "Transaccion en bloque",
+  "Virtual operation": "Operacion virtual",
+  "Operation time": "Tiempo de la operacion",
+  "Transaction": "Transaccion",
+  "Summary": "Resumen",
+  "Raw operation": "Operacion cruda",
+
+  "Proxies": "Apoderados",
+  "Top proxies": "Apoderados mas grandes",
+  "Power": "Poder",
+  "Followers": "Seguidores",
+
   "COPYRIGHT": "COPYRIGHT"
 }

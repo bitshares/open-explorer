@@ -98,5 +98,43 @@
   "Transactions": "Transactions",
   "Operations": "Operations",
 
+  "Committee members": "Committee members",
+  "Current active committee members": "Current active committee members",
+  "Position": "Position",
+  "Standby committee members": "Standby committee members",
+
+  "BLOCK NUMBER": "BLOCK NUMBER",
+  "NEW USERS": "NEW USERS",
+  "BTS MARKET CAP": "BTS MARKET CAP",
+  "BTS/BTC VOLUME": "BTS/BTC VOLUME",
+  "WITNESSES": "WITNESSES",
+  "COMMITTEE": "COMMITTEE",
+
+  "Fees": "Fees",
+  "Fee schedule": "Fee schedule",
+  "Basic": "Basic",
+  "Premium": "Premium",
+  "Price per KB": "Price per KB",
+
+  "Objects": "Objects",
+  "Exploring object": "Exploring object",
+  "Object type": "Object type",
+  "Object raw data": "Object raw data",
+
+  "Exploring operation ID": "Exploring operation ID",
+  "Fee": "Fee",
+  "Operation in transaction": "Operation in transaction",
+  "Transaction in block": "Transaction in block",
+  "Virtual operation": "Virtual operation",
+  "Operation time": "Operation time",
+  "Transaction": "Transaction",
+  "Summary": "Summary",
+  "Raw operation": "Raw operation",
+
+  "Proxies": "Proxies",
+  "Top proxies": "Top proxies",
+  "Power": "Power",
+  "Followers": "Followers",
+
   "COPYRIGHT": "COPYRIGHT"
 }

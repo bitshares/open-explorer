@@ -3,8 +3,8 @@
     <div class="row">
         <div class="col-md-6">
             <ol class="breadcrumb">
-                <li><a href="#/">Home</a></li>
-                <li class="active"><a href="#/fees/">Fees</a></li>
+                <li><a href="#/"><span data-translate="Home"></span></a></li>
+                <li class="active"><a href="#/fees/"><span data-translate="Fees"></span></a></li>
             </ol>
         </div>
         <div class="col-md-6">
@@ -13,7 +13,7 @@
 
 
     <div class="panel panel-default">
-		<div class="panel-heading">Fee Schedule </div>
+		<div class="panel-heading"><span data-translate="Fee schedule"></span></div>
         <div class="panel-body table-responsive">
             <form>
                 <div class="col-md-8">
@@ -29,10 +29,10 @@
                 <thead>
                     <tr>
                         <th ng-click='sortColumn("identifier")' ng-class='sortClass("identifier")'>ID</th>
-                        <th ng-click='sortColumn("operation")' ng-class='sortClass("operation")'>Operation</th>
-                        <th class="align-right" ng-click='sortColumn("basic_fee")' ng-class='sortClass("basic_fee")'>Basic</th>
-						<th class="align-right" ng-click='sortColumn("premium_fee")' ng-class='sortClass("premium_fee")'>Premium</th>
-						<th class="align-right" ng-click='sortColumn("price_per_kbyte")' ng-class='sortClass("price_per_kbyte")'>Price per KB</th>
+                        <th ng-click='sortColumn("operation")' ng-class='sortClass("operation")'><span data-translate="Operation"></span></th>
+                        <th class="align-right" ng-click='sortColumn("basic_fee")' ng-class='sortClass("basic_fee")'><span data-translate="Basic"></span></th>
+						<th class="align-right" ng-click='sortColumn("premium_fee")' ng-class='sortClass("premium_fee")'><span data-translate="Premium"></span></th>
+						<th class="align-right" ng-click='sortColumn("price_per_kbyte")' ng-class='sortClass("price_per_kbyte")'><span data-translate="Price per KB"></span></th>
                     </tr>
                 </thead>
                 <tbody>

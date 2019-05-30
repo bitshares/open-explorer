@@ -99,5 +99,43 @@
     "Transactions": "交易",
     "Operations": "操作",
 
+    "Committee members": "委员会成员",
+    "Current active committee members": "现任活跃委员会成员",
+    "Position": "位置",
+    "Standby committee members": "备用委员会成员",
+
+    "BLOCK NUMBER": "块号",
+    "NEW USERS": "新用户",
+    "BTS MARKET CAP": "BTS市场资本化",
+    "BTS/BTC VOLUME": "BTS / BTC音量",
+    "WITNESSES": "证人",
+    "COMMITTEE": "委员会",
+
+    "Fees": "费用",
+    "Fee schedule": "收费表",
+    "Basic": "基本",
+    "Premium": "额外费用",
+    "Price per KB": "P每KB价格",
+
+    "Objects": "对象",
+    "Exploring object": "探索对象",
+    "Object type": "对象类型",
+    "Object raw data": "对象原始数据",
+
+    "Exploring operation ID": "探索操作ID",
+    "Fee": "费用",
+    "Operation in transaction": "交易操作",
+    "Transaction in block": "块中的交易",
+    "Virtual operation": "虚拟操作",
+    "Operation time": "操作时间",
+    "Transaction": "交易",
+    "Summary": "摘要",
+    "Raw operation": "原始操作",
+
+    "Proxies": "代理",
+    "Top proxies": "热门代理",
+    "Power": "功率",
+    "Followers": "关注",
+
     "COPYRIGHT": "版权"
 }

@@ -2,8 +2,8 @@
     <div class="row">
         <div class="col-md-6">
             <ol class="breadcrumb">
-                <li><a href="#/">Home</a></li>
-                <li class="active"><a href="#/committee_members/">Committee Members</a></li>
+                <li><a href="#/"><span data-translate="Home"></span></a></li>
+                <li class="active"><a href="#/committee_members/"><span data-translate="Committee members"></span></a></li>
             </ol>
         </div>
         <div class="col-md-6">
@@ -11,7 +11,7 @@
     </div>
 
     <div class="panel panel-default">
-		<div class="panel-heading">Current Active Committee Members</div>
+		<div class="panel-heading"><span data-translate="Current active committee members"></span></div>
         <div class="panel-body table-responsive">
             <form>
                 <div class="col-md-8">
@@ -26,11 +26,11 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th ng-click='sortColumn("counter")' ng-class='sortClass("counter")'>Position</th>
+                        <th ng-click='sortColumn("counter")' ng-class='sortClass("counter")'><span data-translate="Position"></span></th>
                         <th ng-click='sortColumn("id")' ng-class='sortClass("id")'>ID</th>
-                        <th ng-click='sortColumn("committee_member_account_name")' ng-class='sortClass("committee_member_account_name")'>Account</th>
+                        <th ng-click='sortColumn("committee_member_account_name")' ng-class='sortClass("committee_member_account_name")'><span data-translate="Account"></span></th>
                         <th>Url</th>
-						<th class="align-right" ng-click='sortColumn("total_votes")' ng-class='sortClass("total_votes")'>Total votes</th>
+						<th class="align-right" ng-click='sortColumn("total_votes")' ng-class='sortClass("total_votes")'><span data-translate="Total votes"></span></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -46,7 +46,7 @@
     </div>
 
     <div class="panel panel-default">
-        <div class="panel-heading">Standby Committee Members </div>
+        <div class="panel-heading"><span data-translate="Standby committee members"></span></div>
         <div class="panel-body table-responsive">
             <form>
                 <div class="col-md-8">
@@ -61,11 +61,11 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th ng-click='sortColumn2("counter")' ng-class='sortClass2("counter")'>Position</th>
+                    <th ng-click='sortColumn2("counter")' ng-class='sortClass2("counter")'><span data-translate="Position"></span></th>
                     <th ng-click='sortColumn2("id")' ng-class='sortClass2("id")'>ID</th>
-                    <th ng-click='sortColumn2("committee_member_account_name")' ng-class='sortClass2("committee_member_account_name")'>Account</th>
+                    <th ng-click='sortColumn2("committee_member_account_name")' ng-class='sortClass2("committee_member_account_name")'><span data-translate="Account"></span></th>
                     <th>Url</th>
-                    <th class="align-right" ng-click='sortColumn2("total_votes")' ng-class='sortClass2("total_votes")'>Total votes</th>
+                    <th class="align-right" ng-click='sortColumn2("total_votes")' ng-class='sortClass2("total_votes")'><span data-translate="Total votes"></span></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -79,5 +79,4 @@
             </table>
         </div>
     </div>
-
 </div>
