@@ -136,5 +136,63 @@
   "Power": "Power",
   "Followers": "Followers",
 
+  "Search": "Search",
+  "Search block": "Search block",
+  "Search by block by inserting block number. No commas, no dots, just pure numbers.": "Search by block by inserting block number. No commas, no dots, just pure numbers.",
+  "Sample input": "Sample input",
+  "Block number": "Block number",
+  "Search account": "Search account",
+  "Looking for an account? Start typing the first letters of it's name and let the auto complete feature help you find the exact account name string.": "Looking for an account? Start typing the first letters of it's name and let the auto complete feature help you find the exact account name string.",
+  "Account name or ID": "Account name or ID",
+  "Search object": "Search object",
+  "In order to search for an object you need to insert an ID with the correct Bitshares object format. More info and list can be found": "In order to search for an object you need to insert an ID with the correct Bitshares object format. More info and list can be found",
+  "HERE": "HERE",
+  "Object ID": "Object ID",
+  "Search asset": "Search asset",
+  "Looking for a SmartCoin or UIA? Start typing the first letters of it's name and let the auto complete feature help you find the exact asset name string.": "Looking for a SmartCoin or UIA? Start typing the first letters of it's name and let the auto complete feature help you find the exact asset name string.",
+  "Asset name or ID": "Asset name or id",
+  "Search transaction hash": "Search transaction hash",
+  "If you have a transaction hash, please paste it here to get transaction information.": "If you have a transaction hash, please paste it here to get transaction information.",
+  "Transaction ID": "Transaction ID",
+
+  "Biggest transactions in the last 1 hour": "Biggest transactions in the last 1 hour",
+
+  "Hash": "Hash",
+  "Date": "Date",
+
+  "Voting report": "Voting report",
+
+  "Active witnesses": "Active witnesses",
+  "Missed": "Missed",
+  "Last confirmed block": "Last confirmed block",
+
+  "Current workers": "Current workers",
+  "Worker": "Worker",
+  "Start": "Start",
+  "End": "End",
+  "Daily pay": "Daily pay",
+  "Votes for": "Votes for",
+  "Funded": "Funded",
+
+  "CURRENT PRICE": "CURRENT PRICE",
+  "LAST ASK": "LAST ASK",
+  "LAST BID": "LAST BID",
+  "VOLUME": "VOLUME",
+  "24 HS % CHANGE": "24 HS % CHANGE",
+  "Price chart": "Price chart",
+  "Order book": "Order book",
+  "Sell orders": "Sell orders",
+  "Price": "Price",
+  "Total": "Total",
+  "Buy orders": "Buy orders",
+  "Grouped order book": "Grouped order book",
+  "Sell orders groups": "Sell orders groups",
+  "Buy orders groups": "Buy orders groups",
+  "Min": "Min",
+  "Max": "Max",
+
+  "Most active markets": "Most active markets",
+  "Pair": "Pair",
+
   "COPYRIGHT": "COPYRIGHT"
 }

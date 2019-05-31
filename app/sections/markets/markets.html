@@ -1,18 +1,16 @@
 <div class="page page-table" data-ng-controller="marketsCtrl">
-
     <div class="row">
         <div class="col-md-6">
             <ol class="breadcrumb">
-                <li><a href="#/">Home</a></li>
-                <li class="active"><a href="#/markets/">Markets</a></li>
+                <li><a href="#/"><span data-translate="Home"></span></a></li>
+                <li class="active"><a href="#/markets/"><span data-translate="Markets"></span></a></li>
             </ol>
         </div>
         <div class="col-md-6">
         </div>
     </div>
-
     <div class="panel panel-default">
-		<div class="panel-heading">Most active Markets</div>
+		<div class="panel-heading"><span data-translate="Most active markets"></span></div>
         <div class="panel-body table-responsive">
             <form>
                 <div class="col-md-8">
@@ -27,9 +25,9 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th ng-click='sortColumn("pair")' ng-class='sortClass("pair")'>Pair</th>
-                        <th style="text-align:right" ng-click='sortColumn("price")' ng-class='sortClass("price")'>Price</th>
-						<th style="text-align:right" ng-click='sortColumn("volume")' ng-class='sortClass("volume")'>Volume</th>
+                        <th ng-click='sortColumn("pair")' ng-class='sortClass("pair")'><span data-translate="Pair"></span></th>
+                        <th style="text-align:right" ng-click='sortColumn("price")' ng-class='sortClass("price")'><span data-translate="Price"></span></th>
+						<th style="text-align:right" ng-click='sortColumn("volume")' ng-class='sortClass("volume")'><span data-translate="Volume"></span></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -41,5 +39,4 @@
             </table>
         </div>
     </div>
-
 </div>

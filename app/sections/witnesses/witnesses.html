@@ -2,16 +2,15 @@
     <div class="row">
         <div class="col-md-6">
             <ol class="breadcrumb">
-                <li><a href="#/">Home</a></li>
-                <li class="active"><a href="#/witness/">Network Witnesses</a></li>
+                <li><a href="#/"><span data-translate="Home"></span></a></li>
+                <li class="active"><a href="#/witness/"><span data-translate="Witnesses"></span></a></li>
             </ol>
         </div>
         <div class="col-md-6">
         </div>
     </div>
-
     <div class="panel panel-default">
-		<div class="panel-heading">Active Witnesses </div>
+		<div class="panel-heading"><span data-translate="Active witnesses"></span></div>
         <div class="panel-body table-responsive">
             <form>
                 <div class="col-md-8">
@@ -26,13 +25,13 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th ng-click='sortColumn("counter")' ng-class='sortClass("counter")'>Position</th>
+                        <th ng-click='sortColumn("counter")' ng-class='sortClass("counter")'><span data-translate="Position"></span></th>
                         <th ng-click='sortColumn("id")' ng-class='sortClass("id")'>ID</th>
-                        <th ng-click='sortColumn("witness_account")' ng-class='sortClass("witness_account")'>Account</th>
+                        <th ng-click='sortColumn("witness_account")' ng-class='sortClass("witness_account")'><span data-translate="Account"></span></th>
                         <th>Url</th>
-						<th class="align-right" ng-click='sortColumn("total_votes")' ng-class='sortClass("total_votes")'>Total votes</th>
-						<th class="align-right" ng-click='sortColumn("total_missed")' ng-class='sortClass("total_missed")'>Missed</th>
-                        <th class="align-right" ng-click='sortColumn("last_confirmed_block_num")' ng-class='sortClass("last_confirmed_block_num")'>Last Confirmed Block</th>
+						<th class="align-right" ng-click='sortColumn("total_votes")' ng-class='sortClass("total_votes")'><span data-translate="Total votes"></span>s</th>
+						<th class="align-right" ng-click='sortColumn("total_missed")' ng-class='sortClass("total_missed")'><span data-translate="Missed"></span></th>
+                        <th class="align-right" ng-click='sortColumn("last_confirmed_block_num")' ng-class='sortClass("last_confirmed_block_num")'><span data-translate="Last confirmed block"></span></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -48,9 +47,8 @@
             </table>
         </div>
     </div>
-
     <div class="panel panel-default">
-        <div class="panel-heading">Standby Witnesses </div>
+        <div class="panel-heading"><span data-translate="Standby witnesses"></span></div>
         <div class="panel-body table-responsive">
             <form>
                 <div class="col-md-8">
@@ -65,13 +63,13 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th ng-click='sortColumn2("counter")' ng-class='sortClass2("counter")'>Position</th>
+                    <th ng-click='sortColumn2("counter")' ng-class='sortClass2("counter")'><span data-translate="Position"></span></th>
                     <th ng-click='sortColumn2("id")' ng-class='sortClass2("id")'>ID</th>
-                    <th ng-click='sortColumn2("witness_account")' ng-class='sortClass2("witness_account")'>Account</th>
+                    <th ng-click='sortColumn2("witness_account")' ng-class='sortClass2("witness_account")'><span data-translate="Account"></span></th>
                     <th>Url</th>
-                    <th class="align-right" ng-click='sortColumn2("total_votes")' ng-class='sortClass2("total_votes")'>Total votes</th>
-                    <th class="align-right" ng-click='sortColumn2("total_missed")' ng-class='sortClass2("total_missed")'>Missed</th>
-                    <th class="align-right" ng-click='sortColumn2("last_confirmed_block_num")' ng-class='sortClass2("last_confirmed_block_num")'>Last Confirmed Block</th>
+                    <th class="align-right" ng-click='sortColumn2("total_votes")' ng-class='sortClass2("total_votes")'><span data-translate="Total votes"></span></th>
+                    <th class="align-right" ng-click='sortColumn2("total_missed")' ng-class='sortClass2("total_missed")'><span data-translate="Missed"></span></th>
+                    <th class="align-right" ng-click='sortColumn2("last_confirmed_block_num")' ng-class='sortClass2("last_confirmed_block_num")'><span data-translate="Last confirmed block"></span></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -87,5 +85,4 @@
             </table>
         </div>
     </div>
-
 </div>

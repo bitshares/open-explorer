@@ -1,18 +1,16 @@
 <div class="page page-table" data-ng-controller="workersCtrl">
-
     <div class="row">
         <div class="col-md-6">
             <ol class="breadcrumb">
-                <li><a href="#/">Home</a></li>
-                <li class="active"><a href="#/workers/">DAC Workers</a></li>
+                <li><a href="#/"><span data-translate="Home"></span></a></li>
+                <li class="active">DAC <a href="#/workers/"><span data-translate="Workers"></span></a></li>
             </ol>
         </div>
         <div class="col-md-6">
         </div>
     </div>
-
     <div class="panel panel-default">
-		<div class="panel-heading">Current Workers </div>
+		<div class="panel-heading"><span data-translate="Current workers"></span> </div>
         <div class="panel-body table-responsive">
             <form>
                 <div class="col-md-8">
@@ -27,14 +25,14 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th ng-click='sortColumn("name")' ng-class='sortClass("name")'>Name</th>
-                        <th ng-click='sortColumn("worker_name")' ng-class='sortClass("worker_name")'>Worker</th>
-                        <th ng-click='sortColumn("start")' ng-class='sortClass("start")'>Start</th>
-                        <th ng-click='sortColumn("end")' ng-class='sortClass("end")'>End</th>
-                        <th ng-click='sortColumn("daily_pay")' ng-class='sortClass("daily_pay")'>Daily Pay(BTS)</th>
+                        <th ng-click='sortColumn("name")' ng-class='sortClass("name")'><span data-translate="Name"></span></th>
+                        <th ng-click='sortColumn("worker_name")' ng-class='sortClass("worker_name")'><span data-translate="Worker"></span></th>
+                        <th ng-click='sortColumn("start")' ng-class='sortClass("start")'><span data-translate="Start"></span></th>
+                        <th ng-click='sortColumn("end")' ng-class='sortClass("end")'><span data-translate="End"></span></th>
+                        <th ng-click='sortColumn("daily_pay")' ng-class='sortClass("daily_pay")'><span data-translate="Daily pay"></span>(BTS)</th>
 						<th>Url</th>
-						<th class="align-right" ng-click='sortColumn("votes_for")' ng-class='sortClass("votes_for")'>Votes for</th>
-                        <th ng-click='sortColumn("perc")' ng-class='sortClass("perc")'>Funded</th>
+						<th class="align-right" ng-click='sortColumn("votes_for")' ng-class='sortClass("votes_for")'><span data-translate="Votes for"></span></th>
+                        <th ng-click='sortColumn("perc")' ng-class='sortClass("perc")'><span data-translate="Funded"></span></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,9 +56,8 @@
             </table>
         </div>
     </div>
-
     <div class="panel panel-default">
-        <div class="panel-heading">Expired Workers </div>
+        <div class="panel-heading"><span data-translate="Expired workers"></span></div>
         <div class="panel-body table-responsive">
             <form>
                 <div class="col-md-8">
@@ -75,13 +72,13 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th ng-click='sortColumn2("name")' ng-class='sortClass2("name")'>Name</th>
-                    <th ng-click='sortColumn2("worker")' ng-class='sortClass2("worker_name")'>Worker</th>
-                    <th ng-click='sortColumn2("start")' ng-class='sortClass2("start")'>Start</th>
-                    <th ng-click='sortColumn2("end")' ng-class='sortClass2("end")'>End</th>
-                    <th class="align-right" ng-click='sortColumn2("daily_pay")' ng-class='sortClass2("daily_pay")'>Daily Pay(BTS)</th>
+                    <th ng-click='sortColumn2("name")' ng-class='sortClass2("name")'><span data-translate="Name"></span></th>
+                    <th ng-click='sortColumn2("worker")' ng-class='sortClass2("worker_name")'><span data-translate="worker"></span></th>
+                    <th ng-click='sortColumn2("start")' ng-class='sortClass2("start")'><span data-translate="Start"></span></th>
+                    <th ng-click='sortColumn2("end")' ng-class='sortClass2("end")'><span data-translate="End"></span></th>
+                    <th class="align-right" ng-click='sortColumn2("daily_pay")' ng-class='sortClass2("daily_pay")'><span data-translate="Daily pay"></span>(BTS)</th>
                     <th>Url</th>
-                    <th class="align-right" ng-click='sortColumn2("votes_for")' ng-class='sortClass2("votes_for")'>Votes for</th>
+                    <th class="align-right" ng-click='sortColumn2("votes_for")' ng-class='sortClass2("votes_for")'><span data-translate="Votes for"></span></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -104,5 +101,4 @@
             </table>
         </div>
     </div>
-
 </div>

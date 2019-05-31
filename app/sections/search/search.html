@@ -1,50 +1,47 @@
 <div class="page page-table" data-ng-controller="searchCtrl">
-
     <div class="row">
         <div class="col-md-6">
             <ol class="breadcrumb">
-                <li><a href="#/">Home</a></li>
-                <li class="active"><a href="#/search/">Search</a></li>
+                <li><a href="#/"><span data-translate="Home"></span></a></li>
+                <li class="active"><a href="#/search/"><span data-translate="Search"></span></a></li>
             </ol>
         </div>
         <div class="col-md-6">
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-4">
-
             <div class="panel panel-default">
-                <div class="panel-heading"> Search Block</div>
+                <div class="panel-heading"><span data-translate="Search block"></span></div>
                 <div class="panel-body">
-                    <p>Search by block by inserting block number. No commas, no dots, just pure numbers.</p>
-                    <p>Sample input: <a data-ng-click="add2block('19446934')" style="cursor: pointer;">19446934</a></p>
+                    <p><span data-translate="Search by block by inserting block number. No commas, no dots, just pure numbers."></span></p>
+                    <p><span data-translate="Sample input"></span>: <a data-ng-click="add2block('19446934')" style="cursor: pointer;">19446934</a></p>
                     <form role="form" data-ng-submit="submit()">
                         <input type="hidden" class="form-control" ng-model="type" value="block">
                         <div class="form-group ui-typeahead">
-                            <label for="block">Block Number</label>
+                            <label for="block"><span data-translate="Block number"></span></label>
                             <input type="text" class="form-control" ng-model="block" ng-change="updateData('block')" id="block" placeholder="enter block number"
                                    uib-typeahead="b for b in blocks | filter:$viewValue | limitTo:8" ng-required="required">
                         </div>
-                        <button type="submit" class="btn btn-success btn-w-md">Go</button>
+                        <button type="submit" class="btn btn-success btn-w-md"><span data-translate="Go"></span></button>
                     </form>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="panel panel-default">
-                <div class="panel-heading">Search Account</div>
+                <div class="panel-heading"><span data-translate="Search account"></span></div>
                 <div class="panel-body">
-                    <p>Looking for an account? Start typing the first letters of it's name and let the autocompleate feature help you find the exact string.</p>
-                    <p>Sample input: <a data-ng-click="add2account('alfredo-worker')" style="cursor: pointer;">alfredo-worker</a></p>
+                    <p><span data-translate="Looking for an account? Start typing the first letters of it's name and let the auto complete feature help you find the exact account name string."></span></p>
+                    <p><span data-translate="Sample input"></span>: <a data-ng-click="add2account('alfredo-worker')" style="cursor: pointer;">alfredo-worker</a></p>
                     <form role="form" data-ng-submit="submit()">
                         <input type="hidden" class="form-control" ng-model="type" value="account">
                         <div class="form-group ui-typeahead">
-                            <label for="account">Account name or ID</label>
+                            <label for="account"><span data-translate="Account name or ID"></span></label>
                             <input type="text" class="form-control" ng-model="account" ng-change="updateData('account')" id="account" placeholder="enter account name or id number"
                                    uib-typeahead="a for a in accounts | filter:$viewValue | limitTo:8" ng-required="required">
                         </div>
-                        <button type="submit" class="btn btn-success btn-w-md">Go</button>
+                        <button type="submit" class="btn btn-success btn-w-md"><span data-translate="Go"></span></button>
                     </form>
                 </div>
             </div>
@@ -52,18 +49,18 @@
         <div class="col-md-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Search Object</h3>
+                    <h3 class="panel-title"><span data-translate="Search object"></span></h3>
                 </div>
                 <div class="panel-body">
-                    <p>IOn order to search for an object you need to insert an ID with the correct Bitshares object format. More info and list can be found <a href="http://docs.bitshares.org/development/blockchain/objects.html" target="_blank">HERE</a></p>
-                    <p>Sample input: <a data-ng-click="add2object('1.3.0')" style="cursor: pointer;">1.3.0</a></p>
+                    <p><span data-translate="In order to search for an object you need to insert an ID with the correct Bitshares object format. More info and list can be found"></span> <a href="https://dev.bitshares.works/en/master/api/blockchain-objects-ids.html" target="_blank"><span data-translate="HERE"></span></a></p>
+                    <p><span data-translate="Sample input"></span>: <a data-ng-click="add2object('1.3.0')" style="cursor: pointer;">1.3.0</a></p>
                     <form role="form" data-ng-submit="submit()">
                         <input type="hidden" class="form-control" ng-model="type" value="object">
                         <div class="form-group">
-                            <label for="object">Object ID</label>
+                            <label for="object"><span data-translate="Object ID"></span></label>
                             <input type="text" class="form-control" ng-model="object" id="object" placeholder="enter object id" ng-required="required">
                         </div>
-                        <button type="submit" class="btn btn-success btn-w-md">Go</button>
+                        <button type="submit" class="btn btn-success btn-w-md"><span data-translate="Go"></span></button>
                     </form>
                 </div>
             </div>
@@ -73,45 +70,42 @@
         <div class="col-md-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Search Asset</h3>
+                    <h3 class="panel-title"><span data-translate="Search asset"></span></h3>
                 </div>
                 <div class="panel-body">
-                    <p>Looking for a SmartCoin or UIA? Start typing the first letters of it's name and let the autocompleate feature help you find the exact string.</p>
-                    <p>Sample input: <a data-ng-click="add2asset('CNY')" style="cursor: pointer;">CNY</a></p>
+                    <p><span data-translate="Looking for a SmartCoin or UIA? Start typing the first letters of it's name and let the auto complete feature help you find the exact asset name string."></span></p>
+                    <p><span data-translate="Sample input"></span>: <a data-ng-click="add2asset('CNY')" style="cursor: pointer;">CNY</a></p>
                     <form role="form" data-ng-submit="submit()">
                         <input type="hidden" class="form-control" ng-model="type" value="asset">
                         <div class="form-group ui-typeahead">
-                            <label for="asset">Asset name or id</label>
+                            <label for="asset"><span data-translate="Asset name or ID"></span></label>
                             <input type="text" class="form-control" ng-model="asset" ng-change="updateData('asset')" id="asset" placeholder="enter asset name or id"
                                    uib-typeahead="a for a in assets | filter:$viewValue | limitTo:8" ng-required="required">
                         </div>
-                        <button type="submit" class="btn btn-success btn-w-md">Go</button>
+                        <button type="submit" class="btn btn-success btn-w-md"><span data-translate="Go"></span></button>
                     </form>
                 </div>
             </div>
         </div>
-
         <div class="col-md-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Search Transaction Hash</h3>
+                    <h3 class="panel-title"><span data-translate="Search transaction hash"></span></h3>
                 </div>
                 <div class="panel-body">
-                    <p>Looking for a TRX.</p>
-                    <p>Sample input: <a data-ng-click="add2tx('738be2bd22e2da31d587d281ea7ee9bd02b9dbf0')" style="cursor: pointer;">738be2bd22e2da31d587d281ea7ee9bd02b9dbf0</a></p>
+                    <p><span data-translate="If you have a transaction hash, please paste it here to get transaction information."></span></p>
+                    <p><span data-translate="Sample input"></span>: <a data-ng-click="add2tx('738be2bd22e2da31d587d281ea7ee9bd02b9dbf0')" style="cursor: pointer;">738be2bd22e2da31d587d281ea7ee9bd02b9dbf0</a></p>
                     <form role="form" data-ng-submit="submit()">
                         <input type="hidden" class="form-control" ng-model="type" value="asset">
                         <div class="form-group ui-typeahead">
-                            <label for="asset">Transaction ID</label>
+                            <label for="asset"><span data-translate="Transaction ID"></span></label>
                             <input type="text" class="form-control" ng-model="tx" ng-change="updateData('tx')" id="tx" placeholder="enter tx hash"
                                    uib-typeahead="a for a in txs | filter:$viewValue | limitTo:8" ng-required="required">
                         </div>
-                        <button type="submit" class="btn btn-success btn-w-md">Go</button>
+                        <button type="submit" class="btn btn-success btn-w-md"><span data-translate="Go"></span></button>
                     </form>
                 </div>
             </div>
         </div>
-
     </div>
-
 </div>

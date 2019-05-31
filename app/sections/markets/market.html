@@ -3,8 +3,8 @@
     <div class="row">
         <div class="col-md-6">
             <ol class="breadcrumb">
-                <li><a href="#/">Home</a></li>
-                <li><a href="#/markets/">Markets</a></li>
+                <li><a href="#/"><span data-translate="Home"></span></a></li>
+                <li><a href="#/markets/"><span data-translate="Markets"></span></a></li>
                 <li class="active"><a href="#/markets/{{ticker.base}}/{{ticker.quote}}/">{{ticker.base}}/{{ticker.quote}}</a></li>
             </ol>
         </div>
@@ -42,7 +42,7 @@
             <div class="panel mini-box">
                 <div class="box-info">
                     <p class="size-h3">{{ticker.base_volume | number}}<span class="size-h4"></span></p>
-                    <p class="text-muted text-small"><span data-translate="{{ticker.base}} VOLUME"></span></p>
+                    <p class="text-muted text-small">{{ticker.base}} <span data-translate="VOLUME"></span></p>
                 </div>
             </div>
         </div>
@@ -50,7 +50,7 @@
             <div class="panel mini-box">
                 <div class="box-info">
                     <p class="size-h3">{{ticker.quote_volume | number}}<span class="size-h4"></span></p>
-                    <p class="text-muted text-small"><span data-translate="{{ticker.quote}} VOLUME"></span></p>
+                    <p class="text-muted text-small">{{ticker.quote}} <span data-translate="VOLUME"></span></p>
                 </div>
             </div>
         </div>
@@ -64,12 +64,10 @@
         </div>
 
     </div>
-
-
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Price Chart</div>
+                <div class="panel-heading"><span data-translate="Price chart"></span></div>
                 <div class="panel-body table-responsive">
                     <!-- <div data-echarts data-options="pricechart.options"  style="height: 400px;"></div> -->
                     <div id="tv_chart_container"></div>
@@ -77,19 +75,19 @@
             </div>
         </div>
     </div>
-<h2>Order Book</h2>
+<h2><span data-translate="Order book"></span></h2>
     <div class="row">
         <div class="col-md-6">
             <div class="panel panel-default">
-                <div class="panel-heading">Sell Orders</div>
+                <div class="panel-heading"><span data-translate="Sell orders"></span></div>
                 <div class="panel-body table-responsive">
                     <table class="table">
                         <thead>
                             <tr>
-                                <th style="text-align:right;" ng-click='sortColumn("price1")' ng-class='sortClass("price1")'>Price</th>
+                                <th style="text-align:right;" ng-click='sortColumn("price1")' ng-class='sortClass("price1")'><span data-translate="Price"></span></th>
                                 <th style="text-align:right;" ng-click='sortColumn("quote1")' ng-class='sortClass("quote1")'>{{ticker.quote}}</th>
                                 <th style="text-align:right;" ng-click='sortColumn("base1")' ng-class='sortClass("base1")'>{{ticker.base}}</th>
-                                <th style="text-align:right;" ng-click='sortColumn("total1")' ng-class='sortClass("total1")'>Total({{ticker.base}})</th>
+                                <th style="text-align:right;" ng-click='sortColumn("total1")' ng-class='sortClass("total1")'><span data-translate="Total"></span>({{ticker.base}})</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -103,18 +101,17 @@
                 </div>
             </div>
         </div>
-
         <div class="col-md-6">
             <div class="panel panel-default">
-                <div class="panel-heading">Buy Orders</div>
+                <div class="panel-heading"><span data-translate="Buy orders"></span></div>
                 <div class="panel-body table-responsive">
                     <table class="table">
                         <thead>
                         <tr>
-                            <th style="text-align:right;" ng-click='sortColumn2("price2")' ng-class='sortClass2("price2")'>Price</th>
+                            <th style="text-align:right;" ng-click='sortColumn2("price2")' ng-class='sortClass2("price2")'><span data-translate="Price"></span></th>
                             <th style="text-align:right;" ng-click='sortColumn2("base2")' ng-class='sortClass2("base2")'>{{ticker.base}}</th>
                             <th style="text-align:right;" ng-click='sortColumn2("quote2")' ng-class='sortClass2("quote2")'>{{ticker.quote}}</th>
-                            <th style="text-align:right;" ng-click='sortColumn2("total2")' ng-class='sortClass2("total2")'>Total({{ticker.base}})</th>
+                            <th style="text-align:right;" ng-click='sortColumn2("total2")' ng-class='sortClass2("total2")'><span data-translate="Total"></span>({{ticker.base}})</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -129,18 +126,18 @@
             </div>
         </div>
     </div>
-    <h2>Grouped Order Book</h2>
+    <h2><span data-translate="Grouped order book"></span></h2>
     <div class="row">
         <div class="col-md-6">
             <div class="panel panel-default">
-                <div class="panel-heading">Sell Orders Groups</div>
+                <div class="panel-heading"><span data-translate="Sell orders groups"></span></div>
                 <div class="panel-body table-responsive">
                     <table class="table">
                         <thead>
                         <tr>
-                            <th style="text-align:right;" ng-click='sortColumn3("min_price3")' ng-class='sortClass3("min_price3")'>Min</th>
-                            <th style="text-align:right;" ng-click='sortColumn3("max_price3")' ng-class='sortClass3("max_price3")'>Max</th>
-                            <th style="text-align:right;" ng-click='sortColumn3("total_for_sale3")' ng-class='sortClass3("total_for_sale3")'>Total({{ticker.base}})</th>
+                            <th style="text-align:right;" ng-click='sortColumn3("min_price3")' ng-class='sortClass3("min_price3")'><span data-translate="Min"></span></th>
+                            <th style="text-align:right;" ng-click='sortColumn3("max_price3")' ng-class='sortClass3("max_price3")'><span data-translate="Max"></span></th>
+                            <th style="text-align:right;" ng-click='sortColumn3("total_for_sale3")' ng-class='sortClass3("total_for_sale3")'><span data-translate="Total"></span>({{ticker.base}})</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -155,14 +152,14 @@
         </div>
         <div class="col-md-6">
             <div class="panel panel-default">
-                <div class="panel-heading">Buy Orders Groups</div>
+                <div class="panel-heading"><span data-translate="Buy orders groups"></span></div>
                 <div class="panel-body table-responsive">
                     <table class="table">
                         <thead>
                         <tr>
-                            <th style="text-align:right;" ng-click='sortColumn4("min_price4")' ng-class='sortClass4("min_price4")'>Min</th>
-                            <th style="text-align:right;" ng-click='sortColumn4("max_price4")' ng-class='sortClass4("max_price4")'>Max</th>
-                            <th style="text-align:right;" ng-click='sortColumn4("total_for_sale4")' ng-class='sortClass4("total_for_sale4")'>Total({{ticker.base}})</th>
+                            <th style="text-align:right;" ng-click='sortColumn4("min_price4")' ng-class='sortClass4("min_price4")'><span data-translate="Min"></span></th>
+                            <th style="text-align:right;" ng-click='sortColumn4("max_price4")' ng-class='sortClass4("max_price4")'><span data-translate="Max"></span></th>
+                            <th style="text-align:right;" ng-click='sortColumn4("total_for_sale4")' ng-class='sortClass4("total_for_sale4")'><span data-translate="Total"></span>({{ticker.base}})</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -177,5 +174,3 @@
         </div>
     </div>
 </div>
-
-

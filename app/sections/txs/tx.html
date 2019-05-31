@@ -1,10 +1,9 @@
 <div class="page page-table" data-ng-controller="txsCtrl">
-
     <div class="row">
         <div class="col-md-6">
             <ol class="breadcrumb">
-                <li><a href="#/">Home</a></li>
-                <li><a href="#/txs/">Transactions</a></li>
+                <li><a href="#/"><span data-translate="Home"></span></a></li>
+                <li><a href="#/txs/"><span data-translate="Transactions"></span></a></li>
                 <li class="active">{{data.hash}}</li>
             </ol>
         </div>
@@ -14,15 +13,15 @@
     <div class="row">
         <div class="col-md-8">
             <div class="panel panel-default" >
-                <div class="panel-heading" >Operations in Transaction</div>
+                <div class="panel-heading" ><span data-translate="Operations in transaction"></span></div>
                 <div class="panel-body table-responsive">
 
                     <table class="table">
                         <thead>
                         <tr>
-                            <th>Operation</th>
-                            <th>ID</th>
-                            <th>Type</th>
+                            <th><span data-translate="Operation"></span></th>
+                            <th><span data-translate="ID"></span></th>
+                            <th><span data-translate="Type"></span></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -36,33 +35,29 @@
             </div>
         </div>
         <div class="col-md-4">
-
             <div class="panel panel-default" >
-                <div class="panel-heading" >Transaction Data</div>
+                <div class="panel-heading" ><span data-translate="Transaction data"></span></div>
                 <div class="panel-body table-responsive">
-
                     <table class="table">
                         <tr>
-                            <td>Hash:</td>
+                            <td><span data-translate="Hash"></span>:</td>
                             <td>{{data.hash}}</td>
                         </tr>
                         <tr>
-                            <td>Block:</td>
+                            <td><span data-translate="Block"></span>:</td>
                             <td><a href="#/blocks/{{data.block_num}}/">{{data.block_num | number}}</a></td>
                         </tr>
                         <tr>
-                            <td>Date:</td>
+                            <td><span data-translate="Date"></span>:</td>
                             <td>{{data.date}}</td>
                         </tr>
                         <tr>
-                            <td>Operations in Transaction Count:</td>
+                            <td><span data-translate="Operations in transaction"></span>:</td>
                             <td>{{count | number}}</td>
                         </tr>
                     </table>
                 </div>
             </div>
-
         </div>
     </div>
-
 </div>

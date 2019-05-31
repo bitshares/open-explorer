@@ -137,5 +137,63 @@
     "Power": "功率",
     "Followers": "关注",
 
+    "Search": "搜索",
+    "Search block": "搜索块",
+    "Search by block by inserting block number. No commas, no dots, just pure numbers.": "通过插入块编号按块搜索。 没有逗号，没有点，只有纯数字。",
+    "Sample input": "样本输入",
+    "Block number": "块号",
+    "Search account": "搜索帐户",
+    "Looking for an account? Start typing the first letters of it's name and let the auto complete feature help you find the exact account name string.": "正在寻找一个帐户？ 开始键入其名称的第一个字母，并让自动完成功能帮助您找到确切的帐户名称字符串。",
+    "Account name or ID": "帐户名称或ID",
+    "Search object": "搜索对象",
+    "In order to search for an object you need to insert an ID with the correct Bitshares object format. More info and list can be found": "要搜索对象，您需要插入具有正确Bitshares对象格式的ID。 可以找到更多信息和列表",
+    "HERE": "这里",
+    "Object ID": "对象ID",
+    "Search asset": "搜索资产",
+    "Looking for a SmartCoin or UIA? Start typing the first letters of it's name and let the auto complete feature help you find the exact asset name string.": "寻找SmartCoin或UIA？ 开始键入其名称的第一个字母，然后让自动完成功能帮助您找到确切的资产名称字符串。",
+    "Asset name or ID": "资产名称或ID",
+    "Search transaction hash": "搜索事务哈希",
+    "If you have a transaction hash, please paste it here to get transaction information.": "如果您有事务哈希，请将其粘贴到此处以获取交易信息。",
+    "Transaction ID": "交易ID",
+
+    "Biggest transactions in the last 1 hour": "过去1小时内最大的交易次数",
+
+    "Hash": "哈希",
+    "Date": "日期",
+
+    "Voting report": "投票报告",
+
+    "Active witnesses": "积极的证人",
+    "Missed": "错过",
+    "Last confirmed block": "最后确认的块",
+
+    "Current workers": "现有工人",
+    "Worker": "工人",
+    "Start": "开始",
+    "End": "结束",
+    "Daily pay": "每日工资",
+    "Votes for": "投票给",
+    "Funded": "资助",
+
+    "CURRENT PRICE": "目前的价格",
+    "LAST ASK": "最后问",
+    "LAST BID": "最后一笔",
+    "VOLUME": "体积",
+    "24 HS % CHANGE": "24 HS％变动",
+    "Price chart": "价格图表",
+    "Order book": "订单",
+    "Sell orders": "卖单",
+    "Price": "价钱",
+    "Total": "总",
+    "Buy orders": "买单",
+    "Grouped order book": "分组订单",
+    "Sell orders groups": "卖单组",
+    "Buy orders groups": "购买订单组",
+    "Min": "敏",
+    "Max": "马克斯",
+
+    "Most active markets": "最活跃的市场",
+    "Pair": "对",
+
     "COPYRIGHT": "版权"
 }

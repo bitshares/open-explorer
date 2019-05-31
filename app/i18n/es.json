@@ -136,5 +136,63 @@
   "Power": "Poder",
   "Followers": "Seguidores",
 
+  "Search": "Buscar",
+  "Search block": "Buscar bloque",
+  "Search by block by inserting block number. No commas, no dots, just pure numbers.": "Buscar insertando numero de bloque sin comas ni puntos, solo numeros.",
+  "Sample input": "Ejemplo",
+  "Block number": "Numero de bloque",
+  "Search account": "Buscar cuenta",
+  "Looking for an account? Start typing the first letters of it's name and let the auto complete feature help you find the exact account name string.": "Comienza tipeando los primeros caractares del nombre de la cuenta y permite al auto completador brindarte el nombre exacto.",
+  "Account name or ID": "Nombre de cuenta o ID",
+  "Search object": "Buscar objecto",
+  "In order to search for an object you need to insert an ID with the correct Bitshares object format. More info and list can be found": "Para buscar un objeto debes tener su ID con el formato correcto. Mas informacion y lista de objectos se pueden encontrar en",
+  "HERE": "AQUI",
+  "Object ID": "ID del objecto",
+  "Search asset": "Buscar un activo",
+  "Looking for a SmartCoin or UIA? Start typing the first letters of it's name and let the auto complete feature help you find the exact asset name string.": "Buscas un activo ? Comienza tipeando los primeros caracteres del nombre y permite que el auto completador te de el nombre exacto",
+  "Asset name or ID": "Nombre de activo o ID",
+  "Search transaction hash": "Buscar transaccion",
+  "If you have a transaction hash, please paste it here to get transaction information.": "Si tienes el hash de una transaccion, pegalo aqui para buscar los delattes de la misma.",
+  "Transaction ID": "ID de la transaccion",
+
+  "Biggest transactions in the last 1 hour": "Mayores transacciones en la ultima hora",
+
+  "Hash": "Hash",
+  "Date": "Fecha",
+
+  "Voting report": "Reporte de votacion",
+
+  "Active witnesses": "Testigos activos",
+  "Missed": "Perdidos",
+  "Last confirmed block": "Ultimo bloque confirmado",
+
+  "Current workers": "Trabajadores",
+  "Worker": "Trabajador",
+  "Start": "Inicio",
+  "End": "Fin",
+  "Daily pay": "Pago diario",
+  "Votes for": "Votos a favor",
+  "Funded": "Fundado",
+
+  "CURRENT PRICE": "PRECIO CORRIENTE",
+  "LAST ASK": "ULTIMO ASK",
+  "LAST BID": "ULTIMO BID",
+  "VOLUME": "VOLUMEN",
+  "24 HS % CHANGE": "CAMBIO DE % EN LAS ULTIMAS 24H",
+  "Price chart": "Grafica de precios",
+  "Order book": "Libro de ordenes",
+  "Sell orders": "Ordenes de venta",
+  "Price": "Precio",
+  "Total": "Total",
+  "Buy orders": "Ordenes de compra",
+  "Grouped order book": "Libro de ordenes agrupado",
+  "Sell orders groups": "Ordenes de venta agrupadas",
+  "Buy orders groups": "Ordenes de compra agrupadas",
+  "Min": "Minimo",
+  "Max": "Maximo",
+
+  "Most active markets": "Mercados mas activos",
+  "Pair": "Par",
+
   "COPYRIGHT": "COPYRIGHT"
 }
