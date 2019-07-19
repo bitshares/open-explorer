@@ -54,7 +54,7 @@
             elasticsearch_wrapper: "https://explorer.bitshares-kibana.info/", // clockwork
             //elasticsearch_wrapper: "/elastic",
             //udf_wrapper: "http://185.208.208.184:5001"
-            udf_wrapper: "https://explorer.bitshares-kibana.info/"
+            udf_wrapper: "https://explorer.bitshares-kibana.info/udf"
         };
 
         return {
