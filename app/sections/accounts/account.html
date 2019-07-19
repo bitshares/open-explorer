@@ -21,7 +21,7 @@
                 <div class="panel-body">
 
                     <uib-tabset class="ui-tab">
-                        <uib-tab heading="General" index="0" class="text-small">
+                        <uib-tab index="0" class="text-small"><uib-tab-heading><span data-translate="General"></span></uib-tab-heading>
                             <br>
 
                             <div class="col-md-3">
@@ -89,7 +89,7 @@
                                 </div>
                             </div>
                         </uib-tab>
-                        <uib-tab heading="Balances" index="1" class="text-small">
+                        <uib-tab index="1" class="text-small"><uib-tab-heading><span data-translate="Balances"></span></uib-tab-heading>
                             <br>
                             <div class="row">
                                 <div class="col-md-6">
@@ -174,7 +174,7 @@
                             </div>
                         </uib-tab>
 
-                        <uib-tab heading="Authorities" index="2" class="text-small">
+                        <uib-tab index="2" class="text-small"><uib-tab-heading><span data-translate="Authorities"></span></uib-tab-heading>
                             <br>
                             <div class="row">
                                 <div class="col-md-6">
@@ -266,7 +266,7 @@
 
                         </uib-tab>
 
-                        <uib-tab ng-if="user_issued_assets.length" heading="Created Assets" index="3" class="text-small">
+                        <uib-tab ng-if="user_issued_assets.length" index="3" class="text-small"><uib-tab-heading><span data-translate="Created assets"></span></uib-tab-heading>
                             <br>
                             <div class="panel panel-default">
                                 <div class="panel-heading"> <span data-translate="Issued Assets"></span></div>
@@ -287,7 +287,7 @@
                         </uib-tab>
 
 
-                        <uib-tab ng-if="proposals.length" heading="Active proposals" index="4" class="text-small">
+                        <uib-tab ng-if="proposals.length" index="4" class="text-small"><uib-tab-heading><span data-translate="Active proposals"></span></uib-tab-heading>
                             <br>
                             <div class="panel panel-default">
                                 <div class="panel-heading"> <span data-translate="Currently active proposals"></span></div>
@@ -307,7 +307,7 @@
                             </div>
                         </uib-tab>
 
-                        <uib-tab ng-if="votes.length" heading="Votes" index="5" class="text-small">
+                        <uib-tab ng-if="votes.length" index="5" class="text-small"><uib-tab-heading><span data-translate="Votes"></span></uib-tab-heading>
                             <br>
                             <div class="panel panel-default">
                                 <div class="panel-heading"> <span data-translate="Supporting with my vote"></span></div>
@@ -334,7 +334,7 @@
                             </div>
                         </uib-tab>
 
-                        <uib-tab ng-if="referrers.length" heading="Referral" index="6" class="text-small">
+                        <uib-tab ng-if="referrers.length" index="6" class="text-small"><uib-tab-heading><span data-translate="Referral"></span></uib-tab-heading>
                             <br>
                             <div class="panel panel-default">
                                 <div class="panel-heading"> <b>{{referral_count}}</b> <span data-translate="referred accounts"></span>.</div>
@@ -370,11 +370,11 @@
                             </div>
                         </uib-tab>
 
-                        <uib-tab ng-if="is_proxy == true" heading="Proxy" index="7" class="text-small">
+                        <uib-tab ng-if="is_proxy == true" index="7" class="text-small">uib-tab-heading><span data-translate="Proxy"></span></uib-tab-heading>
                             <br>
                             <span data-translate="Votes"></span> {{proxy_votes | number:0}}
                         </uib-tab>
-                        <uib-tab ng-if="is_committee_member == true" heading="Committee Member" index="8" class="text-small">
+                        <uib-tab ng-if="is_committee_member == true" index="8" class="text-small"><uib-tab-heading><span data-translate="Committee member"></span></uib-tab-heading>
                             <br>
 
                             <div class="panel panel-default">
@@ -402,7 +402,7 @@
                             </div>
 
                         </uib-tab>
-                        <uib-tab ng-if="is_witness == true" heading="Witness" index="9" class="text-small">
+                        <uib-tab ng-if="is_witness == true" index="9" class="text-small"><uib-tab-heading><span data-translate="Witness"></span></uib-tab-heading>
                             <br>
 
                             <div class="panel panel-default">
@@ -431,7 +431,7 @@
 
                             <span data-translate="Votes"></span> {{witness_votes | number:0}}
                         </uib-tab>
-                        <uib-tab ng-if="is_worker == true" heading="Worker" index="10" class="text-small">
+                        <uib-tab ng-if="is_worker == true" index="10" class="text-small"><uib-tab-heading><span data-translate="Worker"></span></uib-tab-heading>
                             <br>
                             <span data-translate="Votes"></span> {{worker_votes | number:0}}
                         </uib-tab>

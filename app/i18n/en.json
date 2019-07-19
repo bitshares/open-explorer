@@ -12,8 +12,19 @@
   "Workers": "Workers",
   "Voting": "Voting",
   "Proxies": "Proxies",
-
   "Home": "Home",
+  "General": "General",
+  "Balances": "Balances",
+  "Authorities": "Authorities",
+  "Created assets": "Created assets",
+  "Active proposals": "Active proposals",
+  "Referral": "Referral",
+  "Proxy": "Proxy",
+  "Committee member": "Committee member",
+  "Smart coins": "Smart coins",
+  "User issued assets": "User issued assets",
+
+
   "Account Information": "Account Information",
   "Name": "Name",
   "Referrer": "Referrer",

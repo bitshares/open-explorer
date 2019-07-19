@@ -12,8 +12,19 @@
   "Workers": "Trabajadores",
   "Voting": "Votacion",
   "Proxies": "Proxies",
-
   "Home": "Inicio",
+  "General": "General",
+  "Balances": "Saldos",
+  "Authorities": "Autoridades",
+  "Created assets": "Activos creados",
+  "Active proposals": "Propuestas activas",
+  "Referral": "Remisión",
+  "Proxy": "Apoderado",
+  "Committee member": "Miembro del comité",
+  "Smart coins": "Monedas inteligentes",
+  "User issued assets": "Activos creados por usuarios",
+
+
   "Account Information": "Informacion de cuenta",
   "Name": "Nombre",
   "Referrer": "Referente",
@@ -56,7 +67,7 @@
 
   "Volume": "Volumen",
   "Accumulated fees": "Comisiones acumuladas",
-  "Holders": "Pripietarios",
+  "Holders": "Propietarios",
   "Dynamic asset properties": "Propiedades dinamicas del activo",
   "Bit-Asset properties": "Propiedades del Bit-Asset",
   "Additional asset information": "Informacion adicional del activo",
