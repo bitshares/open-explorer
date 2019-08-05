@@ -281,8 +281,8 @@
                     callback(results);
                 }
             },
-            getAccountHistory: function(account_id, page, callback) {
-                $http.get(appConfig.urls.python_backend + "/account_history?account_id=" + account_id + "&page=" + page)
+            getAccountHistory: function(account_id, start, limit, callback) {
+                $http.get(appConfig.urls.elasticsearch_wrapper + "es/account_history?account_id=" + account_id + "&search_after=" + start + "&size=" + limit + "&sort_by=-account_history.sequence")
                     .then(function (response) {
 
                     var results = [];
@@ -290,22 +290,23 @@
                     angular.forEach(response.data, function (value, key) {
                         var timestamp;
                         var witness;
-                        var op = utilities.operationType(value.op_type);
+                        var op = utilities.operationType(value.operation_type);
                         var op_type = op[0];
                         var op_color = op[1];
-                        var time = new Date(value.timestamp);
+                        var time = new Date(value.block_data.block_time);
                         timestamp = time.toLocaleString();
                         witness = value.witness;
+                        var parsed_op = value.operation_history.op_object;
                         var operation = {
-                            operation_id: value.id,
-                            block_num: value.block_num,
+                            operation_id: value.account_history.operation_id,
+                            block_num: value.block_data.block_num,
                             time: timestamp,
                             witness: witness,
                             op_type: op_type,
                             op_color: op_color
                         };
                         var operation_text = "";
-                        operation_text = utilities.opText(appConfig, $http, value.op_type,value.op, function(returnData) {
+                        operation_text = utilities.opText(appConfig, $http, value.operation_type, parsed_op, function(returnData) {
                             operation.operation_text = returnData;
                         });
                         results.push(operation);

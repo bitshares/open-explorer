@@ -42,6 +42,18 @@
                     accountService.getTotalAccountOps(fullAccount.account.id, function (returnDataTotalOps) {
                         var total_ops = returnDataTotalOps;
 
+                        $scope.select = function(page_operations) {
+                            var page = page_operations -1;
+                            var start = returnDataTotalOps - (page * 20);
+                            var limit = 20;
+
+                            accountService.getAccountHistory(name, start, limit, function (returnData) {
+                                $scope.operations = returnData;
+                                $scope.currentPage = page_operations;
+                            });
+                        };
+                        $scope.select(1);
+
                         accountService.getAccountName(fullAccount.account.options.voting_account, function (returnData) {
 
                             $scope.account = {
@@ -165,20 +177,7 @@
                     };
                     $scope.select_referers(1);
 
-
-                    $scope.select = function(page_operations) {
-                        var page = page_operations -1;
-
-                        accountService.getAccountHistory(name, page, function (returnData) {
-                            $scope.operations = returnData;
-                            $scope.currentPage = page_operations;
-                        });
-                    };
-                    $scope.select(1);
-
-
                     utilities.columnsort($scope, "balance", "sortColumn", "sortClass", "reverse", "reverseclass", "column");
-
                 });
             }
 		}
