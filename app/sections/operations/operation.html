@@ -1,0 +1,73 @@
+<div class="page page-table" data-ng-controller="operationsCtrl">
+    <div class="row">
+        <div class="col-md-6">
+            <ol class="breadcrumb">
+                <li><a href="#/"><span data-translate="Home"></span></a></li>
+                <li><a href="#/operations/"><span data-translate="Operations"></span></a></li>
+                <li class="active"><a href="#/operations/{{data.name}}/">{{data.name}}</a></li>
+            </ol>
+        </div>
+        <div class="col-md-6">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading"> <span data-translate="Exploring operation ID"></span>: <strong>{{data.name}}</strong></div>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <span class="badge" style="background-color: #{{data.color}};">{{data.type}}</span>
+                        <span data-translate="Type"></span>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge" style="background-color: #FFFFFF; color: #000000">2</span>
+                        <span data-translate="Fee"></span>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge" style="background-color: #FFFFFF; color: #000000">{{data.op_in_trx}}</span>
+                        <span data-translate="Operation in transaction"></span>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge" style="background-color: #FFFFFF; color: #000000">{{data.trx_in_block}}</span>
+                        <span data-translate="Transaction in block"></span>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge" style="background-color: #FFFFFF; color: #000000">{{data.virtual_op | number}}</span>
+                        <span data-translate="Virtual operation"></span>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#/blocks/{{data.block_num}}/'>{{data.block_num | number}}</a></span>
+                        <span data-translate="Block"></span>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge" style="background-color: #FFFFFF; color: #000000">{{data.block_time}}</span>
+                        <span data-translate="Operation time"></span>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#/txs/{{data.trx_id}}/'>{{data.trx_id}}</a></span>
+                        <span data-translate="Transaction"></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading"><span data-translate="Summary"></span></div>
+                <div class="panel-body">
+                    <font size="+2">
+                        <div ng-bind-html="data.operation_text | to_trusted" layout-align="center"></div>
+                    </font>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span data-translate="Raw operation"></span></h3>
+        </div>
+        <div class="panel-body">
+            <pre>{{data.raw | json}}</pre>
+        </div>
+    </div>
+</div>

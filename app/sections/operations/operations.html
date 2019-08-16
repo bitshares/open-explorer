@@ -3,71 +3,62 @@
         <div class="col-md-6">
             <ol class="breadcrumb">
                 <li><a href="#/"><span data-translate="Home"></span></a></li>
-                <li><a href="#/operations/"><span data-translate="Operations"></span></a></li>
-                <li class="active"><a href="#/operations/{{data.name}}/">{{data.name}}</a></li>
+                <li class="active"><a href="#/operations/"><span data-translate="Operations"></span></a></li>
             </ol>
         </div>
         <div class="col-md-6">
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-heading"> <span data-translate="Exploring operation ID"></span>: <strong>{{data.name}}</strong></div>
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <span class="badge" style="background-color: #{{data.color}};">{{data.type}}</span>
-                        <span data-translate="Type"></span>
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge" style="background-color: #FFFFFF; color: #000000">2</span>
-                        <span data-translate="Fee"></span>
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge" style="background-color: #FFFFFF; color: #000000">{{data.op_in_trx}}</span>
-                        <span data-translate="Operation in transaction"></span>
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge" style="background-color: #FFFFFF; color: #000000">{{data.trx_in_block}}</span>
-                        <span data-translate="Transaction in block"></span>
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge" style="background-color: #FFFFFF; color: #000000">{{data.virtual_op | number}}</span>
-                        <span data-translate="Virtual operation"></span>
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#/blocks/{{data.block_num}}/'>{{data.block_num | number}}</a></span>
-                        <span data-translate="Block"></span>
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge" style="background-color: #FFFFFF; color: #000000">{{data.block_time}}</span>
-                        <span data-translate="Operation time"></span>
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#/txs/{{data.trx_id}}/'>{{data.trx_id}}</a></span>
-                        <span data-translate="Transaction"></span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-heading"><span data-translate="Summary"></span></div>
-                <div class="panel-body">
-                    <font size="+2">
-                        <div ng-bind-html="data.operation_text | to_trusted" layout-align="center"></div>
-                    </font>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title"><span data-translate="Raw operation"></span></h3>
-        </div>
-        <div class="panel-body">
-            <pre>{{data.raw | json}}</pre>
+        <div class="panel-heading"><span data-translate="Last operations"></span></div>
+        <div class="panel-body table-responsive">
+            <form>
+                <div class="col-md-8">
+                </div>
+                <div class="form-group col-md-4">
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                        <input type="text" class="form-control" placeholder="Search for an operation" ng-model="search">
+                    </div>
+                </div>
+            </form>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th><span data-translate="Operation"></span></th>
+                    <th>ID</th>
+                    <th><span data-translate="Date and time"></span></th>
+                    <th><span data-translate="Block"></span></th>
+                    <th><span data-translate="Type"></span></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="operation in operations | filter:search">
+                    <td><div ng-bind-html="operation.operation_text | to_trusted" layout-align="center"></div></td>
+                    <td><a href='#/operations/{{operation.operation_id}}/'>{{operation.operation_id}}</a></td>
+                    <td>{{operation.time}}</td>
+                    <td><a href='#/blocks/{{operation.block_num}}/'>{{operation.block_num | number}} </a></td>
+                    <td><span class="badge badge-primary" style="background-color: #{{operation.color}};">{{operation.type}}</span></td>
+                </tr>
+                </tbody>
+            </table>
+            <footer class="table-footer">
+                <div class="row">
+                    <div class="col-md-6 page-num-info">
+                    </div>
+                    <div class="col-md-6 text-right pagination-container">
+                        <ul uib-pagination class="pagination-sm"
+                            ng-model="currentPage"
+                            total-items="total_ops"
+                            max-size="4"
+                            ng-change="currentPage===undefined || select(currentPage)"
+                            items-per-page="20"
+                            rotate="false"
+                            previous-text="&lsaquo;" next-text="&rsaquo;"
+                            boundary-links="true"></ul>
+                    </div>
+                </div>
+            </footer>
         </div>
     </div>
 </div>

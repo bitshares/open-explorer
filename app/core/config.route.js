@@ -40,7 +40,9 @@
 
                 .when('/objects/:name', {templateUrl: 'sections/objects/object.html'})
 
-                .when('/operations/:name', {templateUrl: 'sections/operations/operations.html'})
+                .when('/operations', {templateUrl: 'sections/operations/operations.html'})
+                .when('/operations/:name', {templateUrl: 'sections/operations/operation.html'})
+
                 .when('/404', {templateUrl: 'sections/pages/404.html'})
 
 				.when('/accounts', {templateUrl: 'sections/accounts/accounts.html'})
