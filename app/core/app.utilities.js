@@ -256,7 +256,7 @@
                                         .then(function (response_name2) {
 
                                         operation_text = "<a href='/#/accounts/" + issuer + "'>" + response_name.data + "</a>  issued " + amount;
-                                        operation_text = operation_text + " <a href='/#/assets/" + asset_to_issue_asset_id + "'>" + response_asset.data[0]["symbol"] + "</a>";
+                                        operation_text = operation_text + " <a href='/#/assets/" + asset_to_issue_asset_id + "'>" + response_asset.data.symbol + "</a>";
                                         operation_text = operation_text + " to <a href='/#/accounts/" + issue_to_account + "'>" + response_name2.data + "</a>";
                                         callback(operation_text);
                                     });
