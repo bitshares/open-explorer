@@ -47,7 +47,7 @@
                             var start = returnDataTotalOps - (page * 20);
                             var limit = 20;
 
-                            accountService.getAccountHistory(name, start, limit, function (returnData) {
+                            accountService.getAccountHistory(fullAccount.account.id, start, limit, function (returnData) {
                                 $scope.operations = returnData;
                                 $scope.currentPage = page_operations;
                             });
