@@ -9,16 +9,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,600italic,400,600,300,700' rel='stylesheet' type='text/css'>
-        <!-- <link rel="stylesheet" href="bower_components/themify-icons/css/themify-icons.min.css"> -->
-        <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.min.css">
-        <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.min.css">
-
-        <!-- build:css({.tmp,app}) styles/main.css -->
-        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-
-        <link rel="stylesheet" href="styles/custom/custom.css">
-        <!-- endbuild -->
-
+        <link rel="stylesheet" href="html/font-awesome.min.css">
+        <link rel="stylesheet" href="html/loading-bar.min.css">
+        <link rel="stylesheet" href="html/bootstrap.min.css">
+        <link rel="stylesheet" href="html/custom.css">
     </head>
     <body data-ng-app="app"
           id="app"
@@ -33,104 +27,18 @@
             </div>
         <![endif]-->
 
-        <header data-ng-include=" 'sections/layout/header.html' "
-                 id="header"
-                 class="header-container "></header>
+        <header data-ng-include="'html/header.html'" id="header" class="header-container "></header>
 
         <div class="main-container" style="margin: 10px">
-
-
             <div id="content" class="content-container">
-                <section data-ng-view
-                         class="view-container {{main.pageTransition.class}}"></section>
+                <section data-ng-view class="view-container {{main.pageTransition.class}}"></section>
             </div>
-
-            <footer data-ng-include=" 'sections/layout/footer.html' "
-                    id="footer"
-                    class="app-footer">
-            </footer>
+            <footer data-ng-include="'html/footer.html'" id="footer" class="app-footer"></footer>
         </div>
 
-        <!-- build:js scripts/vendor.js -->
-        <script src="bower_components/jquery/dist/jquery.min.js"></script>
-        <script src="bower_components/angular/angular.min.js"></script>
-        <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="bower_components/angular-websocket/dist/angular-websocket.min.js"></script>
-        <script src="bower_components/angular-route/angular-route.min.js"></script>
-        <script src="bower_components/angular-aria/angular-aria.min.js"></script>
-        <script src="bower_components/angular-animate/angular-animate.min.js"></script>
-        <script src="bower_components/angular-translate/angular-translate.min.js"></script>
-        <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
-        <script src="bower_components/angular-google-analytics/dist/angular-google-analytics.js"></script>
-        <!-- endbuild -->
+        <script src="charting_library/jquery.min.js"></script>
+        <script src="charting_library/charting_library.min.js"></script>
+        <script src="charting_library/datafeed/udf/datafeed.js"></script>
 
-        <!-- build:js scripts/ui.js -->
-        <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-        <script src="bower_components/echarts/dist/echarts.min.js"></script>
-        <script src="bower_components/ngECharts/dist/ngecharts.js"></script>
-        <script src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
-        <!-- <script src="bower_components/pnglib/pnglib.js"></script>
-        <script src="bower_components/identicon/identicon.js"></script>
-        <script src="bower_components/angular-identicon/dist/angular-identicon.min.js"></script> -->
-        <script src="bower_components/jdenticon/dist/jdenticon.min.js"></script>
-        <script src="bower_components/js-sha256/build/sha256.min.js"></script>
-
-        <script type="text/javascript" src="charting_library/charting_library.min.js"></script>
-        <script type="text/javascript" src="charting_library/datafeed/udf/datafeed.js"></script>
-
-        <!-- endbuild -->
-
-        <!-- build:js({.tmp,app}) scripts/app.js -->
-        <!-- injector:js -->
-        <script src="app.module.js"></script>
-        <script src="sections/layout/nav.module.js"></script>
-        <script src="sections/accounts/accounts.module.js"></script>
-        <script src="sections/assets/assets.module.js"></script>
-        <script src="sections/markets/markets.module.js"></script>
-        <script src="sections/committee_members/committee_members.module.js"></script>
-        <script src="sections/fees/fees.module.js"></script>
-        <script src="sections/objects/objects.module.js"></script>
-        <script src="sections/proxies/proxies.module.js"></script>
-        <script src="sections/search/search.module.js"></script>
-        <script src="sections/txs/txs.module.js"></script>
-        <script src="sections/voting/voting.module.js"></script>
-        <script src="sections/witnesses/witnesses.module.js"></script>
-        <script src="sections/workers/workers.module.js"></script>
-        <script src="sections/operations/operations.module.js"></script>
-        <script src="sections/blocks/blocks.module.js"></script>
-        <script src="chart/chart.module.js"></script>
-        <script src="core/app.config.js"></script>
-        <script src="core/app.utilities.js"></script>
-
-        <script src="core/service.network.js"></script>
-        <script src="core/service.market.js"></script>
-        <script src="core/service.asset.js"></script>
-        <script src="core/service.chart.js"></script>
-        <script src="core/service.account.js"></script>
-        <script src="core/service.governance.js"></script>
-
-        <script src="core/app.controller.js"></script>
-        <script src="core/config.route.js"></script>
-        <script src="core/i18n.js"></script>
-        <script src="sections/dashboard/dashboard.controller.js"></script>
-        <script src="sections/layout/header.controller.js"></script>
-        <script src="sections/layout/nav.directive.js"></script>
-        <script src="sections/accounts/accounts.controller.js"></script>
-        <script src="sections/assets/assets.controller.js"></script>
-        <script src="sections/markets/markets.controller.js"></script>
-        <script src="sections/committee_members/committee_members.controller.js"></script>
-        <script src="sections/fees/fees.controller.js"></script>
-        <script src="sections/objects/objects.controller.js"></script>
-        <script src="sections/proxies/proxies.controller.js"></script>
-        <script src="sections/search/search.controller.js"></script>
-        <script src="sections/txs/txs.controller.js"></script>
-        <script src="sections/voting/voting.controller.js"></script>
-        <script src="sections/witnesses/witnesses.controller.js"></script>
-        <script src="sections/workers/workers.controller.js"></script>
-        <script src="sections/operations/operations.controller.js"></script>
-        <script src="sections/blocks/blocks.controller.js"></script>
-        <script src="chart/echarts.controller.js"></script>
-        <!-- endinjector -->
-        <!-- endbuild -->
     </body>
 </html>

@@ -55,32 +55,47 @@
         <div class="col-lg-6">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <uib-tabset class="ui-tab">
-                        <uib-tab index="0" class="text-small" select="showChart(0)">
-                            <uib-tab-heading><span data-translate="Operations"></span></uib-tab-heading>
-                            <div data-echarts data-options="operations_chart.options" style="min-height: 200px; width: 100%; margin-top: 10px"></div>
-                        </uib-tab>
-                        <uib-tab index="1" class="text-small" select="showChart(1)">
-                            <uib-tab-heading><span data-translate="Proxies"></span></uib-tab-heading>
-                            <div data-echarts data-options="proxies.options" style="min-height: 200px; width: 100%; margin-top: 10px"></div>
-                        </uib-tab>
-                        <uib-tab index="2" class="text-small" select="showChart(2)">
-                            <uib-tab-heading><span data-translate="Markets"></span></uib-tab-heading>
-                            <div data-echarts data-options="markets.options" style="min-height: 200px; width: 100%; margin-top: 10px"></div>
-                        </uib-tab>
-                        <uib-tab index="3" class="text-small" select="showChart(3)">
-                            <uib-tab-heading><span data-translate="Smart coins"></span></uib-tab-heading>
-                            <div data-echarts data-options="smartcoins.options" style="min-height: 200px; width: 100%; margin-top: 10px"></div>
-                        </uib-tab>
-                        <uib-tab index="4" class="text-small" select="showChart(4)">
-                            <uib-tab-heading><span data-translate="User issued assets"></span></uib-tab-heading>
-                            <div data-echarts data-options="uias.options" style="min-height: 200px; width: 100%; margin-top: 10px"></div>
-                        </uib-tab>
-                        <uib-tab index="5" class="text-small" select="showChart(5)">
-                            <uib-tab-heading><span data-translate="Holders"></span></uib-tab-heading>
-                            <div data-echarts data-options="holders.options" style="min-height: 200px; width: 100%; margin-top: 10px"></div>
-                        </uib-tab>
-                    </uib-tabset>
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a data-target="#operations" role="tab" data-toggle="tab">Operations</a></li>
+                        <li role="presentation"><a data-target="#proxies" role="tab" data-toggle="tab">Proxies</a></li>
+                        <li role="presentation"><a data-target="#markets" role="tab" data-toggle="tab">Markets</a></li>
+                        <li role="presentation"><a data-target="#smartcoin" role="tab" data-toggle="tab">Smart coins</a></li>
+                        <li role="presentation"><a data-target="#uia" role="tab" data-toggle="tab">User issued assets</a></li>
+                        <li role="presentation"><a data-target="#holders" role="tab" data-toggle="tab">Holders</a></li>
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="operations">
+                            <div style="width:100%;">
+                                <lz-chart config="operations_chart.options" style="min-height: 200px; width: 100%; min-width: 400px; margin-top: 10px"></lz-chart>
+                            </div></div>
+                        <div role="tabpanel" class="tab-pane" id="proxies">
+                            <div style="width:100%">
+                                <lz-chart config="proxies_chart.options" style="min-height: 200px; width: 100%; min-width: 400px; margin-top: 10px"></lz-chart>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="markets">
+                            <div style="width:100%">
+                                <lz-chart config="markets_chart.options" style="min-height: 200px; width: 100%; min-width: 400px; margin-top: 10px"></lz-chart>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="smartcoin">
+                            <div style="width:100%">
+                                <lz-chart config="smartcoins_chart.options" style="min-height: 200px; width: 100%; min-width: 400px; margin-top: 10px"></lz-chart>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="uia">
+                            <div style="width:100%">
+                                <lz-chart config="uias_chart.options" style="min-height: 200px; width: 100%; min-width: 400px; margin-top: 10px"></lz-chart>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="holders">
+                            <div style="width:100%">
+                                <lz-chart config="holders_chart.options" style="min-height: 200px; width: 100%; min-width: 400px; margin-top: 10px"></lz-chart>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

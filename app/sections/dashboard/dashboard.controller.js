@@ -33,64 +33,27 @@
         });
 
         chartService.topProxiesChart(function (returnData) {
-            $scope.proxies = returnData;
+            $scope.proxies_chart = returnData;
         });
 
         chartService.topMarketsChart(function (returnData) {
-            $scope.markets = returnData;
+            $scope.markets_chart = returnData;
         });
 
         chartService.topSmartCoinsChart(function (returnData) {
-            $scope.smartcoins = returnData;
+            $scope.smartcoins_chart = returnData;
         });
 
         chartService.topUIAsChart(function (returnData) {
-            $scope.uias = returnData;
+            $scope.uias_chart = returnData;
         });
 
         chartService.topHoldersChart(function (returnData) {
-            $scope.holders = returnData;
+            $scope.holders_chart = returnData;
         });
 
         // Todo: subscribe to updates
 
-        // hack for the display chart problem
-        $scope.showChart = function(chartToShow) {
-
-            $timeout(function() {
-                $window.dispatchEvent(new Event("resize"));
-            }, 1000);
-
-            if(chartToShow === 0) {
-                $timeout(function() {
-                    $window.dispatchEvent(new Event("resize"));
-                }, 100);
-            }
-            else if(chartToShow === 1) {
-                $timeout(function() {
-                    $window.dispatchEvent(new Event("resize"));
-                }, 100);
-            }
-            else if(chartToShow === 2) {
-                $timeout(function() {
-                    $window.dispatchEvent(new Event("resize"));
-                }, 100);
-            }
-            else if(chartToShow === 3) {
-                $timeout(function() {
-                    $window.dispatchEvent(new Event("resize"));
-                }, 100);
-            }
-            else if(chartToShow === 4) {
-                $timeout(function() {
-                    $window.dispatchEvent(new Event("resize"));
-                }, 100);
-            }
-            else if(chartToShow === 5) {
-                $timeout(function() {
-                    $window.dispatchEvent(new Event("resize"));
-                }, 100);
-            }
-        };
+        $scope.currentTabIndex = 0;
     }
 })();
