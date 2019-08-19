@@ -121,21 +121,23 @@
             },
             getReferrerCount: function(account, callback) {
                 var count = 0;
-                $http.get(appConfig.urls.python_backend + "/referrer_count?account_id=" + account).then(function (response) {
+                $http.get(appConfig.urls.python_backend + "/referrer_count?account_id=" + account)
+                    .then(function (response) {
                     count = response.data;
                     callback(count);
                 });
             },
             getFullAccount: function(account, callback) {
                 var full_account = {};
-                $http.get(appConfig.urls.python_backend + "/full_account?account_id=" + account).then(function (response) {
+                $http.get(appConfig.urls.python_backend + "/full_account?account_id=" + account)
+                    .then(function (response) {
                     full_account  = response.data;
                     callback(full_account);
                 });
             },
             getTotalAccountOps: function(account_id, callback) {
-                $http.get(appConfig.urls.elasticsearch_wrapper + "/es/account_history?account_id="+account_id+"&from_date=2015-10-10&to_date=now&type=count")
-                    .then(function(response) {
+                $http.get(appConfig.urls.elasticsearch_wrapper + "/es/account_history?account_id="+account_id+
+                    "&from_date=2015-10-10&to_date=now&type=count").then(function(response) {
                         var count = 0;
                         angular.forEach(response.data, function (value, key) {
                             count = count + value.doc_count;
@@ -145,7 +147,8 @@
             },
             getAccountName: function(account_id, callback) {
                 var account_name = "";
-                $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + account_id).then(function (response) {
+                $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + account_id)
+                    .then(function (response) {
                     account_name = response.data;
                     callback(account_name);
                 });
@@ -162,7 +165,8 @@
                         results.push(authline);
                     }
                     else if(type === "account") {
-                        $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + value[0]).then(function (response) {
+                        $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + value[0])
+                            .then(function (response) {
                             authline = {
                                 account: value[0],
                                 threshold: value[1],
@@ -225,7 +229,8 @@
                         type = "Other";
                         account = "No name";
                     }
-                    $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + account).then(function (response) {
+                    $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + account)
+                        .then(function (response) {
                         var parsed = {
                             id: value.id,
                             type: type,
@@ -282,7 +287,8 @@
                 }
             },
             getAccountHistory: function(account_id, start, limit, callback) {
-                $http.get(appConfig.urls.elasticsearch_wrapper + "es/account_history?account_id=" + account_id + "&search_after=" + start + "&size=" + limit + "&sort_by=-account_history.sequence")
+                $http.get(appConfig.urls.elasticsearch_wrapper + "es/account_history?account_id=" +
+                    account_id + "&search_after=" + start + "&size=" + limit + "&sort_by=-account_history.sequence")
                     .then(function (response) {
 
                     var results = [];
@@ -306,7 +312,8 @@
                             op_color: op_color
                         };
                         var operation_text = "";
-                        operation_text = utilities.opText(appConfig, $http, value.operation_type, parsed_op, function(returnData) {
+                        operation_text = utilities.opText(appConfig, $http, value.operation_type, parsed_op,
+                            function(returnData) {
                             operation.operation_text = returnData;
                         });
                         results.push(operation);
@@ -316,5 +323,4 @@
             }
         };
     }
-
 })();

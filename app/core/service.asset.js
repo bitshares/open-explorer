@@ -77,7 +77,8 @@
             },
             getAssetFull: function(asset_id, callback) {
 
-                $http.get(appConfig.urls.python_backend + "/asset_and_volume?asset_id=" + asset_id).then(function(response) {
+                $http.get(appConfig.urls.python_backend + "/asset_and_volume?asset_id=" + asset_id)
+                    .then(function(response) {
 
                     var type;
                     var description;
@@ -142,7 +143,8 @@
             },
             getAssetHolders: function(asset_id, precision, callback) {
                 var accounts = [];
-                $http.get(appConfig.urls.python_backend + "/asset_holders?asset_id=" + asset_id).then(function(response) {
+                $http.get(appConfig.urls.python_backend + "/asset_holders?asset_id=" + asset_id)
+                    .then(function(response) {
                     angular.forEach(response.data, function(value, key) {
                         var account = {
                             name: value.name,
@@ -155,7 +157,8 @@
                 });
             },
             getAssetHoldersCount: function(asset_id, callback) {
-                $http.get(appConfig.urls.python_backend + "/asset_holders_count?asset_id=" + asset_id).then(function(response) {
+                $http.get(appConfig.urls.python_backend + "/asset_holders_count?asset_id=" + asset_id)
+                    .then(function(response) {
                     var holders_count = response.data;
                     callback(holders_count);
                 });

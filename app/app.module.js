@@ -10,7 +10,7 @@
         // 3rd Party Modules
         'ui.bootstrap',
         'angular-loading-bar',
-		'ngWebSocket',
+        'ngWebSocket',
         'angular-google-analytics',
 
         // Custom modules
@@ -33,7 +33,6 @@
         'app.blocks',
         'app.header'
     ]);
-
 })();
 
 

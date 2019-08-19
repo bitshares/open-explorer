@@ -24,7 +24,8 @@
             },
 
             getBigBlocks: function(callback) {
-                $http.get(appConfig.urls.elasticsearch_wrapper + "/es/account_history?from_date=now-1w&to_date=now&type=aggs&agg_field=block_data.block_num&size=20")
+                $http.get(appConfig.urls.elasticsearch_wrapper +
+                    "/es/account_history?from_date=now-1w&to_date=now&type=aggs&agg_field=block_data.block_num&size=20")
                     .then(function (response) {
 
                     var blocks = [];
@@ -44,7 +45,8 @@
                 });
             },
             getLastOperations: function(limit, from, callback) {
-                $http.get(appConfig.urls.elasticsearch_wrapper + "/es/account_history?size=" + limit + "&from_=" + from + "&from_date=now-1d")
+                $http.get(appConfig.urls.elasticsearch_wrapper +
+                    "/es/account_history?size=" + limit + "&from_=" + from + "&from_date=now-1d")
                     .then(function (response) {
 
                     var lastops = [];
@@ -74,7 +76,8 @@
             },
 
             getBigTransactions: function(callback) {
-                $http.get(appConfig.urls.elasticsearch_wrapper + "/es/account_history?from_date=now-1h&to_date=now&type=aggs&agg_field=block_data.trx_id.keyword&size=20")
+                $http.get(appConfig.urls.elasticsearch_wrapper +
+                    "/es/account_history?from_date=now-1h&to_date=now&type=aggs&agg_field=block_data.trx_id.keyword&size=20")
                     .then(function (response) {
 
                     var transactions = [];
@@ -93,7 +96,8 @@
 
             getTransactionMetaData: function(trx, callback) {
                 var data;
-                $http.get(appConfig.urls.elasticsearch_wrapper + "/es/trx?trx=" + trx + "&size=1&sort=-operation_history.sequence")
+                $http.get(appConfig.urls.elasticsearch_wrapper + "/es/trx?trx=" + trx +
+                    "&size=1&sort=-operation_history.sequence")
                     .then(function(response) {
 
                     data = {
@@ -108,7 +112,8 @@
 
             getTransactionOperations: function(trx, callback) {
                 var data;
-                $http.get(appConfig.urls.elasticsearch_wrapper + "/es/trx?trx=" + trx + "&size=100&sort=-operation_history.sequence")
+                $http.get(appConfig.urls.elasticsearch_wrapper + "/es/trx?trx=" + trx +
+                    "&size=100&sort=-operation_history.sequence")
                     .then(function(response) {
 
                     var operations = [];

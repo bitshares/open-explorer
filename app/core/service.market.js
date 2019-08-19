@@ -77,7 +77,8 @@
             },
             getGroupedOrderBook: function(base, quote, base_precision, quote_precision, callback) {
                 var grouped = [];
-                $http.get(appConfig.urls.python_backend + "/grouped_limit_orders?base=" + base + "&quote=" + quote + "&group=10&limit=10")
+                $http.get(appConfig.urls.python_backend + "/grouped_limit_orders?base=" + base + "&quote=" +
+                    quote + "&group=10&limit=10")
                     .then(function(response) {
 
                     angular.forEach(response.data, function(value, key) {
@@ -138,7 +139,8 @@
             },
             getTicker: function(base, quote, callback) {
                 var ticker = {};
-                $http.get(appConfig.urls.python_backend + "/ticker?base=" + base + "&quote=" + quote).then(function(response) {
+                $http.get(appConfig.urls.python_backend + "/ticker?base=" + base + "&quote=" + quote)
+                    .then(function(response) {
                     var ticker = {
                         price: response.data.latest,
                         ask: response.data.lowest_ask,

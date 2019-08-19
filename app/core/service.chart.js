@@ -84,7 +84,8 @@
                 }
             },
             topOperationsChart: function(callback) {
-                $http.get(appConfig.urls.elasticsearch_wrapper + "/es/account_history?from_date=now-1d&to_date=now&type=aggs&agg_field=operation_type&size=10")
+                $http.get(appConfig.urls.elasticsearch_wrapper +
+                    "/es/account_history?from_date=now-1d&to_date=now&type=aggs&agg_field=operation_type&size=10")
                     .then(function(response) {
 
                     var legends = [];
