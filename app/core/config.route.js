@@ -6,10 +6,7 @@
             var routes, setRoutes;
 
             routes = [
-                'dashboard',
-				'assets', 'fees', 'witness', 'votes', 'workers', 'charts', 'search',
-                'txs',
-				'accounts',
+                'dashboard', 'assets', 'fees', 'witness', 'votes', 'workers', 'charts', 'search', 'txs', 'accounts',
                 'markets'
             ];
 
