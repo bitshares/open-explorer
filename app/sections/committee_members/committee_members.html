@@ -2,8 +2,8 @@
     <div class="row">
         <div class="col-md-6">
             <ol class="breadcrumb">
-                <li><a href="#/"><span data-translate="Home"></span></a></li>
-                <li class="active"><a href="#/committee_members/"><span data-translate="Committee members"></span></a></li>
+                <li><a href="#!/"><span data-translate="Home"></span></a></li>
+                <li class="active"><a href="#!/committee_members/"><span data-translate="Committee members"></span></a></li>
             </ol>
         </div>
         <div class="col-md-6">
@@ -36,8 +36,8 @@
                 <tbody>
                 <tr data-ng-repeat="ac in active_committee | orderBy:column:reverse | filter:search">
                     <td>{{ac.counter}}</td>
-                    <td><a href="#/objects/{{ac.id}}/">{{ac.id}}</a></td>
-                    <td><a href="#/accounts/{{ac.committee_member_account}}/">{{ac.committee_member_account_name}}</a></td>
+                    <td><a href="#!/objects/{{ac.id}}/">{{ac.id}}</a></td>
+                    <td><a href="#!/accounts/{{ac.committee_member_account}}/">{{ac.committee_member_account_name}}</a></td>
                     <td><a href="{{ac.url}}" target="_blank">Link</a></td>
 					<td class="align-right">{{ac.total_votes | number: 0}}</td>
                 </tbody>
@@ -71,8 +71,8 @@
                 <tbody>
                 <tr data-ng-repeat="sc in standby_committee | orderBy:column2:reverse2 | filter:search2">
                     <td>{{sc.counter}}</td>
-                    <td><a href="#/objects/{{sc.id}}/">{{sc.id}}</a></td>
-                    <td><a href="#/accounts/{{sc.committee_member_account}}/">{{sc.committee_member_account_name}}</a></td>
+                    <td><a href="#!/objects/{{sc.id}}/">{{sc.id}}</a></td>
+                    <td><a href="#!/accounts/{{sc.committee_member_account}}/">{{sc.committee_member_account_name}}</a></td>
                     <td><a href="{{sc.url}}" target="_blank">Link</a></td>
                     <td class="align-right">{{sc.total_votes | number: 0}}</td>
                 </tbody>

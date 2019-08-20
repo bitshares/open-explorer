@@ -56,12 +56,12 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active"><a data-target="#operations" role="tab" data-toggle="tab">Operations</a></li>
-                        <li role="presentation"><a data-target="#proxies" role="tab" data-toggle="tab">Proxies</a></li>
-                        <li role="presentation"><a data-target="#markets" role="tab" data-toggle="tab">Markets</a></li>
-                        <li role="presentation"><a data-target="#smartcoin" role="tab" data-toggle="tab">Smart coins</a></li>
-                        <li role="presentation"><a data-target="#uia" role="tab" data-toggle="tab">User issued assets</a></li>
-                        <li role="presentation"><a data-target="#holders" role="tab" data-toggle="tab">Holders</a></li>
+                        <li role="presentation" class="active"><a data-target="#operations" role="tab" data-toggle="tab"><span data-translate="Operations"></span></a></li>
+                        <li role="presentation"><a data-target="#proxies" role="tab" data-toggle="tab"><span data-translate="Proxies"></span></a></li>
+                        <li role="presentation"><a data-target="#markets" role="tab" data-toggle="tab"><span data-translate="Markets"></span></a></li>
+                        <li role="presentation"><a data-target="#smartcoin" role="tab" data-toggle="tab"><span data-translate="Smart coins"></span></a></li>
+                        <li role="presentation"><a data-target="#uia" role="tab" data-toggle="tab"><span data-translate="User issued assets"></span></a></li>
+                        <li role="presentation"><a data-target="#holders" role="tab" data-toggle="tab"><span data-translate="Holders"></span></a></li>
                     </ul>
 
                     <!-- Tab panes -->
@@ -115,9 +115,9 @@
                 <tbody>
                 <tr data-ng-repeat="operation in operations track by $index">
                     <td><div ng-bind-html="operation.operation_text | to_trusted" layout-align="center"></div></td>
-                    <td><a href='#/operations/{{operation.operation_id}}/'>{{operation.operation_id}}</a></td>
+                    <td><a href='#!/operations/{{operation.operation_id}}/'>{{operation.operation_id}}</a></td>
                     <td>{{operation.time}}</td>
-					<td><a href='#/blocks/{{operation.block_num}}/'>{{operation.block_num | number}} </a></td>
+					<td><a href='#!/blocks/{{operation.block_num}}/'>{{operation.block_num | number}} </a></td>
                     <td><span class="badge badge-primary" style="background-color: #{{operation.color}};">{{operation.type}}</span></td>
                 </tr>
                 </tbody>

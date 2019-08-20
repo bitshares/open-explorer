@@ -2,8 +2,8 @@
     <div class="row">
         <div class="col-md-6">
             <ol class="breadcrumb">
-                <li><a href="#/"><span data-translate="Home"></span></a></li>
-                <li class="active"><a href="#/proxies/"><span data-translate="Proxies"></span></a></li>
+                <li><a href="#!/"><span data-translate="Home"></span></a></li>
+                <li class="active"><a href="#!/proxies/"><span data-translate="Proxies"></span></a></li>
             </ol>
         </div>
         <div class="col-md-6">
@@ -25,7 +25,7 @@
                 <tbody>
                 <tr data-ng-repeat="p in proxies | orderBy:column:reverse">
                     <td>{{p.position}}</td>
-                    <td><a href="#/accounts/{{p.account}}/">{{p.account_name}}</a></td>
+                    <td><a href="#!/accounts/{{p.account}}/">{{p.account_name}}</a></td>
                     <td class="align-right">{{p.power | number: 0}}</td>
 					<td class="align-right">{{p.followers | number}}</td>
                     <td>{{p.perc | number: 3}}</td>

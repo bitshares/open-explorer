@@ -2,8 +2,8 @@
     <div class="row">
         <div class="col-md-6">
             <ol class="breadcrumb">
-                <li><a href="#/"><span data-translate="Home"></span></a></li>
-                <li class="active"><a href="#/accounts/"><span data-translate="Accounts"></span></a></li>
+                <li><a href="#!/"><span data-translate="Home"></span></a></li>
+                <li class="active"><a href="#!/accounts/"><span data-translate="Accounts"></span></a></li>
             </ol>
         </div>
         <div class="col-md-6">
@@ -32,8 +32,8 @@
                 </thead>
                 <tbody>
                 <tr data-ng-repeat="rich in richs | orderBy:column:reverse | filter:search">
-                    <td><a href='#/accounts/{{rich.id}}/'>{{rich.name}}</a></td>
-                    <td class="align-right">{{rich.amount | number: 0}} <a href='#/assets/1.3.0/'>BTS</a></td>
+                    <td><a href='#!/accounts/{{rich.id}}/'>{{rich.name}}</a></td>
+                    <td class="align-right">{{rich.amount | number: 0}} <a href='#!/assets/1.3.0/'>BTS</a></td>
                 </tbody>
             </table>
         </div>

@@ -2,8 +2,8 @@
     <div class="row">
         <div class="col-md-6">
             <ol class="breadcrumb">
-                <li><a href="#/"><span data-translate="Home"></span></a></li>
-                <li class="active">DAC <a href="#/workers/"><span data-translate="Workers"></span></a></li>
+                <li><a href="#!/"><span data-translate="Home"></span></a></li>
+                <li class="active">DAC <a href="#!/workers/"><span data-translate="Workers"></span></a></li>
             </ol>
         </div>
         <div class="col-md-6">
@@ -37,8 +37,8 @@
                 </thead>
                 <tbody>
                 <tr data-ng-repeat="w in workers_current | orderBy:column:reverse | filter:search" class="{{w.tclass}}">
-                    <td><a href='#/objects/{{w.id}}/'>{{w.name}}</a> <span class='label label-info'>{{w.voting_now}}</span></td>
-                    <td><a href='#/accounts/{{w.worker}}/'>{{w.worker_name}}</a></td>
+                    <td><a href='#!/objects/{{w.id}}/'>{{w.name}}</a> <span class='label label-info'>{{w.voting_now}}</span></td>
+                    <td><a href='#!/accounts/{{w.worker}}/'>{{w.worker_name}}</a></td>
                     <td>{{w.start}}</td>
                     <td>{{w.end}}</td>
                     <td class="align-right">{{w.daily_pay | number}}</td>
@@ -83,8 +83,8 @@
                 </thead>
                 <tbody>
                 <tr data-ng-repeat="w in workers_expired | orderBy:column2:reverse2 | filter:search2" class="{{w.tclass}}">
-                    <td><a href='#/objects/{{w.id}}/'>{{w.name}}</a></td>
-                    <td><a href='#/accounts/{{w.worker}}/'>{{w.worker_name}}</a></td>
+                    <td><a href='#!/objects/{{w.id}}/'>{{w.name}}</a></td>
+                    <td><a href='#!/accounts/{{w.worker}}/'>{{w.worker_name}}</a></td>
                     <td>{{w.start}}</td>
                     <td>{{w.end}}</td>
                     <td class="align-right">{{w.daily_pay | number}}</td>
