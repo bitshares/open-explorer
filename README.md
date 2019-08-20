@@ -20,6 +20,6 @@ npm start
 Build bundle and move to www:
 
 ```
-npm start:build
+npm run start:build
 cp -rf dist/* /var/www/open-explorer.io/public_html/
 ```
