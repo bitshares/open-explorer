@@ -43,7 +43,8 @@ const HTML = [
 ];
 
 const CSS = [
-    '../node_modules/components-font-awesome/css/font-awesome.min.css',
+    '../node_modules/components-font-awesome/css/fontawesome.min.css',
+    '../node_modules/components-font-awesome/css/solid.min.css',
     '../node_modules/angular-loading-bar/build/loading-bar.min.css',
     '../node_modules/bootstrap/dist/css/bootstrap.min.css',
     "styles/custom.css"

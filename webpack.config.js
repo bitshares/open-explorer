@@ -48,8 +48,10 @@ module.exports = {
 
         new CopyWebpackPlugin([{
 
-                from: path.resolve(__dirname, `./node_modules/components-font-awesome/fonts`),
-                to: path.resolve(__dirname, './dist/fonts')
+            from: path.resolve(__dirname, `./node_modules/components-font-awesome/webfonts`),
+            to: path.resolve(__dirname, './dist/webfonts')
+            //to: './dist/webfonts/[name].[ext]'
+                //to: path.resolve(__dirname, './dist/assets/fonts')
             }]
         ),
         new CopyWebpackPlugin([{

@@ -1,0 +1,72 @@
+.flags-american,.flags-china,.flags-japan,.flags-portugal,.flags-russia,.flags-spain {
+    height:21px;
+    width:32px
+}
+.flags-american,.flags-china,.flags-japan,.flags-portugal,.flags-russia,.flags-spain,.flags-sprite {
+    background-repeat:no-repeat
+}
+.flags-american {
+    background-image:url(../images/flags/american.png);
+    background-position:0 0
+}
+.flags-china {
+    background-image:url(../images/flags/china.png);
+    background-position:0 0
+}
+.flags-japan {
+    background-image:url(../images/flags/japan.png);
+    background-position:0 0
+}
+.flags-portugal {
+    background-image:url(../images/flags/portugal.png);
+    background-position:0 0
+}
+.flags-russia {
+    background-image:url(../images/flags/russia.png);
+    background-position:0 0
+}
+.flags-spain {
+    background-image:url(../images/flags/spain.png);
+    background-position:0 0
+}
+
+/* arrows */
+.arrow-down:after,.arrow-up:after{
+    content: ' ';
+    position: relative;
+    left: 2px;
+    border: 8px solid transparent;
+}
+
+.arrow-down:after{
+    top: 10px;
+    border-top-color: grey;
+}
+
+.arrow-up:after{
+    bottom: 15px;
+    border-bottom-color: grey;
+}
+
+.arrow-down,.arrow-up{
+    padding-right: 10px;
+}
+
+
+/* align right */
+.align-right {
+    text-align:right;
+}
+
+.breadcrumb {
+    background: none;
+}
+
+ .tab-content>.tab-pane {
+     display: block;
+     height: 0;
+     overflow: hidden;
+ }
+.tab-content>.tab-pane.active {
+    height: auto;
+}
