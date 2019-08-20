@@ -56,11 +56,11 @@
                                             var divideby = Math.pow(10, asset_precision);
                                             var amount = Number(amount_amount / divideby);
 
-                                            operation_text =  "<a href='/#/accounts/" + from + "'>"
+                                            operation_text =  "<a href='/#!/accounts/" + from + "'>"
                                                 + response_name.data + "</a>";
                                             operation_text = operation_text + " sent " + formatNumber(amount) +
-                                                " <a href='/#/assets/" + amount_asset_id + "'>" + asset_name +
-                                                "</a> to <a href='/#/accounts/" + to + "'>" + to_name + "</a>";
+                                                " <a href='/#!/assets/" + amount_asset_id + "'>" + asset_name +
+                                                "</a> to <a href='/#!/accounts/" + to + "'>" + to_name + "</a>";
 
                                             callback(operation_text);
                                     });
@@ -99,13 +99,13 @@
                                             var divideby = Math.pow(10, receive_asset_precision);
                                             var receive_amount = Number(min_to_receive_amount / divideby);
 
-                                            operation_text =  "<a href='/#/accounts/" + operation_account + "'>" +
+                                            operation_text =  "<a href='/#!/accounts/" + operation_account + "'>" +
                                                 response_name.data + "</a>";
                                             operation_text = operation_text + " wants " + formatNumber(receive_amount) +
-                                                " <a href='/#/assets/" + min_to_receive_asset_id + "'>" +
+                                                " <a href='/#!/assets/" + min_to_receive_asset_id + "'>" +
                                                 receive_asset_name + "</a> for ";
                                             operation_text = operation_text + formatNumber(sell_amount) +
-                                                " <a href='/#/assets/" + amount_to_sell_asset_id + "'>" +
+                                                " <a href='/#!/assets/" + amount_to_sell_asset_id + "'>" +
                                                 sell_asset_name + "</a>";
                                             callback(operation_text);
                                     });
@@ -119,7 +119,7 @@
                     $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + operation_account)
                         .then(function (response_name) {
 
-                            operation_text = "<a href='/#/accounts/" + operation_account + "'>" + response_name.data +
+                            operation_text = "<a href='/#!/accounts/" + operation_account + "'>" + response_name.data +
                                 "</a> cancel order";
                             callback(operation_text);
                     });
@@ -142,9 +142,9 @@
 
                                             var asset2 = response_asset2.data.symbol;
 
-                                            operation_text = "<a href='/#/accounts/" + operation_account + "'>" +
+                                            operation_text = "<a href='/#!/accounts/" + operation_account + "'>" +
                                                 response_name.data + "</a> update debt/collateral for ";
-                                            operation_text = operation_text + "<a href='#/markets/" + asset1 + "/" +
+                                            operation_text = operation_text + "<a href='#!/markets/" + asset1 + "/" +
                                                 asset2 + "'>" + asset1 + "/" + asset2 + "</a>";
                                             callback(operation_text);
                                     });
@@ -184,13 +184,13 @@
                                             var divideby = Math.pow(10, receive_asset_precision);
                                             var receive_amount = Number(receives_amount / divideby);
 
-                                            operation_text = "<a href='/#/accounts/" + operation_account + "'>" +
+                                            operation_text = "<a href='/#!/accounts/" + operation_account + "'>" +
                                                 response_name.data + "</a>";
                                             operation_text = operation_text + " paid " + formatNumber(p_amount) +
-                                                " <a href='/#/assets/" + pays_asset_id + "'>" + pays_asset_name +
+                                                " <a href='/#!/assets/" + pays_asset_id + "'>" + pays_asset_name +
                                                 "</a> for ";
                                             operation_text = operation_text + formatNumber(receive_amount) +
-                                                " <a href='/#/assets/" + receives_asset_id + "'>" +
+                                                " <a href='/#!/assets/" + receives_asset_id + "'>" +
                                                 receive_asset_name + "</a>";
                                             callback(operation_text);
                                     });
@@ -206,8 +206,8 @@
                     $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + operation_account)
                         .then(function (response_name) {
 
-                            operation_text = "<a href='/#/accounts/" + operation_account + "'>" +
-                                response_name.data + "</a>  register <a href='/#/accounts/" + name + "'>" + name +
+                            operation_text = "<a href='/#!/accounts/" + operation_account + "'>" +
+                                response_name.data + "</a>  register <a href='/#!/accounts/" + name + "'>" + name +
                                 "</a>";
 
                             if(registrar !== referrer) {
@@ -215,7 +215,7 @@
                                 $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + referrer)
                                     .then(function (response_name2) {
 
-                                        operation_text = operation_text + " thanks to " + "<a href='/#/accounts/" +
+                                        operation_text = operation_text + " thanks to " + "<a href='/#!/accounts/" +
                                             referrer + "'>" + response_name2.data + "</a>";
                                         callback(operation_text);
                                     });
@@ -231,7 +231,7 @@
                     $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + operation_account)
                         .then(function (response_name) {
 
-                            operation_text = "<a href='/#/accounts/" + operation_account + "'>" + response_name.data +
+                            operation_text = "<a href='/#!/accounts/" + operation_account + "'>" + response_name.data +
                                 "</a> updated account data";
                             callback(operation_text);
                     });
@@ -249,9 +249,9 @@
                         $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + account_to_list)
                             .then(function (response_name2) {
 
-                            operation_text = "<a href='/#/accounts/" + operation_account + "'>" + response_name.data +
+                            operation_text = "<a href='/#!/accounts/" + operation_account + "'>" + response_name.data +
                                 "</a> " +
-                                type + " the account " + "<a href='/#/accounts/" + account_to_list + "'>" +
+                                type + " the account " + "<a href='/#!/accounts/" + account_to_list + "'>" +
                                 response_name2.data + "</a>";
                             callback(operation_text);
                         });
@@ -278,11 +278,11 @@
                                     $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + issue_to_account)
                                         .then(function (response_name2) {
 
-                                        operation_text = "<a href='/#/accounts/" + issuer + "'>" + response_name.data +
+                                        operation_text = "<a href='/#!/accounts/" + issuer + "'>" + response_name.data +
                                             "</a>  issued " + amount;
-                                        operation_text = operation_text + " <a href='/#/assets/" +
+                                        operation_text = operation_text + " <a href='/#!/assets/" +
                                             asset_to_issue_asset_id + "'>" + response_asset.data.symbol + "</a>";
-                                        operation_text = operation_text + " to <a href='/#/accounts/" +
+                                        operation_text = operation_text + " to <a href='/#!/accounts/" +
                                             issue_to_account + "'>" + response_name2.data + "</a>";
                                         callback(operation_text);
                                     });
@@ -307,9 +307,9 @@
                                     var divideby = Math.pow(10, asset_precision);
                                     var amount = Number(amount_to_reserve_amount / divideby);
 
-                                    operation_text = "<a href='/#/accounts/" + operation_account + "'>" +
+                                    operation_text = "<a href='/#!/accounts/" + operation_account + "'>" +
                                         response_name.data +
-                                        "</a> burned(reserved) " + formatNumber(amount) + " <a href='/#/assets/" +
+                                        "</a> burned(reserved) " + formatNumber(amount) + " <a href='/#!/assets/" +
                                         amount_to_reserve_asset_id + "'>" +
                                         asset_name + "</a>";
                                     callback(operation_text);
@@ -328,9 +328,9 @@
                             $http.get(appConfig.urls.python_backend + "/asset?asset_id=" + asset_id)
                                 .then(function (response_asset) {
 
-                                    operation_text = "<a href='/#/accounts/" + operation_account + "'>" +
+                                    operation_text = "<a href='/#!/accounts/" + operation_account + "'>" +
                                         response_name.data + "</a>  published feed for ";
-                                    operation_text = operation_text + "<a href='/#/assets/" + asset_id + "'>" +
+                                    operation_text = operation_text + "<a href='/#!/assets/" + asset_id + "'>" +
                                         response_asset.data.symbol + "</a>";
                                     callback(operation_text);
                             });
@@ -342,7 +342,7 @@
 
                     $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + operation_account)
                         .then(function (response_name) {
-                            operation_text = "<a href='/#/accounts/" + operation_account + "'>" + response_name.data +
+                            operation_text = "<a href='/#!/accounts/" + operation_account + "'>" + response_name.data +
                                 "</a>  created a proposal";
                             callback(operation_text);
                     });
@@ -354,7 +354,7 @@
 
                     $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + operation_account)
                         .then(function (response_name) {
-                            operation_text = "<a href='/#/accounts/" + operation_account + "'>" + response_name.data +
+                            operation_text = "<a href='/#!/accounts/" + operation_account + "'>" + response_name.data +
                                 "</a>  updated ";
                             operation_text = operation_text + " proposal <a href='/#objects/"+proposal+"'>"+proposal+
                                 "</a>";
@@ -379,10 +379,10 @@
                                     var divideby = Math.pow(10, asset_precision);
                                     var amount = Number(amount_amount / divideby);
 
-                                    operation_text = "<a href='/#/accounts/" + operation_account + "'>" +
+                                    operation_text = "<a href='/#!/accounts/" + operation_account + "'>" +
                                         response_name.data +
                                         "</a> withdrew vesting balance of " + formatNumber(amount) +
-                                        " <a href='/#/assets/" + amount_asset_id + "'>" +
+                                        " <a href='/#!/assets/" + amount_asset_id + "'>" +
                                         asset_name + "</a>";
                                     callback(operation_text);
                                 });
@@ -406,9 +406,9 @@
                                     var divideby = Math.pow(10, asset_precision);
                                     var amount = Number(total_claimed_amount / divideby);
 
-                                    operation_text = "<a href='/#/accounts/" + operation_account + "'>" +
+                                    operation_text = "<a href='/#!/accounts/" + operation_account + "'>" +
                                         response_name.data +
-                                        "</a> claimed a balance of " + formatNumber(amount) + " <a href='/#/assets/" +
+                                        "</a> claimed a balance of " + formatNumber(amount) + " <a href='/#!/assets/" +
                                         amount_to_reserve_asset_id + "'>" +
                                         asset_name + "</a>";
                                     callback(operation_text);
@@ -446,12 +446,12 @@
                                             var divideby2 = Math.pow(10, asset_precision2);
                                             var amount2 = Number(debt_covered_amount / divideby2);
 
-                                            operation_text = "<a href='/#/accounts/" + operation_account + "'>" +
+                                            operation_text = "<a href='/#!/accounts/" + operation_account + "'>" +
                                                 response_name.data +
-                                                "</a> bid " + formatNumber(amount1) + " <a href='/#/assets/" +
+                                                "</a> bid " + formatNumber(amount1) + " <a href='/#!/assets/" +
                                                 additional_collateral_asset_id + "'>" +
                                                 asset_name1 + "</a> for " + formatNumber(amount2) +
-                                                " <a href='/#/assets/" + debt_covered_asset_id + "'>" +
+                                                " <a href='/#!/assets/" + debt_covered_asset_id + "'>" +
                                                 asset_name2 + "</a>";
                                             callback(operation_text);
                                         });
@@ -480,11 +480,11 @@
                                     $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + to)
                                         .then(function (response_name2) {
 
-                                            operation_text = "<a href='/#/accounts/" + operation_account + "'>" +
+                                            operation_text = "<a href='/#!/accounts/" + operation_account + "'>" +
                                                 response_name.data +
-                                                "</a> create HTLC to <a href='/#/accounts/" + to + "'>" +
+                                                "</a> create HTLC to <a href='/#!/accounts/" + to + "'>" +
                                                 response_name2.data + "</a> to transfer " +
-                                                formatNumber(amount) + " <a href='/#/assets/" + asset_id + "'>" +
+                                                formatNumber(amount) + " <a href='/#!/assets/" + asset_id + "'>" +
                                                 asset_name + "</a>";
                                             callback(operation_text);
                                         });
@@ -498,7 +498,7 @@
                     $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + operation_account)
                         .then(function (response_name) {
 
-                            operation_text = "<a href='/#/accounts/" + operation_account + "'>" + response_name.data +
+                            operation_text = "<a href='/#!/accounts/" + operation_account + "'>" + response_name.data +
                                 "</a> redeem HTLC";
                             callback(operation_text);
                         });
@@ -510,7 +510,7 @@
                     $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + operation_account)
                         .then(function (response_name) {
 
-                            operation_text = "<a href='/#/accounts/" + operation_account + "'>" + response_name.data +
+                            operation_text = "<a href='/#!/accounts/" + operation_account + "'>" + response_name.data +
                                 "</a> redeemed HTLC";
                             callback(operation_text);
                         });
@@ -522,7 +522,7 @@
                     $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + operation_account)
                         .then(function (response_name) {
 
-                            operation_text = "<a href='/#/accounts/" + operation_account + "'>" + response_name.data +
+                            operation_text = "<a href='/#!/accounts/" + operation_account + "'>" + response_name.data +
                                 "</a> extend HTLC";
                             callback(operation_text);
                         });
@@ -534,7 +534,7 @@
                     $http.get(appConfig.urls.python_backend + "/account_name?account_id=" + operation_account)
                         .then(function (response_name) {
 
-                            operation_text = "<a href='/#/accounts/" + operation_account + "'>" + response_name.data +
+                            operation_text = "<a href='/#!/accounts/" + operation_account + "'>" + response_name.data +
                                 "</a> refund HTLC";
                             callback(operation_text);
                         });
