@@ -11,7 +11,6 @@
                 'txs',
 				'accounts',
                 'markets'
-
             ];
 
             setRoutes = function(route) {

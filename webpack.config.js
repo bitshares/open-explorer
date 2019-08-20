@@ -8,7 +8,6 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 const Html = require('./html'); // html.js
 
 module.exports = {
-    //mode: "development",
     entry: {
         vendor: ['jquery', 'angular', 'bootstrap', 'angular-route', 'angular-animate', 'angular-aria',
             'angular-ui-bootstrap', 'angular-loading-bar', 'angular-websocket', 'angular-google-analytics',
@@ -47,11 +46,8 @@ module.exports = {
         }),
 
         new CopyWebpackPlugin([{
-
-            from: path.resolve(__dirname, `./node_modules/components-font-awesome/webfonts`),
-            to: path.resolve(__dirname, './dist/webfonts')
-            //to: './dist/webfonts/[name].[ext]'
-                //to: path.resolve(__dirname, './dist/assets/fonts')
+                from: path.resolve(__dirname, `./node_modules/components-font-awesome/webfonts`),
+                to: path.resolve(__dirname, './dist/webfonts')
             }]
         ),
         new CopyWebpackPlugin([{
