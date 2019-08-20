@@ -6,8 +6,7 @@
 
     function objectsCtrl($scope, $routeParams, networkService) {
 
-        var name = $routeParams.name;
-
+        const name = $routeParams.name;
         networkService.getObject(name, function (returnData) {
             $scope.data = returnData;
         });

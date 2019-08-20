@@ -2,12 +2,13 @@
     'use strict';
 
     angular.module('app.assets')
-        .controller('assetsCtrl', ['$scope', '$routeParams', '$location', 'utilities', 'assetService', 'chartService', 'marketService', assetsCtrl]);
+        .controller('assetsCtrl', ['$scope', '$routeParams', '$location', 'utilities', 'assetService', 'chartService',
+            'marketService', assetsCtrl]);
 
     function assetsCtrl($scope, $routeParams, $location, utilities, assetService, chartService, marketService) {
 
-		var path = $location.path();
-		var name = $routeParams.name;
+		const path = $location.path();
+		let name = $routeParams.name;
 		if(name) {
 		    name = name.toUpperCase();
             if(path.includes("assets")) {
@@ -17,7 +18,7 @@
                     assetService.getAssetHoldersCount(name, function (returnDataHolders) {
                         $scope.data.holders = returnDataHolders;
                     });
-                    var precision = returnData.precision;
+                    const precision = returnData.precision;
                     assetService.getAssetHolders(name, precision, function (returnDataHolders) {
                         $scope.accounts = returnDataHolders;
                     });

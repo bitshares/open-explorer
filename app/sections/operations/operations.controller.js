@@ -6,8 +6,8 @@
 
     function operationsCtrl($scope, $routeParams, $location, networkService) {
 
-        var path = $location.path();
-        var name = $routeParams.name;
+        const path = $location.path();
+        const name = $routeParams.name;
 
         if(name) {
             if (path.includes("operations")) {
@@ -19,9 +19,9 @@
         else {
             if (path === "/operations") {
                 $scope.select = function (page_operations) {
-                    var page = page_operations - 1;
-                    var limit = 50;
-                    var from = page * limit;
+                    const page = page_operations - 1;
+                    const limit = 50;
+                    const from = page * limit;
 
                     networkService.getLastOperations(limit, from, function (returnData) {
                         $scope.operations = returnData;

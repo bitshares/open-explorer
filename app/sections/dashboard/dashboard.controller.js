@@ -1,7 +1,8 @@
 (function () {
     'use strict';
 
-    angular.module('app').controller('DashboardCtrl', ['$scope', '$timeout', '$window', 'networkService', 'chartService',  DashboardCtrl])
+    angular.module('app').controller('DashboardCtrl', ['$scope', '$timeout', '$window', 'networkService',
+        'chartService',  DashboardCtrl])
 
         .filter('to_trusted', ['$sce', function($sce){
             return function(text) {
@@ -16,9 +17,9 @@
         });
         
         $scope.select = function(page_operations) {
-            var page = page_operations -1;
-            var limit = 20;
-            var from = page * limit;
+            const page = page_operations -1;
+            const limit = 20;
+            const from = page * limit;
 
             networkService.getLastOperations(limit, from, function (returnData) {
                 $scope.operations = returnData;
@@ -51,8 +52,6 @@
         chartService.topHoldersChart(function (returnData) {
             $scope.holders_chart = returnData;
         });
-
-        // Todo: subscribe to updates
 
         $scope.currentTabIndex = 0;
     }

@@ -2,12 +2,13 @@
     'use strict';
 
     angular.module('app.blocks')
-        .controller('blocksCtrl', ['$scope', '$filter', '$routeParams', '$location', 'utilities', 'networkService', blocksCtrl]);
+        .controller('blocksCtrl', ['$scope', '$filter', '$routeParams', '$location', 'utilities',
+            'networkService', blocksCtrl]);
 
     function blocksCtrl($scope, $filter, $routeParams, $location, utilities, networkService) {
 
-        var path = $location.path();
-        var name = $routeParams.name;
+        const path = $location.path();
+        let name = $routeParams.name;
         if(name) {
 
             name = name.toUpperCase();
@@ -26,7 +27,8 @@
                     $scope.blocks = returnData;
                 });
 
-                utilities.columnsort($scope, "operations", "sortColumn", "sortClass", "reverse", "reverseclass", "column");
+                utilities.columnsort($scope, "operations", "sortColumn", "sortClass", "reverse", "reverseclass",
+                    "column");
 
             }
         }

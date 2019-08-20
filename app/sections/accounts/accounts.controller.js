@@ -4,59 +4,61 @@ import {sha256} from "js-sha256";
     'use strict';
 
     angular.module('app.accounts')
-        .controller('accountsCtrl', ['$scope', '$filter', '$routeParams', '$location', '$http', '$websocket', 'appConfig', 'utilities', 'accountService', 'assetService', accountsCtrl]);
+        .controller('accountsCtrl', ['$scope', '$filter', '$routeParams', '$location', '$http', '$websocket',
+            'appConfig', 'utilities', 'accountService', 'assetService', accountsCtrl]);
 
-    function accountsCtrl($scope, $filter, $routeParams, $location, $http, $websocket, appConfig, utilities, accountService, assetService) {
+    function accountsCtrl($scope, $filter, $routeParams, $location, $http, $websocket, appConfig, utilities,
+                          accountService, assetService) {
 
-		var path = $location.path();
-		var name = $routeParams.name;
+		const path = $location.path();
+		let name = $routeParams.name;
 		if(name) {
             name = name.toLowerCase();
 			if(path.includes("accounts")) {
 
                 accountService.getFullAccount(name, function (fullAccount) {
 
-                    var cashback_balance_id = "";
-                    var cashback_balance_balance = 0;
-                    if(fullAccount.cashback_balance !== undefined && Object.keys(fullAccount.cashback_balance).length > 0) {
+                    let cashback_balance_id = "";
+                    let cashback_balance_balance = 0;
+                    if(fullAccount.cashback_balance !== undefined &&
+                        Object.keys(fullAccount.cashback_balance).length > 0) {
                         cashback_balance_id = fullAccount.cashback_balance.id;
                         cashback_balance_balance = fullAccount.cashback_balance.balance.amount;
                     }
 
-                    var lifetime = "free member";
+                    let lifetime = "free member";
                     if (fullAccount.account.id === fullAccount.account.lifetime_referrer) {
                         lifetime = "lifetime member";
                     }
 
-                    var vesting_balances = [];
+                    let vesting_balances = [];
                     accountService.parseVesting(fullAccount.vesting_balances, function (returnData) {
                         vesting_balances = returnData;
                     });
 
-                    // TODO: get margin positions, call already in the api.py
-
-                    var lifetime_fees_paid = fullAccount.statistics.lifetime_fees_paid;
-                    var bts_balance = fullAccount.balances[0].balance;
+                    const lifetime_fees_paid = fullAccount.statistics.lifetime_fees_paid;
+                    const bts_balance = fullAccount.balances[0].balance;
 
                     jdenticon.update("#identicon", sha256(fullAccount.account.name));
 
-                    // get total ops from ES
                     accountService.getTotalAccountOps(fullAccount.account.id, function (returnDataTotalOps) {
-                        var total_ops = returnDataTotalOps;
+                        const total_ops = returnDataTotalOps;
 
                         $scope.select = function(page_operations) {
-                            var page = page_operations -1;
-                            var start = returnDataTotalOps - (page * 20);
-                            var limit = 20;
+                            const page = page_operations -1;
+                            const start = returnDataTotalOps - (page * 20);
+                            const limit = 20;
 
-                            accountService.getAccountHistory(fullAccount.account.id, start, limit, function (returnData) {
+                            accountService.getAccountHistory(fullAccount.account.id, start, limit,
+                                function (returnData) {
                                 $scope.operations = returnData;
                                 $scope.currentPage = page_operations;
                             });
                         };
                         $scope.select(1);
 
-                        accountService.getAccountName(fullAccount.account.options.voting_account, function (returnData) {
+                        accountService.getAccountName(fullAccount.account.options.voting_account,
+                            function (returnData) {
 
                             $scope.account = {
                                 name: fullAccount.account.name,
@@ -79,17 +81,15 @@ import {sha256} from "js-sha256";
                     });
 
                     $scope.select_balances = function(page_balances) {
-                        var page = page_balances -1;
-                        var balances = [];
-                        var total_counter = 0;
-                        var limit_counter = 0;
-                        var limit = 10;
-                        var start = page * limit;
+                        const page = page_balances -1;
+                        let balances = [];
+                        let total_counter = 0;
+                        let limit_counter = 0;
+                        const limit = 10;
+                        const start = page * limit;
                         angular.forEach(fullAccount.balances, function (value, key) {
 
                             if(total_counter >= start && limit_counter <= limit) {
-                                //if (value.balance === 0) { return; }
-                                //console.log(value);
                                 assetService.getAssetNameAndPrecision(value.asset_type, function (returnData) {
                                     accountService.parseBalance(fullAccount.limit_orders,
                                         fullAccount.call_orders,
@@ -119,7 +119,8 @@ import {sha256} from "js-sha256";
                         $scope.owner_keys = returnData;
                     });
 
-                    accountService.parseAuth(fullAccount.account.owner.account_auths, "account", function (returnData) {
+                    accountService.parseAuth(fullAccount.account.owner.account_auths, "account",
+                        function (returnData) {
                         $scope.owner_accounts = returnData;
                     });
 
@@ -127,11 +128,12 @@ import {sha256} from "js-sha256";
                         $scope.active_keys = returnData;
                     });
 
-                    accountService.parseAuth(fullAccount.account.active.account_auths, "account", function (returnData) {
+                    accountService.parseAuth(fullAccount.account.active.account_auths, "account",
+                        function (returnData) {
                         $scope.active_accounts = returnData;
                     });
 
-                    var account_id = fullAccount.account.id;
+                    const account_id = fullAccount.account.id;
                     accountService.checkIfWorker(account_id, function (returnData) {
                         $scope.is_worker = returnData[0];
                         $scope.worker_votes = returnData[1];
@@ -170,7 +172,7 @@ import {sha256} from "js-sha256";
                     });
 
                     $scope.select_referers = function(page_referers) {
-                        var page = page_referers -1;
+                        const page = page_referers -1;
 
                         accountService.getReferrers(name, page, function (returnData) {
                             $scope.referrers = returnData;
@@ -179,17 +181,16 @@ import {sha256} from "js-sha256";
                     };
                     $scope.select_referers(1);
 
-                    utilities.columnsort($scope, "balance", "sortColumn", "sortClass", "reverse", "reverseclass", "column");
+                    utilities.columnsort($scope, "balance", "sortColumn", "sortClass", "reverse", "reverseclass",
+                        "column");
                 });
             }
 		}
 		else {
             if(path === "/accounts") {
-
                 accountService.getRichList(function (returnData) {
                     $scope.richs = returnData;
                 });
-
                 utilities.columnsort($scope, "amount", "sortColumn", "sortClass", "reverse", "reverseclass", "column");
 			}
 		}

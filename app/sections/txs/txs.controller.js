@@ -6,8 +6,8 @@
 
     function txsCtrl($scope, $routeParams, $location, networkService) {
 
-        var path = $location.path();
-        var name = $routeParams.name;
+        const path = $location.path();
+        const name = $routeParams.name;
 
         if(name) {
             if (path.includes("txs")) {
