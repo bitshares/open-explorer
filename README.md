@@ -7,7 +7,7 @@ http://open-explorer.io
 Clone repo:
 
 ```
-git clone https://github.com/oxarbitrage/open-explorer
+git clone https://github.com/bitshares/open-explorer
 cd open-explorer
 ```
 
