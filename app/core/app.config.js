@@ -10,6 +10,10 @@
         AnalyticsProvider.setAccount('UA-101388661-2');  //UU-XXXXXXX-X should be your tracking code
     }]).run(['Analytics', function(Analytics) { }]);
 
+    angular.module('app').config(['$locationProvider', function($locationProvider) {
+        $locationProvider.hashPrefix('');
+    }]);
+
     function appConfig() {
         var pageTransitionOpts = [
             {

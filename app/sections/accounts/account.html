@@ -2,9 +2,9 @@
     <div class="row">
         <div class="col-md-4 align-baseline">
             <ol class="breadcrumb">
-                <li><a href="#!/"><span data-translate="Home"></span></a></li>
-                <li><a href="#!/accounts/"><span data-translate="Accounts"></span></a></li>
-                <li class="active"><a href="#!/accounts/{{account.id}}/">{{account.name}}</a></li>
+                <li><a href="#/"><span data-translate="Home"></span></a></li>
+                <li><a href="#/accounts/"><span data-translate="Accounts"></span></a></li>
+                <li class="active"><a href="#/accounts/{{account.id}}/">{{account.name}}</a></li>
             </ol>
         </div>
         <div class="col-md-4">
@@ -37,7 +37,7 @@
                                             <div class="panel-body">
                                                 <ul class="list-group">
                                                     <li class="list-group-item">
-                                                        <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#!/objects/{{account.id}}/'>{{account.id}}</a></span>
+                                                        <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#/objects/{{account.id}}/'>{{account.id}}</a></span>
                                                         ID
                                                     </li>
                                                     <li class="list-group-item">
@@ -45,15 +45,15 @@
                                                         <span data-translate="Name"></span>
                                                     </li>
                                                     <li class="list-group-item">
-                                                        <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#!/accounts/{{account.referer}}/'>{{account.referer}}</a></span>
+                                                        <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#/accounts/{{account.referer}}/'>{{account.referer}}</a></span>
                                                         <span data-translate="Referrer"></span>
                                                     </li>
                                                     <li class="list-group-item">
-                                                        <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#!/accounts/{{account.registrar}}/'>{{account.registrar}}</a></span>
+                                                        <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#/accounts/{{account.registrar}}/'>{{account.registrar}}</a></span>
                                                         <span data-translate="Registrar"></span>
                                                     </li>
                                                     <li class="list-group-item">
-                                                        <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#!/objects/{{account.voting_account_id}}/'>{{account.voting_account_name}}</a></span>
+                                                        <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#/objects/{{account.voting_account_id}}/'>{{account.voting_account_name}}</a></span>
                                                         <span data-translate="Voting as"></span>
                                                     </li>
                                                 </ul>
@@ -79,7 +79,7 @@
                                                     </li>
 
                                                     <li class="list-group-item">
-                                                        <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#!/objects/{{account.statistics}}/'>{{account.statistics}}</a></span>
+                                                        <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#/objects/{{account.statistics}}/'>{{account.statistics}}</a></span>
                                                         <span data-translate="Statistics"></span>
                                                     </li>
                                                 </ul>
@@ -116,8 +116,8 @@
                                                 </thead>
                                                 <tbody>
                                                 <tr data-ng-repeat="balance in balances | orderBy:column:reverse | filter:search">
-                                                    <td><a href="#!/objects/{{balance.id}}/">{{balance.id}}</a></td>
-                                                    <td><a href="#!/assets/{{balance.asset}}/">{{balance.asset_name}}</a></td>
+                                                    <td><a href="#/objects/{{balance.id}}/">{{balance.id}}</a></td>
+                                                    <td><a href="#/assets/{{balance.asset}}/">{{balance.asset_name}}</a></td>
                                                     <td class="align-right">{{balance.balance | number}}</td>
                                                 </tbody>
                                             </table>
@@ -163,7 +163,7 @@
                                                 </tr>
                                                 </thead>
                                                 <tr data-ng-repeat="v in account.vesting">
-                                                    <td><a href='#!/objects/{{v.id}}/'>{{v.id}}</a></td>
+                                                    <td><a href='#/objects/{{v.id}}/'>{{v.id}}</a></td>
                                                     <td>{{v.asset_name}}</td>
                                                     <td class="align-right">{{v.balance | number}}</td>
                                                 </tr>
@@ -204,7 +204,7 @@
                                                 </thead>
                                                 <tbody>
                                                 <tr data-ng-repeat="oa in owner_accounts">
-                                                    <td align="left"><a href="#!/accounts/{{oa.account}}/"><font size="-1">{{oa.account_name}}</font></a></td>
+                                                    <td align="left"><a href="#/accounts/{{oa.account}}/"><font size="-1">{{oa.account_name}}</font></a></td>
                                                     <td class="align-right"><font size="-1">{{oa.threshold}}</font></td>
                                                 </tbody>
                                             </table>
@@ -241,7 +241,7 @@
                                                 </thead>
                                                 <tbody>
                                                 <tr data-ng-repeat="aa in active_accounts">
-                                                    <td align="left"><a href="#!/accounts/{{aa.account}}/"><font size="-1">{{aa.account_name}}</font></a></td>
+                                                    <td align="left"><a href="#/accounts/{{aa.account}}/"><font size="-1">{{aa.account_name}}</font></a></td>
                                                     <td class="align-right"><font size="-1">{{aa.threshold}}</font></td>
                                                 </tbody>
                                             </table>
@@ -279,7 +279,7 @@
                                         </thead>
                                         <tbody>
                                         <tr data-ng-repeat="uia in user_issued_assets">
-                                            <td><a href="#!/assets/{{uia.asset_id}}/">{{uia.asset_name}}</a></td>
+                                            <td><a href="#/assets/{{uia.asset_id}}/">{{uia.asset_name}}</a></td>
                                         </tbody>
                                     </table>
                                 </div>
@@ -299,7 +299,7 @@
                                         </thead>
                                         <tbody>
                                         <tr data-ng-repeat="p in proposals">
-                                            <td><a href="#!/blocks/{{p.id}}/">{{p.id}}</a></td>
+                                            <td><a href="#/blocks/{{p.id}}/">{{p.id}}</a></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -323,9 +323,9 @@
                                         </thead>
                                         <tbody>
                                         <tr data-ng-repeat="v in votes">
-                                            <td><a href="#!/objects/{{v.id}}/">{{v.id}}</a> <font size="-1"> - {{v.votable_object_name}}</font></td>
+                                            <td><a href="#/objects/{{v.id}}/">{{v.id}}</a> <font size="-1"> - {{v.votable_object_name}}</font></td>
                                             <td>{{v.type}}</td>
-                                            <td><a href="#!/accounts/{{v.account}}/">{{v.account_name}}</a></td>
+                                            <td><a href="#/accounts/{{v.account}}/">{{v.account_name}}</a></td>
                                             <td>{{v.votes_for | number}}</td>
                                         </tr>
                                         </tbody>
@@ -347,7 +347,7 @@
                                         </thead>
                                         <tbody>
                                         <tr data-ng-repeat="r in referrers">
-                                            <td><a href="#!/accounts/{{r.account_id}}/">{{r.account_name}}</a></td>
+                                            <td><a href="#/accounts/{{r.account_id}}/">{{r.account_name}}</a></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -382,11 +382,11 @@
                                 <div class="panel-body">
                                     <ul class="list-group">
                                         <li class="list-group-item">
-                                            <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href="#!/accounts/{{committee_member_account}}">{{committee_member_account_name}}</a></span>
+                                            <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href="#/accounts/{{committee_member_account}}">{{committee_member_account_name}}</a></span>
                                             <span data-translate="Committee member account"></span>
                                         </li>
                                         <li class="list-group-item">
-                                            <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href="#!/objects/{{committee_id}}">{{committee_id}}</a></span>
+                                            <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href="#/objects/{{committee_id}}">{{committee_id}}</a></span>
                                             <span data-translate="Committee member ID"></span>
                                         </li>
                                         <li class="list-group-item">
@@ -410,11 +410,11 @@
                                 <div class="panel-body">
                                     <ul class="list-group">
                                         <li class="list-group-item">
-                                            <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href="#!/accounts/{{witness_account}}">{{witness_account_name}}</a></span>
+                                            <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href="#/accounts/{{witness_account}}">{{witness_account_name}}</a></span>
                                             <span data-translate="Witness account"></span>
                                         </li>
                                         <li class="list-group-item">
-                                            <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href="#!/objects/{{witness_id}}">{{witness_id}}</a></span>
+                                            <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href="#/objects/{{witness_id}}">{{witness_id}}</a></span>
                                             <span data-translate="Witness ID"></span>
                                         </li>
                                         <li class="list-group-item">
@@ -464,9 +464,9 @@
                 <tbody>
                 <tr data-ng-repeat="operation in operations track by $index">
                     <td><div ng-bind-html="operation.operation_text | to_trusted" layout-align="center"></div></td>
-                    <td><a href='#!/operations/{{operation.operation_id}}/'>{{operation.operation_id}}</a></td>
+                    <td><a href='#/operations/{{operation.operation_id}}/'>{{operation.operation_id}}</a></td>
                     <td>{{operation.time}}</td>
-                    <td><a href='#!/blocks/{{operation.block_num}}/'>{{operation.block_num | number}} </a></td>
+                    <td><a href='#/blocks/{{operation.block_num}}/'>{{operation.block_num | number}} </a></td>
                     <td><span class="badge badge-primary" style="background-color: #{{operation.op_color}};">{{operation.op_type}}</span></td>
                 </tr>
                 </tbody>

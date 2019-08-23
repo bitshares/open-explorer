@@ -2,8 +2,8 @@
     <div class="row">
         <div class="col-md-6">
             <ol class="breadcrumb">
-                <li><a href="#!/"><span data-translate="Home"></span></a></li>
-                <li class="active"><a href="#!/votes/"><span data-translate="Voting report"></span></a></li>
+                <li><a href="#/"><span data-translate="Home"></span></a></li>
+                <li class="active"><a href="#/votes/"><span data-translate="Voting report"></span></a></li>
             </ol>
         </div>
         <div class="col-md-6">
@@ -21,7 +21,7 @@
                 </thead>
                 <tbody>
                 <tr data-ng-repeat="w in witnesses">
-                    <td><a href="#!/objects/{{w.id}}/">{{w.witness_account_name}}</a></td>
+                    <td><a href="#/objects/{{w.id}}/">{{w.witness_account_name}}</a></td>
                     <td class="{{w.tclass1}}">{{w.proxy1}}</td>
                     <td class="{{w.tclass2}}">{{w.proxy2}}</td>
                     <td class="{{w.tclass3}}">{{w.proxy3}}</td>
@@ -48,7 +48,7 @@
                 </thead>
                 <tbody>
                 <tr data-ng-repeat="w in workers">
-                    <td><a href="#!/objects/{{w.id}}/">{{w.id}} - {{w.worker_account_name}}</a><br><font size="-1">{{w.worker_name}}</font></td>
+                    <td><a href="#/objects/{{w.id}}/">{{w.id}} - {{w.worker_account_name}}</a><br><font size="-1">{{w.worker_name}}</font></td>
                     <td class="{{w.tclass1}}">{{w.proxy1}}</td>
                     <td class="{{w.tclass2}}">{{w.proxy2}}</td>
                     <td class="{{w.tclass3}}">{{w.proxy3}}</td>
@@ -75,7 +75,7 @@
                 </thead>
                 <tbody>
                 <tr data-ng-repeat="c in committee">
-                    <td><a href="#!/objects/{{c.id}}/">{{c.committee_account_name}}</a></td>
+                    <td><a href="#/objects/{{c.id}}/">{{c.committee_account_name}}</a></td>
                     <td class="{{c.tclass1}}">{{c.proxy1}}</td>
                     <td class="{{c.tclass2}}">{{c.proxy2}}</td>
                     <td class="{{c.tclass3}}">{{c.proxy3}}</td>

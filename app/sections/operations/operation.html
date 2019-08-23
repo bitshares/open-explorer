@@ -2,9 +2,9 @@
     <div class="row">
         <div class="col-md-6">
             <ol class="breadcrumb">
-                <li><a href="#!/"><span data-translate="Home"></span></a></li>
-                <li><a href="#!/operations/"><span data-translate="Operations"></span></a></li>
-                <li class="active"><a href="#!/operations/{{data.name}}/">{{data.name}}</a></li>
+                <li><a href="#/"><span data-translate="Home"></span></a></li>
+                <li><a href="#/operations/"><span data-translate="Operations"></span></a></li>
+                <li class="active"><a href="#/operations/{{data.name}}/">{{data.name}}</a></li>
             </ol>
         </div>
         <div class="col-md-6">
@@ -36,7 +36,7 @@
                         <span data-translate="Virtual operation"></span>
                     </li>
                     <li class="list-group-item">
-                        <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#!/blocks/{{data.block_num}}/'>{{data.block_num | number}}</a></span>
+                        <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#/blocks/{{data.block_num}}/'>{{data.block_num | number}}</a></span>
                         <span data-translate="Block"></span>
                     </li>
                     <li class="list-group-item">
@@ -44,7 +44,7 @@
                         <span data-translate="Operation time"></span>
                     </li>
                     <li class="list-group-item">
-                        <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#!/txs/{{data.trx_id}}/'>{{data.trx_id}}</a></span>
+                        <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#/txs/{{data.trx_id}}/'>{{data.trx_id}}</a></span>
                         <span data-translate="Transaction"></span>
                     </li>
                 </ul>

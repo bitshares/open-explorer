@@ -2,8 +2,8 @@
     <div class="row">
         <div class="col-md-6">
             <ol class="breadcrumb">
-                <li><a href="#!/"><span data-translate="Home"></span></a></li>
-                <li class="active"><a href="#!/markets/"><span data-translate="Markets"></span></a></li>
+                <li><a href="#/"><span data-translate="Home"></span></a></li>
+                <li class="active"><a href="#/markets/"><span data-translate="Markets"></span></a></li>
             </ol>
         </div>
         <div class="col-md-6">
@@ -32,7 +32,7 @@
                 </thead>
                 <tbody>
                 <tr data-ng-repeat="market in markets | orderBy:column:reverse | filter:search">
-                    <td><a href='#!/markets/{{market.pair}}/'>{{market.pair}}</a></td>
+                    <td><a href='#/markets/{{market.pair}}/'>{{market.pair}}</a></td>
                     <td style="text-align:right">{{market.price | number:10}}</td>
 					<td style="text-align:right">{{market.volume | number}}</td>
                 </tbody>

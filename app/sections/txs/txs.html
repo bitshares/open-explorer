@@ -3,8 +3,8 @@
     <div class="row">
         <div class="col-md-6">
             <ol class="breadcrumb">
-                <li><a href="#!/"><span data-translate="Home"></span></a></li>
-                <li class="active"><a href="#!/txs/"><span data-translate="Transactions"></span></a></li>
+                <li><a href="#/"><span data-translate="Home"></span></a></li>
+                <li class="active"><a href="#/txs/"><span data-translate="Transactions"></span></a></li>
             </ol>
         </div>
         <div class="col-md-6">
@@ -24,7 +24,7 @@
                 </thead>
                 <tbody>
                 <tr data-ng-repeat="trx in transactions">
-                    <td><a href='#!/txs/{{trx.trx_id}}/'>{{trx.trx_id}}</a></td>
+                    <td><a href='#/txs/{{trx.trx_id}}/'>{{trx.trx_id}}</a></td>
                     <td>{{trx.count | number}}</td>
                 </tbody>
             </table>

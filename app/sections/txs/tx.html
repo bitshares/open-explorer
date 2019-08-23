@@ -2,8 +2,8 @@
     <div class="row">
         <div class="col-md-6">
             <ol class="breadcrumb">
-                <li><a href="#!/"><span data-translate="Home"></span></a></li>
-                <li><a href="#!/txs/"><span data-translate="Transactions"></span></a></li>
+                <li><a href="#/"><span data-translate="Home"></span></a></li>
+                <li><a href="#/txs/"><span data-translate="Transactions"></span></a></li>
                 <li class="active">{{data.hash}}</li>
             </ol>
         </div>
@@ -27,7 +27,7 @@
                         <tbody>
                         <tr data-ng-repeat="op in operations">
                             <td><div ng-bind-html="op.operation_text | to_trusted" layout-align="center"></div></td>
-                            <td><a href='#!/operations/{{op.operation_id}}/'>{{op.operation_id}}</a></td>
+                            <td><a href='#/operations/{{op.operation_id}}/'>{{op.operation_id}}</a></td>
                             <td><span class="badge badge-primary" style="background-color: #{{op.op_color}};">{{op.op_type}}</span></td>
                         </tbody>
                     </table>
@@ -45,7 +45,7 @@
                         </tr>
                         <tr>
                             <td><span data-translate="Block"></span>:</td>
-                            <td><a href="#!/blocks/{{data.block_num}}/">{{data.block_num | number}}</a></td>
+                            <td><a href="#/blocks/{{data.block_num}}/">{{data.block_num | number}}</a></td>
                         </tr>
                         <tr>
                             <td><span data-translate="Date"></span>:</td>

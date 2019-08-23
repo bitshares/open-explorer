@@ -2,9 +2,9 @@
     <div class="row">
         <div class="col-md-6">
             <ol class="breadcrumb">
-                <li><a href="#!/"><span data-translate="Home"></span></a></li>
-                <li><a href="#!/assets/"><span data-translate="Assets"></span></a></li>
-                <li class="active"><a href="#!/assets/{{data.id}}/">{{data.symbol}}</a></li>
+                <li><a href="#/"><span data-translate="Home"></span></a></li>
+                <li><a href="#/assets/"><span data-translate="Assets"></span></a></li>
+                <li class="active"><a href="#/assets/{{data.id}}/">{{data.symbol}}</a></li>
             </ol>
         </div>
         <div class="col-md-6">
@@ -35,17 +35,17 @@
                         <span data-translate="Holders"></span>
                     </li>
                     <li class="list-group-item">
-                        <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#!/objects/{{data.dynamic_asset_data_id}}/'>{{data.dynamic_asset_data_id}}</a></span>
+                        <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#/objects/{{data.dynamic_asset_data_id}}/'>{{data.dynamic_asset_data_id}}</a></span>
                         <span data-translate="Dynamic asset properties"></span>
                     </li>
                     <li class="list-group-item" ng-if="data.bitasset_data_id">
-                        <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#!/objects/{{data.bitasset_data_id}}/'>{{data.bitasset_data_id}}</a></span>
+                        <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#/objects/{{data.bitasset_data_id}}/'>{{data.bitasset_data_id}}</a></span>
                         <span data-translate="Bit-Asset properties"></span>
                     </li>
                 </ul>
             </div>
             <h2>{{data.symbol}}</h2>
-            <p>{{data.type}} - <a href='#!/objects/{{data.id}}/'>{{data.id}}</a></p>
+            <p>{{data.type}} - <a href='#/objects/{{data.id}}/'>{{data.id}}</a></p>
         </div>
         <div class="col-md-6">
 
@@ -66,7 +66,7 @@
                         <span data-translate="Max supply"></span>
                     </li>
                     <li class="list-group-item">
-                        <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#!/accounts/{{data.issuer}}/'>{{data.issuer_name}}</a></span>
+                        <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#/accounts/{{data.issuer}}/'>{{data.issuer_name}}</a></span>
                         <span data-translate="Issuer"></span>
                     </li>
                     <li class="list-group-item">
@@ -117,7 +117,7 @@
                     </thead>
                     <tbody>
                     <tr data-ng-repeat="market in markets | orderBy:column:reverse | filter:search">
-                        <td><a href='#!/markets/{{market.pair}}/'>{{market.pair}}</a></td>
+                        <td><a href='#/markets/{{market.pair}}/'>{{market.pair}}</a></td>
                         <td class="align-right">{{market.price | number}}</td>
                         <td class="align-right">{{market.volume | number}}</td>
                     </tbody>
@@ -154,7 +154,7 @@
                     </thead>
                     <tbody>
                     <tr data-ng-repeat="account in accounts | orderBy:column2:reverse2 | filter:search2">
-                        <td><a href='#!/accounts/{{account.id}}/'>{{account.name}}</a></td>
+                        <td><a href='#/accounts/{{account.id}}/'>{{account.name}}</a></td>
                         <td class="align-right">{{account.amount | number}}</td>
                     </tbody>
                 </table>

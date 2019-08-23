@@ -2,8 +2,8 @@
     <div class="row">
         <div class="col-md-6">
             <ol class="breadcrumb">
-                <li><a href="#!/"><span data-translate="Home"></span></a></li>
-                <li class="active"><a href="#!/witness/"><span data-translate="Witnesses"></span></a></li>
+                <li><a href="#/"><span data-translate="Home"></span></a></li>
+                <li class="active"><a href="#/witness/"><span data-translate="Witnesses"></span></a></li>
             </ol>
         </div>
         <div class="col-md-6">
@@ -37,12 +37,12 @@
                 <tbody>
                 <tr data-ng-repeat="w in active_witnesses | orderBy:column:reverse | filter:search">
                     <td>{{w.counter}}</td>
-                    <td><a href="#!/objects/{{w.id}}/">{{w.id}}</a></td>
-                    <td><a href="#!/accounts/{{w.witness_account}}/">{{w.witness_account_name}}</a></td>
+                    <td><a href="#/objects/{{w.id}}/">{{w.id}}</a></td>
+                    <td><a href="#/accounts/{{w.witness_account}}/">{{w.witness_account_name}}</a></td>
                     <td><a href="{{w.url}}" target="_blank">Link</a></td>
 					<td class="align-right">{{w.total_votes | number: 0}}</td>
 					<td class="align-right">{{w.total_missed | number}}</td>
-                    <td class="align-right"><a href="#!/blocks/{{w.last_confirmed_block_num}}/">{{w.last_confirmed_block_num | number}}</a></td>
+                    <td class="align-right"><a href="#/blocks/{{w.last_confirmed_block_num}}/">{{w.last_confirmed_block_num | number}}</a></td>
                 </tbody>
             </table>
         </div>
@@ -75,12 +75,12 @@
                 <tbody>
                 <tr data-ng-repeat="w in standby_witnesses | orderBy:column2:reverse2 | filter:search2">
                     <td>{{w.counter}}</td>
-                    <td><a href="#!/objects/{{w.id}}/">{{w.id}}</a></td>
-                    <td><a href="#!/accounts/{{w.witness_account}}/">{{w.witness_account_name}}</a></td>
+                    <td><a href="#/objects/{{w.id}}/">{{w.id}}</a></td>
+                    <td><a href="#/accounts/{{w.witness_account}}/">{{w.witness_account_name}}</a></td>
                     <td><a href="{{w.url}}" target="_blank">Link</a></td>
                     <td class="align-right">{{w.total_votes | number: 0}}</td>
                     <td class="align-right">{{w.total_missed | number}}</td>
-                    <td class="align-right"><a href="#!/blocks/{{w.last_confirmed_block_num}}/">{{w.last_confirmed_block_num | number}}</a></td>
+                    <td class="align-right"><a href="#/blocks/{{w.last_confirmed_block_num}}/">{{w.last_confirmed_block_num | number}}</a></td>
                 </tbody>
             </table>
         </div>

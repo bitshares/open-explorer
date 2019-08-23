@@ -115,9 +115,9 @@
                 <tbody>
                 <tr data-ng-repeat="operation in operations track by $index">
                     <td><div ng-bind-html="operation.operation_text | to_trusted" layout-align="center"></div></td>
-                    <td><a href='#!/operations/{{operation.operation_id}}/'>{{operation.operation_id}}</a></td>
+                    <td><a href='#/operations/{{operation.operation_id}}/'>{{operation.operation_id}}</a></td>
                     <td>{{operation.time}}</td>
-					<td><a href='#!/blocks/{{operation.block_num}}/'>{{operation.block_num | number}} </a></td>
+					<td><a href='#/{{operation.block_num}}/'>{{operation.block_num | number}} </a></td>
                     <td><span class="badge badge-primary" style="background-color: #{{operation.color}};">{{operation.type}}</span></td>
                 </tr>
                 </tbody>

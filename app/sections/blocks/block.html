@@ -2,9 +2,9 @@
     <div class="row">
         <div class="col-md-6">
             <ol class="breadcrumb">
-                <li><a href="#!/"><span data-translate="Home"></span></a></li>
-                <li><a href="#!/blocks/"><span data-translate="Blocks"></span></a></li>
-                <li class="active"><a href="#!/blocks/{{data.block_num}}/"><span data-translate="Block number"></span>: {{data.block_num | number}}</a></li>
+                <li><a href="#/"><span data-translate="Home"></span></a></li>
+                <li><a href="#/blocks/"><span data-translate="Blocks"></span></a></li>
+                <li class="active"><a href="#/blocks/{{data.block_num}}/"><span data-translate="Block number"></span>: {{data.block_num | number}}</a></li>
             </ol>
         </div>
         <div class="col-md-6">
@@ -12,10 +12,10 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            <a href="#!/blocks/{{data.prev}}/"><i class="fas fa-angle-double-left"></i> Block {{data.prev | number}}</a>
+            <a href="#/blocks/{{data.prev}}/"><i class="fas fa-angle-double-left"></i> Block {{data.prev | number}}</a>
         </div>
         <div class="col-md-6" align="right">
-            <a href="#!/blocks/{{data.next}}/"><span data-translate="Block"></span> {{data.next | number}} <i class="fas fa-angle-double-right"></i> </a>
+            <a href="#/blocks/{{data.next}}/"><span data-translate="Block"></span> {{data.next | number}} <i class="fas fa-angle-double-right"></i> </a>
         </div>
     </div>
     <br>
@@ -36,7 +36,7 @@
                 Merkle Root
             </li>
             <li class="list-group-item">
-                <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#!/objects/{{data.witness}}/'>{{data.witness}}</a></span>
+                <span class="badge" style="background-color: #FFFFFF; color: #000000"><a href='#/objects/{{data.witness}}/'>{{data.witness}}</a></span>
                 <span data-translate="Witness"></span>
             </li>
             <li class="list-group-item">
