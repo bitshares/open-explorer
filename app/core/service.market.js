@@ -38,35 +38,35 @@
                 });
             },
             getOrderBook: function(base, quote, base_precision, quote_precision, callback) {
-                var order_book = [];
-                var asks = [];
-                var bids = [];
+                let order_book = [];
+                let asks = [];
+                let bids = [];
                 $http.get(appConfig.urls.python_backend + "/order_book?base=" + base + "&quote=" + quote + "&limit=10")
                     .then(function(response) {
 
-                    var total = 0;
+                    let total = 0;
                     angular.forEach(response.data.asks, function(value, key) {
                         total = total + parseFloat(value.base);
-                        var parsed = {
-                            base1: parseFloat(value.base),
-                            price1: parseFloat(value.price),
-                            quote1: parseFloat(value.quote),
+                        const parsed = {
+                            base: parseFloat(value.base),
+                            price: parseFloat(value.price),
+                            quote: parseFloat(value.quote),
                             base_precision: base_precision,
                             quote_precision: quote_precision,
-                            total1: total
+                            total: total
                         };
                         asks.push(parsed);
                     });
                     total = 0;
                     angular.forEach(response.data.bids, function(value, key) {
                         total = total + parseFloat(value.base);
-                        var parsed = {
-                            base2: parseFloat(value.base),
-                            price2: parseFloat(value.price),
-                            quote2: parseFloat(value.quote),
+                        const parsed = {
+                            base: parseFloat(value.base),
+                            price: parseFloat(value.price),
+                            quote: parseFloat(value.quote),
                             base_precision: base_precision,
                             quote_precision: quote_precision,
-                            total2: total
+                            total: total
                         };
                         bids.push(parsed);
                     });
