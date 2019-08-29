@@ -2,17 +2,17 @@
     'use strict';
 
     angular.module('app').factory('marketService', marketService);
-    marketService.$inject = ['$http', 'appConfig', 'utilities'];
+    marketService.$inject = ['$http', 'appConfig'];
 
-    function marketService($http, appConfig, utilities) {
+    function marketService($http, appConfig) {
 
         return {
             getActiveMarkets: function(callback) {
-                var markets = [];
+                let markets = [];
                 $http.get(appConfig.urls.python_backend + "/most_active_markets").then(function(response) {
 
-                    angular.forEach(response.data, function(value, key) {
-                        var market = {
+                    angular.forEach(response.data, function(value) {
+                        const market = {
                             pair: value.pair,
                             price: value.latest_price,
                             volume: value["24h_volume"]
@@ -24,10 +24,10 @@
                 });
             },
             getAssetMarkets: function(asset_id, callback) {
-                var markets = [];
+                let markets = [];
                 $http.get(appConfig.urls.python_backend + "/markets?asset_id=" + asset_id).then(function(response) {
-                    angular.forEach(response.data, function(value, key) {
-                        var market = {
+                    angular.forEach(response.data, function(value) {
+                        const market = {
                             pair: value.pair,
                             price: value.latest_price,
                             volume: value["24h_volume"]
@@ -45,7 +45,7 @@
                     .then(function(response) {
 
                     let total = 0;
-                    angular.forEach(response.data.asks, function(value, key) {
+                    angular.forEach(response.data.asks, function(value) {
                         total = total + parseFloat(value.base);
                         const parsed = {
                             base: parseFloat(value.base),
@@ -58,7 +58,7 @@
                         asks.push(parsed);
                     });
                     total = 0;
-                    angular.forEach(response.data.bids, function(value, key) {
+                    angular.forEach(response.data.bids, function(value) {
                         total = total + parseFloat(value.base);
                         const parsed = {
                             base: parseFloat(value.base),
@@ -76,36 +76,38 @@
                 });
             },
             getGroupedOrderBook: function(base, quote, base_precision, quote_precision, callback) {
-                var grouped = [];
+                let grouped = [];
                 $http.get(appConfig.urls.python_backend + "/grouped_limit_orders?base=" + base + "&quote=" +
                     quote + "&group=10&limit=10")
                     .then(function(response) {
 
-                    angular.forEach(response.data, function(value, key) {
-                        var total_for_sale = value.total_for_sale;
-                        var max_base_amount = parseInt(value.max_price.base.amount);
-                        var max_quote_amount = parseInt(value.max_price.quote.amount);
-                        var min_base_amount = parseInt(value.min_price.base.amount);
-                        var min_quote_amount = parseInt(value.min_price.quote.amount);
+                        console.log(response);
 
-                        var base_id = value.max_price.base.asset_id;
-                        var quote_id = value.max_price.quote.asset_id;
+                    angular.forEach(response.data, function(value) {
+                        let total_for_sale = value.total_for_sale;
+                        const max_base_amount = parseInt(value.max_price.base.amount);
+                        const max_quote_amount = parseInt(value.max_price.quote.amount);
+                        const min_base_amount = parseInt(value.min_price.base.amount);
+                        const min_quote_amount = parseInt(value.min_price.quote.amount);
 
-                        var base_array = base_id.split(".");
-                        var quote_array = quote_id.split(".");
-                        var divide = 0;
+                        const base_id = value.max_price.base.asset_id;
+                        const quote_id = value.max_price.quote.asset_id;
+
+                        const base_array = base_id.split(".");
+                        const quote_array = quote_id.split(".");
+                        let divide = 0;
 
                         if(base_array[2] > quote_array[2])
                         {
                             divide = 1;
                         }
-                        var qp = Math.pow(10, parseInt(quote_precision));
-                        var bp = Math.pow(10, parseInt(base_precision));
+                        const qp = Math.pow(10, parseInt(quote_precision));
+                        const bp = Math.pow(10, parseInt(base_precision));
 
-                        var max_price;
-                        var min_price;
-                        var min;
-                        var max;
+                        let max_price;
+                        let min_price;
+                        let min;
+                        let max;
                         if(divide) {
                             max = (max_quote_amount / qp) / (max_base_amount / bp);
                             max_price = 1 / max;
@@ -118,7 +120,7 @@
                         }
                         total_for_sale = Number(total_for_sale/bp);
 
-                        var parsed = {
+                        const parsed = {
                                 max_price: max_price,
                                 min_price: min_price,
                                 total_for_sale: total_for_sale,
@@ -131,17 +133,17 @@
                 });
             },
             getAssetPrecision: function(asset_id, callback) {
-                var precision;
+                let precision;
                 $http.get(appConfig.urls.python_backend + "/asset?asset_id=" + asset_id).then(function (response) {
                     precision = response.data.precision;
                     callback(precision);
                 });
             },
             getTicker: function(base, quote, callback) {
-                var ticker = {};
+                let ticker = {};
                 $http.get(appConfig.urls.python_backend + "/ticker?base=" + base + "&quote=" + quote)
                     .then(function(response) {
-                    var ticker = {
+                    const ticker = {
                         price: response.data.latest,
                         ask: response.data.lowest_ask,
                         bid: response.data.highest_bid,
