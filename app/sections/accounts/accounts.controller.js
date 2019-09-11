@@ -46,7 +46,7 @@ import {sha256} from "js-sha256";
 
                         $scope.select = function(page_operations) {
                             const page = page_operations -1;
-                            const start = returnDataTotalOps - (page * 20);
+                            const start = returnDataTotalOps - (page * 20) + 1;
                             const limit = 20;
 
                             accountService.getAccountHistory(fullAccount.account.id, start, limit,
